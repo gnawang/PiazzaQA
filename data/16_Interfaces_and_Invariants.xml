@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:49:01-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:49:01-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:49:01-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">16_Interfaces_and_Invariants.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:7b02813f-85c4-4173-9b7f-60b70c59f62b</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:0fa49051-8b9d-45dc-a461-cb96c2d936fb</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="16_Interfaces_and_Invariants.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280Programming and Introductory Data Structures 
+</P>
+
+<P>blockM-dearborn 
+Interfaces and Invariants 
+</P>
+
+<P>Slides by Andrew DeOrio, 
+</P>
+
+<P>Jeff Ringenbergand 
+</P>
+
+<P>Brian Noble 
+</P>
+
+<P>Abstract Data Type Review 
+</P>
+
+<P>.Recall the two main advantages of an ADT: 
+1.Information hiding: we don't need to know the details of how 
+the object is represented, nor do we need to know how the 
+operations on those objects are implemented. 
+2.Encapsulation: the objects and their operations are defined in 
+the same place; the ADT combines both data and operation in 
+one entity. 
+</P>
+
+<P>Abstract Data Type Review 
+</P>
+
+<P>.To the caller, an ADT is only an interface 
+.Here are two definitions: 
+.Good Definition: The contract for using things of this type. 
+.Better Definition: The set of assumptions that each programmer needs to 
+make about another's code in order to demonstrate the correctness of 
+his/her own code. 
+</P>
+
+<P>.Once you have an interface, you can pick from among many 
+possible implementations as long as you satisfy the (implied) 
+contract. 
+</P>
+
+<P>Interfaces 
+</P>
+
+<P>.The class mechanism, as we've used it so far, has one 
+shortcoming: 
+.It co-mingles details of the implementationwith the definition of the 
+interface. 
+</P>
+
+<P>.Recall that the implementation of a class includes: 
+1.Data members 
+2.Method implementations 
+</P>
+
+<P>.The method implementations can be written separately from 
+the class definition and usually are 
+</P>
+
+<P>Interfaces 
+</P>
+
+<P>.For example, if we were really building an IntSet, we'd split 
+it across two files: 
+.IntSet.h: the class IntSet{...}definition 
+.IntSet.cpp:the implementation of each method 
+</P>
+
+<P>.Unfortunately, the data members still must be part of the classdefinition in IntSet.h 
+.Since any programmer using an IntSetmust see that 
+definition, those programmers know something about the 
+implementation 
+.However, in a well-designed class, any implementation-
+specific bits must be private. So, client code can't touch those 
+objects. 
+</P>
+
+<P>Interfaces 
+</P>
+
+<P>.Having data objects in the definition has two undesirable 
+effects: 
+1.It complicates the class definition, making it harder to read and 
+understand. 
+2.It communicates information to the programmer that s/he isn't 
+supposed to know. 
+</P>
+
+<P>.The second problem can have very drastic consequences. 
+.If a programmer using your class (mistakenly) makes an 
+assumption about a &quot;guarantee&quot; that your implementation 
+provides, but the interface doesn't promise, you're in trouble. 
+.What if you change the implementation? 
+</P>
+
+<P>Interfaces 
+</P>
+
+<P>.Question: How can you provide a class definition that carries 
+no implementation details to the client programmer, yet still 
+has interface information? 
+.Remember, classes mustcontain their data members, so this 
+means that the class cannot have an implementation. 
+.Answer: Create an &quot;interface-only&quot; class as an abstract base 
+class, from which an implementation can be derived. 
+</P>
+
+<P>Interfaces 
+</P>
+
+<P>.To create an abstract base class, we first provide an interface only definition of IntSet. .This class will neverbe instantiated because there is noimplementation .Use pure virtual functions to do this </P>
+
+<P>Pure virtual function review </P>
+
+<P>.Because there will be no implementation, we need to declare member functions in a special way: .Declare each method as a virtualfunction .“Assign&quot; a 0to each of these virtual functions </P>
+
+<P>.These are called pure virtual functions </P>
+
+<P>class Shape { 
+public: 
+virtualdouble area() const= 0; 
+virtualvoid print() const= 0; 
+}; 
+</P>
+
+<P>Exercise 
+.Convert this class to an abstract base class 
+</P>
+
+<P>class IntSet{ 
+//OVERVIEW: mutable set of ints,|set|&lt;=ELTS_CAPACITY 
+intelts[ELTS_CAPACITY]; 
+intelts_size; 
+public: 
+static constintELTS_CAPACITY = 100; 
+void insert(intv); 
+void remove(intv); 
+boolquery(intv) const; 
+intsize() const; 
+</P>
+
+<P>}; 
+</P>
+
+<P>IntSetAbstract Base Class 
+class IntSet{ 
+// OVERVIEW: interface for a mutable set of ints 
+// with bounded size 
+public: 
+virtualvoid insert(intv) = 0; 
+virtualvoid remove(intv) = 0; 
+virtualboolquery(intv) const= 0; 
+virtualintsize() const= 0; 
+}; 
+</P>
+
+<P>Abstract Base Class Review 
+</P>
+
+<P>.A class with any pure virtual functionis an abstract class .You cannotcreate an instance of an abstract class, because there can be no implementation </P>
+
+<P>intmain() { 
+IntSetis; //compile error! 
+} 
+.You cancreate a pointer or reference to an abstract class 
+</P>
+
+<P>intmain() { 
+IntSet*is_ptr; //OK 
+IntSet&amp;is_ref; //OK 
+} 
+</P>
+
+<P>Implementing the Interface 
+</P>
+
+<P>.Abstract base classes aren't very interesting without some derivative of IntSetto actually provide an implementation </P>
+
+<P>.This is done with a derived class: 
+</P>
+
+<P>class IntSetUnsorted: public IntSet{ 
+intelts[ELTS_CAPACITY]; 
+intelts_size; 
+intindexOf() const; 
+public: 
+static constintELTS_CAPACITY = 100; 
+IntSetUnsorted(); 
+virtual void insert(intv); 
+virtual void remove(intv); 
+virtual boolquery(intv) const; 
+virtual intsize() const; 
+}; 
+We could implement 
+</P>
+
+<P>either the sorted or unsorted version </P>
+
+<P>Implementing the Interface </P>
+
+<P>.Abstract base classes aren't very interesting without some derivative of IntSetto actually provide an implementation .This is done with a simple derived class: </P>
+
+<P>class IntSetUnsorted: public IntSet{ 
+intelts[ELTS_CAPACITY]; 
+intelts_size; 
+intindexOf() const; 
+public: 
+static constintELTS_CAPACITY = 100; 
+IntSetUnsorted(); 
+virtual void insert(intv); 
+</P>
+
+<P>virtual void remove(intv); </P>
+
+<P>virtual boolquery(intv) const; </P>
+
+<P>virtual intsize() const; </P>
+
+<P>}; </P>
+
+<P>The derived class has to implement the constructor because the base class has no implementation to construct! </P>
+
+<P>Implementing the Interface 
+.We can also create an implementation that is sorted 
+</P>
+
+<P>class IntSetSorted: public IntSet{ 
+intelts[ELTS_CAPACITY]; 
+intelts_size; 
+intindexOf() const; 
+public: 
+static constintELTS_CAPACITY = 100; 
+IntSetSorted(); 
+virtual void insert(intv); 
+virtual void remove(intv); 
+virtual boolquery(intv) const; 
+virtual intsize() const; 
+}; 
+</P>
+
+<P>Using the Interface 
+</P>
+
+<P>.To use our IntSetinterface, all we need to know are the public member functions, which would be in IntSet.h </P>
+
+<P>class IntSet{ 
+// OVERVIEW: interface for a mutable set of ints 
+// with bounded size 
+public: 
+virtual void insert(intv) = 0; 
+virtual void remove(intv) = 0; 
+virtual boolquery(intv) const= 0; 
+virtual intsize() const= 0; 
+}; 
+</P>
+
+<P>Using the Interface 
+</P>
+
+<P>.Now that we have an interface (IntSet) and two implementations (IntSetUnsortedand IntSetSorted), we can use our interface </P>
+
+<P>intmain() { 
+IntSetUnsortedis; 
+IntSet*is_ptr= &amp;is; //pointer to implementation 
+is_ptr-&gt;insert(7); 
+is_ptr-&gt;insert(4); 
+is_ptr-&gt;insert(7); 
+is_ptr-&gt;insert(1); 
+is_ptr-&gt;remove(4); 
+} 
+</P>
+
+<P>Using the Interface 
+</P>
+
+<P>.The cool part: we can switch the implementation and the old code still works! This is an example of a subtype. </P>
+
+<P>intmain() { IntSetUnsortedIntSetSortedis; IntSet*is_ptr= &amp;is; //pointer to implementation </P>
+
+<P>is_ptr-&gt;insert(7); </P>
+
+<P>is_ptr-&gt;insert(4); </P>
+
+<P>is_ptr-&gt;insert(7); </P>
+
+<P>is_ptr-&gt;insert(1); </P>
+
+<P>is_ptr-&gt;remove(4); </P>
+
+<P>} </P>
+
+<P>InvariantsReview </P>
+
+<P>.An invariantis something that is always true .In other words, it is a set of conditions that must always evaluate to true at certain well-defined points in the program, otherwise, the program is incorrect .We've seen three kinds of invariants: .Recursive invariant .Iterative invariant .Representation invariant </P>
+
+<P>Recursive Invariant Review </P>
+
+<P>.A recursive invariantapplies to the arguments of a recursive function .A recursive invariant describes the conditions that must be satisfied by any call to the function .For example, in our tail-recursive factorial function, the recursive invariant was n! * result == num! </P>
+
+<P>intfact_helper(intn, intresult) {/*...*/} </P>
+
+<P>intfactorial(intnum) { </P>
+
+<P>return fact_helper(num, 1); </P>
+
+<P>} </P>
+
+<P>Iterative Invariant Review </P>
+
+<P>.An iterative invariantapplies to each loop variable .An iterative invariantmust be true before and after each iteration .For example, in our iterative factorial function, the iterative invariant was n! * result == num! </P>
+
+<P>intfactorial(intnum) { 
+intn = num; 
+intresult = 1; 
+while (n!=0) { 
+result *= n; 
+n -= 1; 
+} 
+return result; 
+} 
+</P>
+
+<P>Representation Invariant Review 
+</P>
+
+<P>.A representation invariantapplies to the data members of an ADT .Recall that member variables are a class's representation </P>
+
+<P>.A representation invariantmust be true immediately before and immediately after any member function execution .Think of it as a &quot;sanity check&quot; for the ADT </P>
+
+<P>Representation Invariant Details </P>
+
+<P>.A representation invariantmust be true immediately before and immediately after any member function execution .Each method in the class is free to assume that theinvariant is true on entry if: .The representation invariant holds at the required times, and .Each data element is truly private </P>
+
+<P>.This is true because the only code that can change them belongs to the methods of that class, and those methodsalways establish the invariant </P>
+
+<P>Representation Invariant Details </P>
+
+<P>.A representation invariantmust be true immediately before and immediately after any member function execution </P>
+
+<P>.Exception: constructors 
+.The constructor establishes the representation invariant, so the 
+representation invariant only has to hold at the end 
+.Exception: destructors 
+.There is one sort of method, called a destructor, where the 
+representation invariant only has to hold at the beginning 
+.We won’t see this until later 
+</P>
+
+<P>Representation Invariant Example 
+</P>
+
+<P>.We've seen two examples of representation invariants, both 
+applying to the private members of an IntSetrepresentation: 
+</P>
+
+<P>intelts[ELTS_CAPACITY]; 
+</P>
+
+<P>intelts_size; 
+</P>
+
+<P>.For the unsorted version, the invariant is: 
+.The first elts_sizemembers of eltscontain the integers comprising 
+the set, with no duplicates. 
+</P>
+
+<P>.For the sorted version, the invariant is: 
+.The first elts_sizemembers of eltscontain the integers comprising 
+the set, from lowest to highest, with no duplicates. 
+</P>
+
+<P>Representation Invariant Example 
+</P>
+
+<P>.We used these invariants to write the methods of each 
+implementation. 
+.For example: 
+</P>
+
+<P>insert(intv) // unsorted version 
+</P>
+
+<P>if v not in elts// don’t allow duplicates 
+</P>
+
+<P>elts[elts_size] = v// this breaks invariant 
+</P>
+
+<P>++elts_size// this restores it 
+</P>
+
+<P>insert(intv) // sorted version 
+</P>
+
+<P>if v not in elts// don’t allow duplicates 
+</P>
+
+<P>make gap in array // this breaks invariant elts[gap] = v // restore eltsinvariant ++elts_size// restore elts_sizeinvar. </P>
+
+<P>Using Representation Invariants </P>
+
+<P>.The representation invariant plays a crucial role in 
+implementing an abstract data type 
+.Before writing a singleline of code, write down the rep 
+invariant! 
+.That tells you howto write each method 
+.Then, for each method you: 
+1.Do the work of the method (i.e. insert) 
+2.Repair the invariants you broke 
+</P>
+
+<P>Check the Representation Invariant 
+</P>
+
+<P>.We've seen representation invariants written in English: 
+.IntSetSorted: The first elts_sizemembers of eltscontain the 
+integers comprising the set, from lowest to highest, with no duplicates. 
+</P>
+
+<P>.We can also write representation invariants in code 
+.For even moderately complicated data structures, it is worth 
+coding the representation invariant beforecoding anything else 
+.Let's add a private member function to IntSetSortedcalled check_invariant()that checks the representation 
+invariant 
+</P>
+
+<P>Exercise 
+class IntSetSorted: public IntSet{ 
+//... 
+private: 
+//Represent a set of size N as an sorted set of 
+//integers, with no duplicates, stored in the 
+//first N slots of the array 
+intelts[ELTS_CAPACITY]; 
+//Number of elements currently in the set 
+intelts_size; 
+</P>
+
+<P>//EFFECTS: returns true if rep. invariant holds 
+boolcheck_invariant() const; 
+}; 
+Write this function using a loop 
+</P>
+
+<P>Using check_invariant() 
+</P>
+
+<P>.You can use check functions for defensive programming .Add a check to the end of each member function .Add a check to the beginning too, if you’re really paranoid .assert()is the perfect way to make these checks </P>
+
+<P>assert() </P>
+
+<P>.A programmer’s best friend .assert(STATEMENT); .Make sure that STATEMENT is true .If not, crash the program with a debugging message </P>
+
+<P>#include &lt;cassert> 
+void IntSet::insert(intv) { 
+assert(check_invariant()); 
+//... 
+} 
+a.out: Interfaces_and_Invariants.cpp:146: 
+</P>
+
+<P>IntSetUnsorted::insert(): Assertion `check_invariant()' failed. Aborted (core dumped) </P>
+
+<P>assert() + check_invariant() </P>
+
+<P>.Add a check to each member function .Check at the end of the constructor </P>
+
+<P>IntSetSorted::IntSetSorted() </P>
+
+<P>: elts_size(0) { 
+assert(check_invariant()); 
+} 
+.Check at the beginning and at the end of other functions 
+</P>
+
+<P>void IntSetSorted::insert(intv) { 
+assert(check_invariant()); 
+//... 
+assert(check_invariant()); 
+} 
+</P>
+
+<P>assert() + check_invariant() 
+</P>
+
+<P>.constmember functions can't change any member variable, so we only need a check at the beginning </P>
+
+<P>intIntSetSorted::size() const{ 
+assert(check_invariant()); 
+return elts_size; 
+} 
+</P>
+
+<P>Check the Representation Invariant 
+</P>
+
+<P>.Let's a add a similar private member function called check_invariant()that checks the representation invariant for IntSetUnsorted </P>
+
+<P>Exercise 
+class IntSetUnsorted: public IntSet{ 
+//... 
+private: 
+//Represent a set of size N as an unsorted set of 
+//integers, with no duplicates, stored in the 
+</P>
+
+<P>//first N slots of the array 
+intelts[ELTS_CAPACITY]; 
+//Number of elements currently in the set 
+intelts_size; 
+//EFFECTS: returns true if rep. invariant holds 
+boolcheck_invariant() const; 
+}; 
+Write this function using nested loops 
+</P>
+
+<P>Invariants and assert() 
+</P>
+
+<P>.The nested loop in check_invariant()might be slow 
+.It's worth it during testing, but not in the final product 
+</P>
+
+<P>.Disable the check by compiling with the NDEBUGpreprocessor 
+variable defined 
+.There are two ways to do this: 
+1.Add a line of code#define NDEBUG //disable assert() 
+2.Specify it on the command line of the compiler: 
+</P>
+
+<P>g++ -DNDEBUG ... 
+.This way, you can turn it off for production code, but leave it induring development and testing 
+</P>
+
+<P>Invariants and assert() 
+#define NDEBUG // disables assert statements! 
+void IntSet::insert(intv) { 
+// ... 
+assert(check_invariant()); 
+} 
+void IntSet::remove(intv) { 
+// ... 
+</P>
+
+<P>assert(check_invariant()); } </P>
+</TaggedPDF-doc>

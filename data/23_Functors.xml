@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:49:03-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:49:03-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:49:03-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">23_Functors.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:1e104fbb-7e1e-4853-9145-34af1d0605d7</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:c15061b9-c55f-4ae8-8274-785c49aa524a</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="23_Functors.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280Programming and Introductory Data Structures 
+</P>
+
+<P>blockM-dearborn 
+Functors 
+</P>
+
+<P>Slides by Andrew DeOrio 
+</P>
+
+<P>First-class Objects 
+</P>
+
+<P>.There are lots of things we can do with integers in a running 
+program, such as: 
+.Create them 
+.Destroy them 
+.Pass them as arguments 
+.Return them as values 
+</P>
+
+<P>.In fact, we can do these four things with allvalues of the 
+simplest types in the language, including pointers and even 
+types we create ourselves with the enum, struct, or classmechanisms. 
+.For any entity in a programming language, we say that the 
+entity is first-classif you can do all four of these things. 
+</P>
+
+<P>First-class Objects 
+</P>
+
+<P>.Unlike values, types and functions are notfirst class objects in C++; 
+but, they can sometimes come close. 
+.The template mechanismallows us to pass types as arguments. 
+.The function pointer mechanismallows us to pass functions as 
+arguments and return them as results. 
+.Specifically, we cannot create and destroy functions dynamically. 
+.Sometimes, that's a problem. 
+</P>
+
+<P>.Fortunately, C++ gives us a mechanism that is almostexactly like 
+first-class functions, called &quot;function objects&quot;. 
+</P>
+
+<P>List Review 
+</P>
+
+<P>.We'll illustrate this problem by using the List ADT to write a 
+generic any_offunction using function pointers. 
+.Remember the operations on a singly-linked List, with it’s 
+associated Iteratorclass: 
+</P>
+
+<P>boolisEmpty(); 
+</P>
+
+<P>void insertFront(constT &amp;v); 
+</P>
+
+<P>void insertBack(constT &amp;v); 
+T removeFront(); 
+Iterator begin() const; 
+Iterator end() const; 
+</P>
+
+<P>Motivation 
+</P>
+
+<P>.Given these list operations, suppose we wanted to write the following routine: </P>
+
+<P>boolany_odd(constList&lt;int&gt; &amp;l); 
+// EFFECT: returns true if l has 
+// any odd element, false otherwise 
+</P>
+
+<P>Motivation 
+.Using an Iterator, we can implement this function: 
+</P>
+
+<P>// EFFECTS: returns true if l has any odd 
+// element, false otherwise 
+boolany_odd(constList&lt;int&gt; &amp;l) { 
+for(List&lt;int&gt;::Iterator i=l.begin(); 
+i!= l.end(); ++i) 
+if (*i% 2) return true; 
+//reached end without finding elt 
+return false; 
+} 
+</P>
+
+<P>Motivation 
+.If we write any_even, it looks almost exactly the same: 
+</P>
+
+<P>// EFFECTS: returns true if l has any even 
+</P>
+
+<P>// element, false otherwise 
+boolany_even(constList&lt;int&gt; &amp;l) { 
+for(List&lt;int&gt;::Iterator i=l.begin(); 
+i!= l.end(); ++i) 
+if (!(*i% 2)) return true; 
+//reached end without finding elt 
+return false; 
+} 
+We can abstract away the test inside the if() 
+</P>
+
+<P>statement as a function and generalize it. 
+</P>
+
+<P>Using function pointers 
+.The generic function header would be something like this: 
+</P>
+
+<P>boolany_of(constList&lt;int&gt; &amp;l, bool(*pred)(int)); 
+</P>
+
+<P>.any_oftakes two arguments, land pred. .lis a reference to a List .predis a pointer to a function taking a single integer argument, returning a booleanresult </P>
+
+<P>.A Predicateis used to control an algorithm .Input: one element .Output: bool </P>
+
+<P>Using function pointers 
+.Then, the generic implementation is: 
+</P>
+
+<P>boolany_of(constList&lt;int&gt; &amp;l, bool(*pred)(int)) { 
+for(List&lt;int&gt;::Iterator i=l.begin(); 
+i!=l.end(); ++i) 
+if (pred(*i)) return true; 
+</P>
+
+<P>//reached end without finding elt return false; } </P>
+
+<P>Using function pointers </P>
+
+<P>.We can use any_ofto see if some list lhas odd elements, by writing the appropriate predicate: </P>
+
+<P>boolisOdd(intn) { 
+return (n%2); 
+} 
+List&lt;int&gt; l; 
+// fill l ... 
+boolcontains_odd= any_of(l, isOdd); 
+.So far, so good –nothing new here... 
+</P>
+
+<P>Motivation 
+Question: How would you use any_ofto see if a list lhas any elements greater than 2? How would you use it to 
+</P>
+
+<P>see if a list has any elements greater than 42? 
+boolany_of(constList&lt;int&gt; &amp;l, bool(*pred)(int)) { 
+for(List&lt;int&gt;::Iterator i=l.begin(); 
+i!=l.end(); ++i) 
+if (pred(*i)) return true; 
+//reached end without finding an odd elt 
+return false; 
+} 
+</P>
+
+<P>Motivation 
+.Answer: Write new predicates! 
+</P>
+
+<P>boolgreater2(intn) { 
+</P>
+
+<P>return (n&gt;2); </P>
+
+<P>} </P>
+
+<P>boolgreater42(intn) { </P>
+
+<P>return (n&gt;42); </P>
+
+<P>} </P>
+
+<P>This is not good. We really ought to be able to generalize more by writing a single predicate that is “GreaterN&quot;, and use that single predicate no matter what the larger than target is. </P>
+
+<P>Worse yet, we'd have to know how much “greater&quot; the elements needed to be at compile time –and we might not know that! </P>
+
+<P>Motivation </P>
+
+<P>.Unfortunately, solving these problems of creating a greaterNfunction with function pointers requires an unsightly global variable: </P>
+
+<P>intgreaterN_limit; //global variable 
+boolgreaterN(intn) { 
+return n &gt; greaterN_limit; 
+} 
+.To use this, we would do something like this: 
+</P>
+
+<P>List&lt;int&gt; l;// fill l ... 
+cin&gt;&gt; greaterN_limit; // get limit 
+cout&lt;&lt; any_of(l, greaterN); 
+</P>
+
+<P>Motivation 
+</P>
+
+<P>.To avoid using a global variable, we'd want a &quot;functioncreating function“ –one that, given an integer limit, returns a predicate that takes one integer argument, N, and returns true if N &gt; limit. .Because C++ functions are not first-class, there's no way to do this with functions. .But, we cando it with the class mechanism plus one neat trick –operator overloading. </P>
+
+<P>Operator Overloading </P>
+
+<P>.Recall that many of our classes required us to define the assignment operator: </P>
+
+<P>constList &amp;operator=(constList &amp;l); .In our Iterator class, we defined more operators: </P>
+
+<P>T&amp; operator* () const; // Get Iterator&amp; operator++ (); // Move booloperator!= (Iterator rhs) const;//Compare </P>
+
+<P>Function call operator </P>
+
+<P>.It turns out that we can redefine almost any operator for a class, 
+and the &quot;function-call&quot; is just another operator 
+.Suppose we have a class called Greater2, with no private 
+members and only one public member function: 
+</P>
+
+<P>class Greater2 { public: booloperator() (intn); }; </P>
+
+<P>Function call operator class Greater2 { public: booloperator() (intn) { return n &gt; 2; } </P>
+
+<P>}; </P>
+
+<P>.This public method overloads the &quot;function-call&quot; operator on instances of Greater2–the method takes a single integer argument, and returns a Boolean result. .It takes an integer argument and returns true if the input is greater than 2. .Because it is a very short function, we implemented it in line </P>
+
+<P>Using function objects </P>
+
+<P>.So, we can do this: </P>
+
+<P>Greater2 g2; </P>
+
+<P>cout&lt;&lt; g2(4) &lt;&lt; endl; </P>
+
+<P>.The second line looks like a function call; however, g2is nota function. Rather, it is an instance of the class Greater2 .The class Greater2 has defined the &quot;function-call operator&quot;, and so that member function runs when we use the syntax g2(4), passing the argument 4. .Objects that overload the function-call operator are called &quot;function objects&quot;, or sometimes &quot;functors&quot;. </P>
+
+<P>./a.out </P>
+
+<P>Implementing Function Objects </P>
+
+<P>.So far, this is a lot like function pointers .However, unlike functions with function pointers, objects can have per-object state, which allows us to specialize on a per-object basis. .Let’s add a member variable to GreaterN </P>
+
+<P>class GreaterN{ </P>
+
+<P>intlimit; </P>
+
+<P>public: </P>
+
+<P>booloperator() (intn) { </P>
+
+<P>return n &gt; limit; } </P>
+
+<P>}; </P>
+
+<P>When we create instances of GreaterN, we store the limitin a member variable, and later can test inputs against that limit. </P>
+
+<P>Implementing Function Objects </P>
+
+<P>.Now, we need a way to set the limit. Let’s initialize a GreaterNobject with a limitusing a constructor. </P>
+
+<P>class GreaterN{ 
+intlimit; 
+public: 
+GreaterN(intlimit_in) : limit(limit_in) {} 
+booloperator() (intn) { 
+return n &gt; limit; 
+} 
+}; 
+</P>
+
+<P>Using Function Objects 
+</P>
+
+<P>.Now, we can use this new class to &quot;generate&quot; specialized functors: </P>
+
+<P>GreaterNg2(2); 
+GreaterNg6(6); 
+cout&lt;&lt; g2(4) &lt;&lt; endl; 
+cout&lt;&lt; g6(4) &lt;&lt; endl; 
+./a.out 
+1 
+0 
+</P>
+
+<P>Exercise: LessNand InRange </P>
+
+<P>.Write a functorcalled LessNthat returns true if an input integer is less than an input limit .Overload the function call operator .Create a constructor to initialize limit </P>
+
+<P>.Write a functorcalled InRangethat returns true if an input integer is within an inclusive range: [min, max] .Overload the function call operator .Create a constructor to initialize minand max </P>
+
+<P>.Write a main()function that uses instances of LessN, GreaterNand InRangeto check if water is a solid, liquidor gasat a given temperature .Read an integer tempfrom standard input .Freezing point = 32, boiling point = 212 </P>
+
+<P>Function objects as function inputs </P>
+
+<P>.Now we have covered how to create function objects .In order to complete our generic any_offunction, we need to pass a functoras a function input .We did this before using function pointers: </P>
+
+<P>boolany_of(constList&lt;int&gt; &amp;l, bool(*pred)(int)); </P>
+
+<P>.Problem: since a functoris a custom type, each functorwill have its own type. .Solution: generalize the type using templates </P>
+
+<P>Templatedfunctions review </P>
+
+<P>.Recall templatedfunctions .This sum function works for any type Tthat can be initialized to 0and can be added with the “+” operator. </P>
+
+<P>template &lt;typenameT&gt; </P>
+
+<P>T sum(T a[], intsize); </P>
+
+<P>double a[100] = {... } intb[200] = {... } double aSum= sum(a, 100); intbSum= sum(b, 200); </P>
+
+<P>Templatedfunctions .We used the sum function with any type T </P>
+
+<P>template &lt;typenameT&gt; </P>
+
+<P>T sum(T a[], intsize); </P>
+
+<P>.We want to use the any_offunction with any functorPredicate .Classes are first-class types, so we can use templates to solve this problem </P>
+
+<P>template &lt;typenamePredicate> 
+boolany_of(constList&lt;int&gt; &amp;l, Predicate pred); 
+</P>
+
+<P>Templatedfunctions 
+.The template is the only thing we have to change in any_of 
+</P>
+
+<P>template &lt;typenamePredicate> 
+boolany_of(constList&lt;int&gt; &amp;l, Predicate pred){ 
+for(List&lt;int&gt;::Iterator i=l.begin(); 
+i!=l.end(); ++i) 
+if (pred(*i)) return true; 
+return false; 
+} 
+Function template 
+</P>
+
+<P>substitutes functor The body of any_ofis exactly the sameas it was before. But, rather than take a function pointer, it takes a functor. </P>
+
+<P>Using function objects 
+.Now, we can use any_ofwith any of our Predicate functors 
+</P>
+
+<P>List&lt;int&gt; l; // fill with ( 1 2 3 ) 
+GreaterNg2(2); 
+GreaterNg6(6); 
+cout&lt;&lt; any_of(l, g2) &lt;&lt; endl; 
+cout&lt;&lt; any_of(l, g6) &lt;&lt; endl; 
+./a.out 
+1 
+0 
+</P>
+
+<P>Using function objects 
+.Now, we can use any_ofwith any of our Predicate functors 
+</P>
+
+<P>List&lt;int&gt; l; // fill l 
+GreaterNg2(2); 
+cout&lt;&lt; any_of(l, g2) &lt;&lt; endl; 
+LessNl2(2); 
+cout&lt;&lt; any_of(l, l2) &lt;&lt; endl; 
+InRangeir(32, 212); 
+cout&lt;&lt; any_of(l, ir) &lt;&lt; endl; 
+</P>
+
+<P>Using function objects 
+.Another way to do it: 
+</P>
+
+<P>List&lt;int&gt; l; // fill l 
+cout&lt;&lt; any_of(l, GreaterN(2)) &lt;&lt; endl; 
+cout&lt;&lt; any_of(l, LessN(2)) &lt;&lt; endl; 
+</P>
+
+<P>cout&lt;&lt; any_of(l, InRange(32, 212)) &lt;&lt; endl; 
+</P>
+
+<P>Using function objects 
+.We can even get limits from the user: 
+</P>
+
+<P>List&lt;int&gt; l; // fill l 
+// ask user for limits 
+intless_limit=0, greater_limit=0; 
+cin&gt;&gt; less_limit&gt;&gt; greater_limit; 
+// create functors 
+LessNless(less_limit); 
+GreaterNgreater(greater_limit); 
+// use functors 
+cout&lt;&lt; any_of(l, less) &lt;&lt; endl; 
+cout&lt;&lt; any_of(l, greater) &lt;&lt; endl; 
+So, the ability of 
+</P>
+
+<P>objects to carry per-object state plusoverriding the “function call” operator gives us the equivalent of a “function factory”. </P>
+
+<P>Comparison functors </P>
+
+<P>.So far, we have written predicatesusing functors .A Predicateis used to control an algorithm. The input is one element, the output is a bool </P>
+
+<P>.Another use for functorsis a comparisonoperator .A comparisonis used to define order. The inputs are two elements of the same type, the output is a bool </P>
+
+<P>Predicate vs. comparison functors .A Predicateis used to control an algorithm. The input is one element, the output is a bool </P>
+
+<P>class MyPredicate{ 
+public: 
+booloperator()(T input) { /* ... */ } 
+}; 
+.A comparisonis used to define order. The inputs are two elements of 
+</P>
+
+<P>the same type, the output is a bool 
+</P>
+
+<P>class MyComparison{ 
+public: 
+booloperator()(T a, T b) { /* ... */ } 
+}; 
+</P>
+
+<P>Comparison functor 
+.A totally superfluous functor 
+</P>
+
+<P>class IntLess{ 
+public: 
+booloperator() (inta, intb) 
+{ return a &lt; b; } 
+}; 
+IntLessless; 
+cout&lt;&lt; less(1, 21) &lt;&lt; endl; 
+./a.out 
+</P>
+
+<P>Comparison functors 
+.An Animalclass: 
+</P>
+
+<P>class Animal { 
+string name; 
+public: 
+// constructors, etc. ... 
+virtual string get_name() const 
+{ return name; } 
+}; 
+.What if we want to compare two Animalobjects and put them 
+</P>
+
+<P>in order? 
+</P>
+
+<P>Comparison functors 
+</P>
+
+<P>.Write a functorto compare two Animalobjects by name .Returns true if name of a is before bin alphabetical order </P>
+
+<P>class AnimalLess{ 
+public: 
+booloperator()(constAnimal &amp;a, 
+constAnimal &amp;b) const 
+{ return a.get_name() &lt; b.get_name(); } 
+}; 
+AnimalLessless; 
+Animal fergie(&quot;Fergie&quot;); 
+Animal myrtleII(&quot;Myrtle II&quot;); 
+cout&lt;&lt; less(fergie, myrtleII) &lt;&lt; endl; 
+./a.out 
+</P>
+
+<P>“Fergie” comes before “Myrtle II” in ASCII order </P>
+
+<P>Exercise: functors+ pointers 
+</P>
+
+<P>.Write AnimalLess_ptr, a functorthat takes two Animalpointers as input, and produces a boolas output. The 
+functorshould not change the pointed-to objects 
+.When should you use a functorthat passes its input by pointer? 
+By constreference? By value? 
+</P>
+
+<P>class AnimalLess{ 
+public: 
+booloperator()(constAnimal &amp;a, 
+constAnimal &amp;b) 
+{ return a.get_name() &lt; b.get_name(); } 
+}; 
+</P>
+
+<P>Exercise: comparison functors 
+</P>
+
+<P>.Now that we have AnimalLess_ptr, we can compare two the objects pointed to by two pointers and determine their order </P>
+
+<P>AnimalLess_ptrless; 
+Animal *fergie= new Animal(&quot;Fergie&quot;); 
+Animal *myrtleII= new Animal(&quot;Myrtle II&quot;); 
+cout&lt;&lt; less(fergie, myrtleII) &lt;&lt; endl; 
+.What if you want to check if two Animal*are equal? 
+</P>
+
+<P>.Use an instance of “AnimalLess_ptrless;” to check if two Animalobjects are equal </P>
+</TaggedPDF-doc>

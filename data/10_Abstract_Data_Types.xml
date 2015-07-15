@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:49-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:49-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:49-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">10_Abstract_Data_Types.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:3c841fad-9390-4b95-9120-30954bccfbbc</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:99149acc-6063-4f8d-9811-e1f86839422f</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="10_Abstract_Data_Types.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280Programming and Introductory Data Structures 
+</P>
+
+<P>blockM-dearborn 
+Abstract Data Types (ADTs) 
+</P>
+
+<P>Slides by Andrew DeOrio 
+</P>
+
+<P>Abstraction 
+</P>
+
+<P>Procedural abstraction 
+</P>
+
+<P>.A function is given a specification which documents whatthe 
+function does, but not howit does it. 
+.For example, if we find a faster way to compute factorial, we 
+can just replace the old implementation with the new one, and 
+no other component of the program needs to know this. 
+</P>
+
+<P>Data abstraction 
+</P>
+
+<P>.An ADT provides an abstractdescription of values and 
+operations. 
+.The definition of an ADT must combine bothsome notion ofwhatthe values of that type represent, and howthey behave. 
+.We can leave off the details of how this actually happens. 
+</P>
+
+<P>Abstract Data Types 
+</P>
+
+<P>.Abstract data types provide two main advantages: 
+.Information hiding: we don't need to know the details of how 
+the object is represented, nor do we need to know how the 
+operations on those objects are implemented. 
+.Encapsulation: the objects and their operations are defined in 
+the same place; the ADT combines both data and operation in 
+one entity. 
+</P>
+
+<P>ADT example 
+</P>
+
+<P>.An example of an ADT is project 2’s list_t 
+.Information HidingIn the list_tdata type, you never knew the precise 
+implementation of the list_tstructure (except by looking in 
+recursive.cpp). 
+.EncapsulationA list_tprovides “modest” encapsulation. The definitions of the 
+operations on lists (list_print, list_make, etc.) were found 
+in the same header file as the type definition of list_t, but there 
+was no language mechanism that enforced this. 
+</P>
+
+<P>ADT example </P>
+
+<P>.Another example of an ADT is the structTrianglefrom the last lecture .Information HidingWe can write programs that use Triangle objects without needing to know the exact representationfor (Triangle *t=triangles; t&lt;triangles+SIZE; ++t) cout&lt;&lt; &quot;area = &quot; &lt;&lt; Triangle_area(t) &lt;&lt; endl; .EncapsulationAgain, a structTriangleprovides “modest” encapsulation </P>
+
+<P>More benefits </P>
+
+<P>.ADTs are substitutable: you can change the implementation and no users of the type can tell .Only the operations defined for the ADT should have access to the details of how the type is implemented .The implementation is usually referred to as the concrete representationor just the representation </P>
+
+<P>.Everyone else may access/modify the representation only through member functions </P>
+
+<P>C++ classes </P>
+
+<P>.The C++ class mechanism provides better encapsulation than the C-style list_tfrom project 2 or the Trianglestructfrom last lecture .The classis a single entity that defines both .The nature of an object: member variables .The operations available on that object: member functions </P>
+
+<P>Recall our Triangle class </P>
+
+<P>class Triangle { </P>
+
+<P>private: </P>
+
+<P>double a,b,c; </P>
+
+<P>public: </P>
+
+<P>double area() { </P>
+
+<P>double s = (a + b + c) / 2; </P>
+
+<P>return sqrt(s*(s-a)*(s-b)*(s-c)); </P>
+
+<P>} Triangle() { a=0, b=0, c=0; } </P>
+
+<P>Triangle(double a_in, double b_in, double c_in) </P>
+
+<P>{ a=a_in; b=b_in; c=c_in; } </P>
+
+<P>// ... get and set functions ... </P>
+
+<P>}; </P>
+
+<P>Question: </P>
+
+<P>Does Triangleprovide 
+information hiding? 
+Encapsulation? 
+</P>
+
+<P>Recall our Triangle class 
+</P>
+
+<P>.Information Hiding: Sort of. 
+.We used the privatekeyword to hide member variables from 
+outside users 
+.But, Triangle’s function definitions (implementations) are 
+mixed with its function declarations (prototypes) 
+.Encapsulation: Yes. 
+.Triangleuses a class, which ensures that the member 
+functions and member variables stay together. 
+</P>
+
+<P>Recall our Triangle class 
+</P>
+
+<P>.Information Hiding: Sort of. 
+.We used the privatekeyword to hide member variables from 
+outside users 
+.But, Triangle’s function definitions (implementations) are 
+mixed with its function declarations (prototypes) 
+.Let’s fix this. We can separate the class declaration from its 
+definition, just like a function prototype. 
+</P>
+
+<P>Triangle ADT 
+</P>
+
+<P>class Triangle { 
+</P>
+
+<P>//OVERVIEW: a geometric representation of a 
+</P>
+
+<P>// triangle 
+</P>
+
+<P>//... 
+</P>
+
+<P>}; 
+</P>
+
+<P>.Put only the class declaration (no implementations) in the file Triangle.h .This file contains only the abstraction .A single OVERVIEW comment describes the class as a whole </P>
+
+<P>Triangle.h </P>
+
+<P>Triangle ADT 
+class Triangle { 
+//OVERVIEW: a geometric representation of a 
+// triangle 
+public: 
+//... 
+}; 
+.We’ll put the publicparts first 
+</P>
+
+<P>.The order of publicand privatedoesn’t matter 
+</P>
+
+<P>Triangle.h 
+</P>
+
+<P>Triangle ADT 
+class Triangle { 
+//... 
+public: 
+//EFFECTS: creates a zero size Triangle 
+Triangle(); 
+//REQUIRES: a,b,care non-negative and form a 
+// triangle 
+//EFFECTS: creates a triangle from edge lengths 
+Triangle(double a_in, double b_in,doublec_in); 
+</P>
+
+<P>}; </P>
+
+<P>.Add constructors .Each function must have a specification comment </P>
+
+<P>Triangle.h </P>
+
+<P>Triangle ADT 
+class Triangle { 
+//... 
+public: 
+Triangle(); 
+Triangle(double a_in, double b_in,doublec_in); 
+//EFFECTS: returns the area of this Triangle 
+double area() const; 
+//EFFECTS: prints edge lengths 
+void print() const; 
+// ... get and set functions ... 
+}; 
+.Add member functions 
+</P>
+
+<P>Triangle.h 
+</P>
+
+<P>constmember functions 
+class Triangle { 
+//... 
+double area() const; 
+void print() const; 
+</P>
+
+<P>}; </P>
+
+<P>.This is a new use of const, and it means “this member function promises not to modify any member variable” </P>
+
+<P>.We have now seen three uses of const: 1.constint* p; // the pointed-to object cannot change 2.int*constp; // the pointer cannot change 3.void foo() const; // member function cannot change member variable </P>
+
+<P>Triangle ADT 
+class Triangle { 
+//... 
+public: 
+Triangle(); 
+Triangle(double a_in, double b_in,doublec_in); 
+double area() const; 
+void print() const; 
+private: 
+//edges are non-negative and form a triangle 
+double a,b,c; 
+}; 
+.Add member variables 
+</P>
+
+<P>Triangle.h 
+</P>
+
+<P>Representation invariant 
+class Triangle { 
+//... 
+//edges are non-negative and form a triangle 
+</P>
+
+<P>double a,b,c; </P>
+
+<P>}; </P>
+
+<P>.Member variables are a class’s representation .The description of how member variables should behave are representation invariants .Representation invariants are rules that the representation must obey immediately before and immediately after any member function execution </P>
+
+<P>Triangle.h </P>
+
+<P>What vs. How </P>
+
+<P>.We now have an abstractdescription of values and operations. .Whatthe data type does, but not how </P>
+
+<P>.Now, we need to implement this ADT .Howthe data type works </P>
+
+<P>Triangle.h 
+Triangle.cpp 
+</P>
+
+<P>Triangle ADT 
+#include &quot;Triangle.h" 
+#include &lt;cmath> 
+#include &lt;iostream> 
+using namespace std; 
+.Implementations go in Triangle.cpp 
+</P>
+
+<P>.#include &quot;Triangle.h&quot; tells the compiler to “copy-paste” Triangle.hat the top of this file </P>
+
+<P>Triangle.cpp </P>
+
+<P>Triangle ADT //... </P>
+
+<P>Triangle::Triangle() </P>
+
+<P>: a(0), b(0), c(0) {} </P>
+
+<P>.Implement default constructor .::is the scope resolution operator, which tells the compiler that this function is inside the scope of the Triangleclass .Needed so that the compiler knows that this is a memberfunction inside Triangle </P>
+
+<P>Triangle.cpp </P>
+
+<P>Triangle ADT 
+//... 
+Triangle::Triangle() 
+: a(0), b(0), c(0){} 
+.This syntax is called an initializer list 
+</P>
+
+<P>.This code work the same way as this: Triangle::Triangle() { a=b=c=0; } .But it is more efficient </P>
+
+<P>Triangle.cpp </P>
+
+<P>Triangle ADT </P>
+
+<P>Triangle::Triangle(double a_in, double b_in, double c_in) </P>
+
+<P>: a(a_in), b(b_in), c(c_in) {} </P>
+
+<P>.The second constructor, also uses an initializer list .Pitfall: The order in which elements are initialized is the order they appear in the object, NOT the order in the initialization list .It is customary to keep them in the same order to avoid confusion </P>
+
+<P>Triangle.cpp </P>
+
+<P>Recall assert() 
+.assert()is a programmer’s friend for debugging 
+</P>
+
+<P>.Does nothing if statement STATEMENTis true .Exits and prints an error message if STATEMENTis false .We can assertthat the representation invariant is true </P>
+
+<P>Triangle::Triangle(double a_in, double b_in, double c_in) : a(a_in), b(b_in), c(c_in) { assert( /*STATEMENT*/ ); } Triangle.cpp 3 4 9 </P>
+
+<P>Exercise </P>
+
+<P>.Write an assert statement that checks the representation invariant .Edges are non-negative and form a triangle .The sum of the lengths of any two sides of a triangle always exceeds the length of the third side </P>
+
+<P>Triangle::Triangle(double a_in, double b_in, double c_in) : a(a_in), b(b_in), c(c_in) { assert( /*STATEMENT*/ ); } Triangle.cpp 3 4 9 </P>
+
+<P>Triangle ADT //... </P>
+
+<P>double Triangle::area() const{ 
+double s = (a + b + c) / 2; 
+double area = sqrt(s*(s-a)*(s-b)*(s-c)); 
+return area; 
+} 
+void Triangle::print() const{ 
+cout&lt;&lt; &quot;a=&quot; &lt;&lt; a &lt;&lt; &quot; b=&quot; &lt;&lt; b &lt;&lt; &quot; c=&quot; &lt;&lt; c 
+&lt;&lt; endl; 
+} 
+.Implementations for print()and area() 
+</P>
+
+<P>Triangle.cpp 
+</P>
+
+<P>Using our ADT 
+</P>
+
+<P>.We now have an abstractdescription of values and operations .Whatthe data type does, but not how </P>
+
+<P>.We have an implementation of this ADT .Howthe data type works </P>
+
+<P>.Now, let’s use our new ADT </P>
+
+<P>Triangle.h Triangle.cpp test.cpp </P>
+
+<P>Flatland </P>
+
+<P>.Flatland: A Romance of Many Dimensions by Edwin A. Abbott is a short novel from 1884 by an English schoolmaster .Flatland is set in a two-dimensional world, where all the characters are geometric shapes. .Abbott represents the social hierarchy of Victorian culture using shapes: more sides indicates a higher status Flatland </P>
+
+<P>.Soldiers are isosceles triangles with sharp points .Craftsmen are equilateral triangles, or thoseclose to it, with an acute angle &gt; 59.5 degrees .Social status is determined by the acute angle: sharper angles indicate lower status </P>
+
+<P>soldier craftsman </P>
+
+<P>Flatland .Let’s represent a soldier and a craftsmanusing our Triangle ADT </P>
+
+<P>Triangle soldier(1,11,11); Triangle craftsman(5,5,5); soldier.print(); craftsman.print(); $ ./a.out a=1 b=11 c=11 a=5 b=5 c=5 soldier craftsman </P>
+
+<P>Flatland </P>
+
+<P>.As in Victorian England, those in Flatland are preoccupied with social status .Since status is determined by the acute angle, we will write a function to compute this angle </P>
+
+<P>soldier craftsman acute angle acute angle </P>
+
+<P>Exercise: get_acute() </P>
+
+<P>.Add a member function to Trianglethat returns the acute angle//EFFECTS: returns the smallest angle, in radiansdouble get_acute() const; .Recall that the acute angle is opposite the shortest edge .Recall your geometry: .Use acos(x)from the cmathlibrary, which returns arc cosof x in radians </P>
+
+<P>a b c B C A a </P>
+
+<P>Using get_acute() </P>
+
+<P>.Let’s use get_acute()to find out how many craftsmen live in Flatland .Craftsmen have an acute angle &gt; 59.5 deg. (1.0384709 rad) </P>
+
+<P>Triangle census[SIZE]; 
+//fill with Flatland’s inhabitants 
+intnum_craftsmen= 0; 
+for (Triangle *t=census; t&lt;census+SIZE; ++t) 
+if (t-&gt;get_acute() &gt; 1.0384709) 
+num_craftsmen+= 1; 
+cout&lt;&lt; num_craftsmen&lt;&lt; endl; 
+Flatland.cpp 
+</P>
+
+<P>A more efficient get_acute() 
+</P>
+
+<P>.Problem: the trigonometry inside get_acute()has become too slow for our Flatland simulation .Flatlanders are verypreoccupied with social status! .Let’s add a member variable and store the acute angle .Then, get_acute()can simply return the pre-computed angle .The technique is called caching .Compute it once, use it many times </P>
+
+<P>A more efficient get_acute() 
+class Triangle { 
+//... 
+private: 
+double a,b,c; 
+//measure of smallest angle, 
+</P>
+
+<P>//negative if not yet computed 
+double acute; 
+}; 
+.Add member variable to store smallest angle 
+</P>
+
+<P>.This member variable has its own representation invariant 
+</P>
+
+<P>Triangle.h 
+</P>
+
+<P>A more efficient get_acute() 
+Triangle::Triangle() 
+: a(0), b(0), c(0), acute(-1.0){} 
+Triangle::Triangle(double a_in, double b_in, double 
+</P>
+
+<P>c_in) 
+: a(a_in), b(b_in), c(c_in), acute(-1.0){} 
+.Modify constructors to initialize new member variable 
+</P>
+
+<P>.Use value -1.0indicate that acute angle has not yet been computed </P>
+
+<P>Triangle.cpp </P>
+
+<P>A more efficient get_acute() double Triangle::get_acute() const{ if (acute &gt; 0) return acute; //recomputeacute if (a &lt;= b &amp;&amp; a &lt;= c) //a is the short edge acute = acos((b*b + c*c -a*a)/(2*b*c)); else if (b &lt;= c) //b is the short edge acute = acos((c*c + a*a -b*b)/(2*c*a)); else //c is the short edge acute = acos((a*a + b*b -c*c)/(2*a*b)); return acute; } Triangle.cpp Modify get_acute()to check and return cached value If acutehas already been computed, just return it Otherwise, compute it exactly as before and store it </P>
+
+<P>Using get_acute() </P>
+
+<P>.Old code still works, without modification! 
+.But subsequent calls to get_acute()are now faster . 
+</P>
+
+<P>Triangle census[SIZE]; 
+//fill with Flatland’s inhabitants 
+intnum_craftsmen= 0; 
+for (Triangle *t=census; t&lt;census+SIZE; ++t) 
+if (t-&gt;get_acute()&gt; 1.0384709) 
+num_craftsmen+= 1; 
+cout&lt;&lt; num_craftsmen&lt;&lt; endl; 
+</P>
+
+<P>Flatland.cpp 
+</P>
+
+<P>Problems with set functions 
+.What is wrong with this code? 
+</P>
+
+<P>Triangle soldier(1,11,11); 
+soldier.print(); 
+cout&lt;&lt; &quot;acute=&quot; &lt;&lt; soldier.get_acute() &lt;&lt; endl; 
+soldier.set_b(11.1); 
+soldier.print(); 
+cout&lt;&lt; &quot;acute=&quot; &lt;&lt; soldier.get_acute() &lt;&lt; endl; 
+</P>
+
+<P>Problems with set functions 
+</P>
+
+<P>.Problem: setfunctions change edge lengths without changing pre-computed acuteangle </P>
+
+<P>Triangle soldier(1,11,11); 
+soldier.print(); 
+cout&lt;&lt; &quot;acute=&quot; &lt;&lt; soldier.get_acute() &lt;&lt; endl; 
+soldier.set_b(11.1); 
+soldier.print(); 
+cout&lt;&lt; &quot;acute=&quot; &lt;&lt; soldier.get_acute() &lt;&lt; endl; 
+$ ./a.out 
+a=1 b=11 c=11 
+acute=0.0909404 
+a=1 b=11.1 c=11 
+acute=0.0909404 
+Edge length changed, 
+</P>
+
+<P>angle should have changed too! </P>
+
+<P>Problems with set functions </P>
+
+<P>.Solution: mark the cached acutemember variable to be recomputed </P>
+
+<P>void Triangle::set_b(double b_in) { 
+b = b_in; 
+acute = -1.0; 
+} 
+.Do this to the other setfunctions as well 
+</P>
+
+<P>void Triangle::set_a(double a_in) {/*...*/} 
+void Triangle::set_c(double c_in){/*...*/} 
+void Triangle::set(double a_in,doubleb_in,doublec_in) 
+{/*...*/} 
+</P>
+
+<P>Using get_acute() 
+Triangle soldier(1,11,11); 
+soldier.print(); 
+cout&lt;&lt; &quot;acute=&quot; &lt;&lt; soldier.get_acute() &lt;&lt; endl; 
+soldier.set_b(11.1); 
+soldier.print(); 
+cout&lt;&lt; &quot;acute=&quot; &lt;&lt; soldier.get_acute() &lt;&lt; endl; 
+$ ./a.out 
+a=1 b=11 c=11 
+acute=0.0909404 
+a=1 b=11.1 c=11 
+acute=0.0900755 
+Edge length changed, 
+</P>
+
+<P>angle recomputed . 
+</P>
+
+<P>The power of abstraction 
+</P>
+
+<P>.We changed the implementation, but not the abstraction 
+.Modified private member variables 
+.Modified public function implementations 
+</P>
+
+<P>.This did not change whatthe public functions did, but rather 
+changed howthey did it. 
+.Because the abstraction (AKA public functions) remained the 
+same, our old code still worked 
+.This is a big benefit of ADTs! 
+</P>
+
+<P>Abstraction exercise 
+</P>
+
+<P>.There is more than one way to represent a triangle 
+.Let's change our representation from 3 edges to 2 edges and an 
+angle: a, b, and theta 
+.Do we need to change whatour ADT does? 
+.Hint: avoid this if possible 
+</P>
+
+<P>.Do we need to change howour ADT does it? 
+.Do we need to change anything in Triangle.h? What? 
+.Do we need to change anything in Triangle.cpp? What? 
+.Do we need to change anything in Flatland.cpp? What? 
+</P>
+
+<P>a 
+</P>
+
+<P>b 
+</P>
+
+<P>. 
+</P>
+</TaggedPDF-doc>

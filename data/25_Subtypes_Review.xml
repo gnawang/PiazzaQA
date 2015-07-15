@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:49:04-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:49:04-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:49:04-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">25_Subtypes_Review.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:9bdde638-d8c6-41ff-b28d-84492814ba1d</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:1538ca23-79b1-4e81-9eaa-7451efc62d2e</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="25_Subtypes_Review.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280Programming and Introductory Data Structures 
+</P>
+
+<P>blockM-dearborn 
+Recap #1 for Final Exam 
+Derived classes and subtypes 
+Slides by Atul Prakash 
+</P>
+
+<P>P1: You are given Triangle ADT 
+class Triangle { 
+private: 
+double a,b,c; //edge lengths represent a triangle 
+double acute; //measure of smallest angle 
+public: 
+//EFFECTS: creates a zero size Triangle 
+Triangle() {a = 0; b = 0; c = 0; acute = -1;} 
+//REQUIRES: a,b,care non-negative and form a triangle 
+//EFFECTS:creates a Triangle with given edge lengths 
+Triangle(double a_in, double b_in, double c_in); 
+//... 
+</P>
+
+<P>Write the default constructor using the 
+initializer syntax. 
+class Triangle { 
+private: 
+double a,b,c; //edge lengths represent a triangle 
+double acute; //measure of smallest angle 
+public: 
+Triangle(); 
+} 
+</P>
+
+<P>P2: You are given Triangle ADT 
+class Triangle { 
+//... 
+public: 
+//EFFECTS: sets edge lengths 
+void set_a(double a_in); 
+void set_b(double b_in); 
+void set_c(double c_in); 
+//EFFECTS: returns edge length 
+double get_a() const; 
+double get_b() const; 
+double get_c() const; 
+}; 
+</P>
+
+<P>and the following derived class: 
+class Isosceles : public Triangle{ 
+//OVERVIEW: a geometric representation of an//isosceles triangle with edge a representing//the base, and b=c the legs 
+//... 
+Isosceles(); 
+}; 
+</P>
+
+<P>Find the problem with each of the 
+following constructors: 
+Isosceles() { 
+a = b = c = 0; 
+acute = -1; 
+} 
+Isosceles() { 
+set_a(0); 
+</P>
+
+<P>set_b(0); 
+set_c(0); 
+} 
+Isosceles() { 
+Triangle(); 
+} 
+</P>
+
+<P>P3 
+–What is a good way to write the constructor for Isosceles? 
+</P>
+
+<P>Isosceles() { 
+// What to put in here? 
+} 
+</P>
+
+<P>P4 
+</P>
+
+<P>–Can the constructor for Isosceles() be omitted entirely? In 
+other words, not even declared? 
+–If that is legal, what will the following do: 
+</P>
+
+<P>Isosceles *t = new Isosceles(); 
+</P>
+
+<P>P5: Given the following Triangle ADT 
+with couts 
+class Triangle { 
+private: 
+double a,b,c; //edge lengths represent a triangle 
+double acute; //measure of smallest angle 
+public: 
+Triangle() 
+</P>
+
+<P>: a(0), b(0), c(0), acute(-1.0) { 
+cout&lt;&lt; “Triangle() constructor” &lt;&lt; endl; … 
+} 
+Triangle(double a_in, double b_in, double c_in) 
+: a(a_in), b(b_in), c(c_in), acute(-1.0) { 
+cout&lt;&lt; “Triangle(a_in, b_in, c_in) constructor” &lt;&lt; endl; … 
+} 
+~Triangle() {cout&lt;&lt; “Triangle destructor called” &lt;&lt; endl;} 
+} 
+</P>
+
+<P>and Isosceles with output statements 
+class Isosceles : public Triangle{ 
+//OVERVIEW: a geometric representation of an//isosceles triangle with edge a representing//the base, and b=c the legs 
+//... 
+Isosceles() { cout&lt;&lt; “Isosceles() constructor” &lt;&lt; endl; …}; 
+Isosceles(double base, double leg) { 
+cout&lt;&lt; “Isosceles(base, leg) constructor” &lt;&lt; endl; … 
+} 
+~Isosceles() {cout&lt;&lt; “Isosceles destructor called” &lt;&lt; endl;} 
+} 
+</P>
+
+<P>P5 problem 
+intmain() { 
+cout&lt;&lt; “begin of main” &lt;&lt; endl; 
+Isosceles worker(0.9, 8); 
+cout&lt;&lt; “end of main” &lt;&lt; endl; 
+} 
+</P>
+
+<P>•In what order are constructors and destructors called and what is the output? </P>
+
+<P>P5 solution </P>
+
+<L>
+<L>
+<LI>
+<Lbl>•</Lbl>
+
+<LBody>Discuss in class </LBody>
+</LI>
+
+<LI>P6 problem 
+intmain() { 
+cout&lt;&lt; “begin of main” &lt;&lt; endl; 
+Triangle *t= new Isosceles(0.9, 8); 
+cout&lt;&lt; “end of main” &lt;&lt; endl; 
+} 
+</LI>
+</L>
+
+<LI>
+<Lbl>•</Lbl>
+
+<LBody>Using same design of Triangle and Isosceles class as in P5, in what order are constructors and destructors called and what is the output? </LBody>
+</LI>
+
+<L>
+<LI>
+<Lbl>•</Lbl>
+
+<LBody>Discuss solution to P6 </LBody>
+</LI>
+
+<LI>P7 problem 
+intmain() { 
+cout&lt;&lt; “begin of main” &lt;&lt; endl; 
+Triangle *t= new Isosceles(0.9, 8); 
+delete t; 
+cout&lt;&lt; “end of main” &lt;&lt; endl; 
+} 
+</LI>
+</L>
+
+<LI>
+<Lbl>•</Lbl>
+
+<LBody>Using same design of Triangle and Isosceles class as in P5, in what order are constructors and destructors called and what is the output? </LBody>
+</LI>
+</L>
+
+<P>P8-P9: Given the following Triangle ADT with couts </P>
+
+<P>class Triangle { 
+private: 
+double a,b,c; //edge lengths represent a triangle 
+double acute; //measure of smallest angle 
+public: 
+Triangle() 
+{ 
+cout&lt;&lt; “Triangle() constructor” &lt;&lt; endl; … 
+} 
+Triangle(double a_in, double b_in, double c_in) 
+{ 
+cout&lt;&lt; “Triangle(a_in, b_in, c_in) constructor” &lt;&lt; endl; … 
+} 
+virtual~Triangle() {cout&lt;&lt; “Triangle destructor called” &lt;< 
+</P>
+
+<P>endl;} 
+} 
+</P>
+
+<P>and Isosceles with output statements 
+class Isosceles : public Triangle{ 
+//OVERVIEW: a geometric representation of an//isosceles triangle with edge a representing//the base, and b=c the legs 
+//... 
+Isosceles() { cout&lt;&lt; “Isosceles() constructor” &lt;&lt; endl; …}; 
+Isosceles(double a, double b, double c) { 
+cout&lt;&lt; “Isosceles(a, b, c) constructor” &lt;&lt; endl; … 
+} 
+virtual~Isosceles() {cout&lt;&lt; “Isosceles destructor called” &lt;< 
+</P>
+
+<P>endl;} 
+} 
+</P>
+
+<P>P8 problem 
+intmain() { 
+cout&lt;&lt; “begin of main” &lt;&lt; endl; 
+Isosceles worker(0.9, 8); 
+cout&lt;&lt; “end of main” &lt;&lt; endl; 
+} 
+</P>
+
+<L>
+<L>
+<LI>
+<Lbl>•</Lbl>
+
+<LBody>In what order are constructors and destructors called and what is the output? Is there any difference in output from P5? </LBody>
+</LI>
+
+<LI>P9 problem 
+intmain() { 
+cout&lt;&lt; “begin of main” &lt;&lt; endl; 
+Triangle *t= new Isosceles(0.9, 8); 
+delete t; 
+cout&lt;&lt; “end of main” &lt;&lt; endl; 
+} 
+</LI>
+</L>
+
+<LI>
+<Lbl>•</Lbl>
+
+<LBody>Using same design of Triangle and Isosceles class as in P8, in what order are constructors and destructors called and what is the output? </LBody>
+</LI>
+
+<L>
+<LI>
+<Lbl>•</Lbl>
+
+<LBody>Discuss solution to P9 </LBody>
+</LI>
+
+<LI>P10: Consider the following design </LI>
+</L>
+
+<LI>
+<Lbl>•</Lbl>
+
+<LBody>Rectangle class: Rectangles are defined by sides x an y. It provides the following methods: </LBody>
+</LI>
+</L>
+
+<P>class Rectangle { double x,y; public: virtual void setx(double x_in) {x = x_in;} </P>
+
+<P>virtual void sety(double y_in) {y = y_in;} </P>
+
+<P>} </P>
+
+<P>•Define setxand setyfor Square so that Square satisfies the Liskov’ssubstitution principle with respect to setxand setyoperations. </P>
+
+<P>class Square : public Rectangle { </P>
+
+<P>virtual void setx(double x_in); </P>
+
+<P>virtual void sety(double y_in); </P>
+
+<P>} </P>
+
+<L>
+<L>
+<LI>
+<Lbl>•</Lbl>
+
+<LBody>Discuss solution to P10 here </LBody>
+</LI>
+
+<LI>P11: Consider the following design </LI>
+</L>
+
+<LI>
+<Lbl>•</Lbl>
+
+<LBody>Square class: Squares are defined by one side, such 
+that a is non-negative. It provides a method: 
+–seta(double a_in) { assert(a_in&gt;= 0); a = a_in;} 
+</LBody>
+</LI>
+
+<LI>
+<Lbl>•</Lbl>
+
+<LBody>PositiveSquare: subclass of Square where a is required 
+to be positive. The method is: 
+–seta(double a_in) { assert(a_in&gt; 0); a = a_in;} 
+</LBody>
+</LI>
+
+<LI>
+<Lbl>•</Lbl>
+
+<LBody>Is every PositiveSquarea Square? 
+</LBody>
+</LI>
+
+<L>
+<LI>
+<Lbl>•</Lbl>
+
+<LBody>Does seta() operation satisfy the Liskov’ssubstitution 
+principle? Why or why not? 
+</LBody>
+</LI>
+
+<LI>P12: handling errors </LI>
+</L>
+
+<LI>
+<Lbl>•</Lbl>
+
+<LBody>Write the constructor so that attempt at creating illegal triangles are prevented and an error communicated to the caller. Fix main() as well so that the user is repeatedly asked until a valid triangle is successfully created. </LBody>
+</LI>
+</L>
+
+<P>Triangle::Triangle(double a_in, double b_in, double c_in); </P>
+
+<P>intmain() { 
+Triangle *t; 
+// Fix the code below 
+double a, b, c; 
+cout&lt;&lt; “Please enter the sides of a triangle” &lt;&lt; endl; 
+cin&gt;&gt; a &gt;&gt; b &gt;&gt; c; 
+t = new Triangle(a, b, c); 
+… 
+} 
+</P>
+
+<P>Solution 
+</P>
+
+<P>•Discuss P12 in class </P>
+</TaggedPDF-doc>

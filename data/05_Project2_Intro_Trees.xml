@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:48:27-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:48:27-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:48:27-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">05_Project2_Intro_Trees.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:89e9ed3e-e60f-406d-8508-a282e3a56aa0</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:7cfa9a5c-c0b3-4bbd-bdfe-fc9f9db6d46f</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="05_Project2_Intro_Trees.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280 </P>
+
+<P>Programming and Introductory Data Structures blockM-dearborn Project 2 Intro: Trees </P>
+
+<P>Slides by Andrew DeOrio 1 </P>
+
+<P>Project 2 </P>
+
+<P>.This project will give you experience writing recursive functions that operate on recursively-defined data structures .Lists and Trees </P>
+
+<P>.New types: list_t and tree_t .You can access these new types with #include &quot;recursive.h&quot; </P>
+
+<P>2 </P>
+
+<P>Trees </P>
+
+<P>.A binary tree is well formed if 1.It is the empty tree, or 2.It consists of an integer element, plus two children, called the left subtree and the right subtree, each of which is a well-formed binary tree. </P>
+
+<P>.Leaf: both children are the empty tree </P>
+
+<P>8 / \ 4 27 / \ /\ 18 /\ </P>
+
+<P>3 </P>
+
+<P>tree_t 
+.Project 2 provides tree_t type 
+</P>
+
+<P>tree_t tree_make(); 
+// EFFECTS: creates an empty tree. 
+</P>
+
+<P>tree_t tree_make(int elt, tree_t left, 
+</P>
+
+<P>tree_t right); 
+// EFFECTS: creates a new tree, with elt as it's 
+// element, left as 
+// its left subtree, and right as its right subtree 
+4 
+</P>
+
+<P>Exercise: creating a tree 
+.Use tree_make() to create this tree: 
+</P>
+
+<P>8 
+/ \ 
+4 27 
+/ \ /\ 
+18 
+/\ 
+</P>
+
+<P>5 
+</P>
+
+<P>More tree_t functions 
+bool tree_isEmpty(tree_t tree); 
+// EFFECTS: returns true if tree is empty 
+</P>
+
+<P>int tree_elt(tree_t tree); 
+// REQUIRES: tree is not empty 
+// EFFECTS: returns the element at the top of tree. 
+</P>
+
+<P>tree_t tree_left(tree_t tree); 
+// REQUIRES: tree is not empty 
+// EFFECTS: returns the left subtree of tree 
+</P>
+
+<P>tree_t tree_right(tree_t tree); 
+// REQUIRES: tree is not empty 
+// EFFECTS: returns the right subtree of tree 
+</P>
+
+<P>7 
+</P>
+
+<P>More tree_t functions 
+int tree_elt(tree_t tree); 
+// REQUIRES: tree is not empty 
+// EFFECTS: returns the element at the top of tree. 
+</P>
+
+<P>tree_elt( ) returns 8 
+</P>
+
+<P>8 
+8 
+/ \ 
+4 27 
+</P>
+
+<P>/ \ /\ 
+18 
+</P>
+
+<P> /\ </P>
+
+<P>More tree_t functions tree_t tree_left(tree_t tree); // REQUIRES: tree is not empty // EFFECTS: returns the left subtree of tree </P>
+
+<P>tree_left( ) returns </P>
+
+<P>9 8 / \ 4 27 </P>
+
+<P>/ \ /\ 18 /\ 4 </P>
+
+<P>/\ </P>
+
+<P>More tree_t functions tree_t tree_right(tree_t tree); // REQUIRES: tree is not empty // EFFECTS: returns the right subtree of tree </P>
+
+<P>tree_right( ) returns </P>
+
+<P>10 8  / \ 4 27 </P>
+
+<P>/ \ /\ 18 /\ 27 /\ 18 /\ </P>
+
+<P>Visiting each node </P>
+
+<P>.Visiting each node in a tree is called a traversal .Traversal is recursive .For example: 1.Visit the root node 2.Traverse the left subtree 3.Traverse the right subtree </P>
+
+<P>11 8 / \ 4 27 / \ /\ 18 /\ </P>
+
+<P>Exercise: visiting each node .Write a function for this process </P>
+
+<P>void print_nodes(tree_t tree); // 0. Check for an empty tree // 1. Print the root node // 2. print_nodes() on the left subtree // 3. print_nodes() on the right subtree .Use tree_isEmpty, tree_left, </P>
+
+<P>tree_right, tree_elt .Example output: 8 4 27 18 </P>
+
+<P>12 8 / \ 4 27 / \ /\ 18 /\ </P>
+
+<P>A typical tree function </P>
+
+<P>void tree_function(tree_t tree) { //empty tree base case if (tree_isEmpty(tree)) return; </P>
+
+<P>//do something with root cout &lt;&lt; tree_elt(tree) &lt;&lt; &quot; &quot;; </P>
+
+<P>tree_function(tree_left(tree)); //recurse L </P>
+
+<P>tree_function(tree_right(tree)); //recurse R } 14 order may change </P>
+</TaggedPDF-doc>

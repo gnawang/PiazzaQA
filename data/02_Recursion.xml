@@ -1,0 +1,1175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:30:21-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:30:21-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:30:21-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">02_Recursion.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:e4be993d-0db8-4141-8705-6abeea59f674</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:321057ed-2a2b-4322-b098-b9d0ea86635a</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="02_Recursion.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280 
+Programming and Introductory Data Structures 
+</P>
+
+<P>blockM-dearborn 
+Procedural Abstraction and Recursion 
+</P>
+
+<P>Slides by Brian Noble, 
+Jeff Ringenberg and 
+Andrew DeOrio 
+</P>
+
+<P>1 
+Abstraction 
+</P>
+
+<P>.Abstraction is a many-to-one mapping that reduces complexity 
+and eliminates unnecessary details by providing only those 
+details that matter. 
+.For example, there are several ways to implement a 
+multiplication algorithm (table lookup, summing, etc..). Each 
+looks quite different internally than the other, but they do the 
+same thing. In general, a user won’t care how it’s done, just 
+that it multiplies. 
+.There are two types of abstraction: 
+.Procedural (the topic of the next three weeks) 
+.Data 
+</P>
+
+<P>2 
+</P>
+
+<P>Procedural Abstraction 
+</P>
+
+<P>.Decomposing a program into functions is a way of providing 
+“computational” abstractions. 
+.Rather than simply being collections of commonly used code, 
+functions provide a useful tool for implementing procedural 
+abstraction within a program. 
+</P>
+
+<P>3 
+</P>
+
+<P>Procedural Abstraction 
+</P>
+
+<P>.For any function, there is a person who implements the 
+function (the author) and a person who uses the function (the 
+client). 
+.The author needs to think carefully about what the function is 
+supposed to do, as well as how the function is going to do it. 
+.In contrast, the client only needs to consider the what, not the 
+how. Since how is much more complicated, this is a Big Win 
+for the client! 
+</P>
+
+<P>.In individual programming, you will often be the author and 
+the client. Sometimes it is to your advantage to “forget the 
+details” and only concentrate on higher levels of functionality. 
+</P>
+
+<P>4 
+</P>
+
+<P>Procedural Abstraction 
+</P>
+
+<P>.Procedural abstractions, done properly, have two important 
+properties: 
+.Local: the implementation of an abstraction can be understood without 
+examining any other abstraction implementation. 
+.Substitutable: you can replace one (correct) implementation of an 
+abstraction with another (correct) one, and no callers of that abstraction 
+will need to be modified. 
+</P>
+
+<P>.These properties only apply to implementations of abstractions, 
+not the abstractions themselves. 
+.It is CRITICALLY IMPORTANT to get the abstractions right 
+before you start writing a bunch of code. 
+.If you change the abstraction that is offered, the change is not 
+local, nor is the new version substitutable. 
+</P>
+
+<P>5 
+</P>
+
+<P>Procedural Abstraction 
+</P>
+
+<P>.Unfortunately, abstraction limits the scope of change. 
+.If you need to change what a procedural abstraction does, it can 
+involve many different changes in the program. 
+.However, if a change can be limited to replacing the 
+implementation of an abstraction with a substitutable 
+implementation, then you are guaranteed that no other part of 
+the project needs to change. This is vital for projects that 
+involve many programmers. 
+</P>
+
+<P>6 
+</P>
+
+<P>Function Definitions vs. 
+Declarations 
+</P>
+
+<P>.In small programs, often we just define functions before they 
+are used. 
+.In larger programs, it is useful to separate the declaration 
+of a function from its definition. A declaration provides the 
+“type signature” of a function, also called the function header. 
+.Function headers can be placed in their own file and accessed 
+</P>
+
+<P>using the preprocessor directive #include. </P>
+
+<P>7 </P>
+
+<P>Function Definitions vs. 
+Declarations Example 
+8 
+double GetParam(string prompt, double min, double max); 
+</P>
+
+<P>//... 
+io.h 
+#include &quot;io.h" 
+</P>
+
+<P>double GetParam(string prompt, double min, double max) 
+{ /* ... */ } 
+io.cpp 
+#include &quot;io.h" 
+int main() { 
+</P>
+
+<P>// ... 
+</P>
+
+<P>GetParam(prompt, min, max); 
+} 
+p1.cpp 
+</P>
+
+<P>Function Details 
+</P>
+
+<P>.All C++ functions take zero or more arguments and return a result of some type. .There is a special type, called “void”, that means “no result is returned”. void is still a type, even though it is “the type with no legal values”. .Typically, a function's signature defines all of the state, in the form of explicit arguments, needed by the procedure to accomplish its goal. However, sometimes there are also implicit arguments: elements of the global environment that are used by the procedure. </P>
+
+<P>9 </P>
+
+<P>Function Details 
+</P>
+
+<P>.The type signature of a function can be considered part of the 
+abstraction – if you change it, customers (callers) must also 
+change. 
+.However, as long as a new implementation of an abstraction 
+does the “same thing” as some old (correct) implementation, 
+you can replace the old one with the new one. 
+.Of course, now we need to know what we mean by the “same 
+thing”. This boils down to describing the abstraction (not 
+implementation) of the function. We use specifications to do 
+this. 
+</P>
+
+<P>10 
+</P>
+
+<P>Specifications 
+</P>
+
+<P>.For a procedural abstraction, a specification must answer three 
+questions: 
+.What pre-conditions must hold to use the function? 
+.Does the function change any inputs (even implicit ones)? If so, how? 
+.What does the procedure actually do? 
+</P>
+
+<P>.We answer each of these three questions in a specification 
+comment, and we always include one – with the declaration, if 
+it is separate from definition. 
+</P>
+
+<P>11 
+</P>
+
+<P>Specification Comments 
+</P>
+
+<P>.There are three clauses to the specification: 
+.REQUIRES: the pre-conditions that must hold, if any. 
+.MODIFIES: how inputs are modified, if any. 
+.EFFECTS: what the procedure computes given legal inputs. 
+</P>
+
+<P>.Note that the first two clauses have an “if any”, which means 
+they may be empty, in which case you may omit them. 
+</P>
+
+<P>12 
+</P>
+
+<P>Specification Comment Example 
+</P>
+
+<P>bool isEven(int n); 
+// EFFECTS: returns true if n is even, 
+</P>
+
+<P>//false otherwise 
+</P>
+
+<P>.This function returns true if and only if its argument is an even 
+number. We call functions that return true or false depending 
+on some input property predicates. 
+.Since the predicate isEven is well-defined over all inputs 
+(every possible integer is either even or odd) there need be no 
+REQUIRES clause. 
+.Since isEven modifies no (implicit or explicit) arguments, 
+there need be no MODIFIES clause. 
+</P>
+
+<P>13 
+</P>
+
+<P>Specification Comment Example 
+</P>
+
+<P>int factorial(int n); 
+// REQUIRES: n &gt;= 0 
+// EFFECTS: returns n! 
+</P>
+
+<P>.The mathematical abstraction factorial is only defined for nonnegative integers. So, we REQUIRE that the caller supply an 
+argument greater than or equal to zero. 
+.Factorial promises to compute n! correctly for non-negative 
+integers only. In other words, the EFFECTS clause is only 
+valid for inputs satisfying the REQUIRES clause. 
+.Importantly, this means that the implementation of factorial 
+DOES NOT HAVE TO CHECK if n &lt; 0! The function 
+specification tells the caller that s/he must pass a non-negative 
+integer. 
+</P>
+
+<P>14 
+</P>
+
+<P>More Function Details 
+</P>
+
+<P>.Functions without REQUIRES clauses are considered 
+complete; they are valid for all input. 
+.Functions with REQUIRES clauses are considered partial; 
+some arguments that are &quot;legal&quot; with respect to the type system 
+are not legal with respect to the function. 
+.Whenever possible, it is much better to write complete 
+functions than partial ones. 
+.When we discuss exceptions, we will see a way to convert 
+partial 
+functions to complete ones. 
+</P>
+
+<P>16 
+</P>
+
+<P>More Function Details </P>
+
+<P>.What about the MODIFIES clause? .A MODIFIES clause identifies any function argument or piece of global state that might change if this function is called. .For example, this can happen with pass-by-reference as opposed to passby-value inputs </P>
+
+<P>17 </P>
+
+<P>Specification Comment Example </P>
+
+<P>void swap(int &amp;x, int &amp;y); // MODIFIES: x, y // EFFECTS: exchanges the values of x and y </P>
+
+<P>.The ampersand (&amp;) means that you get a reference to the caller's argument, not a copy of it. This lets you to change the value of that argument. .NOTE: If the function could change a reference argument, it must go in the MODIFIES clause. Leave it out only if the function can never change it. .This implies you should never use pass-by reference, unless you intend to change the input in some situation. </P>
+
+<P>18 </P>
+
+<P>Call by reference example </P>
+
+<P>int main() { </P>
+
+<P>int a=4, b=9; </P>
+
+<P>cout &lt;&lt; a &lt;&lt; “ “ &lt;&lt; b &lt;&lt; endl; </P>
+
+<P>swap(a,b); </P>
+
+<P>cout &lt;&lt; a &lt;&lt; “ “ &lt;&lt; b &lt;&lt; endl; </P>
+
+<P>} </P>
+
+<P>19 void swap(int &amp;x, int &amp;y); // MODIFIES: x, y // EFFECTS: exchanges the // values of x and y 4 9 </P>
+
+<P>9 4 </P>
+
+<P>Call by reference example </P>
+
+<P>20 int main() </P>
+
+<P>a: </P>
+
+<P>b: </P>
+
+<P>void swap(int &amp;x, int &amp;y) </P>
+
+<P>x: </P>
+
+<P>y: </P>
+
+<P>Call Stacks: How function calls work 
+</P>
+
+<P>.When we call a function (using pass-by-value semantics) the 
+program follows these steps: 
+1.Evaluate the actual arguments to the function (order is not 
+guaranteed). 
+2.Create an “activation record” (sometimes called a “stack 
+frame”) to hold the function's formal arguments and local 
+variables. 
+3.Copy the actuals' values to the formals' storage space. 
+4.Evaluate the function in its local scope. 
+5.Replace the function call with the result. 
+6.Destroy the activation record. 
+</P>
+
+<P>21 
+Call Stacks 
+</P>
+
+<P>.Activation records are typically stored as a stack. 
+.You can think of this process like plates in a cafeteria 
+.Each time you clean a plate, you add it to the top of the stack. 
+.Each time a new plate is needed, it is taken from the top. 
+.Calling a function is like cleaning a plate. 
+.Returning from the function is like taking a plate. 
+</P>
+
+<P>22 
+Call Stacks 
+</P>
+
+<P>.Activation records work just like the plates example. 
+.When a function is called, an activation record for this 
+invocation is added to the “top” of the stack. 
+.When that function returns, it's record is removed from the 
+“top” of the stack. 
+.In the meantime, this function may have called other functions, 
+(which create corresponding activation records). These 
+functions must return (and destroy their corresponding 
+activation records) before this function can return. 
+.Note: “top” is placed in quotes, because, by convention, stacks 
+are typically drawn growing down rather than up. 
+</P>
+
+<P>23 
+</P>
+
+<P>Call Stack Example 
+</P>
+
+<P>int plus_one(int x) { 
+</P>
+
+<P>return (x+1); 
+</P>
+
+<P>} 
+</P>
+
+<P>int plus_two(int x) { 
+</P>
+
+<P>return (1 + plus_one(x)); 
+</P>
+
+<P>} 
+</P>
+
+<P>int main() { 
+</P>
+
+<P>int result = 0; 
+</P>
+
+<P> result = plus_two(0); </P>
+
+<P>cout &lt;&lt; result; </P>
+
+<P>return 0; } 24 </P>
+
+<P>Call Stack Example </P>
+
+<P>int plus_one(int x) { </P>
+
+<P>return (x+1); } </P>
+
+<P>int plus_two(int x) { </P>
+
+<P>return (1 + plus_one(x)); } </P>
+
+<P>int main() { int result = 0; </P>
+
+<P>result = plus_two(0); </P>
+
+<P>cout &lt;&lt; result; </P>
+
+<P>return 0; </P>
+
+<P>} </P>
+
+<P>25 </P>
+
+<P>Main starts out with an activation record with room only for the local “result”: main: result: 0 Call Stack Example </P>
+
+<P>int plus_one(int x) { return (x+1); } </P>
+
+<P>int plus_two(int x) { return (1 + plus_one(x)); } </P>
+
+<P>int main() { int result = 0; </P>
+
+<P>result = plus_two(0); cout &lt;&lt; result; return 0; </P>
+
+<P>} 26 Then, main calls </P>
+
+<P>plus_two, passing the literal value &quot;0&quot;: </P>
+
+<P>main: </P>
+
+<P>plus_two: </P>
+
+<P>result: 0 x: 0 </P>
+
+<P>Call Stack Example </P>
+
+<P>int plus_one(int x) { return (x+1); } </P>
+
+<P>int plus_two(int x) { return (1 + plus_one(x)); } </P>
+
+<P>int main() { int result = 0; </P>
+
+<P>result = plus_two(0); cout &lt;&lt; result; return 0; </P>
+
+<P>} 27 Which in turn calls </P>
+
+<P>plus_one: </P>
+
+<P>main: </P>
+
+<P>plus_two: plus_one: </P>
+
+<P>result: 0 </P>
+
+<L>
+<LI>
+<Lbl>x:</Lbl>
+
+<LBody> 0 </LBody>
+</LI>
+
+<LI>
+<Lbl>x:</Lbl>
+
+<LBody> 0 </LBody>
+</LI>
+</L>
+
+<P>Call Stack Example </P>
+
+<P>int plus_one(int x) { return (x+1); } </P>
+
+<P>int plus_two(int x) { return (1 + plus_one(x)); } </P>
+
+<P>int main() { int result = 0; </P>
+
+<P>result = plus_two(0); cout &lt;&lt; result; return 0; </P>
+
+<P>} 28 plus_one adds one to x, </P>
+
+<P>returning the value 1: main: </P>
+
+<P>plus_two: </P>
+
+<P>plus_one: </P>
+
+<P>result: 0 </P>
+
+<L>
+<LI>
+<Lbl>x:</Lbl>
+
+<LBody> 0 </LBody>
+</LI>
+
+<LI>
+<Lbl>x:</Lbl>
+
+<LBody> 0 </LBody>
+</LI>
+</L>
+
+<P>Call Stack Example </P>
+
+<P>int plus_one(int x) { </P>
+
+<P>return (x+1); } </P>
+
+<P>int plus_two(int x) { </P>
+
+<P>return (1 + plus_one(x)); } </P>
+
+<P>int main() { int result = 0; </P>
+
+<P>result = plus_two(0); </P>
+
+<P>cout &lt;&lt; result; </P>
+
+<P>return 0; } 29 plus_one’s activation </P>
+
+<P>record is destroyed: </P>
+
+<P>main: </P>
+
+<P>plus_two: </P>
+
+<P>result: 0 </P>
+
+<P>x: 0 </P>
+
+<P>Call Stack Example </P>
+
+<P>int plus_one(int x) { return (x+1); } </P>
+
+<P>int plus_two(int x) { return (1 + plus_one(x)); } </P>
+
+<P>int main() { int result = 0; </P>
+
+<P>result = plus_two(0);  cout &lt;&lt; result; </P>
+
+<P>return 0; } 30 plus_two adds one to the </P>
+
+<P>result, and returns the value </P>
+
+<P>2: </P>
+
+<P>main: </P>
+
+<P>plus_two: </P>
+
+<P>result: 2 </P>
+
+<P>x: 0 </P>
+
+<P>Call Stack Example </P>
+
+<P>int plus_one(int x) { return (x+1); } </P>
+
+<P>int plus_two(int x) { return (1 + plus_one(x)); } </P>
+
+<P>int main() {  int result = 0; </P>
+
+<P>result = plus_two(0); </P>
+
+<P>cout &lt;&lt; result; </P>
+
+<P>return 0; } 31 plus_two’s activation </P>
+
+<P>record is destroyed: </P>
+
+<P>main: result: 2 </P>
+
+<P>Call Stack Example </P>
+
+<P>int plus_one(int x) { </P>
+
+<P>return (x+1); } </P>
+
+<P>int plus_two(int x) { </P>
+
+<P>return (1 + plus_one(x)); } </P>
+
+<P>int main() { int result = 0; </P>
+
+<P>result = plus_two(0); cout &lt;&lt; result;  return 0; </P>
+
+<P>} </P>
+
+<P>32 </P>
+
+<P>main then prints the result: </P>
+
+<P>main: </P>
+
+<P>result: 2 </P>
+
+<P>2 </P>
+
+<P>Some things to note </P>
+
+<P>.Even though plus_one and plus_two both have formals called “x”, this presents no problem. .Since environments are lexically scoped, plus_one cannot see plus_two's </P>
+
+<P>x. Instead, a copy of plus_two's x is passed to plus_one, and stored in plus_one's x. </P>
+
+<P>.Neither plus_one nor plus_two can see main's “result” 
+.Again, environments are lexically scoped. result is only accessible from 
+within main. 
+</P>
+
+<P>33 
+</P>
+
+<P>Recursion 
+A convenient place for using stacks 
+</P>
+
+<P>.“Recursive” just means “refers to itself”. 
+.So, a function is recursive if it calls itself. 
+.Likewise, a problem is recursive if: 
+1.There is (at least) one “trivial” base or “stopping” case. 
+2.All other cases can be solved by first solving one (or more) smaller 
+cases, and then combining those solutions with a simple step. 
+</P>
+
+<P>34 
+</P>
+
+<P>Recursion 
+A convenient place for using stacks 
+</P>
+
+<P>.Recursive problems are those that are defined in terms of the 
+problem itself and can be solved very elegantly, simply, and 
+(sometimes) efficiently by recursive functions. 
+.This is the focus of the next few lectures, and the core of the 
+material you will need for project 2. 
+</P>
+
+<P>35 
+</P>
+
+<P>Recursion Example 
+</P>
+
+<P>.Consider the factorial function: 
+.C++ does not have a “factorial” operator (neither do most other 
+programming languages). 
+.So, we have to figure out how to solve it. 
+.REQUIREMENT: factorial is defined only for the domain of nonnegative integers (this will be assumed) 
+</P>
+
+<P>36 
+</P>
+
+<P>. 
+. 
+... 
+3163*2*1!3kk 
+Recursion Example 
+</P>
+
+<P>.Now consider the recursive definition: 
+</P>
+
+<P>.This is a recursive definition of factorial; the function factorial 
+is defined in terms of factorial itself. 
+</P>
+
+<P>37 
+</P>
+
+<P>1 (n == 0) 
+n * (n-1)! (n &gt; 0) 
+n! = 
+</P>
+
+<P>Recursion Example 
+</P>
+
+<P>.There are two important features of this definition. 
+.First, there is one trivial stopping case that requires no computation: 
+</P>
+
+<P>0! = 1 
+.Second, every other case can be solved by first solving a “smaller” 
+problem, where “smaller” means “a problem that is closer to the 
+trivial stopping case,” and then performing a simple additional 
+computation on that smaller result to get the larger one. This is 
+called the “recursive step” (or, sometimes, the inductive step). 
+</P>
+
+<P>.Because of these features, converting to code is 
+easy! 
+</P>
+
+<P>38 
+</P>
+
+<P>1 (n == 0) 
+</P>
+
+<P>n * (n-1)! (n &gt; 0) 
+</P>
+
+<P>n! = 
+Recursion Example 
+</P>
+
+<P>39 
+int factorial (int n) 
+</P>
+
+<P>// REQUIRES: n &gt;= 0 
+</P>
+
+<P>// EFFECTS: computes n! 
+</P>
+
+<P>1.{ 
+</P>
+
+<L>
+<LI>
+<Lbl>2.</Lbl>
+
+<LBody> if (n == 0) { </LBody>
+</LI>
+
+<LI>
+<Lbl>3.</Lbl>
+
+<LBody> return 1; // ‘base case’ </LBody>
+</LI>
+
+<LI>
+<Lbl>4.</Lbl>
+
+<LBody> } else { </LBody>
+</LI>
+
+<LI>
+<Lbl>5.</Lbl>
+
+<LBody> return n*factorial(n-1); // ‘recursive step’ </LBody>
+</LI>
+
+<LI>
+<Lbl>6.</Lbl>
+
+<LBody> } 7.} </LBody>
+</LI>
+</L>
+
+<P>1 (n == 0) 
+</P>
+
+<P>n * (n-1)! (n &gt; 0) 
+</P>
+
+<P>n! = 
+Recursion Example 
+</P>
+
+<P>.Suppose we call our function as 
+follows: 
+</P>
+
+<P>int main() 
+</P>
+
+<P>1.{ 
+</P>
+
+<L>
+<LI>
+<Lbl>2.</Lbl>
+
+<LBody> int x; </LBody>
+</LI>
+
+<LI>
+<Lbl>3.</Lbl>
+
+<LBody> x = factorial(3); 4.} </LBody>
+</LI>
+</L>
+
+<P>40 main </P>
+
+<P>x: </P>
+
+<P>Recursion Example </P>
+
+<P>.main() calls factorial with an argument 3. .We evaluate the actual argument, create an activation record, and copy the actual value to the formal: </P>
+
+<P>41 </P>
+
+<P>factorial </P>
+
+<P>n: 3 main </P>
+
+<P>x: </P>
+
+<P>Recursion Example 
+</P>
+
+<P>.Now we evaluate the body of 
+factorial: 
+.n is not zero, so we evaluate the 
+alternate arm of the if statement. 
+Substituting for n and simplifying, 
+we get: 
+</P>
+
+<P>return 3 * factorial(2) 
+</P>
+
+<P>.So, factorial must call factorial. We 
+follow the “call a function” protocol, 
+and create a new activation record 
+for a new instance of factorial: 
+</P>
+
+<P>42 
+</P>
+
+<P>factorial </P>
+
+<P>n: 3 </P>
+
+<P>main </P>
+
+<P>x: factorial </P>
+
+<P>n: 2 </P>
+
+<P>Recursion Example </P>
+
+<P>.Again, n is not zero, so we evaluate the arm again: return 2 * factorial(1) </P>
+
+<P>43 factorial </P>
+
+<P>n: 3 main </P>
+
+<P>x: factorial </P>
+
+<P>n: 2 </P>
+
+<P>factorial </P>
+
+<L>
+<LI>
+<Lbl>n:</Lbl>
+
+<LBody> 1 Recursion Example .And again… </LBody>
+</LI>
+
+<LI>
+<Lbl>n:</Lbl>
+
+<LBody> 3 </LBody>
+</LI>
+</L>
+
+<P>44 factorial </P>
+
+<P>main </P>
+
+<P>x: factorial </P>
+
+<P>n: 2 </P>
+
+<P>factorial </P>
+
+<P>n: 1 </P>
+
+<P>factorial </P>
+
+<P>n: 0 </P>
+
+<P>Recursion Example </P>
+
+<P>.This time, n is zero, so we evaluate the consequence rather than the alternative. .Return the value “1”, popping the most recent activation record off of the stack. </P>
+
+<P>45 factorial </P>
+
+<P>n: 3 </P>
+
+<P>main </P>
+
+<P>x: factorial </P>
+
+<L>
+<LI>
+<Lbl>n:</Lbl>
+
+<LBody> 2 </LBody>
+</LI>
+
+<LI>
+<Lbl>n:</Lbl>
+
+<LBody> 1 </LBody>
+</LI>
+
+<LI>
+<Lbl>n:</Lbl>
+
+<LBody> 0 </LBody>
+</LI>
+</L>
+
+<P>factorial </P>
+
+<P>factorial </P>
+
+<P>Recursion Example </P>
+
+<P>.We called factorial with this statement as follows: return 1 * factorial(0) .But, now we know the value of factorial(0), so we can simplify to return 1 * 1 =&gt; return 1; .This pops another frame off the stack </P>
+
+<P>46 factorial </P>
+
+<P>n: 3 </P>
+
+<P>main </P>
+
+<P>x: factorial </P>
+
+<P>n: 2 </P>
+
+<P>factorial </P>
+
+<P>n: 1 </P>
+
+<P>Recursion Example </P>
+
+<P>.Allowing us to complete this arm: </P>
+
+<P>return 2 * factorial(1) =&gt; </P>
+
+<P>return 2 * 1 =&gt; </P>
+
+<P>return 2; </P>
+
+<P>.Now pop off another frame </P>
+
+<P>47 factorial </P>
+
+<P>n: 3 main </P>
+
+<P>x: </P>
+
+<P>factorial n: 2 </P>
+
+<P>Recursion Example </P>
+
+<P>.Resolve the last “pending” 
+multiplication: 
+</P>
+
+<P>return 3 * factorial(2) => 
+</P>
+
+<P>return 3 * 2 => 
+</P>
+
+<P>return 6 
+</P>
+
+<P>.That's convenient, since it is the 
+correct answer. 
+.And don’t forget that last pop! 
+</P>
+
+<P>48 
+</P>
+
+<P>factorial 
+</P>
+
+<P>n: 3 main </P>
+
+<P>x: Recursion Writing a function for the general case </P>
+
+<P>.Don’t try to do it all in your head. Instead, treat it like an 
+inductive proof. 
+.To write a correct recursive function, do two things: 
+1.Identify the “trivial” case (or cases), and write them explicitly. 
+2.For all other cases, first assume there is a function that can solve 
+smaller versions of the same problem, then figure out how to get from 
+the smaller solution to the bigger one. 
+</P>
+
+<P>49 
+Recursion 
+Another example 
+</P>
+
+<P>.What if you needed to count the “1” bits in the binary 
+representation of a non-negative number? 
+.There are no “1” bits in the number zero, so that's our base 
+case. 
+.To figure out the rest of the non-negative integers, let’s 
+think about the representation. 
+.There are 32 bits, from “least” to “most” significant (LSB 
+to MSB). The value of the number is: 
+</P>
+
+<P> 1*LSB + 2*(2ndLSB) + 4*(3rdLSB) + ... + 231*(MSB) 50 </P>
+
+<P>Recursion 
+Another example 
+</P>
+
+<P>.Given the representation: 
+</P>
+
+<P>1*LSB + 2*(2ndLSB) + 4*(3rdLSB) + ... + 231*(MSB) 
+</P>
+
+<P>1.If N is odd, its least significant bit is 1, otherwise it is zero. 
+2.An even number divided by two has the same number of 1s 
+</P>
+
+<P>Dividing N by two is the equivalent of shifting its bits one to the right. The 
+least significant gets thrown away, and the most significant is filled with a 
+zero. 
+</P>
+
+<P>.Given these two facts, here is a recursive definition of numOnes: 
+</P>
+
+<P>51 
+</P>
+
+<P>numOnes(N) = 
+0 if N == 0 (base case) 
+numOnes(N/2) if N&gt;0, N is even (inductive step) 
+1 + numOnes((N-1)/2) if N&gt;0, N is odd (inductive step) 
+Make N even by doing this 
+</P>
+
+<P>Recursion 
+Another example 
+</P>
+
+<P>.Now, write some code for it: 
+.The obvious way: 
+</P>
+
+<P>int numOnes(int N) 
+</P>
+
+<P>// REQUIRES N &gt;= 0 
+</P>
+
+<P>// EFFECTS returns number of &quot;1&quot;s in N's representation { </P>
+
+<P>if (N == 0) return 0; </P>
+
+<P>else if (N % 2) return 1 + numOnes((N-1)/2); </P>
+
+<P> else return numOnes(N/2); 
+} 
+52 
+numOnes(N) = 
+</P>
+
+<P>0 if N == 0 (base case) 
+numOnes(N/2) if N&gt;0, N is even (inductive step) 
+1 + numOnes((N-1)/2) if N&gt;0, N is odd (inductive step) 
+</P>
+
+<P>Recursion Resource Costs Compare the costs of these two versions int factorial(int x) { if (x == 0) { return 1; } else { return x * factorial(x-1); } } </P>
+
+<P>// ** Recursive ** 
+</P>
+
+<P>int fact_iter(int x) { 
+int result = 1; 
+while (x) { 
+result *= x; 
+x -= 1 ; 
+} 
+return result; 
+</P>
+
+<P>} 
+// ** Using loops ** 
+</P>
+
+<P>54 </P>
+
+<P>Questions for the class, small groups ~5 minutes: </P>
+
+<L>
+<LI>
+<Lbl>•</Lbl>
+
+<LBody> How many multiplications does each version perform? </LBody>
+</LI>
+
+<LI>
+<Lbl>•</Lbl>
+
+<LBody> How much space does each one require? </LBody>
+</LI>
+</L>
+</TaggedPDF-doc>

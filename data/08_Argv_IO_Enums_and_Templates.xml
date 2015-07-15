@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:48:52-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:48:52-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:48:52-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">08_Argv_IO_Enums_and_Templates.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:a7a15a94-f2b3-40eb-ab62-6766e35b74ae</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:e0e31079-92c8-4d0c-995e-0b01d341b254</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="08_Argv_IO_Enums_and_Templates.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280 Programming and Introductory Data Structures </P>
+
+<P>blockM-dearborn Argv, IO, Enums and Templates </P>
+
+<P>Slides by Andrew DeOrio </P>
+
+<P>1 </P>
+
+<P>Outline </P>
+
+<P>.Today, we will cover 4 small topics: 1.Argv: get command line options from the user 2.IO: read strings and numbers from a file 3.Enums: used to categorize data 4.Templates: a way to parameterize across types </P>
+
+<P>All of these will be helpful for project 3 </P>
+
+<P>2 </P>
+
+<P>Argv Basics </P>
+
+<P>.So far, we've considered programs that always do exactly the same thing .We haven't really examined I/O in great detail nor have we tried passing arguments to the programs we are running .For example, consider using the submit280 program from EECS 280 at UM to submit your project 2 solution </P>
+
+<P>3 </P>
+
+<P>$ submit280 2 p2.cpp </P>
+
+<P>Argv Basics </P>
+
+<P>.The first word, submit280, is the name of the program to run. .The second and third words are arguments to the submit280 program. </P>
+
+<P>.These arguments are passed to submit280 for its consideration, 
+much as arguments are passed to functions. 
+.The shell (the program to which you type commands) collects 
+arguments and passes them to the programs it executes. 
+</P>
+
+<P>4 $ submit280 2 p2.cpp </P>
+
+<P>Argv + main </P>
+
+<P>.Arguments are passed to programs as an array too int main(int argc, char *argv[]) .Since each argument is just a sequence of characters, this array is an array of C-strings </P>
+
+<P>char *argv[] .Reading from inside out: argv is an array of pointers-to-char </P>
+
+<P>.We also need to know how big the array is: int argc </P>
+
+<P>5 </P>
+
+<P>Argv in pictures </P>
+
+<P>.Pictorially, this would look like the following in memory: </P>
+
+<P>6 s u b m i t 2 8 0 \0 2 </P>
+
+<P>\0 p 2 . c p p \0 </P>
+
+<P>argv $ submit280 2 p2.cpp </P>
+
+<P>char *argv[] </P>
+
+<P>Note: argv[0] is the name of the program being executed. This is because it is possible for the same program to be given different names, and do different things depending on what name it was called with. </P>
+
+<P>atoi() </P>
+
+<P>.Suppose we wanted to write a program that is given a list of integers as it’s arguments, and prints out the sum of that list .Before we can write this program we need a way to convert from C-strings to integers .It turns out there is a predefined function that is part of the “standard library” called atoi() </P>
+
+<P>#include &lt;cstdlib&gt; //needed for atoi() </P>
+
+<P>int atoi(const char *s); // EFFECTS: parses s as a number and // returns its int value 7 </P>
+
+<P>Argv Exercise #include &lt;cstdlib&gt; </P>
+
+<P>int main (int argc, char *argv[]) { int sum = 0; for (int i = 1; i &lt; argc; ++i) { sum += atoi(argv[i]); } cout &lt;&lt; &quot;sum is &quot; &lt;&lt; sum &lt;&lt; endl; return 0; </P>
+
+<P>} </P>
+
+<P>$ ./a.out 3 10 11 12 19 sum is 55 </P>
+
+<L>
+<LI>
+<Lbl>•</Lbl>
+
+<LBody>What is the value of argc? </LBody>
+</LI>
+
+<LI>
+<Lbl>•</Lbl>
+
+<LBody>What is the value of argv? </LBody>
+</LI>
+</L>
+
+<P>Outline </P>
+
+<P>.Today, we will cover 4 small topics: 1.Argv: get command line options from the user 2.IO: read strings and numbers from a file 3.Enums: used to categorize data 4.Templates: a way to parameterize across types </P>
+
+<P>10 </P>
+
+<P>Shell Redirection </P>
+
+<P>.In Project 1, we used the shell to redirect a file to our program's standard input (cin) </P>
+
+<P>./a.out &lt; inputfile </P>
+
+<P>.We also used the shell to redirect out program's standard output (cout) to a file  ./a.out &gt; outputfile </P>
+
+<P>.File IO is not shell redirection .File IO reads files directly, instead of relying on the shell </P>
+
+<P>11 </P>
+
+<P>Shell Redirection Question </P>
+
+<P>.What is argv? (with shell redirection) ./a.out &lt; inputfile </P>
+
+<P>.What is argv? (without shell redirection) ./a.out inputfile </P>
+
+<P>12 </P>
+
+<P>fstream library </P>
+
+<P>.In C++, we can read and write files directly with the fstream </P>
+
+<P>library </P>
+
+<P>#include &lt;fstream&gt; </P>
+
+<P>.fstream allows you to read a file just like cin </P>
+
+<P>14 </P>
+
+<P>fstream Example string filename = &quot;hello.txt&quot;; </P>
+
+<P> ifstream filestream; 
+filestream.open( filename.c_str() ); 
+if ( !filestream.is_open() ) { 
+cerr &lt;&lt; &quot;open failed&quot; &lt;&lt; endl; 
+exit(1); 
+} 
+string word; 
+while ( filestream &gt;&gt; word ) { 
+cout &lt;&lt; &quot;word = `&quot; &lt;&lt; word &lt;&lt; &quot;'\n&quot;; 
+} 
+filestream.close(); 
+</P>
+
+<P>15 
+hello world! 
+the end 
+</P>
+
+<P>hello.txt 
+</P>
+
+<P>fstream Example 
+string filename = &quot;hello.txt&quot;; 
+ifstream filestream; 
+filestream.open( filename.c_str() ); 
+if ( !filestream.is_open() ) { 
+cerr &lt;&lt; &quot;open failed&quot; &lt;&lt; endl; 
+exit(1); 
+} 
+string word; 
+while ( filestream &gt;&gt; word ) { 
+</P>
+
+<P> cout &lt;&lt; &quot;word = `&quot; &lt;&lt; word &lt;&lt; &quot;'\n&quot;; 
+} 
+filestream.close(); 
+</P>
+
+<P>16 
+hello world! 
+the end 
+</P>
+
+<P>hello.txt 
+</P>
+
+<P>Open a file using a filestream </P>
+
+<P>fstream Example string filename = &quot;hello.txt&quot;; ifstream filestream; filestream.open( filename.c_str() ); if ( !filestream.is_open() ) { cerr &lt;&lt; &quot;open failed&quot; &lt;&lt; endl; exit(1); } string word; while ( filestream &gt;&gt; word ) { cout &lt;&lt; &quot;word = `&quot; &lt;&lt; word &lt;&lt; &quot;'\n&quot;; } filestream.close(); </P>
+
+<P>17 hello world! the end </P>
+
+<P>hello.txt 
+open() demands a C-string. 
+Use filename.c_str() to get 
+</P>
+
+<P>the C-string representation. 
+</P>
+
+<P>fstream Example 
+string filename = &quot;hello.txt&quot;; 
+ifstream filestream; 
+filestream.open( filename.c_str() ); 
+if ( !filestream.is_open() ) { 
+cerr &lt;&lt; &quot;open failed&quot; &lt;&lt; endl; 
+exit(1); 
+} 
+string word; 
+while ( filestream &gt;&gt; word ) { 
+cout &lt;&lt; &quot;word = `&quot; &lt;&lt; word &lt;&lt; &quot;'\n&quot;; 
+} 
+filestream.close(); 
+</P>
+
+<P>18 
+hello world! 
+the end 
+</P>
+
+<P>hello.txt 
+Check for success opening file. 
+</P>
+
+<P>fstream Example 
+string filename = &quot;hello.txt&quot;; 
+ifstream filestream; 
+filestream.open( filename.c_str() ); 
+</P>
+
+<P> if ( !filestream.is_open() ) { 
+cerr &lt;&lt; &quot;open failed&quot; &lt;&lt; endl; 
+exit(1); 
+} 
+string word; 
+while ( filestream &gt;&gt; word ) { 
+cout &lt;&lt; &quot;word = `&quot; &lt;&lt; word &lt;&lt; &quot;'\n&quot;; 
+} 
+filestream.close(); 
+</P>
+
+<P>19 
+hello world! 
+the end 
+</P>
+
+<P>hello.txt 
+</P>
+
+<P>Read one word at a time and check that the read was successful. </P>
+
+<P>fstream Example string filename = &quot;hello.txt&quot;; ifstream filestream; filestream.open( filename.c_str() ); if ( !filestream.is_open() ) { cerr &lt;&lt; &quot;open failed&quot; &lt;&lt; endl; exit(1); } string word; while ( filestream &gt;&gt; word ) { cout &lt;&lt; &quot;word = `&quot; &lt;&lt; word &lt;&lt; &quot;'\n&quot;;  } </P>
+
+<P>filestream.close(); 20 hello world! the end </P>
+
+<P>hello.txt $ ./a.out word = `hello' word = `world!' word = `the' word = `end' </P>
+
+<P>fstream Example string filename = &quot;hello.txt&quot;; ifstream filestream; filestream.open( filename.c_str() ); if ( !filestream.is_open() ) { cerr &lt;&lt; &quot;open failed&quot; &lt;&lt; endl; exit(1); } string word; while ( filestream &gt;&gt; word ) { cout &lt;&lt; &quot;word = `&quot; &lt;&lt; word &lt;&lt; &quot;'\n&quot;; } filestream.close(); </P>
+
+<P>21 </P>
+
+<P>hello world! 
+the end 
+</P>
+
+<P>hello.txt 
+Close file after reading is finished. 
+</P>
+
+<P>fstream Example 
+string filename = &quot;hello.txt&quot;; 
+ifstream filestream; 
+filestream.open( filename.c_str() ); 
+if ( !filestream.is_open() ) { 
+cerr &lt;&lt; &quot;open failed&quot; &lt;&lt; endl; 
+exit(1); 
+} 
+string word1, word2; 
+while ( filestream &gt;&gt; word1 &gt;&gt; word2 ) { 
+cout &lt;&lt; &quot;word1 = `&quot; &lt;&lt; word1 &lt;&lt; &quot;'\n" 
+&lt;&lt; &quot;word2 = `&quot; &lt;&lt; word2 &lt;&lt; &quot;'\n&quot;; 
+} 
+filestream.close(); 
+</P>
+
+<P>22 
+hello world! 
+the end 
+</P>
+
+<P>hello.txt 
+Alternative: read two words at a time. 
+</P>
+
+<P>fstream Example 
+</P>
+
+<P> string filename = &quot;hello.txt&quot;; 
+ifstream filestream; 
+filestream.open( filename.c_str() ); 
+if ( !filestream.is_open() ) { 
+cerr &lt;&lt; &quot;open failed&quot; &lt;&lt; endl; 
+exit(1); 
+} 
+</P>
+
+<P>string line; 
+while ( getline( filestream, line) ) { 
+cout &lt;&lt; “line = `&quot; &lt;&lt; line &lt;&lt; &quot;'\n“; 
+} 
+filestream.close(); 
+</P>
+
+<P>23 
+hello world! 
+the end 
+</P>
+
+<P>hello.txt 
+Alternative: read one line at a time. 
+$ ./a.out 
+line = `hello world!' 
+line = `the end' 
+</P>
+
+<P>Reading numbers 
+ifstream filestream; 
+// open and error check filestream 
+</P>
+
+<P>int i; 
+</P>
+
+<P>while (filestream &gt;&gt; i) { </P>
+
+<P>cout &lt;&lt; &quot;i = &quot; &lt;&lt; i &lt;&lt; endl; } // close filestream and exit 24 1 42 numbers.txt Read a number </P>
+
+<P>directly from a file stream $ ./a.out i = 1 i = 42 </P>
+
+<P>Exercise </P>
+
+<P>.Write a loop to read a file with the following format and print it to the terminal: </P>
+
+<P>ifstream is; filestream.open(&quot;students.txt&quot;); 25 awdeorio 12345678 jringenb 98765432 students.txt </P>
+
+<P>Outline </P>
+
+<P>.Today, we will cover 4 small topics: 1.Argv: get command line options from the user 2.IO: read strings and numbers from a file 3.Enums: used to categorize data 4.Templates: a way to parameterize across types </P>
+
+<P>27 
+</P>
+
+<P>Categorizing Data 
+</P>
+
+<P>.In addition to single constants, we may need to categorize data. 
+.For example, the 12 months of the year are divided into 4 
+semesters at UM 
+.You could encode each of these as a separate integer: 
+</P>
+
+<P>const int JAN = 0; 
+const int FEB = 1; 
+//... 
+const int WINTER = 0; 
+const int SPRING = 1; 
+//... 
+28 
+</P>
+
+<P>Categorizing Data 
+</P>
+
+<P>.Now, let’s write a function to determine which semester a month is in: </P>
+
+<P>int month2semester(int month) { //REQUIRES: month is one of JAN, FEB, ..., DEC // output (semester) is one of WINTER, // SPRING, SUMMER, FALL //EFFECTS: returns the semester &quot;month&quot; is in if (month &lt;= 3) return WINTER; if (month &lt;= 5) return SPRING; if (month &lt;= 7) return SUMMER; if (month &lt;= 11) return FALL;  cout &lt;&lt; &quot;Unrecognized month &quot; &lt;&lt; month &lt;&lt; endl; </P>
+
+<P>exit(1); } 29 const int JAN = 0; </P>
+
+<P>const int FEB = 1; //... const int WINTER = 0; const int SPRING = 1; //... Categorizing Data </P>
+
+<P>int month2semester(int month) { //REQUIRES: month is one of JAN, FEB, ..., DEC // output (semester) is one of WINTER, // SPRING, SUMMER, FALL //EFFECTS: returns the semester &quot;month&quot; is in </P>
+
+<P>} </P>
+
+<P>.What if you use a month that doesn’t exist? .int month = 27; //bad! . </P>
+
+<P>.What if you mix up month with semester? .int month = WINTER; //bad! . </P>
+
+<P>.REQUIRES clause is annoying; not all integers encode a month or a semester .There is a better way: the enumeration (enum) type </P>
+
+<P>30 
+const int JAN = 0; 
+const int FEB = 1; //... 
+const int WINTER = 0; 
+const int SPRING = 1; //... 
+</P>
+
+<P>Enum Type 
+</P>
+
+<P>.Define an enumeration type, which declares a custom type 
+</P>
+
+<P>enum Month {JAN, FEB, MAR, APR, MAY, JUN, 
+JUL, AUG, SEP, OCT, NOV, DEC}; 
+</P>
+
+<P>enum Semester {WINTER, SPRING, SUMMER, FALL}; 
+</P>
+
+<P>.Define a variable of your new type 
+</P>
+
+<P>Month this_month; 
+</P>
+
+<P>Semester this_semester; 
+</P>
+
+<P>.Initialize your variables 
+</P>
+
+<P>this_month = MAY; 
+</P>
+
+<P>this_semester = SPRING; 
+</P>
+
+<P>31 
+</P>
+
+<P>Enum Type 
+</P>
+
+<P>.Once you have an enum type defined, you can use it as 
+a function input or output, just like any other type 
+.enum types are passed by value by default 
+.Custom type names often begin with a capital letter in 
+C++, while variables often begin with a lower-case, 
+and constants (like the enum values) are all-captials: 
+.Month this_month = MAY; 
+.Semester this_semester = SPRING; 
+</P>
+
+<P>.The compiler will help you keep track of errors 
+.Month this_month = FALL; //compile error! 
+</P>
+
+<P>32 
+Switch statements 
+</P>
+
+<P>.Switch statements work well with enums, and are much faster 
+than long chains of if/else/if/else statements 
+</P>
+
+<P>Semester s = FALL; switch(s) { </P>
+
+<P>//... } 33 </P>
+
+<P>Switch statements </P>
+
+<P>.Two cases with the same result are grouped together since the arms of the case statement &quot;fall through&quot; to the next break </P>
+
+<P>Semester s = FALL; </P>
+
+<P>switch(s) { </P>
+
+<P>case SPRING: </P>
+
+<P>case SUMMER: </P>
+
+<P>cout &lt;&lt; &quot;vacation!\n&quot;; </P>
+
+<P>break; </P>
+
+<P>case FALL: </P>
+
+<P>case WINTER: </P>
+
+<P>cout &lt;&lt; &quot;work!\n&quot;; </P>
+
+<P>break; </P>
+
+<P>//... } 34 </P>
+
+<P>Switch statements Semester s = FALL; switch(s) { </P>
+
+<P>case SPRING: </P>
+
+<P>case SUMMER: </P>
+
+<P> cout &lt;&lt; &quot;vacation!\n&quot;; 
+break; 
+case FALL: 
+case WINTER: 
+cout &lt;&lt; &quot;work!\n&quot;; 
+break; 
+</P>
+
+<P>default: 
+assert(0); //error! 
+break; 
+</P>
+
+<P>} 
+35 
+Add a default, 
+</P>
+
+<P>just in case 
+</P>
+
+<P>Exercise 
+//EFFECTS: returns the semester that month falls in 
+// example: month2semester(FEB) == WINTER 
+Semester month2semester(Month month) { 
+</P>
+
+<P>if (month &lt;= APR) return WINTER; 
+if (month &lt;= JUN) return SPRING; 
+if (month &lt;= SEPT) return SUMMER; 
+return FALL; 
+</P>
+
+<P>} .Note that enums are stored in order and can be treated like numbers .Switch statements make no assumptions about the order .Write this function using a switch statement </P>
+
+<P>36 </P>
+
+<P>Outline .Today, we will cover 4 small topics: 1.Argv: get command line options from the user 2.IO: read strings and numbers from a file 3.Enums: used to categorize data 4.Templates: a way to parameterize across types </P>
+
+<P>38 </P>
+
+<P>Generalizing Types </P>
+
+<P>.So far, we've talked about how to generalize across values (“regular” arguments) and behaviors (function pointers as arguments) .Next, we will generalize across types. For example, consider the program to add up the elements of an integer array: </P>
+
+<P>int sum(int a[], int s) { int result = 0; for (int i = 0; i&lt;s; ++i) { result += a[i]; } return result; </P>
+
+<P>} 39 </P>
+
+<P>Generalizing Types </P>
+
+<P>.Now, what happens if we also want a function that does the same thing for arrays of floating point numbers? </P>
+
+<P>double sum(double a[], int s) { double result = 0; for (int i = 0; i&lt;s; ++i) { result += a[i]; } return result; </P>
+
+<P>} 
+</P>
+
+<P>.That's really annoying, because it means that we have to duplicate 
+code. And, in EECS 280, we hate to duplicate code… 
+</P>
+
+<P>40 
+</P>
+
+<P>Generalizing Types 
+</P>
+
+<P>.But, if you look at the two functions, you notice that the only 
+way they differ is in the types they handle. 
+.What we need is a way to generalize on type! 
+</P>
+
+<P>41 
+</P>
+
+<P>double sum(double a[],int s){ double result = 0; for (int i=0; i&lt;s; ++i) { result += a[i]; } return result; </P>
+
+<P>} </P>
+
+<P>int sum(int a[],int s){ int result = 0; for (int i=0;i&lt;s;++i){ result += a[i]; } return result; </P>
+
+<P>} </P>
+
+<P>Templates </P>
+
+<P>.C++ has a mechanism to do this, called the template. 
+.The intuition behind templates are that they are code with the 
+</P>
+
+<P>“type name” left as a (compile-time) constant. 
+.So, they are another form of parametric generalization. This 
+time, the parameter is a type, not a variable. 
+.The basic idea of templates is that you declare something to be 
+a template, parameterized across one or more types: 
+</P>
+
+<P>template &lt;typename T> 
+</P>
+
+<P>42 
+</P>
+
+<P>Templates 
+</P>
+
+<P>.Then, write the definition of the function you want templated, 
+using the type T where appropriate. 
+.We also usually need a REQUIRES clause, that lists what 
+features the type argument for T must have: 
+</P>
+
+<P>template &lt;typename T> 
+</P>
+
+<P>T sum(T a[], int size) { //REQUIRES: T can be initialized to 0 and “+” //is defined over T. T result = 0; for (int i = 0; i&lt;size; ++i) result += a[i]; return result; </P>
+
+<P>} 43 </P>
+
+<P>Templates </P>
+
+<P>.Now, we can use this single definition to serve the purposes of both of the &quot;old&quot; functions: </P>
+
+<P>double a[100] = {... } int b[200] = {... }  int c[100] = {... } </P>
+
+<P>double aSum = sum(a, 100); </P>
+
+<P>int bSum = sum(b, 200); </P>
+
+<P>int cSum = sum(c, 100); </P>
+
+<P>44 </P>
+
+<P>Templates </P>
+
+<P>.Here's what happens: 
+1.When the compiler sees the first call to sum(), it inspects 
+the type of the first argument, because that's the “template 
+type”. 
+2.It then generates the code for that version of sum(), 
+substituting the word double for the type variable T. This 
+is called “instantiation”. 
+3.When it sees the second call to sum(), it does the same 
+thing by generating a second version of sum() and 
+substituting the word int for the type variable T. 
+4.When it sees the third call, the compiler knows that that 
+variant of sum() already exists and simply reuses it. 
+</P>
+
+<P>45 
+</P>
+
+<P>Templates 
+</P>
+
+<P>.The template mechanism buys us something cool when working with 
+enumerations. Often we have to go between the &quot;enum value&quot; and a 
+string name for the enum. 
+.Remember that, by default, enum values are represented as integers 
+from 0..N-1. So, going from enum to string is pretty easy. We will 
+continue to use the Semester enum type: 
+</P>
+
+<P>enum Semester {WINTER, SPRING, SUMMER, FALL}; 
+</P>
+
+<P>.And an array of names: 
+</P>
+
+<P>const int SEMESTER_SIZE = 4; 
+</P>
+
+<P>const char *SEMESTER_NAMES[] = 
+</P>
+
+<P>{&quot;Winter&quot;, &quot;Spring&quot;, &quot;Summer&quot;, &quot;Fall&quot;}; 
+</P>
+
+<P>46 
+</P>
+
+<P>Templates + Enums </P>
+
+<P>.Then, we can just use the array, indexed by enum value, and everything just works: </P>
+
+<P>cout &lt;&lt; WINTER &lt;&lt; endl; cout &lt;&lt; SEMESTER_NAMES[WINTER] &lt;&lt; endl; </P>
+
+<P>.Under the hood, the enum value is converted to an int. This is legal, because all enums can be represented by ints and can be used to index the array. .Going in the other direction is tricky, though, because not all ints are enums </P>
+
+<P>47 </P>
+
+<P>$ ./a.out 0 Winter Templates + Enums </P>
+
+<P>.To go the other way, we might even write a function to do it: </P>
+
+<P>Semester string2semester(const char *s) { for (int i=0; i&lt;SEMESTER_SIZE; ++i) if (strcmp(s, SEMESTER_NAMES[i]) == 0) return static_cast&lt;Semester&gt;(i); assert(0); //won't run exit(1); //needed if asserts are disabled </P>
+
+<P>} .We have to use static_cast to change the type from int to Semester .static_cast means &quot;trust me---this is really another type&quot; </P>
+
+<P>Templates + Enums </P>
+
+<P>.To go the other way, we might even write a function to do it: 
+</P>
+
+<P>Semester string2semester(const char *s) { 
+for (int i=0; i&lt;SEMESTER_SIZE; ++i) 
+if (strcmp(s, SEMESTER_NAMES[i]) == 0) 
+return static_cast&lt;Semester&gt;(i); 
+assert(0); //won't run 
+exit(1); /needed if asserts are disabled 
+</P>
+
+<P>} 
+.We can call the function like this: 
+</P>
+
+<P>Semester s = string2semester(&quot;Winter&quot;); 
+</P>
+
+<P>49 
+Exercise 
+</P>
+
+<P>.But wait! We have another enum and array of names! 
+enum Month {/*...*/}; 
+const int MONTH_SIZE = 12; 
+</P>
+
+<P>const char *MONTH_NAMES[] = {/*...*/}; 
+</P>
+
+<P>.Modify this function using a template and extra inputs to work 
+with any enum 
+</P>
+
+<P>Semester string2semester(const char *s) { for (int i=0; i&lt;SEMESTER_SIZE; ++i) if (strcmp(s, SEMESTER_NAMES[i]) == 0) return static_cast&lt;Semester&gt;(i); assert(0); //won't run exit(1); //needed if asserts are disabled </P>
+
+<P>} 50 </P>
+
+<P>Solution 
+template &lt;typename T> 
+T string2enum(const char *s, const char *names[], int size) { 
+</P>
+
+<P>for (int i=0; i&lt;size; ++i) 
+if (strcmp(s, names[i]) == 0) 
+return static_cast&lt;T&gt;(i); 
+assert(0) ;//won't run 
+exit(1); //needed if asserts are disabled 
+</P>
+
+<P>} 
+</P>
+
+<P>int main() { 
+Semester s = string2enum 
+(&quot;Winter&quot;, SEMESTER_NAMES, SEMESTER_SIZE); 
+Month m = string2enum 
+(&quot;Jan&quot;, MONTH_NAMES, MONTH_SIZE); 
+</P>
+
+<P>} 
+51 
+</P>
+
+<P>Problem with Our Solution 
+</P>
+
+<P>.Problem: these two functions take the same arguments: a string, an array-of-string, and int. .The compiler doesn’t know which version of the template to use </P>
+
+<P>Semester s = string2enum (&quot;Winter&quot;, SEMESTER_NAMES, SEMESTER_SIZE); </P>
+
+<P>Month m = string2enum (&quot;Jan&quot;, MONTH_NAMES, MONTH_SIZE); </P>
+
+<P>.How do we solve this? </P>
+
+<P>52 
+</P>
+
+<P>Template Disambiguation </P>
+
+<P>.Just tell the compiler what you mean. This disambiguates the templated function call. </P>
+
+<P>Semester s = string2enum&lt;Semester&gt; (&quot;Winter&quot;, SEMESTER_NAMES, SEMESTER_SIZE); </P>
+
+<P>Month m = string2enum&lt;Month&gt; (&quot;Jan&quot;, MONTH_NAMES, MONTH_SIZE); </P>
+
+<P>53 </P>
+</TaggedPDF-doc>

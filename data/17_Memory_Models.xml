@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:49:01-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:49:01-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:49:01-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">17_Memory_Models.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:a20e3d77-c960-442c-96aa-a4d1548b4b05</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:ac51310c-9ab6-46fc-b416-910c1c503657</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="17_Memory_Models.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280Programming and Introductory Data Structures 
+</P>
+
+<P>blockM-dearborn 
+Memory Models 
+</P>
+
+<P>Slides by Andrew DeOrio, 
+Jeff RingenbergandBrian Noble 
+</P>
+
+<P>Static, fixed-size structures 
+</P>
+
+<P>.So far, the data structures we've built have all had room for &quot;at 
+most N&quot; elements: 
+.The various IntSetimplementations could have at most 100 
+distinct integers 
+.We could extend these sizes to larger ones, but we really only 
+know how to create static, fixed-sizedstructures. 
+</P>
+
+<P>Static, fixed-size structures 
+</P>
+
+<P>.Sometimes, the process you are modeling has a physical limit, 
+which makes a static, fixed-sized structure a reasonable choice. 
+.For example, a deck of cards has 52 individual cards in it, so 
+this is a reasonable limitation. 
+.However, there is no meaningful sense in which a &quot;set ofintegers&quot; is limited to some particular number of elements. 
+.No matter how big you make the set's capacity, an application 
+that needs more will eventually come along. 
+.Consider the list_ttype from the second project: 
+.The type imposed no limits on how large a list could grow 
+</P>
+
+<P>Global and local variables 
+</P>
+
+<P>.For the variables we have used so far you need to know two 
+things at compile time (statically) 
+.The size (or number) 
+.The lifetime (when it will be created and destroyed) 
+</P>
+
+<P>.There have been two classes of such variables: 
+1.Global variables 
+2.Local variables 
+</P>
+
+<P>Global variables 
+</P>
+
+<P>.Global variables are defined anywhere outside of a function definition .Space is set aside for these variables before the program begins execution, and is reserved for them until the program completes .This space is reserved at compile time </P>
+
+<P>Global variable examples 
+constintSIZE=10; 
+intmain() { 
+//... 
+} 
+static Triangle 
+g_triangle; 
+Shape * ask_user() { 
+//... 
+return &amp;g_triangle; 
+} 
+intsum_cur=0; //bad idea 
+intsum(list_tlist){ 
+// ... 
+} 
+intprod_cur=0;//bad idea 
+intproduct(list_tlist){ 
+// ... 
+} 
+</P>
+
+<P>Local variables 
+</P>
+
+<P>.Local variables are any variable defined within a block .This includes function arguments, which act as if they were defined in the outermost block of the function .Space is set aside for these variables when the relevant block is entered, and is reserved for them until the block is exited .This space is reserved at run time, but the size is known to the compiler .Since the compiler must know how big all of these variables will be, it is static information, and must be declared by the programmer </P>
+
+<P>Local variable examples 
+intsum(list_tlist){ 
+//... 
+} 
+intsum(int*array, intsize) { 
+intsum=0; 
+//... 
+} 
+intmain(intargc, char* argv[]) { 
+IntSeti; 
+for (inti=0; i&lt;10; ++i) { 
+//... 
+} 
+} 
+</P>
+
+<P>Dynamic variables 
+</P>
+
+<P>.There is a third type of variable, called a dynamic variable .It is dynamic because .Size (or number) is determined at runtime .When it will be created and destroyed is determined at runtime </P>
+
+<P>.In other words, you (the programmer) get to decide how big a dynamic variable is, when it is created, and when it is destroyed </P>
+
+<P>new </P>
+
+<P>.Create dynamic variables using new 
+</P>
+
+<P>intmain() { 
+int*p = new int; 
+} 
+</P>
+
+<P>.This creates new space for an integer, and returns a pointer to 
+that space, assigning it to p 
+.The initial value is undefined 
+.Use initializer syntax to assign an initial value 
+</P>
+
+<P>intmain() { 
+int*p = new int(5); 
+} 
+</P>
+
+<P>Exercise 
+</P>
+
+<P>intmain() { 
+int*p = new int(5); 
+} 
+</P>
+
+<P>.How many variables are in this program? 
+.Mark each as global, local or dynamic 
+</P>
+
+<P>Exercise 
+</P>
+
+<P>intmain() { 
+int*p = new int(5); 
+} 
+</P>
+
+<P>.How many variables are in this program? 2 
+1.int*pis a local variable of type &quot;pointer to integer" 
+2.int(5)is a dynamic variable of type &quot;integer" 
+</P>
+
+<P>.This “thing pointed to by p” is a dynamically-allocated piece of 
+memory, and lives “somewhere else”. 
+.It does not have a name of its own, but is “the integer pointed 
+to by p”. 
+</P>
+
+<P>p: </P>
+
+<P>delete </P>
+
+<P>.Destroy dynamic variables using delete 
+</P>
+
+<P>int*p= new int; 
+//do something with p 
+delete p; 
+.Releases the claim on the space previously used by the int 
+</P>
+
+<P>.Space can be recycled later by new 
+</P>
+
+<P>delete pitfalls 
+.You can only deletea dynamic variable once 
+</P>
+
+<P>int*p= new int; 
+//do something with p 
+delete p; 
+delete p; //Error! 
+*** glibcdetected *** 
+</P>
+
+<P>./a.out: double free or corruption (fasttop): 0x00000000007ac010 *** </P>
+
+<P>... 
+Aborted (core dumped) 
+</P>
+
+<P>delete pitfalls 
+.delete 0(AKA NULL) does nothing 
+</P>
+
+<P>int*p= new int; 
+//do something with p 
+delete p; p=0; 
+delete p; //OK 
+</P>
+
+<P>delete pitfalls 
+</P>
+
+<P>.Ordinary objects can be destroyed by delete, but only if they were created by new </P>
+
+<P>inti= 0; //local variable 
+int*p=&amp;i; //pointer to local variable 
+delete p; //Error! 
+</P>
+
+<P>Size of dynamic variables 
+.With dynamic arrays, we can choose the size at runtime 
+</P>
+
+<P>//ask user to enter integer size 
+intsize = get_size_from_user(); 
+int*p= new int[size]; 
+//do something with p ... 
+delete[]p; 
+.Note the different syntax with delete 
+</P>
+
+<P>.We will talk about dynamic arrays in more depth next time 
+</P>
+
+<P>Lifetime of dynamic variables 
+.What’s the problem? 
+</P>
+
+<P>//EFFECTS: allocates an array of specified size// and initializes each element to zero 
+int* get_zero_array(intsize) { 
+intarray[size]; 
+for (inti=0; i&lt;size; ++i) 
+array[i] = 0; 
+return array; 
+} 
+</P>
+
+<P>Lifetime of dynamic variables 
+</P>
+
+<P>.The lifetime of an object is completely under the control of the program –it lives until it is explicitly destroyed .You can create a variable in one function and use it in another </P>
+
+<P>//EFFECTS: allocates an array of specified size// and initializes each element to zero 
+int* get_zero_array(intsize) { 
+int*array = new int[size]; 
+for (inti=0; i&lt;size; ++i) 
+array[i] = 0; 
+return array; 
+} 
+</P>
+
+<P>Lifetime of dynamic variables 
+//EFFECTS: allocates an array of specified size// and initializes each element to zero 
+int* get_zero_array(intsize) { 
+int*array = new int[size]; 
+for (inti=0; i&lt;size; ++i) 
+array[i] = 0; 
+return array; 
+} 
+intmain() { 
+int*a = get_zero_array(10); 
+//use a 
+delete[] a; a=0; 
+} 
+Call newin one 
+</P>
+
+<P>function, and call 
+</P>
+
+<P>deletein another 
+</P>
+
+<P>function </P>
+
+<P>Memory leaks .Dynamic variables live until the programmer destroys them using delete .This is true even if you &quot;forget&quot; the pointer to the object. </P>
+
+<P>intmain() { 
+int*p1 = new int(1); 
+int*p2 = new int(2); 
+p1 = p2; 
+} 
+.This leaves us with: 
+</P>
+
+<P>p1: 
+p2: 
+1 
+2 
+</P>
+
+<P>Memory leaks 
+intmain() { 
+int*p1 = new int(1); 
+int*p2 = new int(2); 
+p1 = p2; 
+} 
+.Two pointers point to the object &quot;2&quot;, and none to the object &quot;1" 
+</P>
+
+<P>.There is no way to release the memory occupied by &quot;1" 
+</P>
+
+<P>p1: 
+p2: 
+1 
+2 
+</P>
+
+<P>Memory leaks 
+</P>
+
+<P>.Note there is an important difference between the lifetime of a pointer variable and the lifetime of the object it points to! </P>
+
+<P>.In this example, exiting the block that defines p1causes the local object p1to vanish, but the dynamic object it points to remains .This leaves us with an allocated dynamic object that wehave no means of reclaiming called a memory leak .If memory leaks occur often enough, your program may reach a point where it can no longer allocate new dynamic objects </P>
+
+<P>p1: </P>
+
+<P>p2: </P>
+
+<P>1 </P>
+
+<P>2 </P>
+
+<P>intmain() { </P>
+
+<P>int*p1 = new int(1); </P>
+
+<P>int*p2 = new int(2); </P>
+
+<P>p1 = p2; </P>
+
+<P>} </P>
+
+<P>Why Use Dynamic Variables </P>
+
+<P>1.If you want to manage the lifetime of the variable yourself .Not stack, Not global, but something in between </P>
+
+<P>2.Many parts of the code refer to an object, but only want one copy in memory .Normally, if many parts refer to the same object, those parts will be in different scopes </P>
+
+<P>The heap </P>
+
+<P>.The space for objects created via newcomes from a location in memory called the heap. .To describe the heap, we first have to revisit the memory model used by a &quot;typical&quot; C++ process: .A running program has an &quot;address space&quot;, a collection of memory locations that are accessible to it .An address space is private to a running program –no other running program can access/modify it </P>
+
+<P>Program segments </P>
+
+<P>.There are typically five parts, called segments, in an address space: </P>
+
+<P>Stack (grows down) THE BIG VOID Heap (grows up) Globals (Fixed size) Text (The program) Address MAX Address 0 </P>
+
+<P>Text segment </P>
+
+<P>.The code comprising a 
+compiled program goes in 
+the text segment. 
+.It is at a very low address, 
+but typically not at address 
+zero. 
+</P>
+
+<P>Stack (grows down) THE BIG VOID Heap (grows up) Globals (Fixed size) Text (The program) Address MAX Address 0 </P>
+
+<P>Globalsand heap segments </P>
+
+<P>.Immediately above the text section, the compiler allocates space for any global variables, and initializes them, when necessary. .When things are allocated via new, they come from the heap, which is allowed to grow upward. </P>
+
+<P>Stack (grows down) THE BIG VOID Heap (grows up) Globals (Fixed size) Text (The program) Address MAX Address 0 </P>
+
+<P>Stack segment and the Big Void .When functions are called, </P>
+
+<P>stack frames are created on the stack, which grows downward. .Since we don't know howbig either of these will get, we keep a big hole in between the two called THE BIG VOID. </P>
+
+<P>Stack (grows down) THE BIG VOID Heap (grows up) Globals (Fixed size) Text (The program) Address MAX Address 0 </P>
+
+<P>The little void </P>
+
+<P>.Most systems also reserve the first few thousand addresses starting at zero for another void. .If you accidentally treat a small integer as a pointer, it points to this page (or predefined block of memory) and causes a SEGFAULT. </P>
+
+<P>Stack (grows down) THE BIG VOID Heap (grows up) Globals (Fixed size) Text (The program) the little void Address MAX Address 0 </P>
+
+<P>Global vs. Local vs. Dynamic Global Local Dynamic Where in </P>
+
+<P>code? </P>
+
+<P>Outside function Inside function </P>
+
+<P>(block) orargs </P>
+
+<P>Anywhereyou use new When </P>
+
+<P>created </P>
+
+<P>Beginning of program Beginning of </P>
+
+<P>function (block) You call new When </P>
+
+<P>destroyed </P>
+
+<P>End of program End of function(block) </P>
+
+<P>You call delete Size static static dynamic Location Globals Stack Heap </P>
+
+<P>Stack and heap example intmain() { int*p; } .Local variable goes on the </P>
+
+<P>stack .Undefined value .An address, since pis a pointer </P>
+
+<P>.Could point to a random, part of memory </P>
+
+<P>stack 
+heap 
+(int*p) 
+</P>
+
+<P>Stack and heap example 
+intmain() { 
+int*p; 
+</P>
+
+<P>new int(100); </P>
+
+<P>} </P>
+
+<P>.Dynamic memory goes on the heap .Leaks sizeof(int)bytes of memory .No way to find int(100) and delete it! </P>
+
+<P>stack 
+heap 
+(int*p) 
+100 (int) 
+</P>
+
+<P>Stack and heap example 
+intmain() { 
+int*p = new int(100); 
+} 
+.Good habit: always initialize 
+</P>
+
+<P>variables 
+</P>
+
+<P>stack 
+heap 
+(int*p) 
+100 (int) 
+</P>
+
+<P>Stack and heap example 
+intmain() { 
+int*p = new int(100); 
+cout&lt;&lt; *p &lt;&lt; endl; 
+} 
+.Access dynamic variable 
+</P>
+
+<P>using pointer 
+</P>
+
+<P>stack 
+heap 
+(int*p) 
+100 (int) 
+100 
+</P>
+
+<P>Stack and heap example 
+intmain() { 
+int*p = new int(100); 
+cout&lt;&lt; *p &lt;&lt; endl; 
+} 
+.Problem: memory leak! 
+</P>
+
+<P>stack 
+heap 
+(int*p) 
+100 (int) 
+</P>
+
+<P>Stack and heap example 
+intmain() { 
+int*p = new int(100); 
+delete p; 
+cout&lt;&lt; *p &lt;&lt; endl; 
+} 
+.Problem: memory leak! 
+</P>
+
+<P>.Fixed .Problem: reading dynamic variable after delete </P>
+
+<P>stack </P>
+
+<P>heap 
+(int*p) 
+100 (int) 
+</P>
+
+<P>Stack and heap example 
+intmain() { 
+int*p = new int(100); 
+delete p; p=0; 
+cout&lt;&lt; *p &lt;&lt; endl; 
+} 
+.Problem: reading dynamic 
+</P>
+
+<P>variable after delete .Fixed .Problem: dereferencing a 0(AKA NULL) pointer! </P>
+
+<P>stack 
+heap 
+(int*p) 
+100 (int) 
+the little void 
+Address 0 
+… 
+</P>
+
+<P>Stack and heap example 
+intmain() { 
+int*p = new int(100); 
+delete p; p=0; 
+assert(p); 
+cout&lt;&lt; *p &lt;&lt; endl; 
+} 
+</P>
+
+<P>.Problem: dereferencing a 0(AKA NULL) pointer! .assert()can help identify problem before it causes a SEGFAULT </P>
+
+<P>stack 
+heap 
+(int*p) 
+100 (int) 
+the little void 
+Address 0 
+… 
+</P>
+
+<P>Stack and heap example 
+intmain() { 
+int*p = new int(100); 
+assert(p); 
+cout&lt;&lt; *p &lt;&lt; endl; 
+delete p; p=0; 
+} 
+.Bugs fixed 
+</P>
+
+<P>stack 
+heap 
+(int*p) 
+100 (int) 
+the little void 
+Address 0 
+… 
+</P>
+
+<P>NULL vs. 0 </P>
+
+<P>int*ptr= NULL; </P>
+
+<P>int*ptr= 0; </P>
+
+<P>.C style 
+.No library needed 
+.int*ptr=0; 
+.Works, but ptr=NULLis 
+preferred 
+</P>
+
+<P>.C++ style 
+.int*ptr=NULL; 
+.error: ‘NULL’ was not 
+declared in this scope 
+</P>
+
+<P>.#include &lt;cstddef> 
+int*ptr=NULL; 
+.Works, but ptr=0is preferred 
+</P>
+
+<P>Stack and heap exercise 
+</P>
+
+<P>inti= 42; 
+</P>
+
+<P>int*p = &amp;i; 
+</P>
+
+<P>delete p; p=0; 
+</P>
+
+<P>.Draw the stack and the 
+heap 
+.What is wrong with this 
+code? 
+</P>
+
+<P>stack 
+</P>
+
+<P>heap 
+</P>
+
+<P>Stack and heap exercise 
+</P>
+
+<P>inti=4; 
+</P>
+
+<P>int*p = new int(17); 
+</P>
+
+<P>i= *p; </P>
+
+<P>delete p; p=0; </P>
+
+<P>.Draw the stack and the heap .How much memory is leaked? </P>
+
+<P>stack 
+heap 
+</P>
+
+<P>Stack and heap exercise 
+int*p = new int(100); 
+int*q = p; 
+delete q; q=0; 
+cout&lt;&lt; *p &lt;&lt; endl; 
+.Draw the stack and the 
+</P>
+
+<P>heap 
+.What does this print? 
+.How much memory is 
+leaked? 
+</P>
+
+<P>stack 
+heap 
+</P>
+
+<P>Stack and heap exercise 
+int*p = new int(100); 
+int*q = new int(42); 
+q=p; 
+delete q; q=0: 
+.Draw the stack and the 
+</P>
+
+<P>heap .How much memory is leaked? </P>
+
+<P>stack heap </P>
+
+<P>Classes and dynamic memory </P>
+
+<P>.When you create instances of classes, their constructors are 
+called, just as if it were created the &quot;normal&quot; way. 
+</P>
+
+<P>IntSet*isp= new IntSet; 
+</P>
+
+<P>1.Allocate enough space on the heap to hold an IntSet. 
+.An array of 100 integers (elts) 
+.One extra integer (elts_size) to hold its size 
+</P>
+
+<P>2.Call the constructor IntSet::IntSet()on this new 
+object 
+</P>
+
+<P>Classes and dynamic memory 
+.We can also destroy instances of ADTs that were created by new: 
+</P>
+
+<P>IntSet*isp= new IntSet; 
+delete isp; isp=0; 
+</P>
+
+<P>Exercise: allocating classes 
+</P>
+
+<P>IntSet*isp= new IntSet; </P>
+
+<P>delete isp; isp=0; </P>
+
+<P>.Draw the stack and heap .Assume no virtual functions </P>
+
+<P>stack heap </P>
+</TaggedPDF-doc>

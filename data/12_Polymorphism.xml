@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:49-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:49-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:49-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">12_Polymorphism.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:af0e460d-e51d-490c-aa1d-ab2b49f81c12</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:3f785b9d-fc81-4e90-bed9-8c423e75ea9a</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="12_Polymorphism.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280Programming and Introductory Data Structures </P>
+
+<P>blockM-dearborn Polymorphism Slides by Andrew DeOrio </P>
+
+<P>Review: classes and ADTs 
+.Recall our Triangleclass (simplified here): 
+</P>
+
+<P>class Triangle { 
+public: 
+Triangle(); 
+Triangle(double a_in, double b_in,doublec_in); 
+double area() const; 
+void print() const; 
+private: 
+double a,b,c; 
+}; 
+</P>
+
+<P>Review: classes and ADTs 
+</P>
+
+<P>.The C++ classmechanism lets us create our own custom types .We can use our new, custom type just like built-in types </P>
+
+<P>intmain() { 
+Triangle t(3,4,5); 
+t.print(); 
+Triangle *t_ptr= &amp;t; 
+t_ptr-&gt;print(); 
+} 
+./a.out 
+Triangle: a=3 b=4 c=5 
+</P>
+
+<P>Triangle: a=3 b=4 c=5 
+class Triangle { 
+//... 
+void print() const{ 
+cout&lt;&lt; &quot;Triangle: " 
+&lt;&lt; &quot;a=&quot; &lt;&lt; a 
+&lt;&lt; &quot; b=&quot; &lt;&lt; b 
+&lt;&lt; &quot; c=&quot; &lt;&lt; c 
+&lt;&lt; endl; 
+} 
+</P>
+
+<P>Review: derived types 
+</P>
+
+<P>.A derived type is used to represent an is a relationship .A derived type inherits the member functionsand member variables of its parent </P>
+
+<P>class Isosceles : public Triangle { 
+// ... 
+}; 
+class Equilateral : public Isosceles { 
+// ... 
+}; 
+.An Iscesclesis aTriangle 
+</P>
+
+<P>.An Equilateralis aIsosceles .An Equilateralis aTriangle </P>
+
+<P>Triangle Isosceles Equilateral </P>
+
+<P>Review: derived types </P>
+
+<P>.Again, we can use our new, derived type just like built-in types 
+</P>
+
+<P>Isoscelesi(1,12); 
+i.print(); 
+Isosceles*i_ptr= &amp;i; 
+i_ptr-&gt;print(); 
+./a.out 
+Isosceles: base=1, leg=12 
+Isosceles: base=1, leg=12 
+class Isosceles 
+: public Triangle { 
+//... 
+void print() const{ 
+cout&lt;&lt; &quot;Isosceles: " 
+&lt;&lt; base=&quot; &lt;&lt; get_a() 
+&lt;&lt; &quot; leg=&quot; &lt;&lt; get_b() 
+&lt;&lt; endl; } 
+} 
+</P>
+
+<P>Review: subtypes 
+</P>
+
+<P>.If S is a subtypeof T, then objects of type T may be replaced with objects of type S without altering any of the desirable properties of that program (correctness) </P>
+
+<P>Isoscelesi(1,12); IsoscelesTriangle *ptr= &amp;i; ptr-&gt;print(); </P>
+
+<P>Static type </P>
+
+<P>.Often, the compiler can tell which derived type is needed .This is called the static type </P>
+
+<P>Trianglet(3,4,5); 
+t.print(); 
+Triangle *t_ptr= &amp;t; 
+t_ptr-&gt;print(); 
+Isoscelesi(1,12); 
+i.print(); 
+Isosceles*i_ptr= &amp;i; 
+i_ptr-&gt;print(); 
+./a.out 
+Triangle: a=3, b=4, c=5 
+Triangle: a=3, b=4, c=5 
+Isosceles: base=1, leg=12 
+Isosceles: base=1, leg=12 
+</P>
+
+<P>Dynamic type 
+</P>
+
+<P>.Other times, the type is not known until run time .This is called the dynamic type </P>
+
+<P>//EFFECTS: asks user to select Triangle, 
+// Isosceles or Equilateral 
+// returns a pointer to correct object 
+Triangle * ask_user(); 
+intmain() { 
+Triangle *t = ask_user(); //enters&quot;Isosceles" 
+t-&gt;print(); 
+} 
+.What is the static type of t? What is the dynamic type? 
+</P>
+
+<P>Dynamic type 
+static Triangle g_triangle(3,4,5); 
+static Isosceles g_isosceles(1,12); 
+static Equilateral g_equilateral(5); 
+Triangle * ask_user() { 
+cout&lt;&lt; &quot;Triangle, Isosceles or Equilateral? &quot;; 
+string s; 
+cin&gt;&gt; s; 
+if (s == &quot;Triangle&quot;) return &amp;g_triangle; 
+if (s == &quot;Isosceles&quot;) return &amp;g_isosceles; 
+if (s == &quot;Equilateral&quot;) return &amp;g_equilateral; 
+cout&lt;&lt; &quot;Unrecognized shape `&quot; &lt;&lt; s &lt;&lt; &quot;'\n&quot;; 
+exit(1); //crash 
+} 
+Returns pointer 
+</P>
+
+<P>to global variable 
+I wish we could create as many objects as the user asked for ... 
+</P>
+
+<P>Forshadowing 
+</P>
+
+<P>.I wish we could create as many objects as the user asked for ... 
+.We will soon know how! 
+.Dynamic memory 
+.For now, we will use this global variable work-around 
+</P>
+
+<P>static Triangle g_triangle(3,4,5); 
+//... 
+Triangle * ask_user() { 
+//... 
+if (s == &quot;Triangle&quot;) return &amp;g_triangle; 
+//... 
+</P>
+
+<P>} 
+</P>
+
+<P>Dynamic type 
+//EFFECTS: asks user to select Triangle, 
+// Isosceles or Equilateral 
+// returns a pointer to correct object 
+Triangle * ask_user(); 
+intmain() { 
+Triangle *t = ask_user(); //enters&quot;Isosceles" 
+t-&gt;print(); 
+} 
+.What is the output of this program? 
+</P>
+
+<P>Dynamic type 
+//... 
+Triangle *t = ask_user(); //&quot;Isosceles" 
+t-&gt;print(); 
+.Problem: the Triangle::print()function was called 
+</P>
+
+<P>.Because the static typeof tis Triangle 
+</P>
+
+<P>.But we wanted the Isosceles::print()function instead .Because the dynamic typeof tis Isosceles </P>
+
+<P>./a.out Triangle, Isosceles or Equilateral? Isosceles Triangle: a=1 b=12 c=12 </P>
+
+<P>Polymorphism //... </P>
+
+<P>Triangle *t = ask_user(); //&quot;Isosceles&quot; </P>
+
+<P>t-&gt;print(); </P>
+
+<P>.tcan change types at runtime, in other words it is polymorphic .We can use the virtual function mechanism in C++ to check the dynamic typeof tat runtime and call the correct version of print() </P>
+
+<P>Polymorphism </P>
+
+<P>.Polymorphism is the ability to associate many behaviors with one function name dynamically (at runtime) .A polymorphic type is any type with a virtual function .Virtual functions are the C++ mechanism used to implement polymorphism </P>
+
+<P>Polymorphism example 
+class Triangle { 
+virtual void print() const{/*...*/} 
+//... 
+}; 
+.virtualmeans &quot;check the dynamic type at runtime, then select 
+</P>
+
+<P>the correct print()member function" 
+.virtualis inherited, so the overridden print()in Isoscelesand Equilateralwill automatically become virtual 
+</P>
+
+<P>Triangle 
+Isosceles 
+Equilateral 
+</P>
+
+<P>Polymorphism example 
+class Triangle { 
+virtual void print() const{/*...*/} //... 
+}; 
+class Isosceles { 
+</P>
+
+<P>virtual void print() const{/*...*/} //... 
+}; 
+class Equilateral {//... 
+virtual void print() const{/*...*/} //... 
+}; 
+.Optionally add virtualkeyword to derived types 
+</P>
+
+<P>.This is more clear . 
+</P>
+
+<P>Triangle 
+Isosceles 
+Equilateral 
+</P>
+
+<P>Dynamic type 
+//... 
+Triangle *t = ask_user(); //&quot;Isosceles" 
+t-&gt;print(); 
+.Now our program works correctly . 
+</P>
+
+<P>./a.out 
+Triangle, Isosceles or Equilateral? Isosceles 
+Isosceles: base=1 leg=12 
+</P>
+
+<P>Extending the class hierarchy 
+.Recall our Rectangleclass (simplified here): 
+</P>
+
+<P>class Rectangle { 
+public: 
+Rectangle(); 
+Rectangle(double a_in, double b_in); 
+double area() const; 
+</P>
+
+<P>void print() const; 
+private: 
+double a,b; 
+}; 
+</P>
+
+<P>Exercise 
+</P>
+
+<P>.Create a class hierarchy for Triangle, Isosceles, Equilateraland Rectangle. Draw it. </P>
+
+<P>Triangle Isosceles Equilateral Rectangle </P>
+
+<P>Exercise </P>
+
+<P>.A Rectangleis a Shape 
+.A Triangleis a Shape 
+.etc. 
+.Now: write the Shapeclass 
+.Member functions? Virtual? 
+.Member variables? 
+.Think: what if we wanted to add a Circle class? 
+</P>
+
+<P>Triangle Isosceles Equilateral Rectangle Shape </P>
+
+<P>Exercise class Shape { </P>
+
+<P>public: 
+virtual double area() const{/*...*/} 
+virtual void print() const{/*...*/} 
+}; 
+class Triangle : public Shape {/*...*/}; 
+class Rectangle : public Shape {/*...*/}; 
+.All shapes have area()and a print()member functions 
+</P>
+
+<P>.Use virtual, so pointers to derived types will call the right version of area()and print() </P>
+
+<P>Exercise 
+class Shape { 
+public: 
+virtual double area() const{/*...*/} 
+virtual void print() const{/*...*/} 
+}; 
+.No member variables 
+</P>
+
+<P>.Not all shapes have common attributes, e.g., circleand triangle 
+</P>
+
+<P>Exercise 
+.This code is perfectly legal C++, but it makes no sense! 
+</P>
+
+<P>Shape s; 
+</P>
+
+<P>s.print(); 
+</P>
+
+<P>.A shape is an abstract idea .Our shape should only be an interface to ensure that all shapes behave the same way </P>
+
+<P>Abstract base class </P>
+
+<P>.Problem: an instance of an abstract idea makes no senseShape s; //what kind of shape??? .Solution: abstract base classes </P>
+
+<P>.Create an interface onlyclass as a base class, from which an 
+implementation can be derived 
+.You cannot create an instance of an abstract base class, which 
+is exactly what we want for a Shape 
+</P>
+
+<P>Pure virtual functions 
+</P>
+
+<P>.Because there will be no implementation, we need to declare 
+member functions in a special way: 
+.Declare each method as a virtualfunction 
+.“Assign&quot; a 0to each of these virtual functions. 
+</P>
+
+<P>.These are called pure virtual functions 
+.You can think of them as a set of function pointers, all of which 
+point to NULL(AKA 0) 
+</P>
+
+<P>class Shape { 
+</P>
+
+<P>public: 
+</P>
+
+<P>virtualdouble area() const= 0; 
+</P>
+
+<P>virtualvoid print() const= 0; 
+</P>
+
+<P>}; 
+</P>
+
+<P>Pure virtual functions 
+</P>
+
+<P>.Shape is now an abstract base class 
+.You cannot create an instance of an abstract base classShape s; //compiler error 
+.You cancreate a pointer to an abstract base class, and then 
+assign the pointer to a concrete classderived the base base 
+.This is subtyping at work 
+</P>
+
+<P>Rectangle r(2,4); //concrete derived typeShape *s = &amp;r; //OK, Rectangle is aShapes-&gt;print(); //virtual, so correct 
+version//of print() is called 
+</P>
+
+<P>./a.out 
+</P>
+
+<P>Rectangle: a=2 b=4 
+</P>
+
+<P>Pure virtual functions 
+</P>
+
+<P>//EFFECTS: asks user to select a shape 
+</P>
+
+<P>// returns a pointer to correct object 
+Shape * ask_user(); 
+intmain() { 
+Shape *s= ask_user(); //&quot;Rectangle" 
+s-&gt;print(); 
+} 
+.Now we can expand the ask_user() function to work with any 
+</P>
+
+<P>Shape 
+</P>
+
+<P>./a.out 
+Rectangle, Triangle, Isosceles or Equilateral? Rectangle 
+Rectangle: a=2 b=4 
+</P>
+
+<P>Factory functions 
+</P>
+
+<P>//EFFECTS: asks user to select a shape 
+</P>
+
+<P>// returns a pointer to correct object 
+</P>
+
+<P>Shape * ask_user(); 
+</P>
+
+<P>.ask_user()is an example of a factory function .A factory function creates objects for a client who doesn't need to know their actual types .You will use a factory function in project 4 .Return blackjack players using different strategies: simple, card-counting, etc. </P>
+
+<P>Upcast 
+Shape *s = ask_user(); //&quot;Isosceles" 
+.Substitute subtype (Isosceles) for supertype(Shape) 
+</P>
+
+<P>.This is called an upcast 
+</P>
+
+<P>.Type conversion is automatic, an implicit cast 
+</P>
+
+<P>Shape * ask_user() { 
+</P>
+
+<P>cout&lt;&lt; &quot;Rectangle, Triangle, Isosceles or Equilateral? &quot;; 
+string s; 
+cin&gt;&gt; s; 
+if (s == &quot;Triangle&quot;) return &amp;g_triangle; 
+if (s == &quot;Isosceles&quot;) return &amp;g_isosceles; 
+//... 
+} 
+upcast 
+</P>
+
+<P>Upcast 
+</P>
+
+<P>Shape *s = ask_user(); //&quot;Isosceles" 
+</P>
+
+<P>.Think of upcastas a cast from one type in the class hierarchy to 
+a higher one. 
+.Since a Isoscelesis a Shape, this cast can happen 
+automatically. 
+</P>
+
+<P>Triangle Isosceles Equilateral Rectangle Shape upcast </P>
+
+<P>Downcast </P>
+
+<P>Isosceles *t= ask_user();//enter &quot;Isosceles&quot; </P>
+
+<P>.Can’t convert supertype(Shape) to subtype (Isosceles) .Type conversion is not automatic .This is called a downcast </P>
+
+<P>error: invalid conversion from ‘Shape*’ to ‘Isosceles*’ Shape * ask_user(); </P>
+
+<P>Downcast </P>
+
+<P>Isosceles *t= ask_user();//enter &quot;Isosceles&quot; </P>
+
+<P>.Think of downcastas a cast from one type in the class 
+hierarchy to a lower one. 
+.Since a Shapemight not be a Isosceles, this cast cannot 
+happen automatically. 
+</P>
+
+<P>error: invalid conversion from ‘Shape*’ to ‘Isosceles*’ 
+Shape * ask_user() 
+Triangle 
+Isosceles 
+Equilateral 
+Rectangle 
+Shape 
+downcast 
+</P>
+
+<P>Downcast 
+Shape *s = ask_user(); //&quot;Isosceles" 
+Isosceles *i= dynamic_cast&lt;Isosceles*&gt;(s); 
+if (i!= 0){ //check for NULL pointer 
+//something triangular 
+double c = i-&gt;get_c(); 
+} 
+.dynamic_cast&lt;T*&gt;(ptr)downcastsptrto type T*, if possible. 
+</P>
+
+<P>Otherwise, it returns 0. 
+</P>
+
+<P>.In this example, if the user enters “Isoscles”, the call to 
+</P>
+
+<P>dynamic_castwill cast from Shape*to Isoscles* Shape * ask_user(); </P>
+
+<P>Downcast </P>
+
+<P>Shape *s = ask_user(); //&quot;Isosceles&quot; </P>
+
+<P>Isosceles *i= dynamic_cast&lt;Isosceles*&gt;(s); </P>
+
+<P>if (i!= 0){ //check for NULL pointer </P>
+
+<P>//something triangular </P>
+
+<P>} </P>
+
+<P>.Always need to check a dynamic_castfor success .dynamic_castonly works on polymorphic types. .AKA classes with virtual functions </P>
+
+<P>Shape * ask_user(); </P>
+
+<P>dynamic_castvs. static_cast </P>
+
+<P>.We have now seen two different kinds of cast .dynamic_cast .Checks at runtime if it is OK to cast .Cast from a polymorphic base class to a derived class .Supertypeto subtype, downcast </P>
+
+<P>.static_cast .Does not check at runtime .The programmer tells the compiler “trust me” .Works with non-polymorphic types as well as polymorphic </P>
+
+<P>Constructors and polymorphism </P>
+
+<P>.Recall how constructors of derived classes work .First, the base class constructor runs, then the derived class constructor runs, etc. .In other words, instances of a derived class are constructed starting from the base class </P>
+
+<P>Note: The constructor that is called automatically is the default constructor. If you want a non-default constructor, </P>
+
+<P>you must call it explicitly. 
+</P>
+
+<P>Constructors and polymorphism 
+intmain () { 
+Triangle t; 
+} 
+class Shape { 
+public: 
+Shape() { 
+cout&lt;< 
+&quot;Shape default ctor\n&quot;; 
+} 
+//... 
+}; 
+class Triangle : Shape { 
+public: 
+Triangle() { 
+cout&lt;< 
+&quot;Triangle default ctor\n&quot;; 
+} 
+//... 
+}; 
+./a.out 
+Shape default ctor 
+Triangle default ctor 
+</P>
+
+<P>Constructors and polymorphism 
+class Triangle : public Shape { 
+</P>
+
+<P>//... 
+Triangle() : a(0), b(0), c(0) 
+{ cout&lt;&lt; &quot;Triangle default ctor\n&quot;; } 
+Triangle(double a_in, double b_in, double c_in) 
+: a(a_in), b(b_in), c(c_in) 
+{ cout&lt;&lt; &quot;Triangle double ctor\n&quot;; } 
+//... 
+}; 
+.Add the same messages to Isosceles, Equilateraland 
+</P>
+
+<P>Rectangle 
+</P>
+
+<P>Exercise: What is the output? 
+intmain() { 
+Equilaterale; 
+} 
+intmain() { 
+Rectangle r; 
+} 
+</P>
+
+<P>Exercise: What is the output? 
+intmain() { 
+Isoscelesi; 
+Triangle *t_ptr= &amp;i; 
+} 
+intmain() { 
+Isoscelesi(1,12); 
+Shape *s_ptr= &amp;i; 
+} 
+</P>
+
+<P>Exercise: What is the output? 
+intmain() { 
+Rectangle r; 
+Triangle *t_ptr = &amp;r; 
+} 
+intmain() { 
+Isosceles i; 
+Equilateral *e_ptr= &amp;i; 
+} 
+</P>
+
+<P>Exercise: What is the output? 
+intmain() { 
+Equilaterale1(5); 
+Equilaterale2(6); 
+Shape *array[2]; 
+array[0] = &amp;e1; 
+array[1] = &amp;e2; 
+array[0]-&gt;print(); 
+array[1]-&gt;print(); 
+} 
+</P>
+
+<P>Arrays and polymorphism 
+</P>
+
+<P>.Polymorphism gives us another cool feature: we can put (pointers to) objects of different types together in the same container </P>
+
+<P>Rectangle r(2,4); Isosceles i(1,12); Equilateral e(5); constintSIZE=3; </P>
+
+<P>Shape * shapes[SIZE]; </P>
+
+<P>shapes[0] = &amp;r; </P>
+
+<P>shapes[1] = &amp;i; </P>
+
+<P>shapes[2] = &amp;e; </P>
+
+<P>Exercise: write a for-loop to call print()on each Shape*in the array. Use traversal by pointer. </P>
+
+<P>Project 4 </P>
+
+<P>.You now have everything you need for project four: blackjack! .Code in this project: .ADTs representing a deck of cards .Three polymorphic blackjack player ADTs that use different strategies .A game driver </P>
+
+<P>.We will grade your code (as usual) .We will also grade your testcases </P>
+</TaggedPDF-doc>

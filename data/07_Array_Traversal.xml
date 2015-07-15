@@ -1,0 +1,1306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:48:48-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:48:48-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:48:48-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">07_Array_Traversal.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:507bd3c1-bccd-41c2-b703-d7545e4b3c3d</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:4f2428d4-78cd-4b00-b4c0-f0f2c53c2f8c</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="07_Array_Traversal.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280 </P>
+
+<P>Programming and Introductory Data Structures blockM-dearborn Array Traversal </P>
+
+<P>Slides by Jeff Ringenberg, 
+Brian Noble and 
+Andrew DeOrio 
+1 
+</P>
+
+<P>Pointer Review 
+.To declare a pointer to an int, we say: 
+</P>
+
+<P>int *bar; 
+</P>
+
+<P>.Notice the “*”. It means “pointer-to”. 
+.We can assign values to a pointer, just as we can to any other 
+variable: 
+</P>
+
+<P>int foo; int *bar; bar = &amp;foo; foo = 1; </P>
+
+<P>.The symbol “&amp;” means “address-of”. So, this statement says that “bar is a pointer to an integer, initialized to the address of foo”. </P>
+
+<P>2 foo: bar: </P>
+
+<P>1 </P>
+
+<P>Pointer Review </P>
+
+<P>.Once a pointer is created and assigned a value, we can use it to change the value of the object to which it points. We do this by saying: *bar = 2; </P>
+
+<P>.This means “change the value of the object to which bar points 
+to 2”. 
+.The “*” here is the “dereference” operator. 
+.We sometimes say that dereferencing a pointer is the same as 
+“following” it. The resultant environment is: 
+</P>
+
+<P>3 
+int foo; 
+int *bar; 
+bar = &amp;foo; 
+foo: 
+</P>
+
+<P>bar: 1 foo: </P>
+
+<P>bar: 2 Passing Pointers to Functions </P>
+
+<P>.Pointers can be arguments to functions. For example, suppose you want a function that adds one to an integer argument passed by reference. </P>
+
+<P>void add_one(int *x); 
+// MODIFIES: *x 
+// EFFECTS: adds one to *x 
+</P>
+
+<P>.And you'd write it as: 
+</P>
+
+<P>void add_one(int *x) { 
+*x = *x + 1; 
+} 
+</P>
+
+<P>4 Passing Pointers to Functions void add_one(int *x) { *x = *x + 1; </P>
+
+<P> } </P>
+
+<P>.If you called this in our example environment: </P>
+
+<P>add_one(bar); </P>
+
+<P>.The variable bar is passed by value, but bar itself happens to be a pointer. So, the usual function calling rules apply: .Create a new frame .Evaluate the actual arguments in the calling environment .Copy the values to the storage devoted to the formals .Execute </P>
+
+<P>5 </P>
+
+<P>foo: </P>
+
+<P>bar: 2 </P>
+
+<P>x: </P>
+
+<P>3 Passing Pointers to Functions </P>
+
+<P>void add_one(int *x) { </P>
+
+<P>*x = *x + 1; </P>
+
+<P>} </P>
+
+<P>.If you called this in our example environment: </P>
+
+<P>add_one(bar); </P>
+
+<P>.x is a copy of the pointer bar. Since they both have the same value (that value is the address of foo), they both point to the same thing. </P>
+
+<P>foo: </P>
+
+<P>bar: 3 </P>
+
+<P>x: 
+int foo; 
+int *bar; 
+bar = &amp;foo; 
+</P>
+
+<P>Passing Pointers to Functions </P>
+
+<P>void add_one(int *x) { </P>
+
+<P>*x = *x + 1; </P>
+
+<P>} </P>
+
+<P>.You can also call add_one without the “middleman” of bar, like so: </P>
+
+<P>add_one(&amp;foo); </P>
+
+<P>.This says “take the address of foo, and pass it as the actual argument”. </P>
+
+<P>7 foo: bar: </P>
+
+<P>3 </P>
+
+<P>x: Pointer question </P>
+
+<P>.If you change the body of add_one to: </P>
+
+<P>void add_one(int *x) { </P>
+
+<P>x = x + 1; </P>
+
+<P>} </P>
+
+<P>.…what happens? </P>
+
+<P>8 
+Pointer question 
+</P>
+
+<P>.This is a legal C++ statement, although it leaves x pointing to an 
+undefined location. In other words, it increments the value of the 
+pointer by one, not the thing it points to. 
+.However, what does it mean to increment a pointer “by one”? 
+</P>
+
+<P>.Pointer arithmetic is done based on units of the “referent type”. 
+.x=x+1, tells the compiler that you want x to point to the “next” int. 
+.On 32-bit machines, ints take up four bytes, or “address values”, so this 
+increments the value of x by four bytes. 
+.However, since x only pointed to one int, 
+</P>
+
+<P>there is no “next” one to point to… 
+</P>
+
+<P>9 
+void add_one(int *x) { 
+</P>
+
+<P>x = x + 1; 
+</P>
+
+<P>} 
+</P>
+
+<P>foo: 
+</P>
+
+<P>bar: 
+</P>
+
+<P>3 
+++bar: 
+? 
+</P>
+
+<P>Check Your Understanding </P>
+
+<P>.You are given the following function signature: </P>
+
+<P>int f(int x, int &amp;y, int *z); </P>
+
+<P>int main() { </P>
+
+<P>int a = 1; </P>
+
+<P>int b = 2; </P>
+
+<P>int c = 3; </P>
+
+<P>int *ptr = &amp;c; </P>
+
+<P>f(a, b, ptr); </P>
+
+<P>… </P>
+
+<P>} </P>
+
+<P>10 </P>
+
+<P>.Which of the following variables in main can be potentially changed by f? .a .b .c .ptr </P>
+
+<P>Pointers vs. references </P>
+
+<P>.This brings us to the essential differences between pointers and references: .Both allow you to pass objects by reference. .Pointers require some extra syntax at calling time (&amp;), in the argument list (*), and with each use (*); references only require extra syntax in the argument list (&amp;). .You can change the object to which a pointer points using arithmetic/assignment, but you cannot change the object to which a reference refers. .You might wonder why you’d ever want to use pointers, since they </P>
+
+<P>require extra typing, and allow you to shoot yourself in the foot. 
+</P>
+
+<P>11 
+Why Pointers? 
+</P>
+
+<P>.There are (at least) two reasons to use pointers: 
+1.Array variables are internally implemented using pointers 
+</P>
+
+<P>2.They allow us to create structures (unlike arrays) whose size 
+is not known in advance; we won't see that use until the last 
+third of the course. 
+</P>
+
+<P>12 
+</P>
+
+<P>Pointers and Arrays 
+</P>
+
+<P>.Recall how we represented an array pictorially last lecture: 
+</P>
+
+<P>13 
+</P>
+
+<P>array: 
+Pointers and Arrays 
+</P>
+
+<P>.Recall how we represented an array pictorially last lecture: 
+</P>
+
+<P>.The actual representation is: 
+</P>
+
+<P>14 
+array: 
+</P>
+
+<P>array: 
+</P>
+
+<P>Pointers and Arrays 
+</P>
+
+<P>.If you were to look at the value of the variable “array” (not 
+array[0]) you'd find that it was exactly the same as the 
+address of array[0]. 
+.In other words, 
+</P>
+
+<P> (array==&amp;array[0]) . True </P>
+
+<P>15 array: </P>
+
+<P>Pointers and Arrays .When the argument array is passed to the function sum, a pointer to the first element of the array is really passed and the compiler does all the work of translating something like: </P>
+
+<P>array[3] 
+into the proper arithmetic/dereference to get the right value. 
+</P>
+
+<P>.For example, you can think of: 
+</P>
+
+<P>int array[4] = {1, 2, 3, 4}; 
+int x; 
+</P>
+
+<P>x = array[0]; 
+As equivalent to: 
+x = *array; 
+</P>
+
+<P>16 
+array: 
+</P>
+
+<P>Pointers and Arrays .The compiler also does the appropriate “pointer arithmetic” if you use other elements of array. So: </P>
+
+<P>x = array[3]; </P>
+
+<P>is equivalent to: int *tmp; tmp = array + 3; x = *tmp; or simply: x = *(array+3); </P>
+
+<P>17 array: </P>
+
+<P>x: </P>
+
+<P>Pointers and Arrays </P>
+
+<P>.The compiler also does the appropriate “pointer arithmetic” if you use other elements of array. So: </P>
+
+<P>x = array[3]; </P>
+
+<P>is equivalent to: int *tmp; tmp = array + 3; x = *tmp; or simply: x = *(array+3); </P>
+
+<P>18 </P>
+
+<P>array: </P>
+
+<P>x: </P>
+
+<P>This ability to perform pointer arithmetic on arrays turns out to be very very useful, and gives us another mechanism to work with arrays. Indexing vs. pointer arithmetic </P>
+
+<P>.We now have another way to loop over an array </P>
+
+<P>const int SIZE = 3; </P>
+
+<P>int array[SIZE] = {1,2,3}; </P>
+
+<P>.Old way, using array indexing </P>
+
+<P>for (int i=0; i&lt;SIZE; ++i) </P>
+
+<P>cout &lt;&lt; array[i] &lt;&lt; &quot; &quot;; </P>
+
+<P>.New way, using pointer arithmetic </P>
+
+<P>for (int *i=array; i&lt;array+SIZE; ++i) cout &lt;&lt; *i &lt;&lt; &quot; &quot;; </P>
+
+<P>19 </P>
+
+<P>Array Traversal Using Pointers </P>
+
+<P>.Recall the problem of strlen. This time write the function 
+using pointers and pointer arithmetic, but not array 
+indexing/subscripting. 
+.First, redefine the type signature to be: 
+</P>
+
+<P>20 
+</P>
+
+<P>int strlen(char s[]) 
+// REQUIRES: s is a NUL-terminated C-string 
+// EFFECTS: returns the length of s, not 
+// counting the NUL. 
+</P>
+
+<P>{ ... } 
+</P>
+
+<P>int strlen(char *s) 
+// REQUIRES: s is a NUL-terminated C-string 
+// EFFECTS: returns the length of s, not 
+// counting the NUL. 
+</P>
+
+<P>{ ... } 
+</P>
+
+<P>Array Traversal Using Pointers 
+</P>
+
+<P>.And the body, using only pointers and pointer arithmetic, is: 
+</P>
+
+<P>21 
+int strlen(char *s) 
+</P>
+
+<P> // REQUIRES: s is a NUL-terminated C-string </P>
+
+<P>// EFFECTS: returns the length of s, not </P>
+
+<P>// counting the NUL. </P>
+
+<P>{ ... } </P>
+
+<P>int strlen(char *s) { 
+char *p = s; 
+while (*p) { 
+++p; 
+} 
+return (p - s); 
+} 
+</P>
+
+<P>Array Traversal Using Pointers 
+</P>
+
+<P>.*p evaluates to “false” if p points to a NUL, true otherwise. 
+.++p advances by “one character”. 
+.p-s computes the “number of characters” between p and s, 
+which happens to be the number of bytes. 
+.Instead, if characters were two bytes each, the pointer 
+arithmetic of p-s would still count the number of characters. 
+</P>
+
+<P>22 
+</P>
+
+<P>int strlen(char *s) { 
+char *p = s; 
+while (*p) { 
+++p; 
+} 
+return (p - s); 
+} 
+</P>
+
+<P>The const Keyword 
+</P>
+
+<P>void strcpy(char *dest, const char *src) 
+</P>
+
+<P>// REQ: src is a NULL-terminated string 
+</P>
+
+<P>// dest is big enough to hold a 
+</P>
+
+<P>// copy of src 
+</P>
+
+<P>// MOD: dest 
+</P>
+
+<P>// EFF: place a copy of src in dest 
+</P>
+
+<P>{ ... } 
+</P>
+
+<P>.The type signature has a new piece to it: the const 
+keyword 
+.const is a type qualifier – something that modifies a type 
+.It means “you cannot change this value once you have 
+initialized it” 
+</P>
+
+<P>23 
+</P>
+
+<P>The const Keyword 
+</P>
+
+<P>.When you have pointers, there are two things you might 
+change: 
+1.The value of the pointer. 
+2.The value of the object to which the pointer points. 
+</P>
+
+<P>.Either (or both) can be made unchangeable: 
+</P>
+
+<P>const T *p; // &quot;T&quot; (the pointed-to object) // cannot be changed T *const p; // &quot;p&quot; (the pointer) cannot be </P>
+
+<P>// changed const T *const p; // neither can be changed. 24 </P>
+
+<P>The const Keyword </P>
+
+<P>void strcpy(char *dest, const char *src) // REQ: src is a NULL-terminated string dest is // big enough to hold a copy of src // MOD: dest // EFF: place a copy of src in dest </P>
+
+<P>{ ... } </P>
+
+<P>.Strictly speaking, we don’t need to include the const </P>
+
+<P>qualifier here since the specification promises that we 
+won't modify the source string (i.e. it isn't mentioned in 
+the MODIFIES clause). 
+.So, why include it? 
+</P>
+
+<P>25 
+</P>
+
+<P>The const Keyword 
+</P>
+
+<P>.Why include const? 
+.Because once you add it, you CANNOT change src, 
+even if you do so by mistake. 
+.Such a mistake will be caught by the compiler. 
+.Bugs that are detected at compile time are among the 
+easiest bugs to fix – those are the kinds of bugs we 
+want. 
+</P>
+
+<P>26 
+</P>
+
+<P>The const Keyword 
+</P>
+
+<P>.Why include const? 
+.Because once you add it, you CANNOT change src, even if 
+you do so by mistake. 
+.Such a mistake will be caught by the compiler. 
+.Bugs that are detected at compile time are among the easiest 
+bugs to fix – those are the kinds of bugs we want. 
+</P>
+
+<P>27 
+</P>
+
+<P>Note: It is still possible to change the memory locations 
+pointed to by src. For example, through another pointer 
+that points to the same locations. 
+The const Keyword 
+</P>
+
+<P>.Use const for things that are passed by reference, but won't 
+be changed 
+.Question: How should we modify strlen to be “const 
+correct”? 
+</P>
+
+<P>28 
+int strlen(char *s) 
+</P>
+
+<P>// REQUIRES: s is a NUL-terminated C-string 
+</P>
+
+<P>// EFFECTS: returns the length of s, not 
+</P>
+
+<P>// counting the NUL. 
+</P>
+
+<P>{ ... } </P>
+
+<P>Check Your Understanding </P>
+
+<P>.You are given the following declaration: </P>
+
+<P>void strcpy(char *dest, const char *src); </P>
+
+<P>.You are given the following variables: </P>
+
+<P>char s[] = “abc”; </P>
+
+<P>char *a = s; </P>
+
+<P>const char *b = “def”; </P>
+
+<P>Which of the following statements are legal (type safe) as far as compiler is concerned? </P>
+
+<P>a)strcpy(a, b); b)strcpy(b, a); c)strcpy(a, a); d)strcpy(b, b); </P>
+
+<P>Hint: pay attention to the meaning of const. </P>
+
+<P>The const Keyword </P>
+
+<P>.Pointers-to-const-T are not the same type as pointers-to-T .const T *p is not equivalent T *p; </P>
+
+<P>.You can use a pointer-to-T anywhere you expect a pointer-toconst-T, but NOT vice versa .OK to pass non-const variable into a function that guarantees us that the variable will not be changed. .Not OK the other way around. </P>
+
+<P>.That's because code that expects a pointer-to-T might try to change the T, but this is illegal for a pointer-to-const-T. .However, code that expects a pointer-to-const-T will work </P>
+
+<P>perfectly well for a pointer-to-T; it's just guaranteed not to try 
+to change it. 
+</P>
+
+<P>30 
+The const Keyword 
+</P>
+
+<P>.Use const for things that are passed by reference, but won't 
+be changed. 
+.Question: How should we modify strlen to be “const correct”? 
+.Answer: Change argument to: const char *s 
+</P>
+
+<P>31 int strlen(const char *s) // REQUIRES: s is a NUL-terminated C-string // EFFECTS: returns the length of s, not // counting the NUL. { ... } </P>
+
+<P>Check Your Understanding 
+.You are given the following variables: 
+</P>
+
+<P>char *b; 
+const char *c; 
+</P>
+
+<P>.Which of the following statements will generate compiler 
+warnings or errors? 
+a)b = c; 
+b)c = b; 
+</P>
+
+<P>32 Array Traversal Example void strcpy(char *dest, const char *src) // REQ: src is a NULL-terminated string // dest is big enough to hold a copy of src // MOD: dest </P>
+
+<P> // EFF: place a copy of src in dest </P>
+
+<P>{ while (*src) { *dest++ = *src++; } *dest = '\0'; </P>
+
+<P>} 33 Take a few minutes to figure this out… CYU </P>
+
+<P>You are given the following variables: 
+char *b; 
+const char *c; 
+</P>
+
+<P>Which of the following statements will generate compiler 
+warnings or errors? 
+</P>
+
+<P>a)b = c; 
+b)c = b; 
+</P>
+
+<P>34 
+Array Traversal Example 
+</P>
+
+<P>.Here there is both a dereference (*) and a postfix increment 
+(++) in the same statement. 
+.This is something you see quite a bit. You just have to 
+remember what it means. 
+</P>
+
+<P>35 void strcpy(char *dest, const char *src) // RME – omitted for space </P>
+
+<P>{ 
+while (*src) { 
+*dest++ = *src++; 
+} 
+*dest = '\0'; 
+</P>
+
+<P>} 
+</P>
+
+<P>Array Traversal Example 
+.The ++ applies to the pointer, not to the referent. 
+</P>
+
+<P>++ “binds tighter” than * 
+</P>
+
+<P>.*p++ says “dereference the pointer given its current value, and then increment it after you are done”. </P>
+
+<P>36 void strcpy(char *dest, const char *src) // RME – omitted for space { while (*src) { *dest++ = *src++; } *dest = '\0'; } </P>
+
+<P>Array Traversal Example 
+.If dest and src each point to the beginnings of two buffers... 
+</P>
+
+<P>*dest++ = *src++; // looped 
+37 
+H 
+dest: 
+</P>
+
+<P>src: 
+E L 
+L 
+O 
+\0 
+</P>
+
+<P>Array Traversal Example 
+.If dest and src each point to the beginnings of two buffers... 
+</P>
+
+<P>*dest++ = *src++; // looped 
+38 
+</P>
+
+<P>H 
+dest: 
+src: 
+E 
+L 
+L 
+O 
+\0 
+</P>
+
+<P>H Array Traversal Example .If dest and src each point to the beginnings of two buffers... </P>
+
+<P>*dest++ = *src++; // looped 39 H dest: src: E L L O \0 </P>
+
+<P>H 
+</P>
+
+<P>Array Traversal Example 
+.If dest and src each point to the beginnings of two buffers... 
+</P>
+
+<P>*dest++ = *src++; // looped 
+40 
+</P>
+
+<P>H 
+dest: 
+src: 
+E 
+E 
+L 
+L 
+O \0 
+</P>
+
+<P>H 
+</P>
+
+<P>Array Traversal Example 
+.If dest and src each point to the beginnings of two buffers... 
+</P>
+
+<P>*dest++ = *src++; // looped 
+41 
+H 
+dest: 
+src: 
+</P>
+
+<P>E 
+E 
+L 
+L 
+O 
+\0 
+</P>
+
+<P>H 
+</P>
+
+<P>Array Traversal Example 
+.If dest and src each point to the beginnings of two buffers... 
+</P>
+
+<P>*dest++ = *src++; // looped 
+</P>
+
+<P>42 
+</P>
+
+<P>H 
+</P>
+
+<P>dest: 
+</P>
+
+<P>src: 
+</P>
+
+<P>E 
+</P>
+
+<P>E 
+</P>
+
+<P>L 
+</P>
+
+<P>L 
+</P>
+
+<P>L 
+</P>
+
+<P>O 
+</P>
+
+<P>\0 
+</P>
+
+<P>H 
+</P>
+
+<P>Array Traversal Example 
+.If dest and src each point to the beginnings of two buffers... 
+</P>
+
+<P>*dest++ = *src++; // looped 
+</P>
+
+<P>43 
+</P>
+
+<P>H 
+</P>
+
+<P>dest: 
+</P>
+
+<P>src: 
+</P>
+
+<P>E 
+</P>
+
+<P>E 
+</P>
+
+<P>L 
+L 
+L 
+O 
+\0 
+H 
+</P>
+
+<P>Array Traversal Example 
+.If dest and src each point to the beginnings of two buffers... 
+</P>
+
+<P>*dest++ = *src++; // looped 
+44 
+H 
+dest: 
+src: 
+E 
+E 
+L 
+L 
+L 
+L 
+O 
+\0 
+H 
+</P>
+
+<P>Array Traversal Example 
+.If dest and src each point to the beginnings of two buffers... 
+</P>
+
+<P>*dest++ = *src++; // looped 
+</P>
+
+<P>45 
+H 
+dest: 
+src: 
+E 
+E 
+L 
+L 
+L 
+L 
+O 
+\0 
+H 
+</P>
+
+<P>Array Traversal Example 
+.If dest and src each point to the beginnings of two buffers... 
+</P>
+
+<P>*dest++ = *src++; // looped 
+46 
+H 
+dest: 
+src: 
+E 
+E 
+L 
+L 
+L 
+L 
+</P>
+
+<P>O 
+O 
+\0 
+H 
+</P>
+
+<P>Array Traversal Example 
+.If dest and src each point to the beginnings of two buffers... 
+</P>
+
+<P>*dest++ = *src++; // looped 
+</P>
+
+<P>47 
+</P>
+
+<P>H 
+</P>
+
+<P>dest: 
+</P>
+
+<P>src: 
+</P>
+
+<P>E 
+</P>
+
+<P>E 
+</P>
+
+<P>L 
+</P>
+
+<P>L 
+</P>
+
+<P>L 
+</P>
+
+<P>L 
+</P>
+
+<P>O 
+</P>
+
+<P>O 
+</P>
+
+<P>\0 
+</P>
+
+<P>H 
+</P>
+
+<P>Array Traversal Example 
+.If dest and src each point to the beginnings of two buffers... 
+</P>
+
+<P>*dest++ = *src++; // looped 
+48 
+</P>
+
+<P>H dest: src: E E L L L L O O \0 H Loop quits and last </P>
+
+<P>assignment of </P>
+
+<P>‘\0’ is written to </P>
+
+<P>*dest </P>
+
+<P>Array Traversal Example 
+.If dest and src each point to the beginnings of two buffers... 
+</P>
+
+<P>*dest++ = *src++; // looped 
+</P>
+
+<P>49 
+</P>
+
+<P>H 
+</P>
+
+<P>dest: 
+</P>
+
+<P>src: 
+</P>
+
+<P>E 
+</P>
+
+<P>E 
+</P>
+
+<P>L 
+</P>
+
+<P>L 
+</P>
+
+<P>L 
+L 
+O 
+O 
+\0 
+H 
+\0 
+</P>
+
+<P>while (*src) { 
+*dest++ = *src++; 
+} 
+*dest = '\0'; 
+</P>
+
+<P>CYU 
+.Consider the following statements: 
+</P>
+
+<P>int a[] = {1, 2, 3}; 
+int b[] = {4, 5, 8}; 
+int *c = a; 
+int *d = b; 
+*c++ = *d++; 
+*c = (*d)++; 
+</P>
+
+<P>What are the final values of the arrays a and c? 
+50 
+</P>
+
+<P>C strings vs. C++ strings 
+C string 
+</P>
+
+<P>C++ string .Library headers </P>
+
+<P>#include &lt;cstring&gt; .string constant </P>
+
+<P>const char* hello = &quot;hello&quot;; </P>
+
+<P>.length </P>
+
+<P>strlen(hello);//5 </P>
+
+<P>.does not include NULL terminator </P>
+
+<P>.Library headers </P>
+
+<P>#include &lt;string&gt; .string constant </P>
+
+<P>const string hello = &quot;hello&quot;; </P>
+
+<P>.length </P>
+
+<P>hello.length();//5 </P>
+
+<P>52 </P>
+
+<P>C strings vs. C++ strings C string C++ string .local variable </P>
+
+<P>const int MAXSIZE=1024; char s[MAXSIZE]; </P>
+
+<P>.copy </P>
+
+<P>strcpy(s, hello); </P>
+
+<P>.local variable </P>
+
+<P>string s; </P>
+
+<P>.copy </P>
+
+<P>s = hello; </P>
+
+<P>53 
+C strings vs. C++ strings 
+C string 
+C++ string 
+.index 
+</P>
+
+<P>hello[1];//’e’ 
+</P>
+
+<P>.concatenate 
+</P>
+
+<P>const char* world = 
+&quot; world&quot;; 
+char message[MAXSIZE]; 
+strcpy(message, hello); 
+strcat(message, world); 
+//“hello world" 
+.index 
+</P>
+
+<P>hello[1];//’e’ </P>
+
+<P>.concatenate </P>
+
+<P>string message = hello + &quot; world&quot;; //“hello world&quot; </P>
+
+<P>54 </P>
+
+<P>C strings vs. C++ strings C string C++ string .compare </P>
+
+<P>if (strcmp(a,b) == 0) </P>
+
+<P>// do something .convert to C++ string </P>
+
+<P>string cpp_str = hello; .compare </P>
+
+<P>if (a == b) </P>
+
+<P>// do something .convert to C string </P>
+
+<P>char c_str[MAXSIZE]; strcpy(c_str, </P>
+
+<P>message.c_str()); </P>
+
+<P>55 </P>
+
+<P>Pointer Arithmetic 
+</P>
+
+<P>.Remember that both of the following expressions are examples of 
+pointer arithmetic: 
+</P>
+
+<P>array[3] *(array+3) 
+</P>
+
+<P>.Recall that an address is a location in memory. 
+.Each byte in memory has a distinct address – that is, C++ is byte-
+addressable. 
+.Every type has a “size” associated with it; the number of bytes of 
+memory required to hold an object of that type. 
+.The language standard does not guarantee much in the way of sizes. 
+.For example, an “int” could be four bytes with one version of the 
+compiler, and eight bytes on another version. 
+</P>
+
+<P>56 
+</P>
+
+<P>Type Sizes 
+</P>
+
+<P>.The amount of memory assigned to a data type is a source of 
+innumerable “portability bugs” in programs. 
+.For example, suppose someone writes a program that assumes that 
+all “ints” are 8 bytes long. If that program is compiled on a 4-byteint compiler, it is likely to break, if it compiles at all. 
+.There are some guarantees, however: 
+.A “char” is always one byte. 
+.A “short” is always at least as big as a char. 
+.An int is always at least as big as a short. 
+.A long is always at least as big as an int. 
+</P>
+
+<P>.However, while a “char” is always one byte, the restrictions on byte 
+are strange: it must have at least eight bits, but could have more! 
+</P>
+
+<P>57 
+</P>
+
+<P>Type Sizes 
+</P>
+
+<P>.Since the sizes of types are not fixed, C++ provides an operator that 
+you can use to determine the size of something, in bytes. For 
+example: 
+</P>
+
+<P>sizeof(int) 
+</P>
+
+<P> tells you the number of bytes required to store an int. </P>
+
+<P>.This is very useful for pointer arithmetic. Suppose we have two arrays, one of chars and one of ints. (assume ints are four bytes long.) </P>
+
+<P>int ai[2]; </P>
+
+<P>char ac[2]; 58 </P>
+
+<P>Type Sizes </P>
+
+<P>.If ai starts on address 100, it will end at address 107. If ac is placed right after ai, it will start at address 108 and end at address 109 (decimal): .If you print out the value of ai, you’ll find it to be 100; ac would be 108. </P>
+
+<P>59 int ai[2]; char ac[2]; </P>
+
+<P>100: ai[0] </P>
+
+<P>104: ai[1] </P>
+
+<P>108: ac[0] </P>
+
+<P>109: ac[1] </P>
+
+<P>110: ????? </P>
+
+<P>Type Sizes </P>
+
+<P>.Now, recall that if a is an array, and i is an int, the following two expressions are equivalent: </P>
+
+<P>a[i] *(a + i) .This seems strange, because the elements in </P>
+
+<P>ac and ai are different sizes! The intuition is a+i should be a pointer value that points to the object a[i]. .The sizeof() operator makes this happen. Since all pointers point to some specific type, and the compiler knows how big each type is, it can add the appropriate value to the pointer to get the right answer. </P>
+
+<P>60 </P>
+
+<P>int ai[2]; </P>
+
+<P>char ac[2]; </P>
+
+<P>100: ai[0] </P>
+
+<P>104: ai[1] </P>
+
+<P>108: ac[0] </P>
+
+<P>109: ac[1] </P>
+
+<P>110: ????? </P>
+
+<P>Type Sizes 
+</P>
+
+<P>.ai+1 “advances” the pointer ai to 
+point to ai[1] 
+.Its value is 104 
+(100+sizeof(int)) 
+.ac+1 “advances” the pointer ac to 
+point to ac[1] 
+.Its value is 109 
+(108+sizeof(char)) 
+</P>
+
+<P>61 
+</P>
+
+<P>int ai[2]; 
+</P>
+
+<P>char ac[2]; 
+</P>
+
+<P>100: ai[0] </P>
+
+<P>104: ai[1] </P>
+
+<P>108: ac[0] </P>
+
+<P>109: ac[1] 110: ????? </P>
+
+<P>ai+1 ac+1 </P>
+
+<P>Pointer Exercise: Code these 
+//REQUIRES: &quot;a&quot; points to an array of length &quot;size" 
+//EFFECTS: Returns a pointer to the first 
+// occurrence of &quot;search&quot; in &quot;a&quot;. 
+// Returns NULL if not found. 
+int *find (int *a, unsigned int size, int search); 
+</P>
+
+<P>//REQUIRES: &quot;s&quot; is a NULL-terminated C-string 
+//EFFECTS: Returns a pointer to the first 
+// occurrence of &quot;search&quot; in &quot;s&quot;. 
+// Returns NULL if not found. 
+char *strchr (char *s, char search); 
+62 
+Do not use array indexing, e.g., a[i] or *(a+i) 
+</P>
+</TaggedPDF-doc>

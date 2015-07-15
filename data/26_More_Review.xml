@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:49:04-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:49:04-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:49:04-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">26_More_Review.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:1c9e7ee9-1274-4ed0-bf38-858b51aa0794</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:ebb7f5ea-35d1-49d2-8758-9c1b6c82fad5</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="26_More_Review.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>Final Review Problems #2 
+Slides by Atul Prakash 
+</P>
+
+<P>P1: Setup 
+class Shape { 
+public: 
+virtualdouble area() const= 0; 
+virtualvoid print() const= 0; 
+}; 
+Shape is abstract. Others are not. 
+Triangle 
+Isosceles 
+Equilateral 
+Rectangle 
+Shape 
+</P>
+
+<P>Basic questions 
+</P>
+
+<P>•Which of the following would be legal C++ statements, assuming that concrete classes have a default constructor? </P>
+
+<L>
+<LI>
+<Lbl>(a)</Lbl>
+
+<LBody> Shape s; </LBody>
+</LI>
+
+<LI>
+<Lbl>(b)</Lbl>
+
+<LBody> Shape *s; </LBody>
+</LI>
+
+<LI>
+<Lbl>(c)</Lbl>
+
+<LBody> Rectangle r; </LBody>
+</LI>
+
+<LI>
+<Lbl>(d)</Lbl>
+
+<LBody> Rectangle *r; </LBody>
+</LI>
+
+<LI>
+<Lbl>(e)</Lbl>
+
+<LBody> Shape *s = new Rectangle; </LBody>
+</LI>
+
+<LI>
+<Lbl>(f)</Lbl>
+
+<LBody> Isosceles*i= new Triangle; </LBody>
+</LI>
+
+<LI>
+<Lbl>(g)</Lbl>
+
+<LBody> Isosceles *t = new Equilateral; </LBody>
+</LI>
+</L>
+
+<P>P2: Setup </P>
+
+<P>class Shape { 
+private: 
+intx, y; // position coordinates 
+public: 
+Shape() {x = 0; y = 0;} 
+virtual double area() const= 0; 
+virtual void print() const= 0; 
+virtual void printposition() { 
+cout&lt;&lt; “Position: “ &lt;&lt; x &lt;&lt; “ “ &lt;&lt; y &lt;&lt; endl; 
+} 
+}; 
+Triangle 
+Isosceles 
+Equilateral 
+Rectangle 
+Shape 
+</P>
+
+<P>Questions 
+</P>
+
+<P>(a)Is the Shape class definition legal C++ code? 
+(b)If so, is it an abstract class? 
+(c)If so, identify the pure virtual functions in the 
+class. 
+(d)Can the constructors be declared as virtual or 
+pure virtual? 
+</P>
+
+<P>Questions 
+</P>
+
+<P>•See the class Shape code for P2. Which of the following would be legal C++ statements? </P>
+
+<L>
+<LI>
+<Lbl>(a)</Lbl>
+
+<LBody> Shape s; </LBody>
+</LI>
+
+<LI>
+<Lbl>(b)</Lbl>
+
+<LBody> Shape *s; </LBody>
+</LI>
+
+<LI>
+<Lbl>(c)</Lbl>
+
+<LBody> Rectangle r; </LBody>
+</LI>
+
+<LI>
+<Lbl>(d)</Lbl>
+
+<LBody> Rectangle *r; </LBody>
+</LI>
+
+<LI>
+<Lbl>(e)</Lbl>
+
+<LBody> Shape *s = new Rectangle; </LBody>
+</LI>
+
+<LI>
+<Lbl>(f)</Lbl>
+
+<LBody> Shape sarray[10]; </LBody>
+</LI>
+
+<LI>
+<Lbl>(g)</Lbl>
+
+<LBody> Shape *sptrarray[10]; </LBody>
+</LI>
+</L>
+
+<P>P3 </P>
+
+<P>Rectangle r(2,4); </P>
+
+<P>Isosceles iarray[3]; </P>
+
+<P>Equilateral e(5); </P>
+
+<P>constintSIZE=1000; </P>
+
+<P>Shape * shapes[SIZE]; </P>
+
+<P>shapes[0] = &amp;r; </P>
+
+<P>shapes[1] = &amp;iarray[0]; </P>
+
+<P>shapes[2] = &amp;e; </P>
+
+<P>Exercise: What is the compile-time 
+(static) type of the following and 
+what is its run-time (dynamic) type? 
+If something is illegal, indicate so: 
+</P>
+
+<P>(a)shapes 
+(b)*shapes 
+(c)**shapes 
+(d)*(shapes[0]) 
+(e)(shapes + 1) 
+(f)*(shapes + 1) 
+(g)**(shapes + 1) 
+(h)(*(shapes + 1)) + 1 
+(i)shapes[1] 
+(j)*shapes[2] 
+</P>
+
+<P>P4 
+Rectangle r(2,4); 
+Isosceles i(1,12); 
+</P>
+
+<P>Equilateral e(5); 
+constintSIZE=1000; 
+Shape * shapes[SIZE]; 
+intnumFilled; // Number of filled locations. 
+shapes[0] = &amp;r; 
+shapes[1] = &amp;i; 
+shapes[2] = &amp;e; 
+numFilled= 3; 
+Exercise: write a for-loop 
+</P>
+
+<P>to call print()on each shape in the array. Use traversal by pointer. </P>
+
+<P>One Solution 
+Shape * shapes[SIZE]; 
+//fill array 
+for (Shape **i=shapes; i&lt;shapes+numFilled; ++i) { 
+Shape *s_ptr= *i; 
+s_ptr-&gt;print(); 
+} 
+Because everything in the array 
+</P>
+
+<P>is a Shape, we can call any Shapefunction on them. Polymorphism does the magic since print() is virtual. </P>
+
+<P>Need a pointer-to-pointer to </P>
+
+<P>traverse an array of pointers Dereference pointer-to-pointer gives us a pointer </P>
+
+<P>Another Solution Shape * shapes[SIZE]; //fill array </P>
+
+<P>for (Shape **i=shapes; i&lt;shapes+SIZE; ++i) { 
+(**i).print(); 
+} 
+Another way to do it: double 
+</P>
+
+<P>dereference 
+</P>
+
+<P>Yet another solution (array notation) 
+Shape * shapes[SIZE]; 
+//fill array 
+for (inti= 0; i&lt; numFilled; ++i) { 
+shapes[i]-&gt;print(); 
+} 
+Because everything in the array 
+</P>
+
+<P>is a Shape, we can call any Shapefunction on them. Polymorphism does the magic since print() is virtual. </P>
+
+<P>Using an array index shapes[i] gives us the pointer to a shape </P>
+
+<P>P5 </P>
+
+<P>•Modify the Shape and Rectangle class so that the following code works. This is tricky to do. You need to define the &lt;&lt; operator on Shape and Rectangle, but the problem is that Shape is an abstract class. </P>
+
+<P>constintSIZE = 3; 
+Shape *shapes[SIZE]; 
+shapes[0] = new Rectangle(3, 4); 
+shapes[1] = new Rectangle(4, 5); 
+for (inti= 0; i&lt; SIZE; ++i) { 
+</P>
+
+<P>cout&lt;&lt; *(shapes[i]) &lt;&lt; endl; 
+} 
+</P>
+
+<P>P6 
+Rectangle r1(2,4); 
+Rectangle r2(3, 5); 
+constintSIZE=3; 
+Shape * shapes[SIZE]; 
+shapes[0] = &amp;r1; 
+shapes[1] = &amp;r2; 
+Are following legal? If so, what happens? 
+(a)shapes[1] = shapes[0]; 
+</P>
+
+<P>(b)*shapes[1] = *shapes[0]; 
+</P>
+
+<P>P6 
+Rectangle r1(2,4); 
+Rectangle r2(3, 5); 
+constintSIZE=3; 
+Shape * shapes[SIZE]; 
+shapes[0] = &amp;r1; 
+shapes[1] = &amp;r2; 
+Are following legal? If so, what happens? 
+(a)shapes[1] = shapes[0]; 
+</P>
+
+<P>(b)*shapes[1] = *shapes[0]; 
+</P>
+
+<P>P7 
+</P>
+
+<P>•Write the signature of the constructor or overloaded operator that is invoked in the following situations: </P>
+
+<P>a.Rectangle r1(3.0, 4.1); </P>
+
+<P>b.Rectangle r2; 
+c.r2 = r1; 
+d.Rectangle r3 = r1; 
+e.Rectangle r4(r2); 
+f.cout&lt;&lt; r4 &lt;&lt; endl; 
+g.Rectangle *r5 = &amp;r1; 
+</P>
+
+<P>P8 
+class List { 
+private: 
+Node *first; // Invariant: 0 if list is empty. 
+structNode { 
+intdatum; 
+Node *next; // Invariant: 0 for the last node in the list. 
+}; 
+public: 
+… 
+}; 
+Add a public member function that removes all odd values from the list. The signature 
+</P>
+
+<P>is as follows. 
+void List::removeodds(); 
+</P>
+</TaggedPDF-doc>

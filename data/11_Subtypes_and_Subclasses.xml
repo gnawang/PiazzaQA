@@ -1,0 +1,810 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:49-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:49-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:49-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">11_Subtypes_and_Subclasses.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:287a1b2c-5ce8-4121-b03a-a1deeb47ab77</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:f213f6be-4cbb-4539-b9e7-c0a401ddb492</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="11_Subtypes_and_Subclasses.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280Programming and Introductory Data Structures </P>
+
+<P>blockM-dearborn Subtypes and Subclasses Slides by Andrew DeOrio </P>
+
+<P>Flatland and Triangles </P>
+
+<P>.Recall Flatland, where the characters are geometric shapes .Characters with similar social status havesimilar shapes –remember, Flatland is asatire .Soldiers are isosceles triangles with sharp points .Craftsmen are equilateral triangles .Recall that we used the C++ classmechanism to represent a triangle, creating a new typeclass Triangle {/*...*/}; </P>
+
+<P>craftsman 
+soldier 
+</P>
+
+<P>Recap: Triangle ADT 
+class Triangle { 
+private: 
+double a,b,c; //edge lengths represent a triangle 
+double acute; //measure of smallest angle 
+public: 
+//EFFECTS: creates a zero size Triangle 
+Triangle(); 
+//REQUIRES: a,b,care non-negative and form a triangle 
+//EFFECTS:creates a Triangle with given edge lengths 
+Triangle(double a_in, double b_in, double c_in); 
+//... 
+</P>
+
+<P>Recap: Triangle ADT 
+class Triangle { 
+</P>
+
+<P>//... 
+//EFFECTS: returns the area 
+double area() const; 
+//EFFECTS: prints edge lengths 
+void print() const; 
+//EFFECTS: returns smallest angle, in radians 
+double get_acute(); 
+//... 
+</P>
+
+<P>Recap: Triangle ADT 
+class Triangle { 
+//... 
+//EFFECTS: sets edge lengths 
+void set_a(double a_in); 
+void set_b(double b_in); 
+void set_c(double c_in); 
+//EFFECTS: returns edge length 
+double get_a() const; 
+double get_b() const; 
+double get_c() const; 
+}; 
+</P>
+
+<P>Recap: Triangle ADT 
+.Recall our program to count the craftsmen in Flatland 
+</P>
+
+<P>Triangle census[SIZE]; 
+//fill with Flatland’s inhabitants 
+intnum_craftsmen= 0; 
+for (Triangle*t=census; t&lt;census+SIZE; ++t) 
+</P>
+
+<P>if (t-&gt;get_acute() &gt; 1.0384709) num_craftsmen+= 1; cout&lt;&lt; num_craftsmen&lt;&lt; endl; Flatland.cpp </P>
+
+<P>Flatland and Triangles </P>
+
+<P>.In Flatland, soldiers and craftsmen have something in common: they are both workers, represented by triangles. .We can represent this kind of relationship between two C++ classes with a derived class .Other terms for a derived class (type) are inherited classor subclass .Let’s create derived classes for an isosceles triangle and an equilateral triangle </P>
+
+<P>craftsman 
+soldier 
+</P>
+
+<P>Derived classes 
+class Isosceles : public Triangle{ 
+//OVERVIEW: a geometric representation of an//isosceles triangle with edge a representing//the base, and b=c the legs 
+//... 
+}; 
+.This creates a new type called Isoscelesthat contains all of 
+</P>
+
+<P>the Trianglemember functions and member data 
+</P>
+
+<P>.Think of this as an “is a” relationshipan Isoscelesis aTriangle 
+</P>
+
+<P>Class hierarchy 
+</P>
+
+<P>.Derivation is often represented by a graph, where each vertex is a class, and each edge shows derivation </P>
+
+<P>Triangle </P>
+
+<P>Isosceles 
+base class 
+AKA parent class 
+AKA superclass 
+derived class 
+AKA child class 
+AKA inherited classAKA subclass 
+derives from 
+AKA inherits from 
+</P>
+
+<P>Using derived classes 
+.Now we can define an Isoscelesobject 
+</P>
+
+<P>intmain() { 
+Isosceles soldier; 
+} 
+.Because member variables are inherited, the compiler allocates 
+</P>
+
+<P>memory for each one 
+</P>
+
+<P>a 
+b 
+</P>
+
+<P>Isosceles 
+acute 
+class Triangle { 
+private: 
+double a,b,c; 
+double acute; 
+//... 
+</P>
+
+<P>Using derived classes </P>
+
+<P>.We call member functions just like we did with the base class .Because member functions are inherited, we do not need to rewrite them (copy paste avoided!) </P>
+
+<P>intmain() { 
+Isosceles soldier; 
+soldier.set_a(1); 
+soldier.set_b(11); 
+soldier.set_c(11); 
+soldier.print(); 
+cout&lt;&lt; &quot;area=&quot; &lt;&lt; soldier.area() &lt;&lt; endl; 
+} 
+$ ./a.out 
+a=1 b=11 c=11 
+area=5.49432 
+</P>
+
+<P>Adding member variables 
+</P>
+
+<P>.In addition to the inherited member variables, we can extra member variables .Let's add extra member variables to Isoscelesto store the baseand legedge lengths </P>
+
+<P>class Isosceles : public Triangle { 
+private: 
+double base, leg; //new member variables 
+}; 
+</P>
+
+<P>Adding member variables 
+</P>
+
+<P>.Now, we get memory for the member variables inherited from Triangle, plus the two added member variables </P>
+
+<P>intmain() { Isosceles i; } </P>
+
+<P>inherited from </P>
+
+<P>Triangle 
+added by 
+Isosceles 
+</P>
+
+<P>class Isosceles : public 
+Triangle { 
+private: 
+double base, leg; 
+}; 
+class Triangle { 
+private: 
+double a,b,c; 
+double acute; 
+}; 
+a 
+b 
+</P>
+
+<P>Isosceles 
+acute 
+base 
+leg 
+</P>
+
+<P>Adding member functions 
+</P>
+
+<P>.In our example, this seems wasteful, since we already have a, band cto store the edge lengths .Instead, let's add member functions to change the base and legs </P>
+
+<P>class Isosceles : public Triangle { 
+private: 
+double base, leg; 
+public: 
+//EFFECTS: sets base (edge a) 
+void set_base(double base); 
+//EFFECTS: sets legs (edges b and c) 
+void set_leg(double leg); 
+}; 
+Exercise: implement 
+</P>
+
+<P>these two functions 
+</P>
+
+<P>Adding member functions 
+.Solution 1: set the member variables directly 
+</P>
+
+<P>class Isosceles : public Triangle { 
+public: 
+//EFFECTS: sets base (edge a) 
+void set_base(double base) { 
+a = base; 
+} 
+//EFFECTS: sets legs (edges b and c) 
+void set_leg(double leg) { 
+b = c = leg; 
+} 
+</P>
+
+<P>}; </P>
+
+<P>Adding member functions </P>
+
+<P>.Problem: a, band care private members of Triangle, and derived classes cannot access privatemember variables of a base class </P>
+
+<P>class Isosceles : public Triangle { 
+public: 
+//EFFECTS: sets base (edge a) 
+void set_base(double base) { 
+a= base; //compile error 
+} 
+//EFFECTS: sets legs (edges b and c) 
+void set_leg(double leg) { 
+b= c= leg; //compile error 
+} 
+}; 
+class Triangle { 
+//... 
+private: 
+double a,b,c; 
+}; 
+</P>
+
+<P>Adding member functions 
+.Solution 2: use set_*()functions inherited from Triangle 
+</P>
+
+<P>class Isosceles : public Triangle { 
+</P>
+
+<P>public: 
+//EFFECTS: sets base (edge a) 
+void set_base(double base) { 
+set_a(base); 
+} 
+//EFFECTS: sets legs (edges b and c) 
+void set_leg(double leg) { 
+set_b(leg); 
+set_c(leg); 
+} 
+}; 
+</P>
+
+<P>Adding member functions 
+</P>
+
+<P>.Now, we can call our new Isoscelesmember functions, in addition to the inherited member functions </P>
+
+<P>intmain() { Isosceles soldier; solider.set_base(1); //additional member function soldier.set_leg(11); //additional member function soldier.print(); //inherited member function } $ ./a.out a=1 b=11 c=11 </P>
+
+<P>Derived class constructors .Constructors are notinherited, so let’s add one </P>
+
+<P>class Isosceles : public Triangle { 
+//... 
+//EFFECTS: creates a zero size Isosceles triangle 
+Isosceles(); 
+}; 
+</P>
+
+<P>Exercise: derived class ctors 
+</P>
+
+<P>.What is wrong with these implementations? .Hint: think like a compiler, think about efficiency </P>
+
+<P>Isosceles() { 
+a = b = c = 0; 
+acute = -1; 
+} 
+Isosceles() { 
+set_a(0); 
+set_b(0); 
+set_c(0); 
+} 
+Isosceles() { 
+Triangle(); 
+} 
+</P>
+
+<P>Derived class constructors 
+class Isosceles : public Triangle { 
+//... 
+//EFFECTS: creates a zero size Isosceles triangle 
+Isosceles() {} 
+</P>
+
+<P>}; 
+</P>
+
+<P>.Solution: do nothing! 
+.Constructors run automatically, starting with the base class 
+</P>
+
+<P>Derived class constructors intmain() { Isosceles i; } .First, Triangleconstructor runs </P>
+
+<P>.Second, Isoscelesconstructor runs </P>
+
+<P>.In the end, we get an initialized chunk of memory like this: </P>
+
+<P>a b c 0 0 0 Isosceles acute -1 Triangle() : a(0), b(0), c(0), acute(-1.0) {} Isosceles() {} </P>
+
+<P>Derived class constructors .Next, let's add a custom constructor to set the base and legs </P>
+
+<P>class Isosceles : public Triangle { 
+//... 
+//REQUIRES: base and leg are non-negative and 
+</P>
+
+<P>// form an isosceles triangle 
+//EFFECTS: creates an Isosceles triangle with 
+// given edge lengths 
+Isosceles(double base, double leg); 
+}; 
+</P>
+
+<P>Derived class constructors 
+.Next, let's add a custom constructor to set the base and legs 
+</P>
+
+<P>class Isosceles : public Triangle { 
+//... 
+//REQUIRES: base and leg are non-negative and 
+</P>
+
+<P>// form an isosceles triangle 
+//EFFECTS: creates an Isosceles triangle with 
+// given edge lengths 
+Isosceles(double base, double leg) 
+: Triangle(base, leg, leg){} 
+}; 
+.Solution: reuse constructor from base class 
+</P>
+
+<P>.Initializer lists are the onlyway to call a base class constructor 
+</P>
+
+<P>from a derived class constructor </P>
+
+<P>Constructors: common pitfall </P>
+
+<P>class Isosceles : public Triangle { 
+//... 
+Isosceles(double base, double leg) { 
+Triangle(base, leg, leg);//bad 
+} 
+}; 
+.Pitfall: calling the base class constructor insidethe derived 
+</P>
+
+<P>class constructor, but outsidethe initializer list .This creates a new, anonymous Triangleobject, which is a local variable without a name inside the Isoscelesconstructor .Usually not what you intended! </P>
+
+<P>Exercise: constructors 
+intmain { 
+Isosceles worker(0.9, 8); 
+} 
+.Which constructors run? 
+</P>
+
+<P>.Specify the exact constructors, arguments, and order 
+</P>
+
+<P>Member functions from base class 
+.What is wrong with this code? 
+</P>
+
+<P>Isosceles soldier(1,11); 
+soldier.print(); 
+soldier.set_b(11.1); 
+soldier.print(); 
+</P>
+
+<P>Member functions from base class 
+.What is wrong with this code? 
+</P>
+
+<P>Isosceles soldier(1,11); soldier.print(); soldier.set_b(11.1); soldier.print(); .Problem: </P>
+
+<P>.soldieris no longer an isosceles triangle! </P>
+
+<P>11 </P>
+
+<P>11.1 </P>
+
+<P>Representation invariant </P>
+
+<P>.The Isoscelesrepresentation invarianthas been broken .The representation invariantconstrains the member variables .You can think of the representation invariant as a sanity-check for the class .Triangleinvariant: a, b, and cform a triangle .Long edge is less than the sum of both short edges </P>
+
+<P>.Isoscelesinvariant: baseand 2 legedges form an isosceles triangle .Base is less than sum of two legs .Legs are equal </P>
+
+<P>Member functions from base class 
+.What is wrong with this code? 
+</P>
+
+<P>Isosceles soldier(1,11); 
+soldier.print(); 
+soldier.set_b(11.1); 
+soldier.print(); 
+.Solution: change set_b()implementation 
+</P>
+
+<P>only in Isoscelesderived class .This is called a function override </P>
+
+<P>1 11 </P>
+
+<P>11.1 </P>
+
+<P>Override vs. Overload </P>
+
+<P>.A function overrideis where a derived class has a function 
+with the same name and prototype as the parentTriangle::set_b(double b_in); 
+Isosceles::set_b(double b_in); 
+.A function overloadis where a single class has two different 
+functions with the same name, but different prototypesTriangle::Triangle(); 
+Triangle::Triangle(double a_in, 
+double b_in, 
+double c_in); 
+</P>
+
+<P>Overriding member functions 
+</P>
+
+<P>.Override set_b()and set_c()to set both legs of the 
+triangle, maintaining the Isoscelesrepresentation invariant 
+</P>
+
+<P>class Isosceles : public Triangle { 
+//... 
+//REQUIRES: a, b, c, are non-negative and form 
+</P>
+
+<P>// an isosceles triangle 
+//MODIFIES: this 
+//EFFECTS: set edge lengths 
+void set_b(double b_in) { b = c = b_in; } 
+void set_c(double c_in) { b = c = c_in; } 
+}; 
+</P>
+
+<P>Overriding member functions 
+</P>
+
+<P>.Problem: Isoscelescan’t modify a, bor c, because they are privatemembers of Triangle .We have seen this before .Bad solution: protectedmembers </P>
+
+<P>class Isosceles : public Triangle { 
+//... 
+void set_b(double b_in) { b= c = b_in; } 
+void set_c(double c_in) { b =c = c_in; } 
+}; 
+class Triangle { 
+//... 
+private: 
+double a,b,c; 
+}; 
+</P>
+
+<P>protected members 
+class Triangle { 
+public: 
+//member functions ... 
+protected: 
+//edge lengths represent a triangle 
+double a,b,c; 
+}; 
+.protectedmembers can be seen by all members of this class 
+</P>
+
+<P>and any derived classes 
+</P>
+
+<P>public vs. private vs. protected 
+</P>
+
+<P>.public .Any code inside the class (member functions) or outside the class can access publicmembers </P>
+
+<P>.private .Only code inside the class (member functions) can access privatemembers </P>
+
+<P>.protected .Code inside the class (member functions) as well as derived classes (member functions of inherited classes) can access protectedmembers </P>
+
+<P>protected members 
+class Isosceles : public Triangle { 
+//... 
+void set_b(double b_in) { b = c = b_in; } 
+void set_c(double c_in) { b = c = c_in; } 
+}; 
+.Now, Isoscelesmember functions can modify a, band cbecause they are protectedmember variables of Triangle, 
+</P>
+
+<P>and Isoscelesis derived from Triangle 
+</P>
+
+<P>class Triangle { 
+//... 
+protected: 
+double a,b,c; 
+}; 
+</P>
+
+<P>Overriding member functions 
+</P>
+
+<P>.When a class overrides a function, the function in the derived class is called, not the base class </P>
+
+<P>Isoscelessoldier(1,11); soldier.print(); soldier.set_b(11.1); soldier.print(); $ ./a.out </P>
+
+<P>a=1 b=11 c=11 a=1 b=11.1c=11.1 Isosceles::set_b()runs, </P>
+
+<P>not Triangle::set_b() This is what we want . </P>
+
+<P>Problems with protected </P>
+
+<P>.Problem: Triangle::get_acute()cachesthe acute angle, computing only once, and using the cached value many times </P>
+
+<P>Isoscelessoldier(1,11); 
+soldier.print(); 
+cout&lt;&lt; &quot;acute=&quot; &lt;&lt; soldier.get_acute() &lt;&lt; endl; 
+soldier.set_b(11.1); 
+soldier.print(); 
+cout&lt;&lt; &quot;acute=&quot; &lt;&lt; soldier.get_acute() &lt;&lt; endl; 
+$ ./a.out 
+a=1 b=11 c=11 
+acute=0.0909404 
+a=1 b=11.1 c=11.1 
+acute=0.0909404 
+Edge length changed, 
+</P>
+
+<P>angle should have 
+changed too! 
+</P>
+
+<P>Problems with protected 
+</P>
+
+<P>.Problem: Triangle::get_acute()cachesthe acute angle, 
+computing only once, and using the cached value many times 
+</P>
+
+<P>.Triangle::set_b()flagged the cached acutemember 
+variable to be recomputedvoid Triangle::set_b(double b_in) { 
+b = b_in; 
+acute = -1.0; 
+} 
+</P>
+
+<P>.Isosceles::set_b()does notvoid Isosceles::set_b(double b_in) { 
+b = c = b_in; 
+} 
+</P>
+
+<P>Problems with protected 
+.Solution: forget protected member variables 
+</P>
+
+<P>class Triangle { 
+private: protected: 
+double a,b,c; 
+}; 
+.Let's just reuse Triangle::set_b(), which correctly flags the 
+</P>
+
+<P>cached acutemember variable to be recomputed 
+</P>
+
+<P>class Isosceles : public Triangle { 
+//... 
+void set_b(double b_in) { 
+Triangle::set_b(b_in); 
+Triangle::set_c(b_in); 
+} 
+}; 
+</P>
+
+<P>Scope resolution operator (::) 
+</P>
+
+<P>.Use the scope resolution operator (::) to call the set_b()and set_c() functions inherited from Triangleinstead of Isosceles </P>
+
+<P>class Isosceles : public Triangle { 
+//... 
+void set_b(double b_in) { 
+Triangle::set_b(b_in); 
+Triangle::set_c(b_in); 
+</P>
+
+<P>} </P>
+
+<P>}; </P>
+
+<P>Subtypes: Introduction </P>
+
+<P>.Isosceleshas a special property: any code that expects a Trianglewill work correctly with an Isoscelesobject .Put another way: we can replace any Triangleobject in a program with an Isoscelesobject and the program will still work </P>
+
+<P>Subtypes: Introduction </P>
+
+<P>.Recall our program to count the craftsmen in Flatland .We can substitute our new data type Isoscelesin place of Trianglein our old program, and it still works </P>
+
+<P>IsoscelesTrianglecensus[SIZE]; </P>
+
+<P>//fill with Flatland’s inhabitants </P>
+
+<P>intnum_craftsmen= 0; </P>
+
+<P>for (Isosceles*t=census; t&lt;census+SIZE; ++t) </P>
+
+<P>if (t-&gt;get_acute() &gt; 1.0384709) </P>
+
+<P>num_craftsmen+= 1; </P>
+
+<P>cout&lt;&lt; num_craftsmen&lt;&lt; endl; </P>
+
+<P>Flatland.cpp </P>
+
+<P>LiskovSubstitution Principle </P>
+
+<P>.If S is a subtypeof T, then objects of type T may be replaced with objects of type S without altering any of the desirable properties of that program (correctness) In other words: For any instance where an object of type T is expected, an object of type S can be supplied without changing the correctness of the original computation </P>
+
+<P>.This is called the Liskovsubstitution principle Barbara Liskov, MIT </P>
+
+<P>LiskovSubstitution Principle </P>
+
+<P>.The C++, subtypes can be created with derived classes 
+.However, not all derived types (classes) are subtypes! 
+.In our Flatland example, Isoscelesis a derived type (class) 
+because it inherits from Triangleclass Isosceles : public Triangle { //... 
+.Isoscelesis also a subtypebecause it fulfills the LiskovSubstitution Principle 
+</P>
+
+<P>Triangle Isosceles base class derived class supertype subtype C++ inheritance fulfills Liskovsubstitution principle </P>
+
+<P>LiskovSubstitution Principle </P>
+
+<P>.For a derived type to also be a subtype, code written to correctly use the supertypemust still be correct if it uses the subtype .This is true of our Flatland example .It is helpful to remember that Isoscelesis aTriangle, so we can use an Isoscelesin place of a Triangle </P>
+
+<P>LiskovSubstitution Principle </P>
+
+<P>.For a derived type to also be a subtype, code written to correctly use the supertypemust still be correct if it uses the subtype </P>
+
+<P>IsoscelesTrianglecensus[SIZE]; //fill with Flatland’s inhabitants intnum_craftsmen= 0; for (Isosceles*t=census; t&lt;census+SIZE; ++t) </P>
+
+<P>if (t-&gt;get_acute() &gt; 1.0384709) </P>
+
+<P>num_craftsmen+= 1; </P>
+
+<P>cout&lt;&lt; num_craftsmen&lt;&lt; endl; </P>
+
+<P>Flatland.cpp </P>
+
+<P>How to create a subtype </P>
+
+<P>.With Abstract Data Types, there are three ways to create a subtype from a derived type 1.Weaken the precondition of one or more operations 2.Strengthen the postconditionof one or more operations 3.Add one or more operations </P>
+
+<P>How to create a subtype </P>
+
+<P>.#1 and #2 apply to overridden functions 1.Weaken the precondition of one or more operations .The overridden member function must require no more of the caller than the old method did, but it can require less </P>
+
+<P>2.Strengthen the postconditionof one or more operations .The overridden member function must do everything the old function did, but it is allowed to do more as well </P>
+
+<P>.Think of this as doing more with less </P>
+
+<P>Weaken precondition </P>
+
+<P>1.Weaken the precondition of one or more operations. .The overridden member function must require no more of the caller than the old method did, but it can require less </P>
+
+<P>.The preconditions of a method are formed by two things: .Its argument type signature .The REQUIRES clause </P>
+
+<P>//REQUIRES: b_inis non-negative and forms a // triangle with existing edges //MODIFIES: this //EFFECTS: sets edges b and c void Isosceles::set_b(double b_in) { Triangle::set_b(b_in); Triangle::set_c(b_in); } </P>
+
+<P>Weaken precondition </P>
+
+<P>.We can weaken the preconditions by requiring less .For example, allowing negative inputs .Take absolute value of any negative input </P>
+
+<P>//REQUIRES: b_inis non-negative andforms a // triangle with existing edges //MODIFIES: this //EFFECTS: sets edges b and c void Isosceles::set_b(double b_in) { b_in= abs(b_in); Triangle::set_b(b_in); Triangle::set_c(b_in); } </P>
+
+<P>Strengthen postcondition </P>
+
+<P>1.Strengthen the postconditionof one or more operations .The overridden member function must do everything the old function did, but it is allowed to do more as well </P>
+
+<P>.The postconditionsof a method are formed by two things: .Its return type signature .The EFFECTS clause </P>
+
+<P>//REQUIRES: b_inis non-negative and forms a // triangle with existing edges //MODIFIES: this //EFFECTS: sets edges b and c voidIsosceles::set_b(double b_in) { Triangle::set_b(b_in); Triangle::set_c(b_in); } </P>
+
+<P>Strengthen postcondition </P>
+
+<P>.We can strengthen the EFFECTS clause by promising everything we used to, plus extra .For example, Isoscelesoverrode the Triangle::set_b() function, to not only set b, but also c </P>
+
+<P>void Triangle::set_b(double b_in) { b = b_in; } void Isosceles::set_b(double b_in) { Triangle::set_b(b_in); //does everything Triangle did Triangle::set_c(b_in); //plus more } </P>
+
+<P>Add an operation </P>
+
+<P>.The final way of creating a subtype is to add a member function .Any code expecting only the old function will still see all of them, so the new function won't break old code .For example: </P>
+
+<P>class Isosceles : public Triangle { </P>
+
+<P>public: 
+//... 
+void set_base(double base){/*...*/} 
+void set_leg(double leg) {/*...*/} 
+}; 
+</P>
+
+<P>Subtype vs. subclass 
+</P>
+
+<P>.We get a derived type (subclass) any time we use inheritanceclass Isosceles : public Triangle {/*...*/}; .A derived type is a subtype only if it fulfills the LiskovSubstitution Principle .The only reason we had to worry about the substitution principle was because we could change the base class using its setfunctions </P>
+
+<P>Isosceles soldier(1,11); 
+soldier.set_b(11.1); 
+1 
+11 
+</P>
+
+<P>11.1 </P>
+
+<P>Exercise: equilateral triangle </P>
+
+<P>.Code an Equilateralclass representing an equilateral triangle .Declare a derived class .Draw the new class hierarchy .Write two constructors: one default, one with input .Override any necessary member functions </P>
+
+<P>a a a </P>
+</TaggedPDF-doc>

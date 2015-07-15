@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:48:44-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:48:44-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:48:44-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">06_Arrays_and_Pointers.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:325f0edf-bcf5-496f-b4cd-d16e45098bb0</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:b6b080c9-875d-4532-b5d2-15487a569f6e</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="06_Arrays_and_Pointers.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280 
+Programming and Introductory Data Structures 
+</P>
+
+<P>blockM-dearborn 
+Arrays and Pointers 
+</P>
+
+<P>Slides by Jeff Ringenberg, 
+</P>
+
+<P>Brian Noble and 
+</P>
+
+<P>Andrew DeOrio 
+</P>
+
+<P>1 
+Data types we've seen so far 
+</P>
+
+<P>.“atoms”: types with singleton values. 
+.For example, something of type “int” holds one “integer”. 
+.Something of type “char” holds one character. 
+</P>
+
+<P>.“aggregate” types: types that hold “sets” of values where each 
+value is of some type. 
+.When all values have the same type, we call it a “homogeneous” 
+aggregate, otherwise it is “heterogeneous”. 
+.These are sometimes also called “container” types, because they 
+contain other types. 
+.The two we've seen so far, in the context of project 2, are lists and trees: 
+each holds a collection of integers. 
+</P>
+
+<P>2 
+</P>
+
+<P>Revisiting lists 
+</P>
+
+<P>.Lists have an important restriction (i.e. you cannot talk about 
+an arbitrary element of a list). You can only talk about “the 
+first element” and “the rest of the list”. 
+.We say such a structure is “linked”; you have to move from 
+one link to the next. 
+.For example, suppose we have the following list: ( 1 2 3 4 ) 
+.To talk about element “4”, you have to call list_rest three times (to skip 
+past 1, 2, and 3), and then call list_first. 
+</P>
+
+<P>3 
+</P>
+
+<P>Revisiting lists 
+</P>
+
+<P>.Lists have an important advantage too: 
+.Because they are defined recursively, there is no &quot;maximum-sized&quot; list. 
+</P>
+
+<P>.A list can grow as large as it needs to be (assuming the 
+resources of the computer are infinite). 
+</P>
+
+<P>4 
+</P>
+
+<P>Arrays 
+.In contrast to a list, C++ has a structure called an array. 
+.An array is a fixed-sized, indexed, homogeneous aggregate 
+type (a collection of items, all of the same type.) 
+.To declare and define an array of four integers (the same size 
+as our list above), we would say the following: 
+</P>
+
+<P>int array[4]; 5 </P>
+
+<P>Defining arrays .For comparison purposes, let's also declare and define an integer, foo: </P>
+
+<P>int foo; int array[4]; </P>
+
+<P>.The environment that we get when we do this is: </P>
+
+<P>6 foo: array: </P>
+
+<P>Defining arrays int foo; int array[4]; </P>
+
+<P>.What are the contents of “array” after this declaration? </P>
+
+<P>foo: </P>
+
+<P>array: Initializing arrays </P>
+
+<P>.You can also initialize the contents of an array in one line – just like with an int. However, we need some sort of notation to specify a set of numbers: </P>
+
+<P>int foo = 7; </P>
+
+<P>int array[4] = { 1, 2, 3, 4 }; </P>
+
+<P>.The corresponding environment would look like this: </P>
+
+<P>9 foo: array: </P>
+
+<P>7 4 3 </P>
+
+<P>2 1 This is called a “static initializer”. </P>
+
+<P>Accessing array elements </P>
+
+<P>.You can access the contents of an array using an “index”. The index of the first array element is zero, the next is one, and so on. </P>
+
+<P>.So, we can name the individual elements of array, like so: </P>
+
+<P>10 
+</P>
+
+<P>foo: </P>
+
+<P>array: 7 4 </P>
+
+<P>3 
+2 
+1 array[0] 
+array[1] 
+array[2] 
+</P>
+
+<P>array[3] 
+</P>
+
+<P>Accessing array elements 
+</P>
+
+<P>.Each individual element is used just like a regular int, so all of the following are legal: </P>
+
+<P>11 </P>
+
+<P>foo: 
+array: 
+7 
+4 
+</P>
+
+<P>3 
+2 
+1 
+array[0] 
+array[1] 
+</P>
+
+<P>array[2] 
+array[3] 
+</P>
+
+<P>Accessing array elements 
+</P>
+
+<P>.Each individual element is used just like a regular int, so all of the following are legal: </P>
+
+<P> array[1] = 6; 
+</P>
+
+<P>12 
+foo: 
+array: 
+7 
+</P>
+
+<P>4 
+3 
+2 
+1 
+array[0] 
+array[1] 
+array[2] 
+array[3] 
+</P>
+
+<P>foo: 
+array: 
+7 
+4 
+3 
+6 
+1 
+array[0] 
+</P>
+
+<P>array[1] 
+array[2] 
+array[3] 
+</P>
+
+<P>Accessing array elements 
+</P>
+
+<P>.Each individual element is used just like a regular int, so all of the following are legal: </P>
+
+<P> array[1] = 6; 
+</P>
+
+<P>++array[1]; 
+13 
+foo: 
+array: 
+</P>
+
+<P>7 
+4 
+3 
+6 
+1 
+array[0] 
+array[1] 
+array[2] 
+</P>
+
+<P>array[3] 
+foo: 
+array: 
+7 
+4 
+3 
+7 
+1 array[0] 
+array[1] 
+array[2] 
+array[3] 
+</P>
+
+<P>Accessing array elements 
+</P>
+
+<P>.Each individual element is used just like a regular int, so all of the following are legal: </P>
+
+<P> array[1] = 6; 
+++array[1]; 
+array[0] = array[1]; 
+</P>
+
+<P>14 
+</P>
+
+<P>foo: 
+array: 
+7 
+4 
+3 
+7 
+1 
+array[0] 
+array[1] 
+</P>
+
+<P>array[2] 
+array[3] 
+foo: 
+array: 
+7 
+4 
+3 
+7 
+</P>
+
+<P>7 
+array[0] 
+array[1] 
+array[2] 
+array[3] 
+</P>
+
+<P>Passing arrays to functions 
+.C++ arrays can be passed as arguments to a function. 
+</P>
+
+<P>.Suppose we wanted to write a function to add up the contents of an array and we want it to work with any size array. .Here's what the declaration of such a function might look like: </P>
+
+<P>int sum(int a[], unsigned int size); // REQUIRES: there are at least size // elements in a[] // EFFECTS: returns the sum of the // first size elements of a[] </P>
+
+<P>15 Passing arrays to functions int sum(int a[], unsigned int size); // REQUIRES: there are at least size // elements in a[] // EFFECTS: returns the sum of the // first size elements of a[] </P>
+
+<P>.There are a few things to notice: 
+1.The declaration of the array argument does not specify the length of 
+the array. That allows the function to work for any length. 
+2.sum() needs to know how long the array actually is (or at least, how 
+many elements to “sum up”), so the second argument does this. 
+3.An unsigned int is used for size since it can’t be negative. A regular 
+int could be used, but then the REQUIRES clause would need to catch 
+cases of negative sizes. It’s better to write a complete function. 
+</P>
+
+<P>16 
+</P>
+
+<P>Passing arrays to functions 
+.The implementation of sum() might look something like this: 
+</P>
+
+<P>int sum(int a[], unsigned int size) { 
+unsigned int i; 
+int result = 0; 
+</P>
+
+<P> for (i=0; i&lt;size; ++i) { 
+result += a[i]; 
+} 
+return result; 
+</P>
+
+<P>} 
+</P>
+
+<P>.Unlike most types we've seen so far, C++ arrays are not passed by 
+value. They are passed by reference. 
+</P>
+
+<P>17 
+</P>
+
+<P>Arrays are passed by reference 
+</P>
+
+<P>.Recall that to pass something by reference, you pass a pointer 
+or reference to the actual object in the caller’s environment to 
+the callee, rather than copy its value. 
+.So, suppose sum() is called in our example above: 
+</P>
+
+<P>cout &lt;&lt; sum(array, 4); 
+</P>
+
+<P>.Rather than copy the entire array, C++ passes a reference to 
+the array to the function sum. 
+</P>
+
+<P>18 
+</P>
+
+<P>Arrays are passed by reference 
+.Here is what passing the array by reference looks like: 
+</P>
+
+<P>19 
+</P>
+
+<P>foo: 
+array: 
+7 
+4 
+</P>
+
+<P>3 7 7 </P>
+
+<P>sum() 0 4 </P>
+
+<P>a: size: </P>
+
+<P>i: result: </P>
+
+<P>Arrays are passed by reference 
+.Here is what passing the array by reference looks like: 
+</P>
+
+<P>20 foo: </P>
+
+<P>array: 7 4 </P>
+
+<P>3 7 7 </P>
+
+<P>sum() 0 4 </P>
+
+<P>a: size: </P>
+
+<P>i: </P>
+
+<P>result: </P>
+
+<P>So, when sum() says a[0], it refers to exactly the same memory location as array[0]! Exercise .Using the values below, what would the contents of array be after calling add_one(array,4)? </P>
+
+<P>void add_one(int a[], unsigned int size) { 
+unsigned int i; 
+for (i=0; i&lt;size; ++i) { 
+++a[i]; 
+} 
+</P>
+
+<P>} 
+</P>
+
+<P>21 
+</P>
+
+<P>foo: 
+array: 
+7 
+4 
+3 
+</P>
+
+<P>7 
+7 
+</P>
+
+<P>Exercise 
+.What's wrong with the following code? 
+</P>
+
+<P>int main() { 
+int array[1]; 
+array[1] = 6; 
+return array[1]; 
+</P>
+
+<P>} 
+23 
+</P>
+
+<P>Warning 
+</P>
+
+<P>.The C++ compiler DOES NOT CHECK to make sure that your array reference is legal. For example, rewriting add_one as follows compiles without any warnings at all! </P>
+
+<P>void add_one(int a[], unsigned int size) { </P>
+
+<P>for (unsigned int i=0; i&lt;=size; ++i) { </P>
+
+<P>++a[i]; </P>
+
+<P>} </P>
+
+<P>} </P>
+
+<P>.This changes each element in the array, plus some other random piece of 
+memory. This is REALLY NOT GOOD. 
+.Unfortunately, this sort of error is quite common – it is called a fencepost 
+error, or an off-by-one error. This is one reason why it is useful to consider 
+your iterative environments carefully. 
+</P>
+
+<P>25 
+Arrays and strings 
+</P>
+
+<P>.One very common use of arrays is as a representation of 
+strings. Most of you are probably familiar with C++-style 
+strings: 
+</P>
+
+<P>string foo; 
+</P>
+
+<P>.However, we will be talking about something quite a bit 
+simpler: C-style strings. 
+.A C-style string is an array of zero or more chars followed by a 
+NULL character – usually written as ‘\0’ 
+</P>
+
+<P>26 
+</P>
+
+<P>C-strings 
+</P>
+
+<P>.For example, the following is a C-style string: 
+</P>
+
+<P>char a[] = “foo”; 
+</P>
+
+<P>.This is the equivalent of: 
+</P>
+
+<P> a[0] = ‘f’ 
+a[1] = ‘o’ 
+a[2] = ‘o’ 
+a[3] = ‘\0’ // This is a fancy way of 
+// writing the value 0 
+</P>
+
+<P>27 
+</P>
+
+<P>C-strings 
+</P>
+
+<P>.This last character of a C-style string is a special character called NULL. There is no printable character equal to NULL, so it acts as a sentinel. </P>
+
+<P>sentinel: a special element value for an aggregate type that is </P>
+
+<P>1.not a legal value for an element of that aggregate and 2.signals the “end” of the aggregate. </P>
+
+<P>.This NULL character satisfies both conditions. This makes it easy to do something like count the number of characters in a string. </P>
+
+<P>28 </P>
+
+<P>a[3] = ‘\0’ Exercise .Write this function </P>
+
+<P>int strlen(char s[]) // REQUIRES: s is a NULL-terminated // C-string // EFFECTS: returns the length of s,  // not counting the NULL. For </P>
+
+<P>// example, strlen(“foo”) </P>
+
+<P>// returns 3. </P>
+
+<P>{ </P>
+
+<P>... </P>
+
+<P>} </P>
+
+<P>29 </P>
+
+<P>Thinking about memory </P>
+
+<P>.So far, we've been talking about environments like blobs of 
+state with objects in them. 
+.However, the computer needs a way to concretely name each 
+particular item of state, be it a variable or a procedure, since 
+each of these entities exists somewhere in the process’ 
+memory. 
+.Memory is a linear sequence of storage locations numbered 
+from 0 to a very large number. 
+</P>
+
+<P>31 
+0x4 
+</P>
+
+<P>0x8 
+… 
+</P>
+
+<P>0xffffffff 
+</P>
+
+<P>0x0 
+</P>
+
+<P>Thinking about memory 
+</P>
+
+<P>.Locations that hold some sort of object belonging to the 
+program are valid, others are not. 
+.The location of its object is called its address. 
+.Normally, we never care precisely what an object's address is; 
+the important thing is that every object has one. This is true of 
+functions as well as variables. 
+</P>
+
+<P>int foo = 7; 
+</P>
+
+<P>int bar = 5; 
+</P>
+
+<P>32 </P>
+
+<P>7 5 0x4 </P>
+
+<P>0x8 … 0xffffffff 0x0 foo </P>
+
+<P>bar </P>
+
+<P>valid Thinking about memory .In C++, to talk about the integer foo: </P>
+
+<P>int foo; </P>
+
+<P>.…we only need to write foo. The compiler handles the following 
+issues for us so we don't have to worry about it: 
+1.Where to allocate space for foo int foo; 
+2.How to change the value of foo when foo is assigned to foo = 7; 
+3.How to access the contents of foo when foo is used cout&lt;&lt; foo; 
+</P>
+
+<P>33 
+</P>
+
+<P>7 
+</P>
+
+<P>0x4 
+</P>
+
+<P>0x8 
+… 
+</P>
+
+<P>0xffffffff 
+0x0 
+</P>
+
+<P>foo 
+Pointers 
+</P>
+
+<P>.Sometimes we want to explicitly work with the address of an 
+object. To do this, we use a pointer 
+.Just as we were able to create variables which were “arrays of 
+T” for nearly any type T, we can also create variable of type 
+“pointer to T” 
+</P>
+
+<P>.A “pointer-to-T” is a variable that can hold the address of some other object of type T. </P>
+
+<P>34 </P>
+
+<P>Pointers 
+.For example, to declare a pointer to an int, we would say: 
+</P>
+
+<P>int *bar; 
+</P>
+
+<P>.Notice the “*”. It means “pointer-to”. 
+.As is typical for type names, we read from inside out. 
+.bar is a pointer to an int. 
+</P>
+
+<P>35 
+</P>
+
+<P>Pointers 
+.We can assign values to bar, just as we can to any other variable. 
+However, the type of value bar expects is an “address of an int”. 
+.Here is how we write this: 
+</P>
+
+<P>int foo; int *bar; bar = &amp;foo; foo = 1; </P>
+
+<P>.The symbol “&amp;” means “address-of”. So, this statement says that “bar is a pointer to an integer, initialized to the address of foo”. </P>
+
+<P>36 </P>
+
+<P>Pointers .The environment we get when we do this is: .Technically, foo has some address, e.g., 0x804240c0, and bar has this address as its value. We don't need to know this since the compiler keeps track of it for us. </P>
+
+<P>37 int foo; int *bar; bar = &amp;foo; foo = 1; foo: </P>
+
+<P>bar: </P>
+
+<P>1 0x804240c0 foo: 0x804240c0 1 </P>
+
+<P>0x804240c4 bar: </P>
+
+<P>Using pointers </P>
+
+<P>.In addition to setting the value of bar, we can use bar to change 
+the value of the object to which bar points. We do this by 
+saying: *bar = 2; 
+.This means “change the value of the object to which bar points 
+to 2”. 
+.The “*” here is the “dereference” operator. 
+.We sometimes say that dereferencing a pointer is the same as 
+“following” it. The resulting environment is: 
+</P>
+
+<P>38 
+</P>
+
+<P>foo: 
+bar: 
+1 
+foo: 
+</P>
+
+<P>bar: 
+2 
+int foo; 
+int *bar; 
+bar = &amp;foo; 
+foo = 1; 
+</P>
+
+<P>Using pointers 
+</P>
+
+<P>.In addition to setting the value of bar, we can use bar to change the value of the object to which bar points. We do this by saying: *bar = 2; .Note that we never needed to know that bar pointed to foo to be able to change foo's value – we just need to know about bar itself. </P>
+
+<P>39 
+foo: 
+bar: 
+</P>
+
+<P>1 
+foo: 
+bar: 
+2 
+int foo; 
+int *bar; 
+bar = &amp;foo; 
+foo = 1; 
+</P>
+
+<P>Variable ptrs vs. function ptrs 
+</P>
+
+<P>.Function pointers are really pointers in exactly the sense we 
+just defined. 
+.However, with functions, the compiler allows us to ignore the 
+“address-of” and “dereference” operators since they are really 
+just “syntactic sugar” because no other meaning is valid. 
+.That’s not true with pointers-to-variables. 
+</P>
+
+<P>40 
+int (*foo)(int, int); 
+foo = min; // min() is predefined 
+foo(5,3); 
+int foo; 
+int *bar; 
+bar = &amp;foo; 
+</P>
+
+<P>*bar = 2; 
+</P>
+
+<P>Pointer Exercise 
+int *x, *y; // Allocate ptrs, but not pointees 
+int a = -1; 
+</P>
+
+<P>x = &amp;a; 
+cout &lt;&lt; &quot;*x=&quot; &lt;&lt; *x &lt;&lt; endl; 
+*x = 42; 
+cout &lt;&lt; &quot;a=&quot; &lt;&lt; a &lt;&lt; endl; 
+*y = 13; 
+cout &lt;&lt; &quot;*y=&quot; &lt;&lt; *y &lt;&lt; endl; 
+y = x; 
+cout &lt;&lt; &quot;*y=&quot; &lt;&lt; *y &lt;&lt; “ a=&quot; &lt;&lt; a &lt;&lt; endl; 
+41 
+1.What are the outputs? 
+</P>
+
+<P>2.Comment this program 
+</P>
+
+<P>3.Draw memory diagram </P>
+</TaggedPDF-doc>

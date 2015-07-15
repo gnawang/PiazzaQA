@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:47:19-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:47:19-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:47:19-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">01_Introduction.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:801014ab-6892-4ebe-ba91-693d5a22f87f</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:1ea853ae-4b33-4136-8f37-c3d04ea659c5</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="01_Introduction.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280 
+Programming and Introductory Data Structures 
+</P>
+
+<P>blockM-dearborn 
+Introduction 
+</P>
+
+<P>Slides by Andrew DeOrio 
+</P>
+
+<P>EECS 280 Manifesto 
+</P>
+
+<P>.Mathematics, especially as used by physics, is the formalism 
+we use to describe “what is” 
+.The physical world is modeled by equations. 
+.Solutions to these equations give us insight into the world. 
+</P>
+
+<P>.Computer Science is a formalism to describe “how to” 
+.The computer science world uses algorithms to do this. 
+.Algorithm: An abstract sequence of actions composed to solve a 
+problem. 
+.Program: A concrete set of program statements which implement some 
+algorithm. 
+</P>
+
+<P>3 
+What you need for EECS 280 
+</P>
+
+<P>.Prerequisites: EECS 182 or EECS 183 or ENGR 101 or ENGR 
+151 
+.If you do not have C++ and/or Linux experience, it's OK 
+.You will need to learn basic C++ syntax on your own for things 
+like selection, iteration, basic I/O, etc 
+.Text book 
+.http://www.cplusplus.com/doc/tutorial/ 
+</P>
+
+<P>.Linux will be covered in the first discussion 
+</P>
+
+<P>4 
+“What EECS 280 is about…” 
+</P>
+
+<P>.Computer science concepts 
+.Learn the concepts, and you can apply them to many languages 
+</P>
+
+<P>.(Analogy) Designing/Implementing a program compared to 
+building a house: 
+.Given the right tools, anyone can build something simple. 
+.However, you won’t be able to build anything complex unless you 
+</P>
+
+<P>understand the core principles behind larger projects. </P>
+
+<P>5 </P>
+
+<P>“What EECS 280 is about…” </P>
+
+<P>.Procedural Abstraction: specification, invariants 
+.Data Abstraction: specification, invariants 
+.Dynamic Resource Management 
+.All this will be applied to programs that a single programmer 
+might be expected to understand. 
+</P>
+
+<P>6 
+</P>
+
+<P>“Why EECS 280 is interesting…” 
+</P>
+
+<P>.Complexity is all around us, and resources are always limited. 
+.Specification, invariants, abstraction, and dynamic resource 
+management turn out to be surprisingly useful! 
+.Programs are composed of pure “thought-stuff” that result in 
+real, tangible products – it’s magic! 
+</P>
+
+<P>7 
+</P>
+
+<P>“What EECS 280 is not about…” 
+</P>
+
+<P>.This course is not about computer programming in C++ 
+.There are thousands of languages 
+.Top ten most popular (January 2014) 
+</P>
+
+<P>1.C 2.Java 3.Objective-C 4.C++ 5.C# 6.PHP 7.(Visual) Basic 8.Python 9.JavaScript 10.Transact-SQL </P>
+
+<P>8 </P>
+
+<P>http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html </P>
+
+<P>The Task of Programming 
+</P>
+
+<P>.Start with a specification of the problem 
+.Design an algorithm that is 
+.Correct 
+.Efficient 
+</P>
+
+<P>.Implement the algorithm 
+.Test 
+.Go back and fix the algorithm or implementation if needed 
+</P>
+
+<P>9 
+Exercise 
+</P>
+
+<P>.You have 9 balls. Eight have equal weight, one is heavier. 
+Find the heavy ball using only a balance. 
+.Don't worry about how fast it is 
+</P>
+
+<P>http://www.cuesportnews.com/wp-content/uploads/2009/06/9ball_rack_.jpg 
+http://www.drlisawatson.com/wp-content/uploads/2011/10/balance_scale.jpg 
+10 
+Exercise 
+</P>
+
+<P>.You have 9 balls. Eight have equal weight, one is heavier. 
+Find the heavy ball using only a balance. 
+.Answer 1: weigh all possible pairs, until the you find an 
+imbalance 
+.Is it correct? 
+.Yes, because we're trying everything! 
+</P>
+
+<P>.It is efficient? How many weighings, in the worst case? 
+.No, because we're trying everything! 
+.9 choose 2 = 36 times 
+</P>
+
+<P>.Let's make this more efficient 
+</P>
+
+<P>http://www.cuesportnews.com/wp-content/uploads/2009/06/9ball_rack_.jpg 
+11 
+</P>
+
+<P>Exercise 
+</P>
+
+<P>.You have 9 balls. Eight have equal weight, one is heavier. 
+Find the heavy ball using only a balance. 
+.Answer 2: pick one ball and compare it against the other 8, 
+until the you find an imbalance 
+</P>
+
+<P>.Is it correct? 
+.Yes, because there is exactly one heavy ball 
+</P>
+
+<P>.It is efficient? How many weighings, in the worst case? 
+.Maybe ... 
+.8 times, worst case 
+</P>
+
+<P>.Can you make this more efficient? 
+</P>
+
+<P>http://www.cuesportnews.com/wp-content/uploads/2009/06/9ball_rack_.jpg 
+12 
+</P>
+
+<P>Exercise 
+</P>
+
+<P>.You have 9 balls. Eight have equal weight, one is heavier. 
+Find the heavy ball using only a balance. 
+.Answer 3: compare two groups of four balls and reserve one 
+ball. If they are equal, then the reserved ball is the heavy ball. 
+.Is it correct? What would you do to test this? 
+.Code it. Compile it. Turn it in. WRONG! 
+.Test with two groups of equal weight balls – it works! 
+.Test with heavy ball in one of the groups – it breaks! 
+</P>
+
+<P>http://www.cuesportnews.com/wp-content/uploads/2009/06/9ball_rack_.jpg 
+13 
+</P>
+
+<P>Exercise 
+</P>
+
+<P>.You have 9 balls. Eight have equal weight, one is heavier. 
+Find the heavy ball using only a balance. 
+.Answer 3: compare two groups of four balls and reserve one 
+ball. If they are equal, then the reserved ball is the heavy ball. 
+Otherwise, divide the remaining group in two until you find 
+an imbalance. 
+.Is it correct? What would you do to test this? 
+.Test with two groups of equal weight balls – it works! 
+.Test with heavy ball in one of the groups – it works! 
+</P>
+
+<P>.It is efficient? How many weighings, in the worst case? 
+.It's much better! 3 balances 
+</P>
+
+<P>http://www.cuesportnews.com/wp-content/uploads/2009/06/9ball_rack_.jpg 
+</P>
+
+<P>Exercise 
+</P>
+
+<P>.You have 9 balls. Eight have equal weight, one is heavier. 
+Find the heavy ball using only a balance. 
+.Can you do it with only two weighings? 
+</P>
+
+<P>http://www.cuesportnews.com/wp-content/uploads/2009/06/9ball_rack_.jpg 
+15 
+</P>
+
+<P>How programs run 
+</P>
+
+<P>.We have discussed different algorithms to solve the &quot;heavy 
+ball&quot; problem 
+.What happens when we code an algorithm using a 
+programming language and run it on a computer? 
+</P>
+
+<P>http://upload.wikimedia.org/wikipedia/commons/8/86/Cyrix_IBM_CPU_6x86MX_PR200_bottom.jpg 
+Hello World! 
+</P>
+
+<P>#include &lt;iostream> 
+</P>
+
+<P>using namespace std; 
+</P>
+
+<P>int main() { 
+</P>
+
+<P>cout &lt;&lt; &quot;Hello world!" 
+&lt;&lt; endl; 
+</P>
+
+<P>return 0; 
+</P>
+
+<P>} 
+</P>
+
+<P>hello.cpp 
+17 
+</P>
+
+<P>http://upload.wikimedia.org/wikipedia/commons/8/86/Cyrix_IBM_CPU_6x86MX_PR200_bottom.jpg 
+Compiled vs. Interpreted 
+</P>
+
+<P>.Language implementations can be compiled or interpreted 
+.Compiled: Program is converted into low-level machine code 
+before execution 
+.Interpreted: Program is run step-by-step during execution 
+</P>
+
+<P>int x = 0; 
+</P>
+
+<P>x = x + 1; compile 001110001110110101011011110011 g++ add.cpp add.cpp a.out http://upload.wikimedia.org/wikipedia/commons/8/86/Cyrix_IBM_CPU_6x86MX_PR200_bottom.jpg </P>
+
+<P>execute </P>
+
+<P>./a.out x = 0; x = x + 1; add.pl </P>
+
+<P>00111000111011110011 execute perl add.pl </P>
+
+<P>Perl interpreter running on CPU </P>
+
+<P>perl 18 Compiled vs. Interpreted </P>
+
+<P>Compiled Interpreted .Faster </P>
+
+<P>.No execution engine </P>
+
+<P>.Less portable .Must recompile </P>
+
+<P>.Less flexible .Need to know everything (mostly) at compile-time </P>
+
+<P>.Slower .Must go through engine .More portable .Just run! </P>
+
+<P>.More flexible .Can change things at runtime </P>
+
+<P>19 </P>
+
+<P>Compilation </P>
+
+<P>.EECS 280 uses compiled C++ 
+.g++ is our compiler 
+</P>
+
+<P>.Multiple steps inside g++ 
+1.Preprocessing 
+2.Compilation proper 
+3.Assembly 
+4.Linking 
+</P>
+
+<P>20 
+</P>
+
+<P>Preprocessing 
+</P>
+
+<P>.Expand #include and #define, etc. 
+.Includes information about cout and endl 
+</P>
+
+<P>.g++ -E hello.cpp –o hello.ii 
+</P>
+
+<P>#include &lt;iostream> 
+using namespace std; 
+int main() { 
+cout &lt;&lt; &quot;Hello world!&quot; &lt;&lt; endl; 
+return 0; 
+} 
+hello.cpp 
+[ all the iostream info ] 
+</P>
+
+<P>int main() { 
+cout &lt;&lt; &quot;Hello world!&quot; &lt;&lt; endl; 
+</P>
+
+<P> return 0; </P>
+
+<P>} </P>
+
+<P>hello.ii </P>
+
+<P>21 
+Compilation proper 
+</P>
+
+<P>.Convert C++ code into assembly instructions 
+.Complicated, multi-step process 
+.Multiple entire courses on this subject, here at Michigan 
+</P>
+
+<P>.Assembly instructions are very close to binary 
+.EECS 370 
+</P>
+
+<P>.g++ -S hello.ii –o hello.s 
+</P>
+
+<P>subq $16, %rsp 
+movl %edi, -4(%rbp) 
+movl %esi, -8(%rbp) 
+cmpl $1, -4(%rbp) 
+jne .L2 
+hello.s 
+[ all the iostream stuff ] 
+int main() { 
+cout &lt;&lt; &quot;Hello world!&quot; &lt;&lt; endl; 
+return 0; 
+} 
+hello.ii 
+</P>
+
+<P>22 
+</P>
+
+<P>subq $16, %rsp 
+movl %edi, -4(%rbp) 
+movl %esi, -8(%rbp) 
+cmpl $1, -4(%rbp) 
+jne .L2 
+hello.s 
+</P>
+
+<P>Assembly 
+</P>
+
+<P>.Convert assembly instructions into binary 
+.EECS 370 
+</P>
+
+<P>.Result is an object file 
+.Binary translation of your program 
+</P>
+
+<P>.g++ -c hello.s –o hello.o </P>
+
+<P>000000011101011001010101010010101010000111111110000000001010101010000101111111111111111111110000 010101010101010000000000000001111000000000011111111111111111111111110 hello.o 23 </P>
+
+<P>000000011101011001010101010010101010000111111110000000001010101010000101111111111111111111110000 010101010101010000000000000001111000000000011111111111111111111111110 hello.o </P>
+
+<P>Linking </P>
+
+<P>.Object file doesn’t know how to find libraries or other object files .Linking includes this information in the executable .g++ hello.o –o hello </P>
+
+<P>ELF [ type of binary ] 000000011101011001010101010010101010000111111110000000001010101010000101111111111111111111110000 010101010101010000000000000001111000000000011111111111111111111111110 hello 24 </P>
+
+<P>After the Compilation Process </P>
+
+<P>.Result of compilation process is an executable .Running the executable .The shell and the operating system work together .Again, a multi-step process </P>
+
+<P>../hello </P>
+
+<P>ELF [ type of binary ] 000000011101011001010101010010101010000111111110000000001010101010000101111111111111111111110000 010101010101010000000000000001111000000000011111111111111111111111110 hello http://upload.wikimedia.org/wikipedia/commons/8/86/Cyrix_IBM_CPU_6x86MX_PR200_bottom.jpg Hello World! 25 </P>
+
+<P>Running the Executable </P>
+
+<P>.Type program into shell .The shell is a program that runs programs .The shell provides the command prompt: .Shell asks OS to run program .OS manages which programs are running and when .To see running programs: top (type “q” to quit) </P>
+
+<P>% \\VBOXSVR\awdeorio\Screenshot from 2013-01-08 13:44:54.png % ./hello 26 Running the Executable </P>
+
+<P>3.OS loads executable into memory .Copies “hello” binary from disk to RAM </P>
+
+<P>4.OS begins execution .CPU executes binary code </P>
+
+<P>5.Program executes and finishes </P>
+
+<P>3.Control transferred back to OS .Cleans up program’s memory (RAM) .Shell waits for another command </P>
+
+<P>% ./hello Hello World! % % ./hello Hello World! 0001010101010100 27 Putting It All Together </P>
+
+<P>.Hello World Demo 1.Log in .Many ways, for example Putty, VNC or SSH .See lab 1 for more options </P>
+
+<P>.One terminal for text editor .One terminal for command line </P>
+
+<P>2.Create text file with the program’s contents .emacs hello.cpp </P>
+
+<P>3.Compile .g++ hello.cpp –o hello </P>
+
+<P>4.Run ../hello </P>
+
+<P>28 </P>
+
+<P>Discussion sections </P>
+
+<P>.Discussion sections are lab-style .Every discussion will be hands-on coding .Bring a laptop .Contact course staff if you don't have access to a laptop or tablet </P>
+
+<P>.Due electronically every Friday .5% of the final grade, checked for completion .Collaboration is encouraged </P>
+
+<P>29 Discussion sections </P>
+
+<P>.Why? </P>
+
+<P>I hear and I forget. </P>
+
+<P>I see and I remember. </P>
+
+<P>I do and I understand. </P>
+
+<P>-Confucious </P>
+
+<P>30 </P>
+
+<P>Exams and grades </P>
+
+<P>.The details on exams, projects, and grades can be found in the syllabus .We will assign grades on a curve, in keeping with past grades given in this course. We will adjust the curve up or down if the class as a whole does better or worse than past instances. In particular, if everyone does exceptionally well, then everyone will get an exceptionally good grade. </P>
+
+<P>31 </P>
+
+<P>Projects </P>
+
+<P>.Projects require: .Read and understand a problem specification .Design a solution to this problem .Implement this solution simply and elegantly .Convince yourself of your solution's correctness </P>
+
+<P>.Grading projects will be done by a combination of testing (correctness) and reading (correctness and simplicity/elegance). .We will give you a few simple test cases to get started, but we will not tell you everything we will be testing for. It is up to you to figure out your own set of tests, and we will spend a lecture on how to do this. </P>
+
+<P>32 </P>
+
+<P>Projects - autograder </P>
+
+<P>.We will use an autograder to test correctness .When you submit, the autograder runs the published test case as a &quot;sanity check&quot; .You can submit as many times as you want .We grade the last submission before the deadline .Protip: submit early and often! </P>
+
+<P>33 </P>
+
+<P>Projects - timeline </P>
+
+<P>.Sample timeline for failure on difficult projects .Sample timeline for success on difficult projects .Even better </P>
+
+<P>“Think about it” Assigned </P>
+
+<P>code plan code </P>
+
+<P>test/debug slack </P>
+
+<P>Due Assigned Due </P>
+
+<P>plan slack </P>
+
+<P>Assigned </P>
+
+<P>Due 34 </P>
+
+<P>Getting help </P>
+
+<P>.Office hours – see class Google Calendar .The Piazza Forum .If you have a question, and can't get to office hours, feel free to post it here. However, do not post your own code, or &quot;give away&quot; solutions in your question. A member of the course staff will be assigned to the forum during each business day, and it will typically be monitored at other times. </P>
+
+<P>.Please do not send technical questions by email. Either see us in office hours, or post to the forums. .To contact the staff, please use eecs280staff@umich.edu </P>
+
+<P>Text book </P>
+
+<P>.We are using a different text book this semester, C++ Primer, by Lippman, Lajoie and Moo. 5th edition </P>
+
+<P>Available in ... </P>
+
+<P>.Print form .Electronic Kindle edition .Free electronically through the University Library .Number of simultaneous users is limited, and sometimes there may be a wait to access it http://www-fp.pearsonhighered.com/bigcovers/0321714113.jpg 36 </P>
+
+<P>Collaboration </P>
+
+<P>.New collaboration policy this semester .You must complete programming assignment 1 alone .You may complete programming assignments 2 - 5 either alone or with a partner .All programming assignments in this course are to be done by you or your partnership </P>
+
+<P>37 </P>
+
+<P>Guidelines for Partnerships </P>
+
+<P>.Working in a partnership is optional .Both you and your partner will still submit your assignments individually, but you should both write each other's uniqname on the project submission for every file .You can cannot change partners in the middle of one project, unless your partner drops the course .You may change partners only after a project is completed and submitted .However, you are free to work individually as much as you like or collaborate as much as you like, as long as it is with your partner </P>
+
+<P>38 </P>
+
+<P>Partnership DOs </P>
+
+<P>.Do READ THE SYLLABUS CAREFULLY before programming with another student. You must follow these guidelines, or risk being investigated for an Honor Code Violation. .Do choose a partner from the current semester of this course. .Do put both your uniqname and the uniqname of your partner in the comments at the top of all code files. This is important to avoid referral to the honor council. .Do submit your own copy of the project. </P>
+
+<P>39 Partnership DON'Ts </P>
+
+<P>.Do not program with someone without understanding these guidelines. .Do not partner on an assignment with someone who has already solved the problem. Students who do this will not learn as much as those who pair with someone at a similar skill level. .Do not share code with anyone other than your partner, or a staff member. .Do not split the work in half. It is important that both partners work on all parts of the program. Splitting the work may harm your or your partner's understanding of that part of the solution. .Do not partner with anyone who is not currently enrolled in the course. </P>
+
+<P>40 </P>
+
+<P>Academic integrity </P>
+
+<P>.You may not collaborate in any way with people outside your partnership </P>
+
+<P>.See the syllabus on CTools for the full policy .We use automated and manual cheat-checking .Sometimes we don’t have time to check until end of semester .During 2012 and 2013, we reported 2-10% of the class each semester </P>
+
+<P>41 </P>
+
+<P>What you'll get out of EECS 280 </P>
+
+<P>.Skills to design, implement, test and debug programs with 1,000+ lines of code .Prerequisite for future computer science courses .Credentials for an internship .Become part of an industry that is changing the world </P>
+
+<P>42 </P>
+</TaggedPDF-doc>

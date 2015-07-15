@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:49:02-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:49:02-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:49:02-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">20_Linked_Lists.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:febc50a2-d093-4bc6-bf02-1b802f6038e8</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:3d67663e-4a43-4bfb-b0d5-8327a3b7a7c4</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="20_Linked_Lists.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280Programming and Introductory Data Structures 
+</P>
+
+<P>blockM-dearborn 
+Linked Lists 
+</P>
+
+<P>Slides by Andrew DeOrio, 
+</P>
+
+<P>Jeff Ringenbergand 
+</P>
+
+<P>Brian Noble 
+</P>
+
+<P>Introduction 
+</P>
+
+<P>.Expandable arrays are only one way to implement storage that 
+can grow and shrink over time 
+.Another way is to use a linked structure 
+.A linked structure is one with a series of zero or more pieces of 
+data, connected by pointers from one to another 
+</P>
+
+<P>list 
+</P>
+
+<P>Introduction 
+</P>
+
+<P>.You can think of linked structures like a freight train 
+.Each piece of data is like a car in the train 
+.At the end of the train you will find a caboose 
+</P>
+
+<P>list 
+</P>
+
+<P>list 
+</P>
+
+<P>Introduction 
+</P>
+
+<P>.Today we will create an abstract data type that stores a mutable 
+sequence of integers, represented as a linked structure 
+.This ADT will be similar to the list_ttype from project 2, 
+except that those lists were immutable: 
+.Once a list_tobject was created, no operations on that list would ever 
+change it 
+</P>
+
+<P>.A valid list of integers is either: 
+.The empty list 
+.An integer followed by a valid list. 
+</P>
+
+<P>Introduction 
+</P>
+
+<P>.A list is another example of a container ADT, since it hold 
+other type. 
+.Let's call our list IntList, since it will hold integers (for 
+now) 
+</P>
+
+<P>class IntList{ 
+//OVERVIEW: a singly-linked list 
+//... 
+</P>
+
+<P>Introduction 
+.There are three operations that the list must support: 
+</P>
+
+<P>class IntList{ 
+public: 
+//EFFECTS: returns true if the list is empty 
+boolisEmpty() const; 
+//MODIFIES: this 
+//EFFECTS: inserts iinto the front of the list 
+void insertFront(inti); 
+//REQUIRES: list is not empty 
+//MODIFIES: this 
+//EFFECTS: removes item at the front of the list 
+intremoveFront(); 
+</P>
+
+<P>Introduction 
+.For example, we can use an IntListlike this: 
+</P>
+
+<P>intmain() { 
+IntListl; // ( ) 
+l.insertFront(1); // ( 1 ) 
+</P>
+
+<P>l.insertFront(2); // ( 2 1 ) 
+l.insertFront(3); // ( 3 2 1 ) 
+l.removeFront(); // ( 2 1 ) 
+l.removeFront(); // ( 1 ) 
+l.removeFront(); // ( ) 
+l.isEmpty(); // TRUE 
+} 
+</P>
+
+<P>List nodes 
+</P>
+
+<P>.We need to pick a concrete representation that stores a list as a dynamically created list of &quot;nodes&quot; </P>
+
+<P>structNode { 
+Node *next; 
+intdatum; 
+}; 
+.Invariant: the datumfield holds the integer datum of an 
+</P>
+
+<P>element in the list .Invariant: the nextfield points to the next Nodein the list, or 0 (AKA NULL) if no such Nodeexists </P>
+
+<P>List nodes </P>
+
+<P>.Question: does any code outside the class need to know about the Nodetype? </P>
+
+<P>structNode { Node *next; intdatum; }; </P>
+
+<P>List nodes .Question: does any code outside the class need to know about the Nodetype? .Answer: no, so make it private .Types can be private, just like variables </P>
+
+<P>class IntList{ 
+//... 
+private: 
+structNode { 
+Node *next; 
+intdatum; 
+}; 
+}; 
+</P>
+
+<P>List nodes 
+</P>
+
+<P>.Each time an intis inserted into the list, we'll create a new node to hold it .Each time an intis removed from the list, we'll save the datum in the first node, destroy the node that held it, and return the datum .The concrete representation of the list (4 2 3) is: </P>
+
+<P>next: datum: 4 next: datum: next: datum: 2 3 Nodes pointer to 0 </P>
+
+<P>Member variables </P>
+
+<P>.Now, we need a way to find the first node in list .Store a pointer in a member variable </P>
+
+<P>class IntList{ 
+//... 
+private: 
+structNode { 
+Node *next; 
+intdatum; 
+}; 
+Node *first; 
+}; 
+.Representation invariant: firstpoints to the first node in the 
+</P>
+
+<P>sequence of nodes representing this IntList, or 0 if the list is empty </P>
+
+<P>Implementing isEmpty() </P>
+
+<P>.Now, let's implement our member functions .Recall the representation invariant: firstpoints to the first node in the sequence of nodes representing this IntList, or 0 if the list is empty </P>
+
+<P>boolIntList::isEmpty() const{ 
+return !first; 
+} 
+</P>
+
+<P>Implementing insertFront() 
+</P>
+
+<P>.When we insert an integer, we start out with the firstfield 
+pointing to the current list: 
+.That list might be empty, or it might not, but in any event it mustpoint to 
+a valid list thanks to the rep invariant. 
+</P>
+
+<P>.The first thing we need to do is to create a new node to hold the new firstelement: </P>
+
+<P>void IntList::insertFront(inti) { 
+Node *np= new Node; 
+//... 
+} 
+</P>
+
+<P>Implementing insertFront() 
+</P>
+
+<P>.Next, we need to establish the invariants on the new node. .This means setting the datum field to i, and the next field to (what will eventually be) the &quot;rest of the list“ –this is precisely the start of the current list: </P>
+
+<P>void IntList::insertFront(inti) { 
+Node *np= new Node; 
+np-&gt;datum = i; 
+np-&gt;next = first; 
+//... 
+} 
+</P>
+
+<P>Implementing insertFront() 
+</P>
+
+<P>.Finally, we need to reestablish the representation invariant; firstcurrently points to the secondnode in the list, and must point to the new list instead: </P>
+
+<P>void IntList::insertFront(inti) { 
+Node *np= new Node; 
+np-&gt;datum = i; 
+np-&gt;next = first; 
+first = np; 
+} 
+</P>
+
+<P>.Notice that this works even on empty lists </P>
+
+<P>Insert example </P>
+
+<P>.Suppose we are inserting a 4. The list might already have elements: </P>
+
+<P>next: 
+datum: 
+next: 
+datum: 
+2 
+3 
+first 
+</P>
+
+<P>Insert example 
+</P>
+
+<P>.Suppose we are inserting a 4. The list might already have 
+elements: 
+.And then the list’s invariant : 
+</P>
+
+<P>next: 
+datum: 
+next: 
+datum: 
+2 
+3 
+first 
+next: 
+datum: 
+next: 
+datum: 
+</P>
+
+<P>3 
+first 
+next: 
+datum: 
+4 
+np 
+</P>
+
+<P>Insert example 
+.Likewise, if the list was empty and we want to insert a 4: 
+</P>
+
+<P>first 
+</P>
+
+<P>Insert example 
+.And the list: 
+</P>
+
+<P>first 
+next: 
+datum: 
+np 
+4 
+</P>
+
+<P>Implementing removeFront() 
+</P>
+
+<P>.Removal is a bit trickier since there are lots of things we need 
+to accomplish, and they have to happen in precisely the right 
+order. 
+.If the first item is removed, this violates the invariant on &quot;first&quot;, 
+which we have to fix: 
+</P>
+
+<P>intIntList::removeFront() { 
+//... 
+first = first-&gt;next; 
+</P>
+
+<P>//... } </P>
+
+<P>Implementing removeFront() </P>
+
+<P>.If we are removing this first node, we must delete it to avoid a memory leak .Unfortunately, we can'tdelete it before advancing the firstpointer (since first-&gt;next would then be undefined) .But, afterwe advance first, the removed node is an orphan, and can't be deleted .We solve this by introducing a local variable to remember the &quot;old&quot; first node, which we will call the victim </P>
+
+<P>Implementing removeFront() 
+.After creating the victim, we can then delete the node afterfirstis updated. 
+</P>
+
+<P>intIntList::removeFront() { 
+Node *victim = first; 
+//... 
+first = first-&gt;next; 
+//... 
+delete victim; victim=0; 
+//... 
+} 
+</P>
+
+<P>Implementing removeFront() 
+</P>
+
+<P>.However, removing the first node is only half of the work. 
+.We must also return the datum that was stored in the node. 
+.This is also tricky: 
+.We can't return the datum before we delete the node, sincethen the delete wouldn't happen. 
+.Likewise, once we delete the node, the contained datum is lost. 
+</P>
+
+<P>.So, we use another local variable, result, to remember the 
+result that we will eventually return. 
+</P>
+
+<P>Implementing removeFront() 
+.Now that we have the resultvariable, the method is finished 
+</P>
+
+<P>intIntList::removeFront() { 
+Node *victim = first; 
+first = first-&gt;next; 
+intresult = victim-&gt;datum; 
+delete victim; victim=0; 
+return result; 
+} 
+</P>
+
+<P>Implementing removeFront() 
+.Recall the REQUIRES clause on removeFront() 
+</P>
+
+<P>//REQUIRES: list is not empty 
+//MODIFIES: this 
+//EFFECTS: removes item at the front of the list 
+intIntList::removeFront() { 
+Node *victim = first; 
+first = victim-&gt;next; 
+intresult = victim-&gt;datum; 
+delete victim; victim=0; 
+return result; 
+} 
+.Write an assertion to check this REQUIRES clause 
+</P>
+
+<P>Implementing removeFront() 
+//REQUIRES: list is not empty 
+//MODIFIES: this 
+</P>
+
+<P>//EFFECTS: removes item at the front of the 
+list 
+intIntList::removeFront() { 
+assert(!isEmpty()); // assert(first); 
+Node *victim = first; 
+first = victim-&gt;next; 
+intresult = victim-&gt;datum; 
+delete victim; victim=0; 
+return result; 
+} 
+</P>
+
+<P>Default constructor 
+</P>
+
+<P>.Now, we need a default constructor .The default constructor should establish the representation invariant for an empty list .Recall the representation invariant: firstpoints to the first node in the sequence of nodes representing this IntList, or 0if the list is empty .Write the default constructor </P>
+
+<P>Default constructor 
+.Write the default constructor 
+</P>
+
+<P>class IntList{ 
+//... 
+public: 
+IntList(); 
+//... 
+} 
+IntList::IntList() : first(0) {} 
+</P>
+
+<P>The Big Three 
+</P>
+
+<P>.Question: do we need the Big Three? Why? .Destructor .Copy constructor .Overloaded assignment operator </P>
+
+<P>The Big Three </P>
+
+<P>.Here's what we need each function to do: .Destructor 1.Remove all nodes </P>
+
+<P>.Copy constructor 1.Initialize member variables 2.Copy all nodes from other list </P>
+
+<P>.Overloaded assignment operator 1.Remove all nodes from this list 2.Copy all nodes from other list </P>
+
+<P>The Big Three </P>
+
+<P>.Create private member functions to avoid copy-pasted code .Destructor 1.Remove all nodes </P>
+
+<P>.Copy constructor 1.Initialize member variables 2.Copy all nodes from other list </P>
+
+<P>.Overloaded assignment operator 1.Remove all nodes from this list 2.Copy all nodes from other list </P>
+
+<P>removeAll() </P>
+
+<P>copyAll(...) </P>
+
+<P>The Big Three </P>
+
+<P>class IntList{ 
+//... 
+private: 
+//MODIFIES: this 
+//EFFECTS: removes all nodes 
+void removeAll(); 
+//MODIFIES: this 
+//EFFECTS: copies all nodes from l to this 
+void copyAll(constIntList&amp;l); 
+}; 
+</P>
+
+<P>The Big Three 
+</P>
+
+<P>.We already have a function to destroy a single node: removeFront(), let's reuse it </P>
+
+<P>void IntList::removeAll() { 
+while (!isEmpty()) 
+removeFront(); 
+} 
+</P>
+
+<P>The Big Three 
+</P>
+
+<P>.We already have a function to insert a single node: 
+insertFront() 
+.What happens if we try to reuse this function to implement 
+copyAll()? 
+</P>
+
+<P>void IntList::copyAll(constIntList&amp;l) { 
+for (Node *np=l.first; np; np=np-&gt;next) 
+insertFront(np-&gt;datum); 
+} 
+</P>
+
+<P>The Big Three 
+</P>
+
+<P>.We could easily write copyAll()if we had a function insertBack() </P>
+
+<P>void IntList::copyAll(constIntList&amp;l) { 
+for (Node *np=l.first; np; np=np-&gt;next) 
+insertBack(np-&gt;datum); 
+} 
+</P>
+
+<P>Implementing insertBack() 
+</P>
+
+<P>.What if we wanted to insert something at the end of the list? 
+.Intuitively, with the current representation, we'd need to walk 
+down the list until we found &quot;the last element&quot;, and then insert 
+it there. 
+.That's not very efficient, because we'd have to examine every 
+element to insert anything at the tail. 
+.Instead, we'll change our concrete representation to track both 
+the front and the back of our list. 
+</P>
+
+<P>first 
+</P>
+
+<P>Implementing insertBack() 
+.The new representational invariant has twonode pointers: 
+</P>
+
+<P>class IntList{ 
+Node *first; 
+Node *last; 
+public: 
+//... 
+}; 
+.The invariant for firstis unchanged 
+</P>
+
+<P>.The invariant for last: lastpoints to the last node of the list if it is not empty, and 0otherwise </P>
+
+<P>Implementing insertBack() </P>
+
+<P>.So, in an empty list, both data members point to 0 
+.However, if the list is non-empty, they look like this: 
+.Note: Adding this new data member requires that we modify 
+insertFront()and removeFront() 
+.In lecture, we'll only write insertBack() 
+</P>
+
+<P>first 
+last 
+Don't worry, you'll get to do them in Project 5 . 
+</P>
+
+<P>Implementing insertBack() 
+.First, we create the new node, and establish its invariants: 
+</P>
+
+<P>void IntList::insertBack(inti) { 
+Node *np= new Node; 
+np-&gt;datum = i; 
+np-&gt;next = 0; 
+//... 
+} 
+</P>
+
+<P>Implementing insertBack() 
+</P>
+
+<P>.To insert the new node, there are two cases: 1.If the list is empty, we need to reestablish the invariants on firstandlast(the new node is both the first and last node of the list) 2.If the list is notempty, there are two broken invariants. The &quot;old&quot; last-&gt;next element (incorrectly) points to 0, and the lastfield no longer points to the last element. </P>
+
+<P>first last np </P>
+
+<P>Implementing insertBack() void IntList::insertBack(inti) { </P>
+
+<P>Node *np= new Node; 
+np-&gt;datum = i; 
+np-&gt;next = 0; 
+if (isEmpty()) { 
+first = last = np; 
+} else { 
+last-&gt;next = np; 
+last = np; 
+} 
+} 
+first 
+last 
+np 
+</P>
+
+<P>The Big Three 
+</P>
+
+<P>.Now that insertBack()is finished, copyAll()now works too </P>
+
+<P>void IntList::copyAll(constIntList&amp;l) { 
+for (Node *np=l.first; np; np=np-&gt;next) 
+insertBack(np-&gt;datum); 
+} 
+</P>
+
+<P>The Big Three 
+</P>
+
+<P>.Back to the Big Three: use removeAll()and copyAll(constIntList&amp; l)to implement these methods .Destructor 1.Remove all nodes </P>
+
+<P>.Copy constructor 1.Initialize member variables 2.Copy all nodes from other list .Overloaded assignment operator 1.Remove all nodes from this list 2.Copy all nodes from other list </P>
+
+<P>Destructor 
+.The destructor 
+</P>
+
+<P>IntList::~IntList() { 
+removeAll(); 
+} 
+.Question: Must a destructor re-establish the representation 
+</P>
+
+<P>invariant before returning? Why? Does this one? 
+</P>
+
+<P>intIntList::removeFront() { 
+assert(!isEmpty()); 
+Node *victim = first; 
+first = victim-&gt;next; 
+intresult = victim-&gt;datum; 
+delete victim; victim=0; 
+return result; 
+} 
+void IntList::removeAll() { 
+while (!isEmpty()) 
+removeFront(); 
+} 
+</P>
+
+<P>Copy constructor 
+</P>
+
+<P>.For the copy constructor, we need to do two things: 1.Initialize member variables </P>
+
+<P>2.Copy all nodes from other list 
+</P>
+
+<P>IntList::IntList(const IntList&amp;l) 
+: first (0), last(0) { 
+copyAll(l); 
+} 
+</P>
+
+<P>Assignment operator 
+</P>
+
+<P>.The assignment operator must 1.Remove all nodes from this list 2.Copy all nodes from other list </P>
+
+<P>.Also, it has to ensure that there is no self assignment (this could cause problems) </P>
+
+<P>IntList&amp;IntList::operator= (constIntList&amp;l) { 
+if (this == &amp;l) return *this; 
+removeAll(); 
+copyAll(l); 
+return *this; 
+} 
+</P>
+
+<P>Singly linked vs. doubly linked lists 
+</P>
+
+<P>.We have now implemented three member functions, plus constructors and the Big Three .insertFront(), insertBack()and removeFront() </P>
+
+<P>.What about removeBack()? </P>
+
+<P>Singly linked vs. doubly linked lists .insertBack()is efficient, but only for insertion .Question: Why is removal from the end expensive? </P>
+
+<P>first last np first last </P>
+
+<P>Singly linked vs. doubly linked lists .This is efficient, but only for insertion. </P>
+
+<P>.Answer: We have to inspect every element to set the new address for last. </P>
+
+<P>first last np first last </P>
+
+<P>Singly linked vs. doubly linked lists </P>
+
+<P>.To make removal from the end efficient, as well, we have to have a 
+doubly-linkedlist, so we can go forward andbackward. 
+.To do this, we're going to change the representation yet again. 
+.In our new representation, a node is: 
+</P>
+
+<P>structNode { 
+Node *next; 
+Node *prev; 
+intdatum; 
+} 
+.The nextand datumfields stay the same. 
+</P>
+
+<P>.The prevfield's invariant is: 
+.prevpoints to the previous node in the list, or 0if no such node exists 
+</P>
+
+<P>Singly linked vs. doubly linked lists 
+</P>
+
+<P>.With this representation, an empty list is unchanged. 
+.While the list ( 2 3 )would look like this: 
+</P>
+
+<P>first last 3 2 </P>
+</TaggedPDF-doc>

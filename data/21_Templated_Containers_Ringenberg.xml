@@ -1,0 +1,1304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:49:03-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:49:03-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:49:03-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">21_Templated_Containers_Ringenberg.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:333e3096-9874-42a6-a7fa-4e7cc7b3491f</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:17db9d68-00e6-40dc-8929-d4bbd0398f5c</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="21_Templated_Containers_Ringenberg.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>Slides by Andrew DeOrio, 
+Jeff Ringenberg and 
+Brian Noble 
+</P>
+
+<P>EECS 280 
+Programming and Introductory Data Structures" 
+Templated Containers 
+</P>
+
+<P>Introduction 
+</P>
+
+<P>.. 
+Abstract Data Types like IntSet and IntList are often 
+called containers or container classes, since their purpose is to 
+contain other objects 
+</P>
+
+<P>.. 
+So far, our IntList container holds only integers 
+</P>
+
+<P>.. 
+Today, we will use the C++ template mechanism to reuse 
+the same container code for any type 
+</P>
+
+<P>Templates 
+</P>
+
+<P>.. 
+To see how templates might be useful, consider the following 
+fragments defining a list-of-int and a list-of-char: 
+</P>
+
+<P>.. 
+Note: The Node definition is now outside of the List class. We 
+will “put it back in” later in lecture. 
+</P>
+
+<P>struct Node { 
+Node *next; 
+int datum; 
+</P>
+
+<P>}; 
+class List { 
+</P>
+
+<P>public: 
+void insertFront(int v); 
+int removeFront(); 
+//... 
+</P>
+
+<P>private: 
+Node *first; 
+}; 
+</P>
+
+<P>struct Node { 
+Node *next; 
+char datum; 
+</P>
+
+<P>}; 
+class List { 
+</P>
+
+<P>public: 
+void insertFront(char v); 
+char removeFront(); 
+//... 
+</P>
+
+<P>private: 
+Node *first; 
+}; 3 
+</P>
+
+<P>Templates 
+</P>
+
+<P>.. 
+It's like someone took the list-of-int definition and replaced 
+each instance of int with an instance of char. 
+</P>
+
+<P>.. 
+Templates are a mechanism to do exactly that. 
+</P>
+
+<P>struct Node { 
+Node *next; 
+int datum; 
+</P>
+
+<P>}; 
+class List { 
+</P>
+
+<P>public: 
+void insertFront(int v); 
+int removeFront(); 
+//... 
+</P>
+
+<P>private: 
+Node *first; 
+}; 
+</P>
+
+<P>struct Node { 
+Node *next; 
+char datum; 
+</P>
+
+<P>}; 
+class List { 
+</P>
+
+<P>public: 
+void insertFront(char v); 
+char removeFront(); 
+//... 
+</P>
+
+<P>private: 
+Node *first; 
+}; 4 
+</P>
+
+<P>Templates 
+</P>
+
+<P>.. 
+The intuition behind templates is that they are code with the 
+&quot;type name&quot; left as a (compile-time) constant. 
+</P>
+
+<P>.. 
+So, they are another form of parametric generalization except 
+this time, the parameter is a type, not a variable. 
+</P>
+
+<P>.. 
+To start, you first need to declare that something will be a 
+template: 
+</P>
+
+<P>T 
+stands for &quot;the name of the 
+</P>
+
+<P>template &lt;typename T&gt; type contained by this List&quot;. 
+</P>
+
+<P>class List { 
+// ... By convention, T is the name of 
+the &quot;type&quot; over which the 
+</P>
+
+<P>}; 
+</P>
+
+<P>template is parameterized. 
+</P>
+
+<P>Template Notation 
+</P>
+
+<P>template &lt;typename T> 
+class List { 
+// ... 
+}; 
+</P>
+
+<P>template &lt;class T&gt; Alternate notation 
+class List { 
+// ... 
+}; 
+</P>
+
+<P>Template Example 
+</P>
+
+<P>template &lt;typename T> 
+class List { 
+public: 
+</P>
+
+<P>bool isEmpty(); 
+void insertFront(T v); 
+T removeFront(); 
+</P>
+
+<P>List(); 
+List(const List &amp;l); 
+List &amp;operator=(const List &amp;l); 
+~List(); 
+</P>
+
+<P>private: 
+... 
+}; 
+</P>
+
+<P>Now, write the definition of 
+the List, using T where 
+you mean &quot;the type of thing 
+held in the list&quot;. 
+</P>
+
+<P>Template Example 
+</P>
+
+<P>template &lt;typename T> 
+class List { 
+public: 
+</P>
+
+<P>bool isEmpty(); 
+void insertFront(T v); 
+T removeFront(); 
+</P>
+
+<P>List(); 
+List(const List &amp;l); 
+List &amp;operator=(const List &amp;l); 
+~List(); 
+</P>
+
+<P>private: 
+... 
+}; 
+</P>
+
+<P>The only thing difference 
+between this definition and the 
+IntList one is that we've used 
+T rather than int to name 
+objects held in this list. 
+</P>
+
+<P>This will work for any type. 
+</P>
+
+<P>A templated container is still 
+homogenous. That is, 
+everything in the container 
+must be of the same type. 
+</P>
+
+<P>Template Example 
+</P>
+
+<P>.. 
+We also have to pick a representation for the elements of this 
+List, and that representation must also be parameterized by T 
+</P>
+
+<P>.. 
+In other words, the Node type has to have an element of type T 
+</P>
+
+<P>template &lt;typename T> 
+</P>
+
+<P>struct Node { 
+Node *next; 
+T datum; 
+}; 
+</P>
+
+<P>Template Example </P>
+
+<P>template &lt;typename T&gt; </P>
+
+<P>struct Node { 
+Node *next; 
+T datum; 
+</P>
+
+<P>}; 
+</P>
+
+<P>template &lt;typename T> 
+class List { 
+public: 
+</P>
+
+<P>// methods 
+Node is only used in the 
+implementations of this 
+</P>
+
+<P>// constructors/destructor 
+</P>
+
+<P>class’ methods 
+private: 
+... 
+</P>
+
+<P>Node will hold only objects }; </P>
+
+<P>of the appropriate type </P>
+
+<P>Template Example </P>
+
+<P>template &lt;typename T&gt; </P>
+
+<P>class List { </P>
+
+<P>public: // methods/constructors/destructor </P>
+
+<P>private: 
+</P>
+
+<P>Node&lt;T&gt; *first; The rest of the class 
+void removeAll(); definition is the same 
+void copyAll(const List &amp;l); as before 
+</P>
+
+<P>}; 
+</P>
+
+<P>Template code goes in the .h file 
+</P>
+
+<P>.. 
+Since the compiler has to create copies of everything, including 
+copies of the method implementations, the client code needs to 
+&quot;see&quot; the method implementations. 
+</P>
+
+<P>.. 
+Thus, we put both the class declaration and definition 
+(implementation) in the .h file 
+</P>
+
+<P>.. 
+This way, all clients see the method implementations 
+</P>
+
+<P>Defining the functions 
+</P>
+
+<P>.. 
+Here is an example of a function being defined in the header 
+file: 
+</P>
+
+<P>.. 
+bool isEmpty() { 
+return !first; 
+} 
+</P>
+
+<P>The above function is defined within the class itself. 
+</P>
+
+<P>Template function example 
+</P>
+
+<P>.. 
+isEmpty() isn't that interesting of a method, since it doesn't 
+use any T's. 
+</P>
+
+<P>.. 
+Here is a more interesting one: 
+</P>
+
+<P>void insertFront(T i) { 
+</P>
+
+<P>Node&lt;T&gt; *np = new Node&lt;T&gt;; 
+np-&gt;datum = i; 
+np-&gt;next = first; 
+first = np; 
+} 
+</P>
+
+<P>.. 
+The argument, i, is of type Twhich is exactly the same type as 
+np-&gt;datum (convenient, huh?). 
+</P>
+
+<P>Alternate way to define member 
+function 
+</P>
+
+<P>template &lt;typename T> 
+</P>
+
+<P>class List { 
+void insertFront(T i); // No code 
+… 
+</P>
+
+<P>}; 
+</P>
+
+<P>// The member code is now outside the class, but still in the 
+// header file 
+template &lt;typename T> 
+void List&lt;T&gt;::insertFront(T i) {
+</P>
+
+<P> Node&lt;T&gt; *np = new Node&lt;T&gt;; 
+np-&gt;datum = i; 
+np-&gt;next = first; 
+first = np; 
+</P>
+
+<P>} 
+</P>
+
+<P>Template code goes in the .h file 
+</P>
+
+<P>.. 
+The compiler creates a new copy of the template code for every 
+instantiated type T. 
+</P>
+
+<P>.. 
+Example: 
+</P>
+
+<P>List&lt;int&gt; li; 
+</P>
+
+<P>List&lt;char&gt; lc; 
+</P>
+
+<P>.. 
+The compiler creates two copies of the List code: 
+</P>
+
+<L>
+<LI>
+<Lbl>1.</Lbl>
+
+<LBody> One compiled with int </LBody>
+</LI>
+
+<LI>
+<Lbl>2.</Lbl>
+
+<LBody> The other compiled with char </LBody>
+</LI>
+</L>
+
+<P>Using Templated Containers 
+</P>
+
+<P>.. 
+To use the templated container, you specify the type T when 
+creating the container object. 
+</P>
+
+<P>// Create a list of integers on the stack 
+List&lt;int&gt; li; 
+li.insertFront(42); 
+</P>
+
+<P>// Create a list of integers on the heap 
+List&lt;int&gt; *lip = new List&lt;int&gt;; 
+lip-&gt;insertFront(42); 
+</P>
+
+<P>Template code goes in the .h file 
+</P>
+
+<P>List.h 
+</P>
+
+<P>template &lt;typename T> 
+</P>
+
+<P>class List { 
+void insertFront(T v) { … } 
+// ... 
+</P>
+
+<P>}; 
+</P>
+
+<P>compiler copies List, compiler copies List, 
+using T=char using T=int 
+</P>
+
+<P>test1.cpp test2.cpp 
+#include &quot;List.h&quot; #include &quot;List.h" 
+List&lt;char&gt; l; List&lt;int&gt; l; 
+</P>
+
+<P>List revisited – using nested types 
+</P>
+
+<P>It is also possible to nest Node within List, since users never need to seethe Node type: 
+</P>
+
+<P>template &lt;typename T> 
+class List { 
+private: 
+</P>
+
+<P>struct Node { 
+T datum; 
+</P>
+
+<P>List&lt;T&gt;::Node is a 
+</P>
+
+<P>Node *next; 
+}; private type and thus visible 
+</P>
+
+<P>public: 
+</P>
+
+<P>to implementations of this 
+</P>
+
+<P>// methods 
+</P>
+
+<P>class’ methods. 
+</P>
+
+<P>// constructors/destructor 
+</P>
+
+<P>private: 
+</P>
+
+<P>Note that Node does not 
+</P>
+
+<P>... 
+}; require an explicit template. 
+</P>
+
+<P>It can make use of T. 
+</P>
+
+<P>Member function using nested Node 
+type 
+</P>
+
+<P>void insertFront(T i) { 
+Node&lt;T&gt; *np = new Node&lt;T&gt;; 
+Node *np = new Node; 
+np-&gt;datum = i; 
+np-&gt;next = first; 
+first = np; 
+</P>
+
+<P>} 
+</P>
+
+<P>.. 
+Note that Node automatically sees T. 
+</P>
+
+<P>Defining member functions outside atemplated class 
+</P>
+
+<P>template &lt;typename T> 
+</P>
+
+<P>class List { 
+void insertFront(T i); // No code 
+… 
+</P>
+
+<P>}; 
+</P>
+
+<P>// The member code is now outside the class, but still in the 
+// header file 
+template &lt;typename T> 
+void List&lt;T&gt;::insertFront(T i) { 
+</P>
+
+<P>Node&lt;T&gt; *np = new Node&lt;T&gt;; // If not using nested type 
+Node *np = new Node; // Using the nested Node type 
+np-&gt;datum = i; 
+np-&gt;next = first; 
+first = np; 
+</P>
+
+<P>} 
+</P>
+
+<P>Containers of values 
+</P>
+
+<P>.. 
+So far, we've inserted and removed elements by value 
+</P>
+
+<P>.. 
+In other words, we copied the things we've inserted into/ 
+removed from the container 
+</P>
+
+<P>.. 
+Example: 42 is copied twice 
+</P>
+
+<P>int main() { 
+</P>
+
+<P>List&lt;int&gt; l; 
+l.insertFront(42); 
+</P>
+
+<P>} 
+</P>
+
+<P>Containers of values 
+</P>
+
+<P>.. 
+Example: 42 is copied twice 
+</P>
+
+<P>int main() { 
+List&lt;int&gt; l; 
+l.insertFront(42); 
+</P>
+
+<P>} 
+</P>
+
+<P>void insertFront(T i){//copied here 
+Node *np = new Node; 
+np-&gt;datum = i; //and copied here 
+np-&gt;next = first; 
+first = np; 
+</P>
+
+<P>} 
+</P>
+
+<P>Containers of values 
+</P>
+
+<P>.. 
+Copying elements by value is fine for types with small 
+representations, for example, built-in types like int 
+</P>
+
+<P>.. 
+This is not true for larger types – any nontrivial struct or class 
+would be expensive to pass by value, because you'll spend all 
+of your time copying 
+</P>
+
+<P>.. 
+Example: 
+</P>
+
+<P>class Gorilla { 
+// OVERVIEW: a big, expensive class 
+// lots of member data ... 
+</P>
+
+<P>}; </P>
+
+<P>Containers of values </P>
+
+<P>class Gorilla { </P>
+
+<P>// OVERVIEW: a big, expensive class ... 
+}; 
+</P>
+
+<P>List&lt;Gorilla&gt; zoo; 
+zoo.insertFront( Gorilla() ); 
+</P>
+
+<P>.. 
+The inserted Gorilla is copied twice! 
+</P>
+
+<P>Option 1: pass by reference 
+</P>
+
+<P>.. 
+Solving the copy problem 
+.. 
+Option 1: pass by reference 
+</P>
+
+<P>void insertFront(const T&amp; i) { //no copy J. 
+Node *np = new Node; 
+</P>
+
+<P>np-&gt;datum = i; //still a copy here L. 
+</P>
+
+<P>np-&gt;next = first; 
+first = np; 
+} 
+</P>
+
+<P>.. 
+This only fixes one copy 
+</P>
+
+<P>Option 2: container of pointers 
+</P>
+
+<P>.. 
+Solving the copy problem 
+.. 
+Option 2: list-of-pointers instead of list-of-values 
+</P>
+
+<P>List&lt;Gorilla*&gt; zoo; 
+Gorilla *colo = new Gorilla; 
+zoo.insertFront(colo); 
+</P>
+
+<P>.. 
+The good news: Gorilla is passed by pointer, no copies! 
+</P>
+
+<P>Container of pointers 
+</P>
+
+<P>.. 
+Solving the copy problem 
+.. 
+Option 2: list-of-pointers instead of list-of-values 
+</P>
+
+<P>List&lt;Gorilla*&gt; zoo; 
+Gorilla *colo = new Gorilla; 
+zoo.insertFront(colo); 
+</P>
+
+<P>zoo 
+</P>
+
+<P>Gorilla* in List 
+Gorilla objects on heap 
+</P>
+
+<P>Container of pointers 
+</P>
+
+<P>.. 
+Solving the copy problem 
+.. 
+Option 2: list-of-pointers instead of list-of-values 
+</P>
+
+<P>List&lt;Gorilla*&gt; zoo; 
+Gorilla *colo = new Gorilla; 
+zoo.insertFront(colo); 
+</P>
+
+<P>.. 
+The good news: Gorilla is passed by pointer, no copies! 
+</P>
+
+<P>.. 
+The bad news: containers-of-pointers are subject to two broad 
+kinds of potential bugs: 
+</P>
+
+<L>
+<LI>
+<Lbl>1.</Lbl>
+
+<LBody> Using an object after it has been deleted </LBody>
+</LI>
+
+<LI>
+<Lbl>2.</Lbl>
+
+<LBody> Leaving an object orphaned by never deleting it </LBody>
+</LI>
+</L>
+
+<P>1. Using an object after it has beendeleted </P>
+
+<P>List&lt;Gorilla*&gt; zoo; 
+Gorilla *colo = new Gorilla; 
+zoo.insertFront(colo); 
+// ... 
+delete colo; // bad! 
+// ... 
+Gorilla *g = zoo.removeFront();//g already 
+</P>
+
+<P>deleted! 
+</P>
+
+<P>1. Using an object after it has beendeleted 
+List&lt;Gorilla*&gt; zoo; 
+Gorilla *colo = new Gorilla; 
+zoo.insertFront(colo); 
+// ... 
+delete colo; // bad! 
+// ... 
+Gorilla *g = zoo.removeFront();//g already 
+</P>
+
+<P>deleted! </P>
+
+<P>zoo </P>
+
+<P>1. Using an object after it has beendeleted 
+List&lt;Gorilla*&gt; zoo; 
+Gorilla *colo = new Gorilla; 
+zoo.insertFront(colo); 
+// ... 
+delete colo; // bad! 
+// ... 
+Gorilla *g = zoo.removeFront();//g already 
+</P>
+
+<P>deleted! </P>
+
+<P>zoo </P>
+
+<P>2. Leaving an object orphaned by never 
+deleting it 
+int main () { 
+List&lt;Gorilla*&gt; zoo; 
+zoo.insertFront(new Gorilla); 
+</P>
+
+<P>} // ~List() is called 
+</P>
+
+<P>.. 
+Problem: destructor removes the Node objects, but not the 
+Gorilla objects 
+</P>
+
+<P>.. 
+You are responsible for managing dynamic memory 
+</P>
+
+<P>2. Leaving an object orphaned by never 
+deleting it 
+int main () { 
+List&lt;Gorilla*&gt; zoo; 
+zoo.insertFront(new Gorilla); 
+</P>
+
+<P>} // ~List() is called 
+</P>
+
+<P>.. 
+Problem: destructor removes the Node objects, but not the 
+Gorilla objects 
+</P>
+
+<P>.. 
+You are responsible for managing dynamic memory 
+</P>
+
+<P>zoo 
+</P>
+
+<P>Gorilla on the heap 
+</P>
+
+<P>2. Leaving an object orphaned by never 
+deleting it 
+int main () { 
+List&lt;Gorilla*&gt; zoo; 
+zoo.insertFront(new Gorilla); 
+</P>
+
+<P>} // ~List() is called </P>
+
+<P>.. Problem: destructor removes the Node objects, but not the Gorilla objects </P>
+
+<P>.. You are responsible for managing dynamic memory </P>
+
+<P>Orphan Gorilla on the heap! </P>
+
+<P>Pattern of use for container-of-ptr </P>
+
+<P>.. 
+Containers do not manage memory outside of themselves 
+.. 
+Container doesn't know what you want to do! 
+</P>
+
+<P>.. 
+Whoever creates memory is responsible for deleting it. 
+.. 
+Every time you create memory with new, you must remove it with 
+delete 
+</P>
+
+<P>Pattern of use for container-of-ptr 
+</P>
+
+<P>Whoever creates memory is responsible for deleting it. 
+</P>
+
+<P>List&lt;Gorilla*&gt; zoo; 
+</P>
+
+<L>
+<LI>
+<Lbl>1. 
+</Lbl>
+Existence: Allocate a Gorilla before inserting it into any 
+container. 
+</LI>
+
+<LI>
+<Lbl>2. 
+</Lbl>
+Ownership: Once it is inserted, do not modify it until it is 
+removed. 
+</LI>
+
+<LI>
+<Lbl>3. 
+</Lbl>
+Conservation: Once it is removed, it must either be 
+deallocated or inserted into some container. Don’t forget to 
+delete at the end! 
+</LI>
+</L>
+
+<P>Pattern of use for container-of-ptr </P>
+
+<P>1. 
+Existence: Allocate a Gorilla before inserting it into any 
+container. 
+// OK 
+List&lt;Gorilla*&gt; zoo; 
+Gorilla *colo = new Gorilla; 
+zoo.insertFront(colo); 
+</P>
+
+<P>// better 
+List&lt;Gorilla*&gt; zoo; 
+zoo.insertFront(new Gorilla); 
+</P>
+
+<P>Pattern of use for container-of-ptr 
+</P>
+
+<P>2. 
+Ownership: Once it is inserted, you cannot modify it until it 
+is removed. 
+List&lt;Gorilla*&gt; zoo; 
+Gorilla *colo = new Gorilla; 
+zoo.insertFront(colo); 
+colo-&gt;set_name(&quot;Bill&quot;); // bad! 
+</P>
+
+<P>.. 
+What if the list was sorted? This could mess up a container’s 
+representation invariant. 
+</P>
+
+<P>Pattern of use for container-of-ptr 
+</P>
+
+<L>
+<L>
+<LI>
+<Lbl>2. 
+</Lbl>
+Ownership: Once it is inserted, you cannot modify it until it 
+is removed. 
+List&lt;Gorilla*&gt; zoo; 
+Gorilla *colo = new Gorilla; 
+zoo.insertFront(colo); 
+// ... 
+Gorilla *g = zoo.removeFront(); //remove 
+g-&gt;set_name(&quot;Bill&quot;); //change 
+zoo.insertFront(g); //replace 
+</LI>
+
+<LI>Pattern of use for container-of-ptr </LI>
+</L>
+
+<LI>
+<Lbl>3. 
+</Lbl>
+Conservation: Once it is removed, it must either be deallocated or 
+inserted into some container. Don’t forget to delete at the end! 
+// bad example 
+List&lt;Gorilla*&gt; zoo; 
+zoo.insertFront(new Gorilla); 
+</LI>
+</L>
+
+<P>zoo.removeFront(); //bad! memory leak! </P>
+
+<P>// good example List&lt;Gorilla*&gt; zoo; zoo.insertFront(new Gorilla); delete zoo.removeFront(); // fixed </P>
+
+<P>Pattern of use for container-of-ptr </P>
+
+<P>3. 
+Conservation: Once it is removed, it must either be 
+deallocated or inserted into some container. 
+// another good example 
+List&lt;Gorilla*&gt; zoo; 
+zoo.insertFront(new Gorilla); 
+Gorilla *g = zoo.removeFront(); 
+// do something with g 
+</P>
+
+<P>delete g; // fixed 
+</P>
+
+<P>Putting it all together 
+</P>
+
+<P>class Gorilla { 
+// OVERVIEW a really big class :) 
+string name; 
+</P>
+
+<P>public: 
+</P>
+
+<P>// construct a Gorilla: set name and print it
+</P>
+
+<P> Gorilla(const string &amp;name_in) : name(name_in) 
+{ cout &lt;&lt; &quot;Gorilla ctor: &quot; &lt;&lt; name &lt;&lt; &quot;\n&quot;; } 
+</P>
+
+<P>// destruct Gorilla and print name 
+</P>
+
+<P>~Gorilla() 
+{ cout &lt;&lt; &quot;Gorilla dtor: &quot; &lt;&lt; name &lt;&lt; &quot;\n&quot;; } 
+</P>
+
+<P>}; 
+</P>
+
+<P>Putting it all together 
+</P>
+
+<P>class Gorilla { 
+// ... 
+Gorilla(const string &amp;name_in) : name(name_in) 
+{ cout &lt;&lt; &quot;Gorilla ctor: &quot; &lt;&lt; name &lt;&lt; &quot;\n&quot;; } 
+~Gorilla() 
+{ cout &lt;&lt; &quot;Gorilla dtor: &quot; &lt;&lt; name &lt;&lt; &quot;\n&quot;; } 
+</P>
+
+<P>}; 
+</P>
+
+<P>int main() { 
+Gorilla colo(&quot;Colo&quot;); 
+return 0; 
+</P>
+
+<P>} 
+</P>
+
+<P>.. 
+What is the output of this code? 
+</P>
+
+<P>Putting it all together 
+</P>
+
+<P>class Gorilla { 
+// ... 
+Gorilla(const string &amp;name_in) : name(name_in) 
+{ cout &lt;&lt; &quot;Gorilla ctor: &quot; &lt;&lt; name &lt;&lt; &quot;\n&quot;; } 
+~Gorilla() 
+{ cout &lt;&lt; &quot;Gorilla dtor: &quot; &lt;&lt; name &lt;&lt; &quot;\n&quot;; } 
+</P>
+
+<P>}; 
+</P>
+
+<P>int main() { 
+Gorilla colo(&quot;Colo&quot;); 
+return 0; 
+</P>
+
+<P>} 
+</P>
+
+<P>Gorilla ctor: Colo 
+Gorilla dtor: Colo 
+</P>
+
+<P>Putting it all together 
+</P>
+
+<P>.. 
+What is the output of this code? 
+</P>
+
+<P>// create dynamic Gorilla objects List&lt;Gorilla*&gt; zoo; </P>
+
+<P>zoo.insertFront(new Gorilla(&quot;Colo&quot;)); 
+zoo.insertFront(new Gorilla(&quot;Koko&quot;)); 
+// do stuff with your zoo ... 
+// delete any memory you created 
+while (!zoo.isEmpty()) 
+</P>
+
+<P>delete zoo.removeFront(); 
+</P>
+
+<P>Putting it all together 
+</P>
+
+<P>.. 
+What is the output of this code? 
+// create dynamic Gorilla objects 
+</P>
+
+<P>List&lt;Gorilla*&gt; zoo; 
+zoo.insertFront(new Gorilla(&quot;Colo&quot;)); 
+zoo.insertFront(new Gorilla(&quot;Koko&quot;)); 
+</P>
+
+<P>// do stuff with your zoo ... 
+</P>
+
+<P>// delete any memory you created 
+</P>
+
+<P>while (!zoo.isEmpty()) 
+delete zoo.removeFront(); 
+</P>
+
+<P>Gorilla ctor: Colo 
+Gorilla ctor: Koko 
+Gorilla dtor: Koko 
+Gorilla dtor: Colo 
+</P>
+
+<P>Exercise: copying container-of-ptr 
+</P>
+
+<P>.. 
+Complete this diagram to include the copy 
+</P>
+
+<P>List&lt;Gorilla*&gt; zoo1; // fill zoo1 
+List&lt;Gorilla*&gt; zoo2(zoo1); // copy 
+</P>
+
+<P>zoo1 
+</P>
+
+<P>List::List(const List &amp;l) 
+: first(0) { 
+copyAll(l); 
+</P>
+
+<P>void IntList::copyAll(const IntList &amp;l) { 
+</P>
+
+<P>} 
+</P>
+
+<P>for (Node *np=l.first; np; np=np-&gt;next) 
+insertBack(np-&gt;datum); 
+} 
+</P>
+
+<P>Exercise: copying container-of-ptr 
+</P>
+
+<P>.. 
+</P>
+
+<P>Answer zoo1 zoo2 </P>
+
+<P>Exercise: copying container-of-ptr </P>
+
+<P>delete zoo2.removeFront(); // what happens? </P>
+
+<P>zoo1 </P>
+
+<P>zoo2 </P>
+
+<P>Exercise: copying container-of-ptr delete zoo2.removeFront(); // what happens? </P>
+
+<P>zoo1 </P>
+
+<P>zoo2 </P>
+
+<P>Exercise: copying container-of-ptr </P>
+
+<P>.. 
+zoo1 now contains an invalid pointer 
+zoo1 
+</P>
+
+<P>zoo2 
+</P>
+
+<P>Deleting a shared object 
+</P>
+
+<P>.. 
+How to delete objects that occur on multiple containers? 
+.. 
+One solution: 
+.. 
+Remove object from all containers before freeing up the object. 
+</P>
+
+<P>// zoo and zoo2 are copies of each other and contain 
+// pointers to the same sequence of Gorilla objects. 
+</P>
+
+<P>while (!zoo.isEmpty()) { 
+// Remove the object from all structures 
+Gorilla *a = zoo.removeFront(); 
+Gorilla *b = zoo2.removeFront(); 
+assert(a == b); // sanity check. 
+// Delete the object. 
+delete a; // Delete the Gorilla object 
+</P>
+
+<P>} 
+</P>
+</TaggedPDF-doc>

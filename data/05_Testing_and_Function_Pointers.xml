@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:48:41-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:48:41-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:48:41-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">05_Testing_and_Function_Pointers.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:5dd95b85-16f6-4ee1-af53-093801abfeaf</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:138911d1-6ec4-4bb3-b234-3a67fcfa64d3</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="05_Testing_and_Function_Pointers.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280 Programming and Introductory Data Structures </P>
+
+<P>blockM-dearborn Testing and Function Pointers </P>
+
+<P>Slides by Andrew DeOrio, </P>
+
+<P>Jeff Ringenberg and </P>
+
+<P>Brian Noble </P>
+
+<P>1 </P>
+
+<P>Goals of Testing </P>
+
+<P>.Ensure that code works as expected .Meet the requirements of the spec </P>
+
+<P>2 </P>
+
+<P>When Testing Goes Wrong </P>
+
+<P>.Patriot missile bug .Persian Gulf war .Missile defense system to detect an incoming missile, then deploy a counter-missile to destroy it. .Needs to happen fast </P>
+
+<P>.Bug in floating point time conversion code </P>
+
+<P>.System failed to intercept a missile .28 killed, 98 injured </P>
+
+<P>3 </P>
+
+<P>When Testing Goes Wrong </P>
+
+<P>.Therac-25 Radiation Therapy Machine (1980’s) .Radiation therapy .Low-power direct electron beam or megavolt X-ray </P>
+
+<P>.Bug in software caused megavolt X-ray instead of low-power 
+.Race condition 
+</P>
+
+<P>.Patients died of radiation poisoning 
+</P>
+
+<P>4 
+</P>
+
+<P>When Testing Goes Wrong 
+</P>
+
+<P>.Knight Capital Group: high-speed stock trading 
+.Goal: buy low, sell high 
+</P>
+
+<P>.August 1, 2012: upgraded software algorithm 
+.Bug: buy high, sell low! 
+</P>
+
+<P>.Cost $440M 
+</P>
+
+<P>5 
+</P>
+
+<P>trades: buy high, 
+then sell low 
+1 ms 
+</P>
+
+<P>Motivation for Testing 
+</P>
+
+<P>.Good testing yields correctly working software products 
+.Good testing yields good scores on projects 
+.Typically, the difference between a good and bad score on a project 
+doesn't have very much to do with your talent as a programmer. It has 
+much more to do with your talents as a tester! 
+</P>
+
+<P>.Testing is not the same as debugging 
+.Testing: Discovering that something is broken. 
+.Debugging: Fixing something once you know it’s broken. 
+</P>
+
+<P>6 
+</P>
+
+<P>Psychology of a Good Tester 
+</P>
+
+<P>.Adversarial frame of mind. 
+</P>
+
+<P>.You must be convinced that the code you are testing is broken 
+and your task is to find out where. 
+.You can NEVER REST and must ALWAYS BE DILIGENT, 
+because the code is NEVER FINISHED! 
+.Everyone makes mistakes, and one essential nature of a 
+mistake is that the person who made it (i.e. YOU) didn't realize 
+it was wrong in the first place – you thought it was perfect! 
+</P>
+
+<P>7 
+</P>
+
+<P>Types of testing 
+</P>
+
+<P>.Unit testing 
+.One piece at a time (e.g., a function) 
+.Find and fix bugs early! Less work. 
+.Test smaller, less complex, easier to understand units. 
+.You just wrote the code: easier to debug 
+</P>
+
+<P>.System testing 
+.Entire project (code base) 
+.Do this after unit testing 
+</P>
+
+<P>.Regression testing 
+.Automatically run all unit and system tests after a code change 
+</P>
+
+<P>8 
+</P>
+
+<P>How to test 
+</P>
+
+<P>1.Understand the specification 
+.Identify the required behaviors 
+</P>
+
+<P>2.Write tests 
+.Code to exercise the design-under-test 
+</P>
+
+<P>3.Check the results 
+.Know the answers in advance 
+</P>
+
+<P>9 
+</P>
+
+<P>Background on lists 
+</P>
+
+<P>.New type list_t 
+.Note: When we define a user type, we often name it with 
+something ending in _t, by convention. 
+.A list can hold a sequence of zero or more integers. It also 
+happens that there is a recursive definition for the values that a 
+list can take. 
+.A valid list is: 
+</P>
+
+<P>either the EMPTY_LIST 
+</P>
+
+<P>or an integer followed by another valid list 
+</P>
+
+<P>10 
+</P>
+
+<P>Background on lists 
+</P>
+
+<P>.Some list functions provided with project 2 
+.list_first( ) takes a list, and returns the first element(an integer) 
+from the list. 
+.list_rest( ) takes a list and returns the list comprising all but the 
+first element. 
+.list_isEmpty( ) takes a list and returns the boolean “true” if the 
+argument is an empty list, and “false” otherwise. 
+</P>
+
+<P>11 
+</P>
+
+<P>Background on lists 
+</P>
+
+<P>.Here are some examples of valid lists: 
+</P>
+
+<P>( 1 2 3 4 ) // a list of four elements 
+</P>
+
+<P>( 2 5 2 ) // a list of three elements </P>
+
+<P>( ) // an empty list </P>
+
+<P>.Example of a list function </P>
+
+<P>list_t reverse(list_t list); </P>
+
+<P>// EFFECTS: returns the reverse of list .Next: let’s test this function </P>
+
+<P>12 </P>
+
+<P>1. Understand the Specification </P>
+
+<P>.For an entire assignment, read through the specification very carefully, and make a note of everything it says you have to do </P>
+
+<P>– and stay away from the computer . 
+.When you write your own functions, you must write those 
+specifications. 
+.Required behaviors: what must and must not happen 
+.A correct implementation must exhibit all of them. 
+</P>
+
+<P>.Note that a required behavior is really a “class” of behaviors. 
+.For example, a program that adds two numbers only has one behavior – 
+add the numbers correctly. 
+.The list of behaviors is not adding 1 and 1 and getting 2, adding 1 and 2 
+and getting 3, etc… 
+</P>
+
+<P>13 
+</P>
+
+<P>1. Understand the Specification </P>
+
+<P>.Example from project 2 spec: </P>
+
+<P>Given this list_t interface, you will write the list processing procedures below </P>
+
+<P>... </P>
+
+<P>list_t reverse(list_t list); </P>
+
+<P>// EFFECTS: returns the reverse of list </P>
+
+<P>14 
+</P>
+
+<P>2. Write Tests </P>
+
+<P>.For each of your required behaviors, write one or more test 
+cases that check them. 
+.To the extent possible, the test case should check exactly one 
+behavior – no more! 
+.That way, if the case fails, you know where to start looking. 
+</P>
+
+<P>15 
+</P>
+
+<P>2. Write Tests </P>
+
+<P>.Simple .“expected” or “normal” inputs </P>
+
+<P>.Boundary conditions .Edges of what is expected .Exploit some detail of implementation </P>
+
+<P>.Nonsense .Clearly unexpected inputs </P>
+
+<P>.Stress tests .Long inputs </P>
+
+<P>16 </P>
+
+<P>2. Write Tests </P>
+
+<P>.Example from project 2 reverse() function .Simple inputs .( 1 2 3 4 5 ) </P>
+
+<P>.Boundary conditions .() // empty list .( 1 ) // one-element list .( 2 2 2 ) // identical elements .( 2 -1 -1 0 ) // mix in negative #’s </P>
+
+<P>.Nonsense .None in this example </P>
+
+<P>17 </P>
+
+<P>Testing Example from Project 2 </P>
+
+<P>// create a list </P>
+
+<P>list_t listA = list_make(); </P>
+
+<P>for (int i = 5; i&gt;0; --i) { </P>
+
+<P>listA = list_make(i, listA); </P>
+
+<P>} </P>
+
+<P>// print list before and after </P>
+
+<P>list_print(listA); cout &lt;&lt; endl; </P>
+
+<P>list_print(reverse(listA)); cout &lt;&lt; endl; 18 ( 1 2 3 4 5 ) ( 5 4 3 2 1 ) </P>
+
+<P>2. Write Tests </P>
+
+<P>.Stress tests 
+.Large and long running test cases. 
+.They must be large, to exercise resource limits in your program. 
+.They must be long running, because some errors are the result of lots of 
+little bugs that individually don't matter much, but as they cascade 
+produces catastrophic results. 
+</P>
+
+<P>19 </P>
+
+<P>3. Check the results </P>
+
+<P>.Do: write down correct answer before running test .Check automatically </P>
+
+<P>.Don’t: quickly run test cases and glance at the output .Could miss something! </P>
+
+<P>20 </P>
+
+<P>3. Check the results .Automatically checking in the test </P>
+
+<P>list_t in = list_make(); // empty list 
+list_t out = reverse(in); // expect empty list 
+if (! list_isEmpty(out) ) { 
+</P>
+
+<P>cout &lt;&lt; “Error” &lt;&lt; endl; 
+exit(1); 
+} 
+</P>
+
+<P>21 
+</P>
+
+<P>3. Check the results .Another way to automatically check a test result </P>
+
+<P>#include &lt;cassert> 
+list_t in = list_make(); // empty list 
+list_t out = reverse(in); // expect empty list 
+assert( list_isEmpty(out) ); 
+</P>
+
+<P>22 
+</P>
+
+<P>assert() 
+#include &lt;cassert> 
+</P>
+
+<P>list_t in = list_make(); // empty list list_t out = reverse(in); // expect empty list assert( list_isEmpty(out) ); </P>
+
+<P>.assert() is a programmer’s friend for testing .Does nothing if list_isEmpty(out) is true .Stops the program and prints an error message if statement is false .asserts that the representation invariant is true </P>
+
+<P>23 </P>
+
+<P>3. Check the results .Automatically checking: diff the outputs </P>
+
+<P># write a test (e.g., list_test.cpp), type # the correct output into list_test.out.correct </P>
+
+<P># run the test and save the output to a file # called.out ./list_test | tee list_test.out </P>
+
+<P># compare the output file against the correct one diff list_test.out.correct list_test.out 24 </P>
+
+<P>3. Check the results </P>
+
+<P>.Automatically checking: diff the outputs .Example </P>
+
+<P>25 list_test.out </P>
+
+<P>( 5 4 3 2 1 ) ( ) </P>
+
+<L>
+<LI>
+<Lbl>(</Lbl>
+
+<LBody> 1 ) 
+</LBody>
+</LI>
+
+<LI>
+<Lbl>(</Lbl>
+
+<LBody> 2 2 2 ) 
+( 0 -1 -1 -1 ) 
+reversed ( 1 2 3 4 5 ) 
+reversed ( ) 
+reversed ( 1 ) 
+reversed ( 2 2 2 ) 
+reversed ( -1 -1 -1 0 ) 
+</LBody>
+</LI>
+</L>
+
+<P>3. Check the results 
+</P>
+
+<P>.As you develop test cases for some code, it pays to write other programs that subject this code to those test cases automatically. .Once you have your test programs, every time you change even the smallest part of your code, you can go back and test all of the behaviors. This is also referred to as regression testing. .If a later case fails, you know it's probably not because of behaviors already tested. Furthermore, if your code has a basic bug, many complex behaviors can be adversely affected. </P>
+
+<P>26 </P>
+
+<P>3. Check the results </P>
+
+<P>.Regression test example using diff strategy .Type make to compile, make test to test </P>
+
+<P>27 Makefile # compile project all: g++ -O2 -Wall -Werror –pedantic \ </P>
+
+<P> -o list_test \ 
+list_test.cpp p2.cpp recursive.cpp 
+</P>
+
+<P># test project 
+</P>
+
+<P>test: 
+./list_test | tee list_test.out 
+diff list_test.out.correct list_test.out 
+</P>
+
+<P>Exercise: Test a Function from P2 
+list_t append(list_t first, list_t second); 
+// EFFECTS: returns the list (first second) 
+</P>
+
+<P>1.Understand the specification 2.Write tests .Write inputs to test </P>
+
+<P>3.Check the results .Write expected outputs </P>
+
+<P>28 </P>
+
+<P>After Testing: Debugging </P>
+
+<P>.If test results differ, three possibilities 1.Code is wrong 2.Test is wrong 3.Spec is wrong (or your understanding of spec is wrong) .Example: create an incorrect solution that satisfies your incorrect expectation! </P>
+
+<P>.To find out: debugging </P>
+
+<P>30 Debugging Strategies </P>
+
+<P>.Read the code </P>
+
+<P>.Remove portions of the code to narrow down error 
+.Temporarily comment it out 
+</P>
+
+<P>.Add print (cout) statements 
+.Add assert() statements 
+.Add a more specific test (shorter is better) 
+.Use a debugger! 
+</P>
+
+<P>31 
+</P>
+
+<P>Debugging Hint for Recursion 
+</P>
+
+<P>.Add a cout statement to the top of your recursive function 
+.Watch the recursion in action 
+</P>
+
+<P>32 
+</P>
+
+<P>$ ./a.out 
+countdown4(1,3) 
+countdown4(2,3) 
+countdown4(3,3) 
+countdown4(4,3) 
+3 
+2 
+1 
+int countdown4(int i, int n) 
+{ 
+</P>
+
+<P>cout &lt;&lt; &quot;countdown4(" 
+</P>
+
+<P>&lt;&lt; i &lt;&lt; &quot;," 
+</P>
+
+<P>&lt;&lt; n &lt;&lt; &quot;)&quot; &lt;&lt; endl; 
+</P>
+
+<P>if (i &gt; n) return 0; 
+</P>
+
+<P>countdown4(i+1, n); 
+</P>
+
+<P>cout &lt;&lt; i &lt;&lt; endl; 
+</P>
+
+<P>return i; 
+</P>
+
+<P>} 
+</P>
+
+<P>Function Pointers </P>
+
+<P>.If you were asked to write a function to add all the elements in a list, and another to multiply all the elements in a list, your functions would be almost exactly the same. .Writing almost the exact same function twice is almost certainly a bad idea. There are two main reasons for this: 1.It’s wasteful of your time. 2.If you find a better way to perform the underlying implementation, you have to change many different versions of the same thing; this is prone to error. </P>
+
+<P>33 </P>
+
+<P>Lists </P>
+
+<P>.Suppose we want to write a (tail-recursive) function to find the smallest element in a list. The recursive definition is: </P>
+
+<P>smallest(list) = the element (if list has only a single element) or the min of the first element and the smallest element from the rest of the list </P>
+
+<P>.Note: This implies that smallest is not defined for the empty list, just like list_first and list_rest are not. </P>
+
+<P>34 </P>
+
+<P>Smallest element: tail-recursive </P>
+
+<P>int small_help(int so_far, list_t list) { if (list_isEmpty(list)) { return so_far; } else { </P>
+
+<P> int candidate = list_first(list); 
+if (candidate &lt; so_far) 
+so_far = candidate; 
+return small_help(so_far, list_rest(list)); 
+} 
+</P>
+
+<P>} 
+</P>
+
+<P>int smallest(list_t list) 
+// REQUIRES: list is not empty 
+// EFFECTS: returns smallest element in the list 
+</P>
+
+<P>{ 
+</P>
+
+<P>return small_help(list_first(list), list_rest(list)); 
+} 
+35 
+</P>
+
+<P>Find the min of first list 
+</P>
+
+<P>item and so_far list_first REQUIRES a non-empty list. Does this solution satisfy that REQUIREMENT in all cases? Why or why not? </P>
+
+<P>Largest element: tail-recursive </P>
+
+<P>.Suppose we now want to write a (tail-recursive) function to find the largest element in a list. The recursive definition is: </P>
+
+<P>largest(list) = the element (if list has only a single element) or the max of the first element and the largest element from the rest of the list </P>
+
+<P>.Note: This implies that largest is not defined for the empty list, just like list_first and list_rest are not. </P>
+
+<P>37 Largest element: tail-recursive int large_help(int so_far, list_t list) { if (list_isEmpty(list)) { return so_far; } else { int candidate = list_first(list); if (candidate &gt; so_far) so_far = candidate; return large_help(so_far, list_rest(list)); } } </P>
+
+<P>int largest(list_t list) // REQUIRES: list is not empty // EFFECTS: returns largest element in the list </P>
+
+<P>{ </P>
+
+<P>return large_help(list_first(list), list_rest(list)); } 38 Find the max of first list </P>
+
+<P>item and so_far </P>
+
+<P>Function Pointers </P>
+
+<P>.largest is almost identical to the definition of smallest. 
+Unsurprisingly the solution is almost identical, too. 
+.In fact, the only differences between smallest and largest are: 
+1.The names of the function 
+2.The comment in the EFFECTS list 
+</P>
+
+<P>3.The polarity of the comparison: &lt; vs. > 
+</P>
+
+<P>.It seems silly to have to write what amounts to almost the same 
+function twice. In fact, it is silly. 
+.Function pointers to the rescue! 
+</P>
+
+<P>39 
+Function Pointers 
+</P>
+
+<P>.So far, we've only defined functions as entities that can be called. 
+However, functions can also be referred to by variables, and passed 
+as arguments to functions. 
+.There are two functions we want to pick between: min() and max(). 
+They are defined as follows: 
+</P>
+
+<P>int min(int a, int b); 
+</P>
+
+<P>// EFFECTS: returns the smaller of a and b. 
+</P>
+
+<P>int max(int a, int b); 
+</P>
+
+<P>// EFFECTS: returns the larger of a and b. 
+</P>
+
+<P>40 
+</P>
+
+<P>Function Pointers 
+</P>
+
+<P>int min(int a, int b); 
+</P>
+
+<P>// EFFECTS: returns the smaller of a and b. 
+</P>
+
+<P>int max(int a, int b); 
+</P>
+
+<P>// EFFECTS: returns the larger of a and b. 
+</P>
+
+<P>.These two functions have precisely the same type signature: 
+.They both take two integers, and return an integer. 
+</P>
+
+<P>.Of course, they do completely different things: 
+.One returns a min and one returns a max. 
+.However, from a syntactic point of view, you call either of them the 
+same way. 
+</P>
+
+<P>Function Pointer syntax 
+</P>
+
+<P>.How do you define a variable that points to a function taking two integers, 
+and returns an integer? 
+.Here's how: 
+</P>
+
+<P>int (*foo)(int, int); 
+</P>
+
+<P>.You read this from &quot;inside out&quot;. In other words: 
+</P>
+
+<P>foo “foo“ 
+(*foo) “is a pointer“ 
+(*foo)( ); “to a function“ 
+(*foo)(int, int); “that takes two integers“ 
+int (*foo)(int, int); “and returns an integer" 
+42 
+</P>
+
+<P>Function Pointer syntax 
+int (*foo)(int, int); 
+</P>
+
+<P>.Once we’ve declared foo, we can assign any function to it: 
+</P>
+
+<P>foo = min; 
+</P>
+
+<P>.Furthermore, after assigning min to foo, we can just call it as 
+follows: 
+foo(3, 5) 
+.…and we'll get back 3! 
+43 
+</P>
+
+<P>Exercise </P>
+
+<P>.Write a function called is_negative( ) .Input is a single int .Output is a bool .Return true if input is negative </P>
+
+<P>.Write a main() function .Define a function pointer call predicate .Input is a single int .Output is a bool </P>
+
+<P>.Assign is_negative() to predicate .Call is_negative() and predicate on several integers </P>
+
+<P>44 </P>
+
+<P>Function Pointers Re-write smallest in terms of function pointers int compare_help(int so_far, list_t list, int (*fn)(int, int)){ if (list_isEmpty(list)) { return so_far; } else { so_far = fn(so_far, list_first(list)); return compare_help(so_far, list_rest(list), fn); } } int smallest(list_t list) // REQUIRES: list is not empty // EFFECTS: returns smallest element in list { </P>
+
+<P> return compare_help(list_first(list),list_rest(list), min); } </P>
+
+<P>46 int min(int a, int b); // EFFECTS: returns the // smaller of a and b. Function Pointers Re-write largest in terms of function pointers </P>
+
+<P>int compare_help(int so_far, list_t list, int (*fn)(int, int)){ if (list_isEmpty(list)) { return so_far; } else { so_far = fn(so_far, list_first(list)); return compare_help(so_far, list_rest(list), fn); } </P>
+
+<P>} </P>
+
+<P>int largest(list_t list) // REQUIRES: list is not empty // EFFECTS: returns largest element in list </P>
+
+<P>{ </P>
+
+<P>return compare_help(list_first(list),list_rest(list), max); } 47 </P>
+
+<P>int max(int a, int b); // EFFECTS: returns the // larger of a and b. </P>
+</TaggedPDF-doc>

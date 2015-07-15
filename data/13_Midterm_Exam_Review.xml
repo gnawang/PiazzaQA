@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:49:01-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:49:01-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:49:01-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">13_Midterm_Exam_Review.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:26505181-c244-4ec0-a2ed-bc525369b7ed</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:89eb27a8-3633-45e3-aa3e-2fa1e1f8a2ab</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="13_Midterm_Exam_Review.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280Programming and Introductory Data Structures </P>
+
+<P>blockM-dearborn Midterm Exam Review </P>
+
+<P>Slides by Andrew DeOrio </P>
+
+<P>Time and location </P>
+
+<P>.Wednesday 26 Feb, 7:00pm (Michigan time) -8:30pm (80min) .Where: (by uniqname) .STAMPS AUD aakashag-ivanbrad .GGBL1504 jackwags-kozdowy .BEYST1670 kploof-mjcar .BEYST1690 mjshen-mursean .DOW1013 mvitez-rshconn .DOW1005 rsoltesz-sjfried .DOW1006 skarl-taykraus .DOW1010 tbourani-woodmatt .DOW1017 wuyuting-zzhiqing </P>
+
+<P>Schedule </P>
+
+<P>.Wednesday (day of exam) .No lecture </P>
+
+<P>.No discussion all week .All office hours following the exam (Thu 27 February -Fri 28 February) are canceled </P>
+
+<P>Policies </P>
+
+<P>.Closed book .Closed notes .One &quot;cheat sheet&quot; .8.5&quot;x11&quot;, double-sided, hand-written, with your name on it </P>
+
+<P>.No calculators or electronics .None needed </P>
+
+<P>.Given under the engineering honor code Engineering honor code </P>
+
+<P>.Exams in the CoEare given under the honor code, which hold that students are honorable and trustworthy people .No proctor .Staff available outside for questions .You must sign the honor pledge on the exam&quot;I have neither given nor received unauthorized aid on this examination, nor have I concealed any violations of the Honor Code.&quot; </P>
+
+<P>Study materials </P>
+
+<P>.Practice exams posted on CTools .Labs .Including optional exercises </P>
+
+<P>.Lecture slides .Exercises from lecture </P>
+
+<P>.Text book .Study groups </P>
+
+<P>Topics </P>
+
+<P>.Everything we have covered up to and including Abstract Data Types .Topics you should definitely study: .Recursion and tail recursion .Lists and trees (project 2) </P>
+
+<P>.Function pointers .Arrays and pointers .Strings and C-Strings .Structs, classes and abstract data types .Structs, enumsand pointers (project 3) </P>
+
+<P>Recursion </P>
+
+<P>Group Exercise: pow(x, y) </P>
+
+<P>.Write a tail-recursive version of the power function that returns 
+x to the power of y. It needs a helper function -why? 
+.Here is a non-tail-recursive, but recursive version of this 
+function: 
+</P>
+
+<P>intpower(intx, inty) { 
+if (y == 0) { 
+return 1; 
+} else { 
+return x * power(x, y-1); 
+} 
+} 
+.Before you begin, why isn't this tail recursive? 
+</P>
+
+<P>Function Pointers 
+</P>
+
+<P>.I couldn’t find anything funny about function pointers on the internet. </P>
+
+<P>Exercise: 
+Use function pointers to write all_even()and all_odd() 
+boolall_of(list_tlist, bool(*fn)(int)) { 
+//EFFECTS: returns true if fnreturns true for all 
+if (list_isEmpty(list)) //base case 
+return true; 
+if (!fn(list_first(list))) //check current item 
+return false; 
+return all_of(list_rest(list), fn); //recurse 
+} 
+.Write these. Use all_of(). Use helper functions. 
+</P>
+
+<P>boolall_even(list_tlist); 
+boolall_odd(list_tlist); 
+</P>
+
+<P>Arrays and pointers 
+</P>
+
+<P>PtrExample 
+void inc(int*x) { 
+cout&lt;&lt; &quot;inc: x=&quot; &lt;&lt; x &lt;&lt; &quot; *x=&quot; &lt;&lt; *x &lt;&lt; endl; 
+x += 1; 
+cout&lt;&lt; &quot;inc: x=&quot; &lt;&lt; x &lt;&lt; &quot; *x=&quot; &lt;&lt; *x &lt;&lt; endl; 
+} 
+intmain (void) { 
+intn = -1; 
+int* p = &amp;n; 
+cout&lt;&lt; &quot;main: p=&quot; &lt;&lt; p &lt;&lt; &quot; *p=&quot; &lt;&lt; *p &lt;&lt; endl; 
+inc(p); 
+cout&lt;&lt; &quot;main: p=&quot; &lt;&lt; p &lt;&lt; &quot; *p=&quot; &lt;&lt; *p &lt;&lt; endl; 
+} 
+.Draw a stack diagram -why is the third line of output different? 
+</P>
+
+<P>.Bonus: what is sizeof(int)on this machine? 
+</P>
+
+<P>output: 
+main: p=0x7fff1e9c958c *p=-1 
+inc : x=0x7fff1e9c958c *x=-1 
+inc : x=0x7fff1e9c9590 *x=513578624 
+main: p=0x7fff1e9c958c *p=-1 
+</P>
+
+<P>Code this 
+//REQUIRES: &quot;a&quot; points to an array of length &quot;size" 
+//EFFECTS: Returns a pointer to the first 
+</P>
+
+<P>// occurrence of &quot;search&quot; in &quot;a&quot;. 
+// Returns NULL if not found. 
+int*find (int*a, unsigned intsize, intsearch); 
+Do not use array indexing, e.g., a[i]or *(a+i) 
+</P>
+
+<P>Strings 
+http://stevehanov.ca/blog/images/c_presentation_03.png 
+Code this 
+//REQUIRES: &quot;s&quot; is a NULL-terminated C-string 
+//EFFECTS: Returns a pointer to the first 
+// occurrence of &quot;search&quot; in &quot;s&quot;. 
+// Returns NULL if not found. 
+char *strchr(char *s, char search); 
+Do not use array indexing, e.g., a[i]or *(a+i) 
+</P>
+
+<P>Structs, Classes, ADTs 
+</P>
+
+<P>http://upload.wikimedia.org/wikipedia/commons/d/da/BjarneStroustrup.jpg 
+</P>
+
+<P>Exercise 
+</P>
+
+<P>.Write a class called Rectangle .Include appropriate member variables .Include a default constructor .Include a second constructor to initialize member variables .Write one set()function that sets all member variables .Include an area()function .Write a print()function .Use publicand privateto expose member functions and hide member variables .Write a main function that defines a Rectanglevariable of size 2x4, calls the print()function, and then calls the area() function </P>
+</TaggedPDF-doc>

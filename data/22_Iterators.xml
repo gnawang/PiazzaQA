@@ -1,0 +1,834 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:49:03-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:49:03-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:49:03-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">22_Iterators.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:db0ae220-cb42-402b-aa0d-7c399b39b920</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:0963b21f-f0d7-4eb5-b489-611fc1fbd91d</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="22_Iterators.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280Programming and Introductory Data Structures </P>
+
+<P>blockM-dearborn Iterators Slides by Andrew DeOrio </P>
+
+<P>Iterator </P>
+
+<P>.An iterator allows you to traverse a container .We’ve seen something like this before with arrays </P>
+
+<P>inta[SIZE]; // fill a 
+for (inti=0; i&lt; SIZE; ++i) 
+cout&lt;&lt; a[i] &lt;&lt; endl; 
+.How would you do this for a linked list, like our Listtype? 
+</P>
+
+<P>Overview 
+</P>
+
+<P>.So far, we've looked at several different kinds of abstractions: 1.Procedural abstraction (functions, function pointers) 2.Data abstraction (Abstract Data Types /ADTs) </P>
+
+<P>.Today, we will use procedural abstraction and data abstraction to iterate over a container </P>
+
+<P>Where we are going </P>
+
+<P>.In the end, our iterator will work a lot like using a pointer to traverse an array </P>
+
+<P>inta[SIZE]; // fill a 
+for (int*p=a; p &lt;a+SIZE; ++p) 
+cout&lt;&lt; *p&lt;&lt; endl; 
+List&lt;int&gt; l; // fill l 
+for (List&lt;int&gt;::Iterator i=l.begin(); 
+i!= l.end(); ++i) 
+</P>
+
+<P>cout&lt;&lt; *i&lt;&lt; endl; 
+You can think of an iterator as a class pretending to be a pointer. 
+</P>
+
+<P>Where we are going 
+List&lt;int&gt; l; // fill l 
+for (List&lt;int&gt;::Iterator i=l.begin(); 
+i!= l.end(); ++i) 
+cout&lt;&lt; *i&lt;&lt; endl; 
+i 
+./a.out 
+23 
+next: 
+datum: 
+next: 
+datum: 
+2 
+3 
+first 
+List 
+</P>
+
+<P>Introduction to Iterators 
+</P>
+
+<P>.Each item in the container will be returned exactly once .In general, an iterator makes no guarantee about the order in which objects are returned, though it is possible to define specific iterators with such a guarantee (like when working with sorted lists). .Usually, for each container type, there is also (at least) one iterator type. </P>
+
+<P>Iterator functions 1.Createan iterator with a constructor </P>
+
+<P>2.Getthe Tat the iterator’s current position 3.Movethe iterator to the next position 4.Comparetwo iterators </P>
+
+<P>List&lt;int&gt; l; // fill l 
+for (List&lt;int&gt;::Iterator i=l.begin(); 
+i!= l.end(); ++i) 
+cout&lt;&lt; *i&lt;&lt; endl; 
+</P>
+
+<P>Review: operator overloading 
+</P>
+
+<P>.Operator overloadinglets us customize what happens when we use a built-in symbol .Example: we overloaded the assignment operator in our IntSet </P>
+
+<P>intmain() { 
+IntSetis1(3); 
+IntSetis2(6); 
+is2 = is1; 
+} 
+.Here, we changed what the equals &quot;=&quot; sign does, by doing a 
+</P>
+
+<P>deep copy instead of a shallow copy .We can also overload other operators </P>
+
+<P>class IntSet{ 
+//... 
+//EFFECTS: assignment operator does 
+// a deep copy 
+IntSet&amp;operator= (constIntSet&amp;rhs); 
+}; 
+</P>
+
+<P>Implementation 
+</P>
+
+<P>.So, for this example, we'll have two classes: 
+.One Listclass, that holds T’s. 
+.One Iteratorclass, that returns each Tin the List 
+</P>
+
+<P>template &lt;typenameT> 
+class List { 
+// ... 
+}; 
+class Iterator { 
+// ... 
+}; 
+</P>
+
+<P>Implementation 
+</P>
+
+<P>.This brings us to two problems 1.For the Iteratorto do its job, it needs to have access to the Nodetype, which is a private type inside List 2.The Iteratorneeds return a type T, which should be the exact same type Tthat is inside the List </P>
+
+<P>Implementation </P>
+
+<P>.We can solve both problems by declaring the Iteratorclass inside the Listclass </P>
+
+<P>template &lt;typenameT> 
+class List { 
+// ... 
+public: 
+class Iterator { 
+// ... 
+}; 
+}; 
+From the outside, we can refer 
+</P>
+
+<P>to our new Iteratorclass by 
+</P>
+
+<P>specifying the scope: List&lt;int&gt;::Iterator </P>
+
+<P>Implementation </P>
+
+<P>.Now, let’s choose a concrete representation .The only thing the Iterator has to do is keep track of is the current node .We can use a Node*pointer to do this </P>
+
+<P>next: datum: next: datum: 2 3 first List Iterator node_ptr </P>
+
+<P>Implementation </P>
+
+<P>.Iteratorhas only one member variable: node_ptr .The invariant on node_ptris that it points to the current node in the underlying List, and 0(AKA NULL) otherwise </P>
+
+<P>template &lt;typenameT> 
+class List { 
+structNode { // same as before 
+Node *next; 
+T datum; 
+}; 
+// ... 
+public: 
+</P>
+
+<P>class Iterator { 
+Node* node_ptr; 
+// ... 
+}; 
+}; 
+List does not 
+</P>
+
+<P>need to change! 
+</P>
+
+<P>Implementation 
+</P>
+
+<P>.Now we can declare our member functions, one for each of the four behaviors we talked about </P>
+
+<P>class Iterator { 
+Node* node_ptr; 
+public: 
+Iterator(); // Create 
+T&amp; operator* () const; // Get 
+Iterator&amp; operator++ (); // Move 
+booloperator!= (Iterator rhs) const;//Compare 
+}; 
+</P>
+
+<P>Implementation 
+Iterator(); // Create new Iterator 
+T&amp; operator* () const; // Get T from node 
+Iterator&amp; operator++ ();// Move to next node 
+booloperator!= (Iterator rhs) const; 
+// Compare two Iterators 
+intmain() { 
+List&lt;int&gt; l; // fill l 
+</P>
+
+<P>for (List&lt;int&gt;::Iterator i=l.begin(); 
+i!= l.end(); ++i) 
+cout&lt;&lt; *i&lt;&lt; endl; 
+} 
+</P>
+
+<P>Create new Iterator: Iterator() 
+</P>
+
+<P>.Now we can define (implement) each Iteratormethod. .For short functions (~1 line), it’s OK to implement them directly in the class declaration. This is called an in lineimplementation. .The constructor establishes the invariant on node_ptr .Think of this as an Iterator“past the end” of the List </P>
+
+<P>class List { 
+// ... 
+class Iterator { 
+Node* node_ptr; 
+public: 
+Iterator() : node_ptr(0) {} 
+// “past the end” by default 
+// ... 
+}; 
+}; 
+</P>
+
+<P>GetTat the iterator’s current position 
+</P>
+
+<P>.The dereference operator returns a reference to the datum at the current Iterator position </P>
+
+<P>class List { 
+// ... 
+class Iterator { 
+Node* node_ptr; 
+public: 
+</P>
+
+<P>T&amp; operator* () const 
+{ return node_ptr-&gt;datum; } 
+// ... 
+}; 
+}; 
+</P>
+
+<P>GetTat the iterator’s current position 
+</P>
+
+<P>T&amp; operator* () const 
+</P>
+
+<P>{ return node_ptr-&gt;datum; } 
+</P>
+
+<P>.Question: node_ptrpoints to a List&lt;T&gt;::Node that was created by the Listimplementation. Why can an Iteratorfunction access it and its data members? .Answer: the Iteratorhas a pointer to the Nodecreated by the List, and the Node‘s data members are all public because it is a struct. </P>
+
+<P>constmember functions </P>
+
+<P>T&amp; operator* () const </P>
+
+<P>{ return node_ptr-&gt;datum; } </P>
+
+<P>.This is a new use of const, and it means “this member function promises not to modify any member variable” .Review: 3 uses of const: 1.constint* p; // the pointed-to object cannot change 2.int*constp; // the pointer cannot change 3.void foo() const; // member function cannot change member variable </P>
+
+<P>Move to next position: operator++ 
+.The prefix increment operator moves to the next Listnode 
+</P>
+
+<P>class List { 
+// ... 
+class Iterator { 
+</P>
+
+<P>Node* node_ptr; 
+public: 
+Iterator&amp; operator++ () { 
+node_ptr = node_ptr-&gt;next; 
+return *this; 
+} 
+// ... 
+}; 
+}; 
+</P>
+
+<P>Prefix increment: operator++ 
+Iterator&amp; operator++ () { 
+node_ptr= node_ptr-&gt;next; 
+return *this; 
+} 
+.Moves Iteratorto the next node 
+</P>
+
+<P>.REQUIRES that Iteratoris not “past the end” 
+.Why does it return *this ? 
+.So you can do cool things like ++++myIteratoror Iterator 
+j = ++i; 
+</P>
+
+<P>Comparing Iterators: operator!= 
+</P>
+
+<P>.Now, we need a way to compare two iterators 
+.Overload operator!=to achieve this 
+</P>
+
+<P>class List { 
+// ... 
+class Iterator { 
+Node* node_ptr; 
+</P>
+
+<P>public: 
+booloperator!= (Iterator rhs) const 
+{ return node_ptr!= rhs.node_ptr; } 
+// ... 
+}; 
+}; 
+</P>
+
+<P>Comparing Iterators: operator!= 
+booloperator!= (Iterator rhs) const 
+{ return node_ptr!= rhs.node_ptr; } 
+.Compares “this” Iteratorwith the input Iterator 
+</P>
+
+<P>.Howto tell if two Iterators are at the same position? If they point to the same List::Node </P>
+
+<P>Comparing Iterators: operator!= 
+// in List.h: 
+booloperator!= (Iterator rhs) const 
+{ return node_ptr!= rhs.node_ptr; } 
+// main.cpp : 
+#include “List.h” 
+intmain() { 
+List&lt;int&gt; l; // fill l 
+for (List&lt;int&gt;::Iterator i=l.begin(); 
+i!=l.end(); ++i) 
+cout&lt;&lt; *i&lt;&lt; endl; 
+} 
+</P>
+
+<P>The missing piece 
+</P>
+
+<P>.We can now 
+1.Createan iterator with a constructor ( Iterator()) 
+</P>
+
+<P>2.Getthe Tat the iterator’s current position (operator*) 3.Movethe iterator to the next position (operator++) 4.Comparetwo iterators (operator!=) </P>
+
+<P>List&lt;int&gt; l; // fill l 
+for (List&lt;int&gt;::Iterator i=l.begin(); 
+i!= l.end(); ++i) 
+cout&lt;&lt; *i&lt;&lt; endl; 
+</P>
+
+<P>The missing piece 
+</P>
+
+<P>.How do we know where to start? Where to end? 
+.Need to ask the list! 
+.Typically implemented as member functions called begin() 
+and end()inside the container, not in the iterator. 
+</P>
+
+<P>List&lt;int&gt; l; // fill l 
+for (List&lt;int&gt;::Iterator i=l.begin(); 
+i!= l.end(); ++i) 
+cout&lt;&lt; *i&lt;&lt; endl; 
+</P>
+
+<P>Implementing end() 
+</P>
+
+<P>.end()is a Listmember function .Returns a default Iteratorobject, “past the end” position </P>
+
+<P>class List { 
+// ... 
+class Iterator { /*...*/ }; 
+Iterator end() const 
+{ return Iterator(); } 
+}; 
+Iterator() 
+</P>
+
+<P>: node_ptr(0) {} 
+</P>
+
+<P>next: 
+datum: 
+next: 
+datum: 
+2 
+3 
+first 
+</P>
+
+<P>Implementing begin() 
+</P>
+
+<P>.begin()is also a Listmember function, just like end() .Returns an Iteratorobject pointing to first Listposition </P>
+
+<P>class List { 
+Node *first; // points to first list Node 
+// ... 
+class Iterator { /*...*/ }; 
+Iterator begin() const 
+{ return Iterator(first); } 
+}; 
+next: 
+datum: 
+next: 
+datum: 
+2 
+3 
+first 
+</P>
+
+<P>Implementing begin() 
+</P>
+
+<P>.Now we need another Iteratorconstructor with a Node*input .No one outside the Listclass should see this, so make it private </P>
+
+<P>class List { 
+// ... 
+class Iterator { 
+// ... 
+private: 
+Iterator(Node* p) : node_ptr(p) {} 
+}; 
+Iterator begin() const 
+{ return Iterator(first); } 
+}; 
+</P>
+
+<P>Implementing begin() 
+</P>
+
+<P>.Now we have another problem .Iterator(Node* p) is private to the Iteratorclass .begin() is a member function of List, not Iterator .Therefore, begin() cannot access Iterator(Node* p) .Bad solution: make it public. .This exposes the representation to clients, leaving the implementation unsafe. </P>
+
+<P>.Good Solution: friendclasses </P>
+
+<P>friend classes </P>
+
+<P>.The frienddeclaration allows you to expose the private members of one class to another class (and only that class). .The methods inside Listnow have access to the private members of Iterator </P>
+
+<P>class List { // ... class Iterator { </P>
+
+<P>// ... 
+friend class List; 
+}; 
+}; 
+</P>
+
+<P>friend classes 
+class List { 
+// ... 
+class Iterator { 
+// ... 
+private: 
+Iterator(Node* p) 
+: node_ptr(p) {} 
+friend class List; 
+}; 
+Iterator begin() const 
+{ return Iterator(first); } 
+}; 
+Now, begin() can access 
+</P>
+
+<P>Iterator(Node* p), but 
+</P>
+
+<P>clients of Listcannot. Understanding that friendship is something given, not taken, will help you remember that &quot;friend class List;&quot; goes inside Iterator, not the other way around. </P>
+
+<P>Putting it all together: recap 
+class List { 
+// ... 
+class Iterator { 
+</P>
+
+<P>Node* node_ptr; 
+// ... 
+}; 
+}; 
+Iteratorgoes inside 
+</P>
+
+<P>List Store a pointer to the current Listposition </P>
+
+<P>Putting it all together: recap 
+class List { 
+// ... 
+class Iterator { 
+// ... 
+Iterator() : node_ptr(0) {} 
+T&amp; operator* () const 
+{ return node_ptr-&gt;datum; } 
+// ... 
+}; 
+}; 
+Construct a default Iterator, 
+</P>
+
+<P>which points to “past the end” Return the datum (of type T) at the current Iteratorposition </P>
+
+<P>Putting it all together: recap 
+class List { 
+// ... 
+class Iterator { 
+// ... 
+</P>
+
+<P>Iterator&amp; operator++ () { 
+node_ptr= node_ptr-&gt;next; 
+return *this; 
+} 
+booloperator!= (Iterator rhs) const 
+{ return node_ptr!= rhs.node_ptr; } 
+// ... 
+}; 
+}; 
+Move to the next Listnode 
+Compare two Iterators 
+</P>
+
+<P>Putting it all together: recap 
+class List { 
+// ... 
+class Iterator { 
+// ... 
+private: 
+Iterator(Node* p) : node_ptr(p) {} 
+// ... 
+}; 
+}; 
+Construct an Iteratorat a specific position 
+This method is only for 
+</P>
+
+<P>internal use, so it is private. </P>
+
+<P>Putting it all together: recap class List { </P>
+
+<P>// ... 
+class Iterator { 
+//... 
+friend class List; 
+}; 
+Iterator begin() const 
+{ return Iterator(first); } 
+Iterator end() const 
+{ return Iterator(); } 
+}; 
+Return an Iteratorto the 
+</P>
+
+<P>first position in the List 
+</P>
+
+<P>Return an Iterator“past the end” of the List frienddeclaration so that </P>
+
+<P>List::begin() can </P>
+
+<P>access private constructor </P>
+
+<P>Putting it all together: example 
+.We now have a Listand Iteratorthat work just like STL! 
+</P>
+
+<P>List&lt;int&gt; l; 
+l.insertFront( 3 ); 
+l.insertFront( 2 ); 
+l.insertFront( 1 ); 
+for (List&lt;int&gt;::Iterator i=l.begin(); 
+i!= l.end(); ++i) { 
+cout&lt;&lt; *i&lt;&lt; &quot; &quot;; 
+} 
+cout&lt;&lt; endl; 
+</P>
+
+<P>./a.out 1 2 3 </P>
+
+<P>Using iterators </P>
+
+<P>.This allows us to write any number of algorithms that must 
+examine every entry of a list, without: 
+.Needing to understand the mechanics of how Lists actually work. 
+.Requiring that the designer of the Listclass knew everything that the 
+client wanted in advance. 
+</P>
+
+<P>.In other words, we have successfully created a function 
+abstraction to access a container 
+</P>
+
+<P>Using iterators 
+</P>
+
+<P>.Since the Iteratoris an object, we can have more than one 
+pointing to the same List 
+</P>
+
+<P>List&lt;int&gt; l; // initialize to ( 1 2 3 ) List&lt;int&gt;::Iterator i=l.begin(); // i-&gt;1 List&lt;int&gt;::Iterator j=i; // j-&gt;1 ++i; // i-&gt;2 cout&lt;&lt; &quot;*i= &quot; &lt;&lt; *i&lt;&lt; endl; cout&lt;&lt; &quot;*j = &quot; &lt;&lt; *j &lt;&lt; endl; ./a.out *i= 2 *j = 1 </P>
+
+<P>Exercise: multiple iterators </P>
+
+<P>.Write a function to check a list for duplicates .Here is code that works for an array </P>
+
+<P>//EFFECTS: returns true if a contains no duplicates boolnoDuplicates(inta[], intsize) { </P>
+
+<P>for (inti=0; i&lt;size; ++i) { 
+for (intj=i+1; j&lt;size; ++j) { 
+if (a[i] == a[j]) return false; 
+} 
+} 
+return true; 
+} 
+.Write a new version of noDuplicatesfor a List&lt;int> 
+</P>
+
+<P>Discussion 
+</P>
+
+<P>.Our Iterator class has one member variable “Node 
+*node_ptr” which is a pointer to dynamically allocated 
+memory. 
+.Question: do we need to implement the Big Three? Why? 
+</P>
+
+<P>Iterator invalidation 
+</P>
+
+<P>.Once an iterator is created, if the underlying container is 
+modified, the iterator may become invalid. 
+.This is dependent on the container 
+</P>
+
+<P>.If the iterator is invalidated, its behavior is undefined, much 
+like an invalid pointer. 
+.The intuition behind this is that the iterator depends on the 
+representation of the container –if that changes, the iterator is 
+likely to miss an element or return an element that no longer 
+exists. 
+</P>
+
+<P>Iterator invalidation .Bad example: </P>
+
+<P>List&lt;int&gt; l; // fill with ( 1 2 3 ) List&lt;int&gt;::Iterator i= l.begin(); // i-&gt;1 l.removeFront(); // l is now ( 2 3 ) cout&lt;&lt; *i&lt;&lt; endl; // i’s node was removed! </P>
+
+<P>.What happens to i? .inow points to a node that was deleted by List .The datum of iis now undefined </P>
+
+<P>Iterator invalidation 
+.Bad example: 
+</P>
+
+<P>List&lt;int&gt; l; 
+l.insertFront( 1 ); 
+List&lt;int&gt;::Iterator i=l.begin(); 
+++i; ++i; // oops, went off the end! 
+.It’s yourresponsibility to keep your Iteratorwithin the 
+</P>
+
+<P>bounds of the container 
+</P>
+
+<P>./a.out 
+Segmentationfault(coredumped) 
+</P>
+
+<P>Pro tip: use assert() 
+Iterator&amp; operator++ () { 
+assert(node_ptr); 
+node_ptr= node_ptr-&gt;next; 
+return *this; 
+} 
+.Pro tip: use assert()to help find bugs in your program 
+</P>
+
+<P>.Stops execution if you try to use an iterator “past the end” 
+</P>
+
+<P>a.out: List.h:85: List&lt;T&gt;::Iterator& 
+List&lt;T&gt;::Iterator::operator++() [withT = int, 
+List&lt;T&gt;::Iterator= List&lt;int&gt;::Iterator]: Assertion`node_ptr' failed. 
+</P>
+
+<P>Aborted(coredumped) 
+</P>
+
+<P>Putting it all together 
+.Recall last lecture: 
+</P>
+
+<P>class Gorilla { 
+// OVERVIEW a really big class :) 
+string name; 
+public: 
+Gorilla(conststring &amp;name_in) : name(name_in) 
+{ cout&lt;&lt; &quot;Gorilla ctor: &quot; &lt;&lt; name &lt;&lt; &quot;\n&quot;; } 
+~Gorilla() 
+{ cout&lt;&lt; &quot;Gorilla dtor: &quot; &lt;&lt; name &lt;&lt; &quot;\n&quot;; } 
+string get_name() { return name; } // new 
+}; 
+</P>
+
+<P>Putting it all together 
+List&lt;Gorilla*&gt; zoo; 
+zoo.insertFront(new Gorilla(&quot;Colo&quot;)); 
+zoo.insertFront(new Gorilla(&quot;Koko&quot;)); 
+.Destructors haven’t run yet, since we’re still coding . 
+</P>
+
+<P>Gorillactor: Colo 
+Gorillactor: Koko 
+</P>
+
+<P>Putting it all together 
+List&lt;Gorilla*&gt; zoo; 
+zoo.insertFront(new Gorilla(&quot;Colo&quot;)); 
+zoo.insertFront(new Gorilla(&quot;Koko&quot;)); 
+for (List&lt;Gorilla*&gt;::Iterator i=zoo.begin(); 
+i!= zoo.end(); ++i) { 
+</P>
+
+<P>Gorilla *g = *i; 
+cout&lt;&lt; g-&gt;get_name() &lt;&lt; endl; 
+} 
+Gorillactor: Colo 
+Gorillactor: Koko 
+Koko 
+Colo 
+dereferences Iterator, returning a Gorilla* 
+dereferences Gorilla*, calling 
+</P>
+
+<P>member function get_name() 
+</P>
+
+<P>Putting it all together 
+List&lt;Gorilla*&gt; zoo; 
+zoo.insertFront(new Gorilla(&quot;Colo&quot;)); 
+zoo.insertFront(new Gorilla(&quot;Koko&quot;)); 
+for (List&lt;Gorilla*&gt;::Iterator i=zoo.begin(); 
+i!= zoo.end(); ++i) 
+cout&lt;&lt; (**i).get_name() &lt;&lt; endl; 
+Gorillactor: Colo 
+Gorillactor: Koko 
+Koko 
+Colo 
+dereferences Iterator, 
+</P>
+
+<P>returning a Gorilla* 
+</P>
+
+<P>dereferences Gorilla*, returning a Gorilla&amp; calls Gorillamember </P>
+
+<P>function </P>
+
+<P>Putting it all together </P>
+
+<P>List&lt;Gorilla*&gt; zoo; 
+zoo.insertFront(new Gorilla(&quot;Colo&quot;)); 
+zoo.insertFront(new Gorilla(&quot;Koko&quot;)); 
+for (List&lt;Gorilla*&gt;::Iterator i=zoo.begin(); 
+i!= zoo.end(); ++i) 
+cout&lt;&lt; (**i).get_name() &lt;&lt; endl; 
+for (List&lt;Gorilla*&gt;::Iterator i=zoo.begin(); 
+i!= zoo.end(); ++i) { 
+delete *i; *i=0; 
+} 
+cout&lt;&lt; endl; 
+Gorillactor: Colo 
+Gorillactor: Koko 
+Koko 
+Colo 
+Gorilladtor: Koko 
+Gorilladtor: Colo 
+Need to clean up after yourself: if 
+</P>
+
+<P>you call new, you must call delete. 
+</P>
+</TaggedPDF-doc>

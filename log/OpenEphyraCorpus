@@ -1,0 +1,56 @@
+<factoid>
+	<time>
+		Fri Jun 05 02:00:51 EDT 2015
+	</time>
+	<question>
+		Where do I find the project 1 spec?
+	</question>
+	<normalization>
+		where do i find the project 1 spec
+	</normalization>
+	<answertype>
+		NElocation
+	</answertype>
+	<querystring>
+		find project spec
+	</querystring>
+	<querystring>
+		(find OR bump OR chance OR encounter OR happen) (project OR task OR labor OR undertaking) (spec OR specification)
+	</querystring>
+	<querystring>
+		"I find the project 1 spec in"
+	</querystring>
+	<querystring>
+		"I find the project 1 spec at"
+	</querystring>
+	<querystring>
+		find project spec
+	</querystring>
+	<querystring>
+		(find OR bump OR chance OR encounter OR happen) (project OR task OR labor OR undertaking) (spec OR specification)
+	</querystring>
+	<querystring>
+		"I find the project 1 spec in"
+	</querystring>
+	<querystring>
+		"I find the project 1 spec at"
+	</querystring>
+<factoid>
+	<time>
+		Fri Jun 05 16:54:11 EDT 2015
+	</time>
+	<question>
+		What is Project 1 located?
+	</question>
+	<normalization>
+		what be project 1 locate
+	</normalization>
+	<querystring>
+		Project located
+	</querystring>
+	<querystring>
+		(Project OR task OR labor OR undertaking) (located OR "turn uped")
+	</querystring>
+	<querystring>
+		"Project 1 is located"
+	</querystring>

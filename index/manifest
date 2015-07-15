@@ -1,0 +1,14 @@
+<parameters>
+	<field>
+		<name>p</name>
+		<numeric>true</numeric>
+		<parserName>NumericFieldAnnotator</parserName>
+	</field>
+	<indexCount>3</indexCount>
+	<indexes>
+		<index>2</index>
+	</indexes>
+	<injectURL>true</injectURL>
+	<normalize>true</normalize>
+</parameters>
+

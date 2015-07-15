@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:49:01-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:49:01-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:49:01-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">15_Container_ADTs.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:fba1c77e-bd96-400d-80cd-370326038e6e</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:e604a8b0-303d-4ad3-ad79-26972ab108fd</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="15_Container_ADTs.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280Programming and Introductory Data Structures 
+</P>
+
+<P>blockM-dearborn 
+Container ADTs 
+</P>
+
+<P>Slides by Andrew DeOrio, 
+</P>
+
+<P>Jeff Ringenberg 
+</P>
+
+<P>and Brian Noble 
+</P>
+
+<P>Abstract Data Types Review 
+</P>
+
+<P>.Abstract data types provide two main advantages: 
+.Information hiding: we don't need to know the details of how 
+the object is represented, nor do we need to know how the 
+operations on those objects are implemented. 
+.Encapsulation: the objects and their operations are defined in 
+the same place; the ADT combines both data and operation in 
+one entity. 
+</P>
+
+<P>Containers 
+</P>
+
+<P>.The purpose of a containeris to hold other objects 
+.For example, an array can hold integers: 
+intarray[10]; 
+a[4] = 517; 
+.What if we want more features in our container? Say, a set of 
+integers. 
+.This is a “set” in the mathematical sense: A collection of 
+zero or more integers, with no duplicates. 
+</P>
+
+<P>Set abstraction 
+</P>
+
+<P>.Let's create an abstraction that holds a set of integers 
+.There are four operations on this set that we will define: 
+.Insert a value into the set 
+.Remove a value from the set 
+.Query to see if a value is in the set 
+.Count the number of elements in the set 
+</P>
+
+<P>IntSetDeclaration 
+</P>
+
+<P>class IntSet{ 
+</P>
+
+<P>public: 
+IntSet(); 
+void insert(intv); 
+void remove(intv); 
+boolquery(intv) const; 
+intsize() const; 
+//... 
+}; 
+</P>
+
+<P>IntSetDeclaration 
+class IntSet{ 
+//... 
+//EFFECTS: returns true if v is in set, 
+//false otherwise 
+boolquery(intv) const; 
+//EFFECTS: returns |set| 
+intsize() const; 
+//... 
+}; 
+</P>
+
+<P>IntSetRepresentation 
+class IntSet{ 
+public: 
+IntSet(); 
+void insert(intv); 
+void remove(intv); 
+boolquery(intv) const; 
+intsize() const; 
+</P>
+
+<P>}; 
+</P>
+
+<P>.The class is incomplete because we haven't chosen a 
+representation for sets 
+.Choosing a representation involves two things: 
+1.Deciding what concrete data elements will be used to 
+represent the values of the set 
+2.Providing an implementation for each method 
+</P>
+
+<P>IntSetRepresentation 
+</P>
+
+<P>class IntSet{ 
+</P>
+
+<P>public: 
+</P>
+
+<P>IntSet(); 
+</P>
+
+<P>void insert(intv); 
+</P>
+
+<P>void remove(intv); 
+</P>
+
+<P>boolquery(intv) const; 
+</P>
+
+<P>intsize() const; 
+</P>
+
+<P>}; 
+</P>
+
+<P>.Despite not having a representation for a set, the (incomplete) 
+declaration is all that a customerof the IntSetabstraction 
+needs to know since it has: 
+.The general overview of the ADT. 
+.The specification of each method. 
+</P>
+
+<P>IntSetRepresentation 
+</P>
+
+<P>.Start with a representation invariant for the set: 
+.Use an array 
+.Represent a set of size N as an unordered array of integers with 
+no duplicates, stored in the first N slots of the array. 
+.intelts_size: equal to the number of elements currently 
+in the array. 
+</P>
+
+<P>IntSetRepresentation </P>
+
+<P>.Since this is an array, and arrays have maximum sizes, we have 
+to choose a maximum sizeintELTS_CAPACITY = 100; 
+.100 is arbitrary, but soon we'll get to dynamic memory . 
+</P>
+
+<P>.Include the size in the OVERVIEW//OVERVIEW: mutable set of ints, 
+|set|&lt;=ELTS_CAPACITY 
+.Account for full sets in the REQUIRESclause for insert: 
+//REQUIRES: set is not full//MODIFIES: this//EFFECTS: set=set+{v} 
+void insert(intv); 
+</P>
+
+<P>IntSet::size() 
+class IntSet{ 
+//OVERVIEW: mutable set of ints,|set|&lt;=ELTS_CAPACITY 
+intelts[ELTS_CAPACITY]; 
+intelts_size; 
+public: 
+static constintELTS_CAPACITY = 100; 
+void insert(intv); 
+void remove(intv); 
+boolquery(intv) const; 
+intsize() const; 
+}; 
+</P>
+
+<P>static Member Variables 
+class IntSet{ 
+public: 
+static constintELTS_CAPACITY = 100; 
+}; 
+.staticmeans &quot;there's only one" 
+</P>
+
+<P>.All instances of the class share this member variable 
+</P>
+
+<P>.A lot like a global variable </P>
+
+<P>.constmeans &quot;you can't change this" 
+</P>
+
+<P>static is Confusing! 
+static intadd(inta, intb) { 
+return a + b; 
+} 
+.Static function: visible only inside one file (internal linkage) 
+</P>
+
+<P>class IntSet{ 
+public: 
+static constintELTS_CAPACITY = 100; 
+}; 
+.Static member variable: all instances of the IntSetclass 
+</P>
+
+<P>share this member variable 
+</P>
+
+<P>IntSet::size() 
+class IntSet{ 
+intelts[ELTS_CAPACITY]; 
+intelts_size; 
+public: 
+static constintELTS_CAPACITY = 100; 
+void insert(intv); 
+void remove(intv); 
+boolquery(intv) const; 
+intsize() const; 
+}; 
+intIntSet::size() const{ 
+return elts_size; 
+</P>
+
+<P>} 
+</P>
+
+<P>Given this 
+representation, and 
+the representation 
+invariants, we can 
+write the methods. 
+</P>
+
+<P>Because our rep invariant 
+says that elts_sizeis 
+always thesize of the set, we can 
+return it directly 
+</P>
+
+<P>Searching IntSet 
+</P>
+
+<P>.Next, consider the three final member functions: 
+.query: searchthe array looking for a specific number 
+.remove: searchthe array for a number; if it exists, remove it 
+.insert: searchthe array for a number; if it doesn't exist, add it 
+</P>
+
+<P>.All three of these have searchin common. 
+.One might be tempted to just write insertand removein 
+terms of query, but removewon't work that way. 
+.Queryonly tells us whetherthe element exists, not where– 
+we need one more method 
+</P>
+
+<P>IntSet::indexOf() 
+class IntSet{ 
+intelts[ELTS_CAPACITY]; 
+intelts_size; 
+intindexOf(intv) const; 
+// EFFECTS: returns the index of 
+// v if it exists in the 
+// array, ELTS_CAPACITY otherwise 
+public: 
+static constintELTS_CAPACITY = 100; 
+void insert(intv); 
+void remove(intv); 
+</P>
+
+<P>boolquery(intv) const; </P>
+
+<P>intsize() const; </P>
+
+<P>}; </P>
+
+<P>This member function must be private. This is because it exposes details about the concrete representation. It is inappropriate to expose these details to a client of this class. </P>
+
+<P>class IntSet{ 
+intelts[ELTS_CAPACITY]; 
+intelts_size; 
+intindexOf(intv) const; 
+public: 
+static constintELTS_CAPACITY = 100; 
+void insert(intv); void remove(intv); 
+boolquery(intv) const; intsize() const; 
+}; 
+intIntSet::indexOf(intv) const{ 
+for (inti= 0; i&lt; elts_size; ++i) { 
+if (elts[i] == v) return i; 
+} 
+return ELTS_CAPACITY; 
+} 
+IntSet::indexOf() 
+</P>
+
+<P>IntSet::query() 
+class IntSet{ // OVERVIEW omitted for space 
+intelts[ELTS_CAPACITY]; 
+intelts_size; 
+</P>
+
+<P>intindexOf(intv) const; 
+public: 
+static constintELTS_CAPACITY = 100; 
+void insert(intv); void remove(intv); 
+boolquery(intv) const; intsize() const; 
+}; 
+boolIntSet::query(intv) const{ 
+return indexOf(v) != ELTS_CAPACITY; 
+} 
+With indexOf, queryis easy! 
+</P>
+
+<P>IntSet::insert() 
+</P>
+
+<P>.The code for insertis not much more difficult than query: 1.First look for the indexOfthe element to insert 2.If it doesn’t exist, we need to add this element to the “end” of the array 3.Using elts_size, the current “end” iselts[elts_size-1] 4.Place the element in the next slot and update elts_size </P>
+
+<P>IntSet::insert() 
+class IntSet{ 
+intelts[ELTS_CAPACITY]; 
+intelts_size; 
+intindexOf(intv) const; 
+public: 
+static constintELTS_CAPACITY = 100; 
+void insert(intv); void remove(intv); 
+boolquery(intv) const; intsize() const; 
+}; 
+void IntSet::insert(intv) { 
+</P>
+
+<P>if (query(v)) return; 
+assert(elts_size&lt; ELTS_CAPACITY); //REQUIRES! 
+elts[elts_size++] = v; 
+} 
+Take a couple minutes 
+</P>
+
+<P>to figure this out. 
+</P>
+
+<P>IntSet::remove () 
+</P>
+
+<P>.removeworks similarly to insert. 1.If the element (called the victim) is in the array we have to remove it leaving a &quot;hole&quot; in the array 2.Instead of moving each element after the victimto the left by one position, pick up the current &quot;last&quot; element and move it to the hole .This again breaks the invariant on elts_size, so we must fix it </P>
+
+<P>IntSet::remove () 
+void IntSet::remove(intv) { 
+intvictim = indexOf(v); 
+if (victim == ELTS_CAPACITY) return;//not found 
+elts[victim] = elts[--elts_size]; 
+} 
+Take a couple minutes 
+</P>
+
+<P>to figure this out 
+</P>
+
+<P>Initialization Exercise 
+.Consider the newly-created set 
+</P>
+
+<P>intmain() { 
+IntSets; 
+} 
+.Problem: On creation, s's data members are uninitialized! 
+</P>
+
+<P>.This means that the value of elts_sizecould be anything, but our representational invariant says it must be zero! .Exercise: implement the IntSetdefault constructor </P>
+
+<P>Exercise </P>
+
+<P>.Add a print()member function .&quot;Promise&quot; not to modify any member variables </P>
+
+<P>class IntSet{ 
+intelts[ELTS_CAPACITY]; 
+intelts_size; 
+public: 
+static constintELTS_CAPACITY = 100; 
+void insert(intv); 
+void remove(intv); 
+boolquery(intv) const; 
+intsize() const; 
+}; 
+</P>
+
+<P>Using IntSet 
+intmain () { 
+IntSetis; 
+is.insert(7); 
+is.insert(4); 
+is.insert(7); 
+is.print(); 
+is.remove(7); 
+is.print(); 
+} 
+./a.out 
+</P>
+
+<L>
+<LI>
+<Lbl>{</Lbl>
+
+<LBody> 7 4 } </LBody>
+</LI>
+
+<LI>
+<Lbl>{</Lbl>
+
+<LBody> 4 } </LBody>
+</LI>
+</L>
+
+<P>IntSetefficiency </P>
+
+<P>intIntSet::indexOf(intv) const{ </P>
+
+<P>for (inti= 0; i&lt; elts_size; ++i) { </P>
+
+<P>if (elts[i] == v) return i; </P>
+
+<P>} </P>
+
+<P>return ELTS_CAPACITY; </P>
+
+<P>} </P>
+
+<P>.Question: How many elements of the array must indexOfexamine in the worst case if there are 10 elements? If there 
+are 90 elements? 
+</P>
+
+<P>IntSetefficiency 
+</P>
+
+<P>.We say the time for indexOfgrows linearlywith the size of 
+the set. 
+.If there are N elements in the set, we have to examine all N of 
+them in the worst case. For large sets that perform lots of 
+queries, this might be too expensive. 
+.Luckily, we can replace this implementation with a different 
+one that can be more efficient. The only change we need to 
+make is to the representation –the abstraction can stay 
+precisely the same. 
+</P>
+
+<P>Improving IntSetefficiency 
+</P>
+
+<P>.Still use an array (of 100 elements) to store the elements ofthe set and the values will still occupy the first elts_sizeslots. 
+.However, now we'll keep the elements in sorted order 
+.The constructor and size methods don’t need to change at all 
+since they just use the elts_sizefield. 
+.queryalso doesn't need to change. If the index exists in the 
+array’s legal bounds, then it’s there. 
+</P>
+
+<P>Improving IntSetefficiency 
+</P>
+
+<P>.However, the others all do need to change. We'll start with the 
+easiest one: remove() 
+</P>
+
+<P>.Recall the old version that moved the last element from the end 
+to somewhere in the middle, this will break the new “sorted” 
+invariant. 
+.Instead of doing a swap, we have to &quot;squish&quot; the array together 
+to cover up the hole. 
+</P>
+
+<P>1 2 3 4 5 6 7 1 2 4 5 6 7 1 2 3 4 5 6 7 1 2 5 6 4 </P>
+
+<P>Improving IntSetefficiency </P>
+
+<P>.How are we going to do the “squish”? .Move the element next to the hole to the left leaving a new hole .Keep moving elements until the hole is “off the end” of the elements </P>
+
+<P>Improving IntSetefficiency void IntSet::remove(intv) { intgap = indexOf(v); if (gap == ELTS_CAPACITY) return; //not found --elts_size; //one less element while (gap &lt; elts_size) { //there are eltsto our right elts[gap] = elts[gap+1]; ++gap; } } Take a couple minutes </P>
+
+<P>to figure this out </P>
+
+<P>Improving IntSetefficiency </P>
+
+<P>.We also have to change insertsince it currently just places the new element at the end of the array. This also will break the new “sorted” invariant. </P>
+
+<P>1 2 3 4 5 6 7 1 2 5 6 7 3 4 + 1 2 3 4 5 6 7 . </P>
+
+<P>Improving IntSetefficiency </P>
+
+<P>.How are we going to do the insert? 
+.Start by moving the last element to the right by one position. 
+.Repeat this process until the correct location is found to insert 
+the new element. 
+.Stop if the start of the array is reached or the element is sorted. 
+.We'll need a new loop variable to track this movement called 
+cand(idate). 
+.It's invariant is that it always points to the next element that 
+might have to move to the right. 
+</P>
+
+<P>Improving IntSetefficiency 
+void IntSet::insert(intv) { 
+if (indexOf(v) != ELTS_CAPACITY) return;//present! 
+assert(elts_size&lt; ELTS_CAPACITY); //REQUIRES 
+intcand= elts_size-1; // largest element 
+while ((cand&gt;= 0) &amp;&amp; elts[cand] &gt; v) { 
+elts[cand+1] = elts[cand]; 
+--cand; 
+} 
+// Now, candpoints to the left of the &quot;gap" 
+elts[cand+1] = v; 
+++elts_size; // repair invariant 
+} 
+Take a couple minutes 
+</P>
+
+<P>to figure this out 
+</P>
+
+<P>Improving IntSetefficiency 
+void IntSet::insert(intv) { 
+if (indexOf(v) != ELTS_CAPACITY) return;//present! 
+assert(elts_size&lt;= ELTS_CAPACITY) //enough room? 
+intcand= elts_size-1; // largest element 
+while ((cand&gt;= 0) &amp;&amp; elts[cand] &gt; v) { 
+elts[cand+1] = elts[cand]; 
+--cand; 
+} 
+// Now, candpoints to the left of the &quot;gap&quot;. 
+elts[cand+1] = v; 
+++elts_size; // repair invariant 
+</P>
+
+<P>} </P>
+
+<P>We are using the &quot;shortcircuit&quot; property of &amp;&amp;. If candis not greater than or equal to zero, we never evaluate the right-hand clause. </P>
+
+<P>Improving IntSetefficiency 
+.Question: Do we have to change indexOf? 
+</P>
+
+<P>intIntSet::indexOf(intv) const{ 
+for (inti= 0; i&lt; elts_size; ++i) { 
+if (elts[i] == v) return i; 
+} 
+return ELTS_CAPACITY; 
+} 
+</P>
+
+<P>Improving IntSetefficiency 
+</P>
+
+<P>.Question: Do we have to change indexOf? .Answer: No, but it can be made more efficient with the new representation </P>
+
+<P>intIntSet::indexOf(intv) const{ 
+for (inti= 0; i&lt; elts_size; ++i) { 
+if (elts[i] == v) return i; 
+} 
+return ELTS_CAPACITY; 
+} 
+</P>
+
+<P>Improving IntSetefficiency 
+</P>
+
+<P>.Suppose we are looking for foo. 
+.Compare fooagainst the middleelement of the array and 
+there are three possibilities: 
+</P>
+
+<P>1.foois equal to the middle element. 
+2.foois less than the element. 
+3.foois greater than the element. 
+</P>
+
+<P>.If it's case 1, we're done. 
+.If it's case 2, then if foois in the array, it must be to the leftof 
+the middle element 
+.If it's case 3, then if foois in the array, it must be to the rightof the middle element. 
+</P>
+
+<P>Improving IntSetefficiency 
+</P>
+
+<P>.Compare fooagainst the middleelement of the array and 
+there are three possibilities: 
+1.foois equal to the middle element. 
+2.foois less than the element. 
+3.foois greater than the element. 
+</P>
+
+<P>.The comparison with the middle element eliminates at least 
+half of the array from consideration! Then, we repeat the same 
+thing over again. 
+.You could write this &quot;repetition&quot; as either a tail-recursive 
+program or an iterative one. Most programmers find the 
+iterative version more natural, so we'll write it iteratively, too. 
+</P>
+
+<P>Improving IntSetefficiency 
+</P>
+
+<P>.First, we need to find the “bounds” of the array. 
+.The “leftmost” element is always zero, but the “rightmost” 
+element is elts_size-1. 
+</P>
+
+<P>intIntSet::indexOf(intv) const{ 
+</P>
+
+<P>intleft = 0; 
+</P>
+
+<P>intright = elts_size-1; 
+</P>
+
+<P>... 
+</P>
+
+<P>} 
+</P>
+
+<P>Improving IntSetefficiency 
+</P>
+
+<P>.It's possible that the segment we are examining is empty and 
+we return ELTS_CAPACITYsince the element is missing. 
+.A nonempty array has at least one element in it, so rightis at 
+least as large as left(right&gt;= left). 
+</P>
+
+<P>intIntSet::indexOf(intv) const{ 
+intleft = 0; 
+intright = elts_size-1; 
+while (right &gt;= left) { 
+... 
+} 
+return ELTS_CAPACITY; 
+} 
+</P>
+
+<P>Improving IntSetefficiency 
+</P>
+
+<P>.Next, find the &quot;middle&quot; element. We do this by finding out the size of our segment (right -left + 1), then divide it by two, and add it to left. </P>
+
+<P>intIntSet::indexOf(intv) const{ 
+intleft = 0; 
+intright = elts_size-1; 
+while (right &gt;= left) { 
+intsize = right -left + 1; 
+intmiddle = left + size/2; 
+... 
+} 
+return ELTS_CAPACITY; 
+} 
+</P>
+
+<P>Improving IntSetefficiency 
+</P>
+
+<P>.Next, find the &quot;middle&quot; element. We do this by finding out the size of our segment (right -left + 1), then divide it by two, and add it to left. </P>
+
+<P>intIntSet::indexOf(intv) const{ 
+intleft = 0; 
+intright = elts_size-1; 
+while (right &gt;= left) { 
+intsize = right -left + 1; 
+intmiddle = left + size/2; 
+... 
+} 
+return ELTS_CAPACITY; 
+} 
+If there is an odd 
+</P>
+
+<P>number of elements, this will be the &quot;true&quot; middle. If there are an even number, it will be the element to the “right&quot; of true middle. </P>
+
+<P>Improving IntSetefficiency </P>
+
+<P>.Then, we compare against the middle element. .If that's the one we are looking for, we are done. </P>
+
+<P>intIntSet::indexOf(intv) const{ 
+intleft = 0; 
+intright = elts_size-1; 
+while (right &gt;= left) { 
+intsize = right -left + 1; 
+intmiddle = left + size/2; 
+if (elts[middle] == v) return middle; 
+... 
+</P>
+
+<P>} return ELTS_CAPACITY; } </P>
+
+<P>Improving IntSetefficiency </P>
+
+<P>.If we are not looking at the element, the true element (if it exists) must be in either the “smaller” half or the “larger” half. .If it is in the smaller half, than we can eliminate all elements at index middleand higher, so we move “right” to middle-1. .Likewise, if it would be in the larger half, we move “left” to middle+1, and we continue looking. </P>
+
+<P>Improving IntSetefficiency 
+intIntSet::indexOf(intv) const{ 
+intleft = 0; 
+intright = elts_size-1; 
+while (right &gt;= left) { 
+intsize = right -left + 1; 
+intmiddle = left + size/2; 
+if (elts[middle] == v) 
+return middle; 
+else if (elts[middle] &lt; v) 
+left = middle+1; 
+else 
+right = middle-1; 
+} 
+return ELTS_CAPACITY; 
+} 
+Take a couple 
+</P>
+
+<P>minutes to figure this out. Try using the inputs: v=3, </P>
+
+<P>v=8, and v=-1with the array below. 1 2 3 4 5 6 7 8 9 0 </P>
+
+<P>Improving IntSetefficiency </P>
+
+<P>.Since you eliminate half of the array with each comparison, 
+this is a much more efficient. 
+.If the array has N elements, you'll need “about” log2(N) 
+comparisons to search it. 
+.This is really cool, because log2(100) is less than 7 –so, we 
+need only 7 comparisons in the worst case. 
+.Also, if you double the size of the array, you need only one 
+extra comparison to do the search. 
+.This is called a binary search 
+</P>
+
+<P>Improving IntSetefficiency 
+</P>
+
+<P>.insertand removeare still linear, because they may have 
+to &quot;swap&quot; an element to the beginning/end of the array. 
+.Here is the summary of asymptotic performance of each 
+function: 
+</P>
+
+<P>Unsorted Sorted insert O(N) O(N) remove O(N) O(N) query O(N) O(log N) </P>
+
+<P>All the unsorted versions still require the 
+unsorted indexOf()which is O(N) 
+</P>
+
+<P>Improving IntSetefficiency 
+</P>
+
+<P>Unsorted Sorted 
+</P>
+
+<P>insert O(N) O(N) 
+</P>
+
+<P>remove O(N) O(N) 
+</P>
+
+<P>query O(N) O(log N) 
+</P>
+
+<P>.If you are going to do more searching than inserting/removing, 
+you should use the &quot;sorted array&quot; version, because queryis 
+faster there. 
+.However, if queryis relatively rare, you may as well use the 
+&quot;unsorted&quot; version. It's &quot;about the same as&quot; the sorted version 
+for insertand remove, but it's MUCH simpler! 
+</P>
+
+<P>Log(n) run time. So what? 0 20 40 60 80 100 120 140 1 8 15 22 29 36 43 50 57 64 71 78 85 92 99 106 113 120 127 O(n) O(log n) </P>
+</TaggedPDF-doc>

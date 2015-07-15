@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:47:52-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:47:52-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:47:52-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">03_Tail_Recursion.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:9c3d3733-19ee-4488-9ada-0890437dd227</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:3bd13d7e-fb81-4bf3-9621-890869a3a711</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="03_Tail_Recursion.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280 </P>
+
+<P>Programming and Introductory Data Structures blockM-dearborn Tail Recursion </P>
+
+<P>Slides by Andrew DeOrio, Jeff Ringenberg and Brian Noble 1 </P>
+
+<P>Recursion .Recall the recursive factorial function </P>
+
+<P>int factorial (int n) { // REQUIRES: n &gt;= 0 // EFFECTS: computes n! </P>
+
+<P>if (n == 0) return 1; // base case return n*factorial(n-1); // recursive step </P>
+
+<P>} 2 </P>
+
+<P>Another kind of factorial 3 int fact_helper(int n, int result) </P>
+
+<P>// REQUIRES: n &gt;= 0 // EFFECTS: returns result * n! </P>
+
+<P>{ if (n == 0) { return result;  } else { </P>
+
+<P>return fact_helper(n-1, result * n); </P>
+
+<P>} </P>
+
+<P>} </P>
+
+<P>int factorial(int num) </P>
+
+<P>// REQUIRES: num &gt;= 0 </P>
+
+<P>// EFFECTS: returns num! </P>
+
+<P>{ </P>
+
+<P>return fact_helper(num, 1); </P>
+
+<P>} </P>
+
+<P>Re-write the recursive version to use the same amount of space as is required by the iterative version (approximately). </P>
+
+<P>Another kind of factorial </P>
+
+<P>.This function is equivalent to the original factorial. .Try to come up with a proof for why. .There are two steps. First, prove the base case, and second, the inductive step. </P>
+
+<P>4 </P>
+
+<P>int fact_helper(int n, int result) </P>
+
+<P>// REQUIRES: n &gt;= 0  // EFFECTS: returns result * n! </P>
+
+<P>{ if (n == 0) { return result; } else { return fact_helper(n-1, result * n); } </P>
+
+<P>} </P>
+
+<P>int factorial(int num) // REQUIRES: num &gt;= 0 // EFFECTS: returns num! </P>
+
+<P>{ return fact_helper(num, 1); } </P>
+
+<P>Another kind of factorial </P>
+
+<P>.There is an important thing to notice about fact_helper. .For every call to fact_helper: </P>
+
+<P>n! * result == num! </P>
+
+<P>.For the first call, this is easy to see, since: </P>
+
+<P>n == num result == 1 7 int fact_helper(int n, int result) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P> // EFFECTS: returns result * n! { </P>
+
+<P>if (n == 0) { </P>
+
+<P>return result; </P>
+
+<P>} else { </P>
+
+<P>return fact_helper(n-1,result*n); </P>
+
+<P>} } </P>
+
+<P>int factorial(int num) </P>
+
+<P>// REQUIRES: num &gt;= 0 </P>
+
+<P>// EFFECTS: returns num! { </P>
+
+<P>return fact_helper(num, 1); } </P>
+
+<P>Another kind of factorial .For every call to fact_helper: </P>
+
+<P>n! * result == num! </P>
+
+<P>.For the second call: </P>
+
+<P>n == (num - 1) result == (1*num) </P>
+
+<P>== num </P>
+
+<P>Substituting, we get: (num-1)! * num == num! </P>
+
+<P>.This is true by inspection. You can continue unwinding if you like. </P>
+
+<P>8 </P>
+
+<P>int fact_helper(int n, int result) // REQUIRES: n &gt;= 0 // EFFECTS: returns result * n! </P>
+
+<P>{ if (n == 0) { return result; } else { return fact_helper(n-1,result*n); } </P>
+
+<P>} </P>
+
+<P>int factorial(int num) // REQUIRES: num &gt;= 0 // EFFECTS: returns num! </P>
+
+<P>{ return fact_helper(num, 1); } </P>
+
+<P>Another kind of factorial .For every call to fact_helper: </P>
+
+<P>n! * result == num! </P>
+
+<P>.This is called the “recursive invariant” of fact_helper and is 
+something that is always true. 
+.Being able to write down invariants makes it much easier to 
+write these sorts of functions. 
+</P>
+
+<P>Another kind of factorial 
+</P>
+
+<P>.So what's the big deal? 
+.This just looks like a more complicated way to write the 
+solution. 
+.Let's trace out a call to the “new” factorial(2), and compare 
+it to the “old” factorial(2): 
+</P>
+
+<P>10 
+&quot;new" 
+factorial(2) 
+--&gt;fact_helper(2, 1) 
+--&gt;fact_helper(1, 2) 
+--&gt;fact_helper(0, 2) 
+&lt;--2 
+&lt;--2 
+&lt;--2 
+</P>
+
+<P>&quot;old" 
+factorial(2) 
+--&gt;2 * factorial(1) 
+--&gt;1 * factorial(0) 
+&lt;--1 
+&lt;--1*1 (==1) 
+&lt;--2*1 (==2) 
+</P>
+
+<P>Another kind of factorial 
+</P>
+
+<P>.As the two recursions progress, they look the same. 
+.However, as they “unwind”, the “new” one doesn't do any 
+more work. 
+.The “new” one simply passes the value from the deepest 
+call out to the top. But, the “old” one still has work to do. 
+</P>
+
+<P>&quot;new" 
+factorial(2) 
+--&gt;fact_helper(2, 1) 
+--&gt;fact_helper(1, 2) 
+</P>
+
+<P>--&gt;fact_helper(0, 2) &lt;--2 &lt;--2 &lt;--2 </P>
+
+<P>&quot;old&quot; factorial(2) --&gt;2 * factorial(1) --&gt;1 * factorial(0) &lt;--1 &lt;--1*1 (==1) &lt;--2*1 (==2) </P>
+
+<P>Stack effects </P>
+
+<P>.So what are the effects of this new version on the stack? .The activation record of a function is needed only as long as there is computation left over and can be discarded as soon as the return value is known. .With the new version, the concrete return value isn’t known at the time of the recursive call. However, we do know that whatever that recursive call returns, that will be our return value too. .This means that the caller's stack frame isn't needed any more, and we can throw it away. .This is called tail recursion </P>
+
+<P>12 </P>
+
+<P>Tail Recursion </P>
+
+<P>.With tail recursion, there is no pending computation at each recursive step, so we can re-use the activation record rather than create a new one. .Here’s how it works: </P>
+
+<P>13 </P>
+
+<P>int fact_helper(int n, int result) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns result * n! </P>
+
+<P>{ </P>
+
+<P> if (n == 0) { 
+return result; 
+} else { 
+return fact_helper(n-1,result*n); 
+} 
+</P>
+
+<P>} 
+</P>
+
+<P>int factorial(int num) 
+// REQUIRES: n &gt;= 0 
+// EFFECTS: returns num! 
+</P>
+
+<P>{ 
+</P>
+
+<P>return fact_helper(num, 1); 
+} 
+factorial 
+</P>
+
+<P>num: 3 
+Tail Recursion 
+.factorial calls 
+</P>
+
+<P>fact_helper: 
+</P>
+
+<P>14 
+</P>
+
+<P>int fact_helper(int n, int result) 
+// REQUIRES: n &gt;= 0 
+// EFFECTS: returns result * n! 
+</P>
+
+<P>{ 
+if (n == 0) { 
+return result; 
+} else { 
+return fact_helper(n-1,result*n); 
+} 
+</P>
+
+<P>} </P>
+
+<P>int factorial(int num) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns num! { </P>
+
+<P>return fact_helper(num, 1); } factorial num: 3 fact_helper </P>
+
+<P>n: 3 result: 1 </P>
+
+<P>Tail Recursion </P>
+
+<P>.n is not zero, so the alternative is evaluated: </P>
+
+<P>return fact_helper(2, 3) .This is a tail-recursive call: fact_helper is calling itself, and there is no work upon return. </P>
+
+<P>15 </P>
+
+<P>int fact_helper(int n, int result) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns result * n! { </P>
+
+<P>if (n == 0) { </P>
+
+<P>return result; </P>
+
+<P>} else { </P>
+
+<P>return fact_helper(n-1,result*n); </P>
+
+<P>} } </P>
+
+<P>int factorial(int num) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns num! { </P>
+
+<P>return fact_helper(num, 1); } factorial </P>
+
+<P>num: 3 </P>
+
+<P>fact_helper </P>
+
+<P>n: 3 result: 1 Tail Recursion </P>
+
+<P>.So, we can re-use the storage of the stack frame! </P>
+
+<P>fact_helper(2, 3) </P>
+
+<P>16 </P>
+
+<P>int fact_helper(int n, int result) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns result * n! { </P>
+
+<P>if (n == 0) { </P>
+
+<P>return result; </P>
+
+<P>} else { </P>
+
+<P>return fact_helper(n-1,result*n); </P>
+
+<P>} } </P>
+
+<P>int factorial(int num) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns num! { </P>
+
+<P>return fact_helper(num, 1); } factorial </P>
+
+<P>num: 3 fact_helper </P>
+
+<P>n: 2 result: 3 </P>
+
+<P>Tail Recursion .Same thing: </P>
+
+<P>return fact_helper(1, 6) </P>
+
+<P>17 </P>
+
+<P>int fact_helper(int n, int result) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns result * n! { </P>
+
+<P>if (n == 0) { </P>
+
+<P>return result; </P>
+
+<P>} else { </P>
+
+<P>return fact_helper(n-1,result*n); </P>
+
+<P>} } </P>
+
+<P>int factorial(int num) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns num! { </P>
+
+<P>return fact_helper(num, 1); } </P>
+
+<P>factorial num: 3 </P>
+
+<P>fact_helper </P>
+
+<P>n: 1 result: 6 </P>
+
+<P>Tail Recursion .And again: </P>
+
+<P>return fact_helper(0, 6) </P>
+
+<P>.Now the result is returned directly to factorial! </P>
+
+<P>18 
+int fact_helper(int n, int result) 
+</P>
+
+<P>// REQUIRES: n &gt;= 0 
+</P>
+
+<P> // EFFECTS: returns result * n! { </P>
+
+<P>if (n == 0) { </P>
+
+<P>return result; </P>
+
+<P>} else { </P>
+
+<P>return fact_helper(n-1,result*n); </P>
+
+<P>} } </P>
+
+<P>int factorial(int num) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns num! { </P>
+
+<P>return fact_helper(num, 1); } factorial </P>
+
+<P>num: 3 </P>
+
+<P>fact_helper </P>
+
+<P>n: 0 result: 6 </P>
+
+<P>Tail vs. Plain Recursion </P>
+
+<P>.If the result of the recursive call is returned directly with no pending computation, it is tail-recursive. Otherwise, it’s “plain” recursion. .Sometimes, it’s easiest to write a recursive function “tailrecursively”. When it isn't (as factorial is not), you typically have to invent a helper function to make it all work out. .Writing a tail recursive version of a function often requires you to add an “extra” argument or two that keeps track of the current “state” of the computation. .In fact_helper(), this extra argument is result and it’s similar to the local variable in the iterative version. That's no accident! </P>
+
+<P>19 </P>
+
+<P>Tail-recursive or not? Why? 
+20 
+$ ./a.out 
+3 
+2 
+1 
+void countdown1(int n) { 
+</P>
+
+<P>if (n &lt;= 0) { 
+return; 
+} else { 
+cout &lt;&lt; n &lt;&lt; endl; 
+countdown1(n-1); 
+return; 
+} 
+</P>
+
+<P>} 
+</P>
+
+<P>Tail-recursive or not? Why? 
+</P>
+
+<P>void countdown2(int n) { 
+if (n &lt;= 0) return; 
+cout &lt;&lt; n &lt;&lt; endl; 
+countdown2(n-1); 
+</P>
+
+<P>} 
+22 
+</P>
+
+<P>void countdown3(int n) { if (n &gt; 0) { cout &lt;&lt; n &lt;&lt; endl; countdown3(n-1); } </P>
+
+<P>} </P>
+
+<P>void countdown1(int n) { if (n &lt;= 0) { return; } else { cout &lt;&lt; n &lt;&lt; endl; countdown1(n-1); return; } </P>
+
+<P>} // for comparison Bonus question: identify the base case and recursive steps. </P>
+
+<P>Tail-recursive or not? Why? 
+24 
+void countdown4_help 
+(int n, int i) { 
+</P>
+
+<P>if (i &gt; n) return; 
+countdown4_help(n, i+1); 
+cout &lt;&lt; i &lt;&lt; endl; 
+</P>
+
+<P>} 
+</P>
+
+<P>void countdown4(int n) { countdown4_help(n, 1); } </P>
+
+<P>Tail-recursive or not? Why? 26 </P>
+
+<P>void countdown5(int n) { if (n &lt;= 0) return; cout &lt;&lt; n &lt;&lt; endl; if (n % 2) { // n is odd countdown5(n-1); return; } else { // n is even cout &lt;&lt; n-1 &lt;&lt; endl; countdown5(n-2); return; } </P>
+
+<P>} </P>
+
+<P>Group Exercise: pow(x, y) </P>
+
+<P>.Write a tail-recursive version of the power function that returns x to the power of y. It needs a helper function; be sure to list its invariant. .Here is a non-tail-recursive, but recursive version of this function: </P>
+
+<P>int power(int x, int y) { if (y == 0) { return 1; } else {  return x * power(x, y-1); </P>
+
+<P>} </P>
+
+<P>} </P>
+
+<P>.Before you begin, why isn't this tail recursive? </P>
+
+<P>28 </P>
+</TaggedPDF-doc>

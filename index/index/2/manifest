@@ -1,0 +1,26 @@
+<parameters>
+	<code-build-date>Jun  4 2014</code-build-date>
+	<corpus>
+		<document-base>1</document-base>
+		<frequent-terms>484</frequent-terms>
+		<maximum-document>4</maximum-document>
+		<total-documents>3</total-documents>
+		<total-terms>2678333</total-terms>
+		<unique-terms>31539</unique-terms>
+	</corpus>
+	<fields>
+		<field>
+			<byte-offset>0</byte-offset>
+			<isNumeric>true</isNumeric>
+			<isOrdinal>false</isOrdinal>
+			<isParental>false</isParental>
+			<name>p</name>
+			<parserName>NumericFieldAnnotator</parserName>
+			<total-documents>1</total-documents>
+			<total-terms>534784</total-terms>
+		</field>
+	</fields>
+	<indri-distribution>Indri development release 5.7</indri-distribution>
+	<type>DiskIndex</type>
+</parameters>
+

@@ -1,0 +1,1073 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:48:03-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:48:03-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:48:03-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">04_Recursion_and_Iteration.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:f6744b69-1a84-4e02-8030-b73154f35b92</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:631b925c-9d9e-4144-b44a-aaa7bf5cb012</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="04_Recursion_and_Iteration.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280 
+Programming and Introductory Data Structures 
+</P>
+
+<P>blockM-dearborn 
+Recursion and Iteration 
+</P>
+
+<P>Slides by Jeff Ringenberg and 
+</P>
+
+<P>Brian Noble 
+</P>
+
+<P>1 
+</P>
+
+<P>Review: General Recursion 
+</P>
+
+<P>.A recursive problem is one that is defined in terms of itself. 
+.A recursive problem has two important features: 
+.There be one or more trivial base cases. 
+.There be a way to solve “bigger” instances by first solving “smaller” 
+instances, then performing a simple computation. 
+</P>
+
+<P>.Recursive problems usually follow the structure of an inductive 
+proof. 
+.Once the problem has been recursively stated, it is fairly simple 
+to write a recursive program to solve it 
+.Unfortunately, these types of recursive programs require one 
+stack frame for every recursive call; this can be substantial. 
+</P>
+
+<P>2 
+</P>
+
+<P>Review: Tail Recursion 
+</P>
+
+<P>.To solve the general recursive stack problem, we considered 
+tail recursive programs which require only “constant space”. 
+.It doesn't matter how “large” the problem to be solved is, we 
+only need a fixed number of stack frames to solve it. 
+.For example, in our tail-recursive factorial solution, we only 
+need the first fact_helper() stack frame, no matter the 
+size of N. 
+.This is also true when solving the problems with iteration. 
+.In fact, the two versions of factorial() we've seen are 
+very, very similar – that similarity is no accident! 
+</P>
+
+<P>3 
+</P>
+
+<P>Recursion and Iteration 
+</P>
+
+<P>.What we will show today: 
+</P>
+
+<P>1.For any tail-recursive function, you can write an iterative equivalent. 
+In other words, tail-recursion is just iteration. 
+2.This equivalence is not true for general recursive programs. 
+</P>
+
+<P>.Note: There are some recursive programs that cannot be 
+solved in constant space, including the tree traversal problem 
+from Project 2. 
+</P>
+
+<P>4 
+</P>
+
+<P>(Tail-Recursion == Iteration) TRUE 
+</P>
+
+<P>.We want to show that tail-recursion is “no more powerful” than 
+iteration (i.e. for any computation that we could express tail-
+recursively, we could also express it iteratively). 
+.We do this by giving a method for converting an arbitrary tail-
+recursive function to an iterative one. 
+.This technique is called a “proof by construction”. 
+</P>
+
+<P>5 
+</P>
+
+<P>Reviewing Loops 
+</P>
+
+<P>while (&lt;boolean-condition&gt;) 
+</P>
+
+<P>&lt;body-statement> 
+</P>
+
+<P>.On entry, the condition is evaluated. If the condition is false, the loop 
+terminates. Otherwise, the body statement is evaluated, and the loop is 
+re-entered. 
+</P>
+
+<P>do 
+</P>
+
+<P>&lt;body-statement> 
+</P>
+
+<P>while (&lt;boolean-condition&gt;); 
+</P>
+
+<P>.On entry, the body statement is evaluated followed by the condition. If 
+the condition is false, the loop terminates. Otherwise, it is re-entered at 
+the body statement. 
+</P>
+
+<P>Reviewing Loops </P>
+
+<P>for ( &lt;init-statement&gt;; </P>
+
+<P>&lt;boolean-condition&gt;; </P>
+
+<P>&lt;post-body&gt; ) </P>
+
+<P>&lt;body-statement&gt; </P>
+
+<P>.When a for-loop is entered for the first time, the init-statement is 
+executed. Then, the condition is evaluated. If it’s false, the loop 
+terminates. Otherwise, the body is evaluated, then the post-body is 
+evaluated, and finally the loop is resumed at the point of evaluating the 
+boolean condition. 
+</P>
+
+<P>7 
+</P>
+
+<P>Reviewing Loops 
+</P>
+
+<P>.To help distinguish between the three types of loops: 
+.If you want to do something zero or more times, use “while”. 
+.If you want to do something one or more times, use “do-while”. 
+.If you want to do something a specific number of times, use “for”. 
+</P>
+
+<P>.It turns out that the “do” and “for” loops are just “syntactic 
+sugar”. 
+.These loops aren’t any more expressive than “while” loops, 
+and anything you can do with either a “do” or a “for” you could 
+also do with a “while”. 
+</P>
+
+<P>8 
+</P>
+
+<P>Reviewing Loops Exercise 
+</P>
+
+<P>for (&lt;init-statement&gt;; 
+</P>
+
+<P>&lt;boolean-condition&gt;; 
+</P>
+
+<P>&lt;post-body&gt;) 
+</P>
+
+<P>&lt;body-statement> 
+</P>
+
+<P>do </P>
+
+<P>&lt;body-statement&gt; </P>
+
+<P>while (&lt;boolean-condition&gt;); </P>
+
+<P>while (&lt;boolean-condition&gt;) </P>
+
+<P>&lt;body-statement&gt; </P>
+
+<P>Convert a do-loop and a for-loop into a while-loop. </P>
+
+<P>9 </P>
+
+<P>Tail-recursion to iteration 
+conversion 
+</P>
+
+<P>.There are five steps to the conversion of a tail-recursive 
+function to an iterative one: 
+1.Copy the function’s type signature. 
+2.Identify any needed “loop variables” by inspecting the call to the 
+helper function (if it exists). 
+3.Write initialization code to mirror the call to the helper function. 
+4.Identify termination condition(s) and return values by copying the base 
+case behavior. 
+5.Write loop body by copying the inductive step. 
+</P>
+
+<P>.This is an algorithm for constructing an iterative construct 
+given a tail-recursive one. This technique is called “proof by 
+construction”, and is very common in computer science. 
+</P>
+
+<P>11 
+</P>
+
+<P>Tail-recursion to iteration 
+conversion 
+</P>
+
+<P>.To see how this works, 
+let's revisit our good 
+friend factorial from 
+last time. 
+.Remember our 
+recursive invariant? 
+</P>
+
+<P>n!*result =num! </P>
+
+<P>12 </P>
+
+<P>int fact_helper(int n, int result) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns result * n! { </P>
+
+<P>if (n == 0) { </P>
+
+<P>return result; </P>
+
+<P>} else { </P>
+
+<P>return fact_helper(n-1,result*n); </P>
+
+<P>} } </P>
+
+<P>int factorial(int num) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns num! { </P>
+
+<P>return fact_helper(num, 1); } </P>
+
+<P>Step 1 – Copy the type signature 13 int fact_helper(int n, int result) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns result * n! { </P>
+
+<P>if (n == 0) { </P>
+
+<P> return result; 
+} else { 
+return fact_helper(n-1,result*n); 
+} 
+</P>
+
+<P>} 
+</P>
+
+<P>int factorial(int num) 
+// REQUIRES: n &gt;= 0 
+// EFFECTS: returns num! 
+</P>
+
+<P>{ 
+</P>
+
+<P>return fact_helper(num, 1); 
+} 
+int factorial(int num) { 
+</P>
+
+<P>.... 
+} 
+</P>
+
+<P>The iterative version has to have exactly the same type signature. </P>
+
+<P>int fact_helper(int n, int result) // REQUIRES: n &gt;= 0 // EFFECTS: returns result * n! </P>
+
+<P>{ if (n == 0) { return result; } else { return fact_helper(n-1,result*n); } </P>
+
+<P>} </P>
+
+<P>int factorial(int num) // REQUIRES: n &gt;= 0 // EFFECTS: returns num! </P>
+
+<P>{ </P>
+
+<P>return fact_helper(num, 1); } int factorial(int num) { </P>
+
+<P>int n = ...; int result = ...; </P>
+
+<P>.... </P>
+
+<P>} 
+</P>
+
+<P>Step 2 – Identify the loop variables </P>
+
+<P>The helper function had two formal arguments: n and result. These arguments are the ones that changed to track each pass through the recursion. </P>
+
+<P>14 </P>
+
+<P>int fact_helper(int n, int result) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns result * n! { </P>
+
+<P>if (n == 0) { </P>
+
+<P>return result; </P>
+
+<P>} else { </P>
+
+<P>return fact_helper(n-1,result*n); </P>
+
+<P>} } </P>
+
+<P>int factorial(int num) // REQUIRES: n &gt;= 0 // EFFECTS: returns num! </P>
+
+<P>{ </P>
+
+<P>return fact_helper(num, 1); } int factorial(int num) { </P>
+
+<P>int n = ...; int result = ...; </P>
+
+<P>.... } </P>
+
+<P>Step 2 – Identify the loop variables </P>
+
+<P>The helper function had two formal arguments: n and result. These arguments are the ones that changed to track each pass through the recursion. </P>
+
+<P>Note: We could re-use num rather than instantiate a new variable n. However, for now, let’s follow the constructive argument precisely. </P>
+
+<P>15 </P>
+
+<P>int fact_helper(int n, int result) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns result * n! { </P>
+
+<P>if (n == 0) { </P>
+
+<P>return result; </P>
+
+<P>} else { </P>
+
+<P>return fact_helper(n-1,result*n); </P>
+
+<P>} } </P>
+
+<P>int factorial(int num) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns num! { </P>
+
+<P>return fact_helper(num, 1); } int factorial(int num) { </P>
+
+<P>int n = num; </P>
+
+<P>int result = 1;  .... } </P>
+
+<P>Step 3 – Write initialization code </P>
+
+<P>The loop variables are just the formal arguments from the helper function. The first call to the helper function comes from the “main” (not helper) function, and its choice of initial argument values is exactly what we use for initialization. </P>
+
+<P>int fact_helper(int n, int result) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns result * n! { </P>
+
+<P>if (n == 0) { </P>
+
+<P>return result; </P>
+
+<P>} else { </P>
+
+<P>return fact_helper(n-1,result*n); </P>
+
+<P> } } </P>
+
+<P>int factorial(int num) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns num! { </P>
+
+<P>return fact_helper(num, 1); } int factorial(int num) { </P>
+
+<P>int n = num; </P>
+
+<P>int result = 1; </P>
+
+<P>.... } </P>
+
+<P>Step 3 – Write initialization code </P>
+
+<P>The loop variables are just the formal arguments from the helper function. The first call to the helper function comes from the “main” recursive function, and it’s choice of initial argument values is exactly what we use for initialization. </P>
+
+<P>Note: Here is where we could “optimize away” n since num is pass-byvalue. However, let’s stick with the formal construction. </P>
+
+<P>int fact_helper(int n, int result) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns result * n! { </P>
+
+<P>if (n == 0) { </P>
+
+<P>return result; </P>
+
+<P>} else { </P>
+
+<P>return fact_helper(n-1,result*n); </P>
+
+<P>} } </P>
+
+<P>int factorial(int num) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns num! { </P>
+
+<P>return fact_helper(num, 1); } int factorial(int num) { </P>
+
+<P>int n = num; </P>
+
+<P>int result = 1; </P>
+
+<P> while (!(n==0)) { 
+.... 
+} 
+return result; 
+</P>
+
+<P>} 
+</P>
+
+<P>Step 4 – Termination condition(s) and return </P>
+
+<P>Use a while-loop since it’s the easiest for tail-recursive conversion and the base case from the recursive version forms the termination condition of the loop. So, we loop for the “big” cases, terminate at the base case, and then return result. </P>
+
+<P>int fact_helper(int n, int result) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns result * n! { </P>
+
+<P>if (n == 0) { </P>
+
+<P>return result; </P>
+
+<P>} else { </P>
+
+<P>return fact_helper(n-1,result*n); </P>
+
+<P>} </P>
+
+<P>} 
+</P>
+
+<P>int factorial(int num) 
+// REQUIRES: n &gt;= 0 
+// EFFECTS: returns num! 
+</P>
+
+<P>{ 
+</P>
+
+<P>return fact_helper(num, 1); 
+} 
+int factorial(int num) { 
+</P>
+
+<P>int n = num; 
+int result = 1; 
+</P>
+
+<P>while (n!=0) { 
+.... 
+} 
+return result; 
+</P>
+
+<P>} 
+</P>
+
+<P>Step 4 – Termination condition(s) and return Use a while-loop since it’s the easiest for tail-recursive conversion and the base case </P>
+
+<P>from the recursive version forms the termination condition of the loop. So, we loop for the “big” cases, terminate at the base case, and then return result. </P>
+
+<P>Note: Get rid of the ugly (!(n==0)) and replace it with a “cleaner” version. </P>
+
+<P>19 </P>
+
+<P>Step 5 – Write the loop body </P>
+
+<P>Transpose the code in the “recursive step” arm of the conditional. First we have to understand what the tail-recursive call is actually doing when it is invoked. To help us do this, let's reexamine the call stack at any point in the recursion. </P>
+
+<P>fact_helper </P>
+
+<P>n: foo result: bar RA: factorial, line 1 </P>
+
+<P>20 </P>
+
+<P>Step 5 – Write the loop body </P>
+
+<P>Transpose the code in the “recursive step” arm of the conditional. First we have to understand what the tail-recursive call is actually doing when it is invoked. To help us do this, let's reexamine the call stack at any point in the recursion. </P>
+
+<P>fact_helper </P>
+
+<P>n: foo result: bar RA: factorial, line 1 </P>
+
+<P>In this case, the recursive call: fact_helper(n-1, n*result) evaluates to: fact_helper(foo-1, foo*bar) 21 </P>
+
+<P>Step 5 – Write the loop body Transpose the code in the “recursive step” arm of the conditional. First we have to understand what the tail-recursive call is actually doing when it is invoked. To help us do this, let's reexamine the call stack at any point in the recursion. </P>
+
+<P>fact_helper </P>
+
+<P>n: foo result: bar RA: factorial, line 1 </P>
+
+<P>In this case, the recursive call: fact_helper(n-1, n*result) evaluates to: fact_helper(foo-1, foo*bar) Rather than create a new frame to hold these values, we re-use the frame we already have, storing the new values into the appropriate locations: </P>
+
+<P>Step 5 – Write the loop body </P>
+
+<P>Transpose the code in the “recursive step” arm of the conditional. First we have to understand what the tail-recursive call is actually doing when it is invoked. To help us do this, let's reexamine the call stack at any point in the recursion. </P>
+
+<P>fact_helper </P>
+
+<P>n: foo result: bar RA: factorial, line 1 </P>
+
+<P>In this case, the recursive call: fact_helper(n-1, n*result) evaluates to: fact_helper(foo-1, foo*bar) </P>
+
+<P>Rather than create a new frame to hold these values, we re-use the frame we already have, storing the new values into the appropriate locations: </P>
+
+<P>fact_helper </P>
+
+<P>n: foo-1 
+result: foo*bar 
+RA: factorial, line 1 
+</P>
+
+<P>In effect, the values of n and result are 
+reassigned: 
+n = n-1; 
+result = n*result; 
+23 
+</P>
+
+<P>int factorial(int num) { </P>
+
+<P>int n = num; </P>
+
+<P>int result = 1; </P>
+
+<P>while (n!=0) { </P>
+
+<P>.... </P>
+
+<P>} </P>
+
+<P>return result; } </P>
+
+<P>Group Exercise 
+There is a problem if we just take the two lines below as the loop body. 
+What is it? How do you avoid it? How do you avoid this problem in general? 
+</P>
+
+<P>n = n-1; 
+result = n*result; 
+int fact_helper(int n, int result) 
+</P>
+
+<P>// REQUIRES: n &gt;= 0 
+// EFFECTS: returns result * n! 
+</P>
+
+<P>{ 
+if (n == 0) { 
+return result; 
+} else { 
+return fact_helper(n-1,result*n); 
+} 
+</P>
+
+<P>} 
+</P>
+
+<P>int factorial(int num) 
+// REQUIRES: n &gt;= 0 
+// EFFECTS: returns num! 
+</P>
+
+<P>{ 
+return fact_helper(num, 1); 
+} 
+</P>
+
+<P>Dependency Graphs 
+Solving the general case of “recursive” reassignment 
+</P>
+
+<P>.In the “recursive” reassignment, all of the new values are 
+computed, and then all of them are assigned, thanks to the 
+semantics of function calling. 
+.Unfortunately, C++ statements are evaluated one at a time. 
+.To solve this problem, we have to build a dependency graph 
+of these assignments. 
+.The graph shows which “new” values depend on which “old” 
+values. 
+.This graph is a special kind of graph called a “directed” graph. 
+</P>
+
+<P>28 
+</P>
+
+<P>Dependency Graphs 
+Solving the general case of “recursive” reassignment 
+</P>
+
+<P>.A graph has a set of “vertexes”, or “nodes”, and a set of 
+“edges” where each edge is drawn from a source vertex to a 
+sink vertex. 
+.For example, you can map out streets in Ann Arbor as a 
+directed graph. Consider the four intersections: 
+</P>
+
+<P>29 
+</P>
+
+<P>5th and 
+Washington 
+</P>
+
+<P>Division and 
+Washington 
+</P>
+
+<P>Division and 
+Liberty 
+</P>
+
+<P>5th and 
+Liberty 
+Dependency Graphs 
+Solving the general case of “recursive” reassignment 
+</P>
+
+<P>.Washington is a two-way street, so there is an edge going both 
+from 5th to Division, and from Division to 5th along 
+Washington – likewise for Liberty. 
+.5th is a one-way street going south, so there is an edge from 
+Washington to Liberty along 5th, but not the other way. 
+</P>
+
+<P>30 
+5th and 
+Washington 
+</P>
+
+<P>Division and 
+Washington 
+</P>
+
+<P>Division and 
+Liberty 
+</P>
+
+<P>5th and 
+Liberty 
+</P>
+
+<P>Dependency Graphs 
+Solving the general case of “recursive” reassignment 
+</P>
+
+<P>.To build a dependency graph, draw one vertex for each 
+variable. If variable foo reads from variable bar to compute 
+its new value, draw an edge from foo to bar. 
+.Note: Don't draw an edge between a vertex and itself. 
+.In our example, n reads only from itself to compute its new 
+value, while result reads from itself and n to compute its 
+new value. 
+.We ignore self-references, so our graph is: 
+</P>
+
+<P>31 
+n result 
+</P>
+
+<P>Dependency Graphs 
+Solving the general case of “recursive” reassignment 
+</P>
+
+<P>.If a variable has no edges with it as a sink (i.e. no edges 
+terminate there), you can write its assignment, and erase it and 
+any edges with it as a source. 
+</P>
+
+<P>32 
+</P>
+
+<P>n 
+</P>
+
+<P>result 
+Dependency Graphs 
+Solving the general case of “recursive” reassignment 
+</P>
+
+<P>.If a variable has no edges with it as a sink (i.e. no edges 
+terminate there), you can write its assignment, and erase it and 
+any edges with it as a source. 
+.Now we can write the first line of the loop body… 
+</P>
+
+<P>33 
+</P>
+
+<P>n 
+result 
+</P>
+
+<P>int fact_helper(int n, int result) 
+// REQUIRES: n &gt;= 0 
+// EFFECTS: returns result * n! 
+</P>
+
+<P>{ 
+if (n == 0) { 
+return result; 
+} else { 
+return fact_helper(n-1,result*n); 
+} 
+</P>
+
+<P>} 
+</P>
+
+<P>int factorial(int num) 
+// REQUIRES: n &gt;= 0 
+// EFFECTS: returns num! 
+</P>
+
+<P>{ 
+</P>
+
+<P>return fact_helper(num, 1); 
+} 
+int factorial(int num) { 
+</P>
+
+<P>int n = num; 
+int result = 1; 
+</P>
+
+<P>while (n!=0) { 
+result *= n; 
+.... 
+} 
+return result; 
+</P>
+
+<P>} 
+</P>
+
+<P>Step 5 – Write the loop body Now we can write the first line of the loop body and erase “result” and the edge terminating at result. The new graph is: </P>
+
+<P>n 34 </P>
+
+<P>int fact_helper(int n, int result) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns result * n! { </P>
+
+<P>if (n == 0) { </P>
+
+<P>return result; </P>
+
+<P>} else { </P>
+
+<P>return fact_helper(n-1,result*n); </P>
+
+<P>} } </P>
+
+<P>int factorial(int num) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns num! </P>
+
+<P>{ </P>
+
+<P>return fact_helper(num, 1); </P>
+
+<P>} </P>
+
+<P>int factorial(int num) { 
+int n = num; 
+int result = 1; 
+while (n!=0) { 
+result *= n; 
+n -= 1; 
+} 
+return result; 
+} 
+Step 5 – Write the loop body 
+</P>
+
+<P>The vertex n now has no edges with it as a sink, so we can write its line down. 
+</P>
+
+<P>n 35 </P>
+
+<P>int fact_helper(int n, int result) </P>
+
+<P>// REQUIRES: n &gt;= 0 </P>
+
+<P>// EFFECTS: returns result * n! { </P>
+
+<P>if (n == 0) { </P>
+
+<P>return result; </P>
+
+<P>} else { </P>
+
+<P>return fact_helper(n-1,result*n); </P>
+
+<P>} } </P>
+
+<P>int factorial(int num) // REQUIRES: n &gt;= 0 </P>
+
+<P> // EFFECTS: returns num! 
+{ 
+</P>
+
+<P>return fact_helper(num, 1); 
+} 
+int factorial(int num) { 
+</P>
+
+<P>int n = num; 
+int result = 1; 
+</P>
+
+<P>while (n!=0) { 
+result *= n; 
+n -= 1; 
+} 
+return result; 
+</P>
+
+<P>} 
+</P>
+
+<P>Step 5 – Write the loop body </P>
+
+<P>Leaving an empty graph. We're done! 36 </P>
+
+<P>Dependency Graphs </P>
+
+<P>.What if you have a cycle in the dependency graph. For example, suppose the recursive call is: </P>
+
+<P> foo_helper(int bar, int baz) { 
+.... 
+foo_helper(baz-1, bar-1); 
+} 
+</P>
+
+<P>.In other words, each of bar and baz depends on the other, like so: </P>
+
+<P>37 baz bar </P>
+
+<P>Dependency Graphs foo_helper(int bar, int baz) { .... foo_helper(baz-1, bar-1); } </P>
+
+<P>.You can't update either one of them “first”. 
+.Solve this by inventing shadow variables that hold both “new” 
+values before assigning any of them: 
+</P>
+
+<P>int bar_new = baz-1; // shadow variable 
+int baz_new = bar-1; // shadow variable 
+bar = bar_new; 
+baz = baz_new; 
+</P>
+
+<P>38 
+baz 
+bar 
+</P>
+
+<P>Dependency Graphs .Note: This no longer creates a cycle because the initialization of the shadow variables happens in the “previous recursive step” and the assignment of bar/baz happens in the “current </P>
+
+<P>recursive step”. 
+.The transition between these two steps is called a software 
+epoch - dependencies do not exist across epochs. 
+</P>
+
+<P>int bar_new = baz-1; // shadow variable 
+int baz_new = bar-1; // shadow variable 
+bar = bar_new; 
+baz = baz_new; 
+</P>
+
+<P>39 
+bar_new 
+baz_new 
+baz 
+bar 
+“previous” epoch 
+</P>
+
+<P>baz_new 
+baz 
+bar 
+bar_new 
+“current” epoch 
+“previous” 
+</P>
+
+<P>epoch “current” epoch </P>
+
+<P>Dependency Graphs int bar_new = baz-1; // shadow variable int baz_new = bar-1; // shadow variable bar = bar_new; baz = baz_new; </P>
+
+<P>.Technically, you can write the general iteration code using only 
+these shadow variables and dispense the dependency graph 
+altogether. 
+.However, shadow variables make things much less readable, 
+and should be avoided whenever possible. 
+</P>
+
+<P>40 
+</P>
+
+<P>Okay, so what's the point? 
+</P>
+
+<P>.It is easy to get yourself into trouble when writing a loop. 
+.For example, you've all probably written a loop with a 
+“fencepost” or “off-by-one” error. 
+.The root cause of these errors tends to be not thinking carefully 
+of how you are updating loop variables. 
+.If you train yourself to think recursively, it's much easier to 
+write loops. 
+</P>
+
+<P>41 
+</P>
+
+<P>Okay, so what's the point? 
+</P>
+
+<P>.In a recursive function, there is “now” (the current invocation) 
+and “then” (the next invocation). 
+.With loops, the division is not so clear, as we saw with the 
+problem of mis-ordering n and result in factorial(). 
+.Understanding recursive invariants is especially helpful when 
+writing the iterative version and leads to the use of “loop 
+invariants”. 
+</P>
+
+<P>42 
+</P>
+
+<P>Exercise 
+</P>
+
+<P>.Implement this function 
+</P>
+
+<P>//returns x^y 
+int power(int x, unsigned int y); 
+</P>
+
+<P>.The obvious solution uses about y multiplications 
+.28 = 2*2* ... *2 
+</P>
+
+<P>.Write 3 solutions: looping, recursive, tail recursive 
+</P>
+
+<P>Solution #4: faster loop </P>
+
+<P>int power4(int x, unsigned y) { </P>
+
+<P>int result=1; </P>
+
+<P>while (y &gt; 0) { </P>
+
+<P>if (y % 2) result *= x; </P>
+
+<P>x *= x; </P>
+
+<P>y /= 2; </P>
+
+<P>} </P>
+
+<P>return result; } .This one is faster, using the trick: 28 = ((22)2)2 .Write a recursive version and a tail-recursive version </P>
+
+<P>47 </P>
+</TaggedPDF-doc>

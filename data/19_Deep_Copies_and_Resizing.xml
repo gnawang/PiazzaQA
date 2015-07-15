@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:49:02-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:49:02-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:49:02-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">19_Deep_Copies_and_Resizing.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:eaa57a70-40d9-4dd0-8a75-43f4189f74b3</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:61912210-fba1-47e9-ab9e-7dfe534b0b7d</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="19_Deep_Copies_and_Resizing.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280Programming and Introductory Data Structures </P>
+
+<P>blockM-dearborn Deep Copies and Resizing Slides by Andrew DeOrio, Jeff Ringenbergand Brian Noble </P>
+
+<P>Review: dynamic arrays </P>
+
+<P>.Last time, we built an IntSetthat the let the client specify the capacity </P>
+
+<P>intmain() { 
+IntSetis(3); //IntSetwith capacity for 3 ints 
+} 
+.We used a pointer to a dynamic array to store the set 
+</P>
+
+<P>class IntSet{ 
+int*elts; //pointer to dynamic array 
+intelts_size; //current occupancy 
+intelts_capacity; //capacity of array 
+static constintELTS_CAPACITY_DEFAULT = 100; 
+//... 
+}; 
+</P>
+
+<P>Review: leaking memory problem 
+</P>
+
+<P>.We had a problem when a local IntSetvariable went out of scope: it leaked all the memory allocated for the dynamic array .This was because the lifetime of dynamic variables is managed by the programmer, not automatically </P>
+
+<P>void foo(IntSetx) { //do something </P>
+
+<P>} 
+intmain() { 
+IntSetis(3); 
+is.insert(5); 
+foo(is); 
+is.query(5); 
+} 
+</P>
+
+<P>Review: destructor 
+</P>
+
+<P>.We fixed this problem by adding a destructor, which deleted the dynamically allocated memory </P>
+
+<P>class IntSet{ 
+public: 
+~IntSet(); 
+//... 
+}; 
+IntSet::~IntSet() { 
+delete[] elts; 
+} 
+</P>
+
+<P>Review: destructor 
+</P>
+
+<P>.A destructor runs automatically .Local variable: when it goes out of scope .Global variable: when the program ends .Dynamic variable: when it is deleted </P>
+
+<P>.For example </P>
+
+<P>void foo(IntSetx) { //x is a local variable </P>
+
+<P>//... 
+} //x goes out of scope, dtorruns 
+</P>
+
+<P>Review: copy problem 
+</P>
+
+<P>.Problem with IntSetand pass-by-value .The IntSetmember variables were copied, but not the array on the heap </P>
+
+<P>void foo(IntSetx) { 
+//do something 
+}//shared array destructed! 
+intmain() { 
+IntSetis(3); 
+is.insert(5); 
+foo(is); 
+is.query(5); 
+} 
+stack 
+heap 
+is 
+3(intelts_capacity) 
+int[3] 
+5 
+(int* elts) 
+0 (intelts_size) 
+x 
+3(intelts_capacity) 
+(int* elts) 
+</P>
+
+<P>0 (intelts_size) </P>
+
+<P>Review: copy constructor </P>
+
+<P>.Solution: copy constructor that copies the array on the heap, called a deep copy </P>
+
+<P>class IntSet{ 
+public: 
+IntSet(constIntSet&amp;other); //copy constructor 
+//... 
+}; 
+IntSet::IntSet(constIntSet&amp;other) { 
+elts= new int[other.elts_capacity]; 
+elts_size= other.elts_size; 
+elts_capacity= other.elts_capacity; 
+for (inti= 0; i&lt; other.elts_size; ++i) 
+elts[i] = other.elts[i]; 
+} 
+</P>
+
+<P>Review: copy problem 
+</P>
+
+<P>.Problem with IntSetand pass-by-value .The IntSetmember variables were copied, but the array on the heap was not </P>
+
+<P>void foo(IntSetx) { //do something }//copy is destructed intmain() { IntSetis(3); is.insert(5); </P>
+
+<P>foo(is);//copy ctorruns 
+is.query(5); 
+} 
+stack 
+heap 
+is 
+3(intelts_capacity) 
+int[3] 
+5 
+(int* elts) 
+0 (intelts_size) 
+x 
+3(intelts_capacity) 
+(int* elts) 
+0 (intelts_size) 
+int[3] 
+5 
+</P>
+
+<P>Problems with assignment &quot;=" 
+.Draw the stack and the heap for this code: 
+</P>
+
+<P>intmain() { 
+IntSetis1(3); 
+IntSetis2(6); 
+is2 = is1; 
+} 
+.Hint: the assignment operator (equals &quot;=&quot; sign) does a shallow 
+</P>
+
+<P>copy 
+</P>
+
+<P>Problems with assignment &quot;=&quot; .How do we fix this? </P>
+
+<P>intmain() { </P>
+
+<P>IntSetis1(3); </P>
+
+<P>IntSetis2(6); </P>
+
+<P>is2 = is1; //assignment of is1 to is2 </P>
+
+<P>} </P>
+
+<P>.By default, the compiler will use a shallow copy .Like the copy constructor, assignment must do a deep copy of the right hand side (is1) to the left hand side (is2) .However, the class instance at the left hand side (is2) must first be destroyed, otherwise we have a memory leak! .To implement this, we redefine the assignment operatorfor an IntSetby using operator overloading </P>
+
+<P>Operator overloading </P>
+
+<P>.Operator overloadinglets us customize what happens when we use a built-in symbol </P>
+
+<P>intmain() { 
+IntSetis1(3); 
+IntSetis2(6); 
+is2 = is1; 
+} 
+.Here, we want to change what the equals &quot;=&quot; sign does, by 
+</P>
+
+<P>doing a deep copy instead of a shallow copy 
+</P>
+
+<P>Overloaded assignment operator 
+.Here's how we customize the assignment &quot;=&quot; operator 
+</P>
+
+<P>class IntSet{ 
+</P>
+
+<P>// data elements 
+... 
+public: 
+// Constructors 
+//EFFECTS: assignment operator does a deep copy 
+IntSet&amp;operator= (constIntSet&amp;rhs); 
+//... 
+}; 
+</P>
+
+<P>Overloaded assignment operator 
+</P>
+
+<P>.Like the copy constructor, the assignment operator takes a 
+reference to a const instance to copy from 
+.However, it also returnsa reference to the copied-to object. 
+.This return value allows for a chained assignmentlike this: 
+IntSetis3; 
+is3 = is2 = is1; 
+.This is a compound expression. 
+.Because &quot;=&quot; binds right-to-left, we first assign is1to is2, 
+and this expression yields the new value of is2so that it can 
+in turn be assigned to is3 
+</P>
+
+<P>IntSet&amp;operator= (constIntSet&amp;rhs); 
+</P>
+
+<P>Overloaded assignment operator 
+</P>
+
+<P>.Here's what we need to do: 
+1.Remove the existing array 
+2.Initialize the member variables 
+3.Copy everything from the rhsIntSet 
+</P>
+
+<P>IntSet&amp;IntSet::operator= (constIntSet&amp;rhs) { 
+delete[] elts; //remove the existing array 
+elts= new int[rhs.elts_capacity]; //copy members 
+elts_size= rhs.elts_size; 
+elts_capacity= rhs.elts_capacity; 
+</P>
+
+<P>//... } </P>
+
+<P>Overloaded assignment operator </P>
+
+<P>.Here's what we need to do: 1.Remove the existing array 2.Initialize the member variables 3.Copy everything from the rhsIntSet </P>
+
+<P>IntSet&amp;IntSet::operator= (constIntSet&amp;rhs) { 
+//... 
+//Copy everything from the rhsIntSet 
+for (inti= 0; i&lt; rhs.elts_size; ++i) 
+elts[i] = rhs.elts[i]; 
+} 
+</P>
+
+<P>Understanding this 
+</P>
+
+<P>IntSet&amp;IntSet::operator= (constIntSet&amp;rhs) { 
+</P>
+
+<P>//... 
+</P>
+
+<P>return *this; 
+</P>
+
+<P>} 
+</P>
+
+<P>.We need to return a reference to the current IntSetso that chaining worksIntSetis1; //fill is1IntSetis2, is3; is3 = is2 = is1; .Every member function has a &quot;secret&quot; variable called this .thisis a pointer to the current instance of the class .Here, we use *thisbecause the return type is a reference </P>
+
+<P>Understanding this intmain() { </P>
+
+<P>IntSetis(3); </P>
+
+<P>} </P>
+
+<P>.Think of thisas a local variable which points to the current instance </P>
+
+<P>stack 
+heap 
+is 
+3(intelts_capacity) 
+int[3] 
+(int* elts) 
+0 (intelts_size) 
+(IntSet* this) 
+</P>
+
+<P>Exercise 
+.Problem: what happens if we do this? 
+</P>
+
+<P>intmain() { 
+IntSetis(3); 
+is.insert(5); 
+is = is; 
+} 
+</P>
+
+<P>Completed assignment operator 
+IntSet&amp;IntSet::operator= (constIntSet&amp;rhs) { 
+if (this == &amp;rhs) return *this; //fix &quot;is = is" 
+delete[] elts; //remove all 
+elts= new int[rhs.elts_capacity]; 
+elts_size= rhs.elts_size; 
+</P>
+
+<P>elts_capacity= rhs.elts_capacity; </P>
+
+<P>for (inti= 0; i&lt; rhs.elts_size; ++i) </P>
+
+<P>elts[i] = rhs.elts[i]; </P>
+
+<P>return *this; </P>
+
+<P>} </P>
+
+<P>The Rule of the Big Three </P>
+
+<P>.This lecture (and the last one) can be summarized with a simple rule: the Rule of The Big Three .If you have any dynamically allocated storage in a class, you must provide: </P>
+
+<Part>
+<H4>1.A destructor </H4>
+
+<P>2.A copy constructor 3.An overloaded assignment operator </P>
+
+<P>.If you find yourself writing one of these, you almost certainly need all of them </P>
+
+<P>Modifying Insert() </P>
+
+<P>.We have modified IntSetto allow a client to specify the capacity of an IntSet .However, this doesn't really get around the “big instance” problem, since the client itself might not know how big the set will grow .So, what we reallywant to do is to create an IntSetthat can grow as big as it needs to .To do this, we only need to modify the insert()method </P>
+
+<P>Modifying Insert() </P>
+
+<P>.In this example, we'll be working with the version that allows clients to specify the initialsize of the IntSet. .We will use the unsorted representation, because it's a bit easier, and we can focus on the act of resizing, not the act of inserting </P>
+
+<P>//REQUIRES: set is not full </P>
+
+<P>void IntSet::insert(intv) { </P>
+
+<P>assert(elts_size&lt; ELTS_CAPACITY);//full! </P>
+
+<P>if (indexOf(v) != elts_capacity) return; 
+elts[elts_size++] = v; 
+} 
+Old version 
+</P>
+
+<P>Modifying Insert() 
+</P>
+
+<P>.In this example, we'll be working with the version that allows clients to specify the initial size of the IntSet .We're going to modify insert()so that it can grow the array </P>
+
+<P>//REQUIRES: set is not full 
+void IntSet::insert(intv) { 
+assert(elts_size&lt; ELTS_CAPACITY);//full! 
+if (indexOf(v) != elts_capacity) return; 
+if(elts_size== elts_capacity) grow(); 
+elts[elts_size++] = v; 
+} 
+New version 
+</P>
+
+<P>Modifying Insert() 
+</P>
+
+<P>.The growmethod won’t take any arguments or return any values. .It should never be called from outside of the class, so make it private </P>
+
+<P>class IntSet{ 
+//... 
+// EFFECTS: enlarge the eltsarray, 
+// preserving current contents 
+void grow(); 
+public: 
+</P>
+
+<P>// ... }; </P>
+
+<P>Modifying Insert() </P>
+
+<P>.Grow will look a lot like the assignment operator .It must perform the following steps: 1.Allocate a bigger array 2.Copy the smaller array to the bigger one 3.Destroy the smaller array 4.Modify eltsand elts_capacityto reflect the new array </P>
+
+<P>Modifying Insert() 
+void IntSet::grow() { 
+int*tmp= new int[elts_capacity+ 1]; 
+for (inti= 0; i&lt; elts_size; ++i) { 
+tmp[i] = elts[i]; 
+} 
+delete [] elts; 
+elts= tmp; 
+elts_capacity+= 1; 
+} 
+1.Allocate a bigger array 
+</P>
+
+<P>2.Copy the smaller array to the bigger one 3.Destroy the smaller array 4.Modify eltsand elts_capacityto reflect the new array </P>
+
+<P>1 2 3 4 </P>
+
+<P>Upper bound </P>
+
+<P>.Unfortunately, we might end up doing a lot of copying. 
+.Suppose a client creates an IntSetof capacity 1, and then 
+inserts N elements into it. 
+.Question: What’s the tight upper bound on the number of 
+integer values that will be copied over the lifetime of this 
+function in the worst case? 
+</P>
+
+<P>void IntSet::grow() { 
+int*tmp= new int[elts_capacity+ 1]; 
+for (inti= 0; i&lt; elts_size; ++i) { 
+tmp[i] = elts[i]; 
+} 
+delete [] elts; 
+elts= tmp; 
+elts_capacity+= 1; 
+} 
+void IntSet::insert(intv) { 
+if (indexOf(v) != elts_capacity) return; 
+if (elts_size== elts_capacity) grow(); 
+elts[elts_size++] = v; 
+} 
+</P>
+
+<P>Upper bound 
+</P>
+
+<P>.Suppose a client creates an IntSetof capacity 1, and then inserts N elements into it </P>
+
+<P>Answer: </P>
+
+<P>.When we extended the array to include the Nth element, we copied N-1 others into it .When we extended the array to include the N-1st, we copied N2 others into it .We did this all the way down to the first copy we had to perform, which copied just one element .So the total number of copies was: (N-1) + (N-2) + ... + 2 + 1 </P>
+
+<P>Upper bound </P>
+
+<P>.Suppose a client creates an IntSetof capacity 1, and then 
+inserts N elements into it 
+</P>
+
+<P>Answer: 
+</P>
+
+<P>.There are N-1 total terms in this summation. 
+.We can add up each &quot;scoped&quot; pair to get a total of N: 
+</P>
+
+<P>(N-1) + (N-2) + ... + 2 + 1 N N </P>
+
+<P>Upper bound </P>
+
+<P>.Suppose a client creates an IntSetof capacity 1, and then 
+inserts N elements into it. 
+</P>
+
+<P>Answer: 
+</P>
+
+<P>.There are N-1 total terms in this summation. 
+.We can add up each &quot;scoped&quot; pair to get a total of N: 
+</P>
+
+<P>(N-1) + (N-2) + ... + 2 + 1 N N Since there are N-1 total terms, </P>
+
+<P>there are (N-1)/2 pairs, each one accounting for N copies. So, the total number of copies is: </P>
+
+<P>N * (N-1)/2 or (N^2 -N)/2 </P>
+
+<P>Upper bound </P>
+
+<P>.Suppose a client creates an IntSetof capacity 1, and then inserts N elements into it. </P>
+
+<P>Answer: 
+</P>
+
+<P>.There are N-1 total terms in this summation. 
+.We can add up each &quot;scoped&quot; pair to get a total of N: 
+</P>
+
+<P>(N-1) + (N-2) + ... + 2 + 1 N N This is a quadratic function in N This means that as the IntSetgrows, </P>
+
+<P>the cost to build the IntSetgrows much faster How can we make this better? </P>
+
+<P>Optimizing grow() </P>
+
+<P>.How can we make grow()better? 
+.The intuition is that we aren't buying enough room each time 
+we copy the array: 
+.We copy N things, but only buy room for one more slot 
+</P>
+
+<P>.Instead, we'd like to buy more slots for each N things we copy 
+.The new version is only slightlydifferent from the old version 
+.However, it has verydifferent performance characteristics 
+</P>
+
+<P>Optimizing grow() 
+void IntSet::grow() { 
+int*tmp= new int[elts_capacity* 2]; 
+for (inti= 0; i&lt; elts_size; ++i) { 
+tmp[i] = elts[i]; 
+} 
+delete [] elts; 
+elts= tmp; 
+elts_capacity*= 2; 
+</P>
+
+<P>} </P>
+
+<P>Instead of growing the array by one, we double it </P>
+
+<P>Optimizing grow() </P>
+
+<P>.Suppose a client creates an IntSetof capacity 1, and then inserts N elements into it using the new version of grow() .Question: What’s the tight upper bound on the number of integer values that will be copied over the lifetime of this function in the worst case? </P>
+
+<P>void IntSet::grow() { 
+int*tmp= new int[elts_capacity* 2]; 
+for (inti= 0; i&lt; elts_size; ++i) { 
+tmp[i] = elts[i]; 
+} 
+delete [] elts; 
+elts= tmp; 
+elts_capacity*= 2; 
+} 
+void IntSet::insert(intv) { 
+if (indexOf(v) != elts_capacity) return; 
+if (elts_size== elts_capacity) grow(); 
+elts[elts_size++] = v; 
+} 
+</P>
+
+<P>Optimizing grow() 
+</P>
+
+<P>Answer: 
+</P>
+
+<P>.In the worst case we copied N-1 elements to insert the Nth 
+.However, the copy operation before that was only for the N/2’th 
+element, which copied (N/2 -1) elements 
+.Likewise for the N/4’th element, (N/4 –1) elements were copied, 
+etc… 
+.So, the total number of copies (T) is: 
+</P>
+
+<Sect>
+<H4>T = (N-1)+(N/2-1)+(N/4-1)+(N/8-1)+... .We can drop the &quot;-1&quot; terms in each step: </H4>
+
+<P>T &lt; N + N/2 + N/4 + N/8 + ... </P>
+
+<P>Optimizing grow() </P>
+
+<P>Answer: </P>
+
+<P>.The big question is how many entries are in this series before we terminate .Note that we will eventually terminate, since we can only copy an integral number of integers .Start collapsing terms to see where we get: </P>
+
+<P>T &lt; N + (N/2 + N/4) + N/8 + ... 
+&lt; N + 3N/4 + N/8 + ... 
+&lt; N + (3N/4 + N/8) + ... 
+&lt; N + 7N/8 + ... 
+</P>
+
+<P>Optimizing grow() 
+Answer: 
+T &lt; N + (N/2 + N/4) + N/8 + ... 
+&lt; N + 3N/4 + N/8 + ... 
+&lt; N + (3N/4 + N/8) + ... 
+&lt; N + 7N/8 + ... 
+.In the worst case, this becomes: 
+</P>
+
+<P>&lt; N + (reallyBigNumber-1)N/(reallyBigNumber) 
+.But (reallyBigNumber-1)/reallyBigNumberis almost 1, so: 
+</P>
+
+<P>T &lt; N + N 
+&lt; 2N 
+</P>
+
+<P>.So, instead of copying almost (N^2-N)/2 elements, we copy fewer than 2N of them </P>
+
+<P>Optimizing grow() 
+Answer: 
+.Here's a table showing what this means: 
+</P>
+
+<P># elements(N^2-N)/22N 
+102 
+82816 
+642016128 
+5121308161024 
+204820961284096 
+.The &quot;double&quot; implementation is muchbetter than the &quot;by-one" 
+</P>
+
+<P>implementation 
+</P>
+
+<P>Exercise: allocating classes 
+intmain() { 
+IntSetis1(1); 
+is1.insert(42); 
+IntSetis2(3); 
+is2 = is1; 
+is2.insert(43); 
+} 
+.Draw the stack and heap 
+</P>
+
+<P>.Hint: first label the lines where ctors, dtors, assignments, etc. happen </P>
+
+<P>stack heap </P>
+</Sect>
+</Part>
+</TaggedPDF-doc>

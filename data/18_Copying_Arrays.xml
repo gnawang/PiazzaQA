@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:49:02-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:49:02-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:49:02-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">18_Copying_Arrays.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:a1f284cf-5aec-40b0-bf0b-21628f3c21de</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:e4d6ea0b-137e-480f-8149-0f2949eb1956</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="18_Copying_Arrays.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280Programming and Introductory Data Structures 
+</P>
+
+<P>blockM-dearborn 
+Copying Arrays 
+</P>
+
+<P>Slides by Andrew DeOrio, 
+</P>
+
+<P>Jeff Ringenbergand 
+</P>
+
+<P>Brian Noble 
+</P>
+
+<P>Creating dynamic arrays 
+</P>
+
+<P>.Some dynamic variables have sizes known to the compilerint*ip= new int(5); //intw/ value &quot;5" 
+int*array = new int[5]; //array w/ 5 elts 
+.Recall that we can create dynamic variables whose size is not 
+known to the compiler using dynamic arraysintsize = get_size_from_user(); //&quot;200" 
+int*p = new int[size]; 
+.Recall that we can destroy dynamic arrays using the array 
+delete operatordelete[] p; 
+</P>
+
+<P>Destroying dynamic arrays 
+</P>
+
+<P>int* p = new int[5]; 
+delete[] p; 
+</P>
+
+<P>.If you allocate an array-of-T, you absolutely mustuse the 
+delete[]operator, and notthe &quot;plain&quot; delete operator. 
+.Conceptually, the array allocator and the singleton allocator are 
+completely different and mixing them leads to undefined 
+behaviorint* p = new int[5]; 
+delete p; //bad! 
+.This is because the language runtime system has to keep track 
+of how large arrays are –since the compiler doesn't know, it 
+has to be dynamic information. 
+</P>
+
+<P>Classes with dynamic arrays 
+</P>
+
+<P>.Now, we can build a version of IntSetthat allows the client 
+to specify how large the capacity of the set should be 
+.Rather than hold an array explicitly, we have a pointer eltsthat will (eventually) point to a dynamically-created array 
+.elts_sizestill tells us how many elements are stored 
+</P>
+
+<P>class IntSet{ 
+</P>
+
+<P>int*elts; //pointer to dynamic array 
+</P>
+
+<P>intelts_size; //current occupancy 
+intelts_capacity; //capacity of array 
+static constintELTS_CAPACITY_DEFAULT = 100; 
+public: 
+//... 
+}; 
+</P>
+
+<P>Classes with dynamic arrays 
+</P>
+
+<P>.elts_capacitytells us the size of the allocated array .ELTS_CAPACITY_DEFAULTtells us the initial size </P>
+
+<P>class IntSet{ 
+int*elts; //pointer to dynamic array 
+intelts_size; //current occupancy 
+intelts_capacity; //capacity of array 
+static constintELTS_CAPACITY_DEFAULT = 100; 
+public: 
+//... 
+}; 
+</P>
+
+<P>Classes with dynamic arrays 
+</P>
+
+<P>.We'll base our changes on the unsorted implementation, and most methods don't need to change .The constructor changes, and allocates a default size array </P>
+
+<P>IntSet::IntSet() 
+: elts_size(0), 
+elts_capacity(ELTS_CAPACITY_DEFAULT) { 
+elts= new int[ELTS_CAPACITY_DEFAULT]; 
+} 
+</P>
+
+<P>Alternate constructor </P>
+
+<P>.In addition to the default, we can write an alternate constructor .It has the same name as the default, but a different type signature: </P>
+
+<P>class IntSet{ 
+//... 
+public: 
+//EFFECTS: creates an IntSetwith default capacity 
+IntSet(); 
+//EFFECTS: creates an IntSetwith specified capacity 
+//REQUIRES: capacity &gt; 0 
+IntSet(intcapacity); 
+//... 
+}; 
+</P>
+
+<P>Alternate constructor 
+.The alternate constructor creates an array of the specified size 
+</P>
+
+<P>IntSet::IntSet(intcapacity) 
+: elts_size(0), elts_capacity(capacity) { 
+elts= new int[capacity]; 
+} 
+</P>
+
+<P>Function overloading 
+</P>
+
+<P>.Recall that this is called function overloading: two different functions with the same name, but different prototypes .Since the compiler knows the argument types, it can select the correct constructor when a new object is created </P>
+
+<P>.Different from function overriding, where a derived class has a function with the same name and prototype as the parent </P>
+
+<P>IntSetis1; //No arguments //default ctorruns IntSetis2(200); //Integer argument //alternate ctorruns </P>
+
+<P>Building a new IntSet </P>
+
+<P>.Notice that the two constructors are nearly identical: .The only difference is whether we use capacityor ELTS_CAPACITY_DEFAULT </P>
+
+<P>IntSet::IntSet() 
+: elts_size(0), 
+elts_capacity(ELTS_CAPACITY_DEFAULT) { 
+elts= new int[ELTS_CAPACITY_DEFAULT]; 
+} 
+IntSet::IntSet(intcapacity) 
+: elts_size(0), elts_capacity(capacity) { 
+elts= new int[capacity]; 
+} 
+</P>
+
+<P>Building a new IntSet 
+</P>
+
+<P>.One way to solve this problem of duplicate definitions is to use something called a default argument .Define only one constructor, but make its argument optional .Fixed . </P>
+
+<P>class IntSet{ 
+//... 
+public: 
+//EFFECTS: creates an IntSetwith specified capacity 
+//REQUIRES: capacity &gt; 0 
+IntSet(intcapacity = ELTS_CAPACITY_DEFAULT); 
+</P>
+
+<P>//... } </P>
+
+<P>Exercise: allocating classes void foo() { IntSetis(3); } .Draw the stack and heap </P>
+
+<P>stack heap </P>
+
+<P>Copy problems </P>
+
+<P>.Problem: what happens if we have a local IntSetinside of a 
+function and the function returns? 
+.Why isn't this a problem with the static version of IntSet? 
+</P>
+
+<P>void foo() { 
+IntSetis(3); 
+} 
+intmain() { 
+foo(); 
+//or worse! 
+//for (inti=0; i&lt;1000000; ++i) 
+// foo(); 
+} 
+</P>
+
+<P>Copy problems 
+void foo() { 
+IntSetis(3); 
+</P>
+
+<P>}//foo returns 
+intmain() { 
+foo(); 
+} 
+.Array is still on the heap! 
+</P>
+
+<P>.Leak! 
+</P>
+
+<P>stack 
+heap 
+is 
+3(intelts_capacity) 
+int[3] 
+(int* elts) 
+0 (intelts_size) 
+</P>
+
+<P>Destructors 
+</P>
+
+<P>.To solve this memory leak, we have to arrange to de-allocate the integer array whenever the &quot;enclosing&quot; IntSetis destroyed. .We do this with a destructorand it is the opposite of a constructor .The constructor ensures that the object is in fact a legal instance of its class and the destructor's job is to do the opposite .If a class allocates dynamic storage, then the destructor is responsible for deallocatingit </P>
+
+<P>Destructors 
+class IntSet{ 
+public: 
+//... 
+//EFFECTS: destroys this IntSet 
+~IntSet(); 
+</P>
+
+<P>//... </P>
+
+<P>}; </P>
+
+<P>IntSet::~IntSet() { </P>
+
+<P>delete[] elts; </P>
+
+<P>} </P>
+
+<P>We have to use the array-based delete operator, not the &quot;standard&quot; delete operator, because the thing we are delete[]ingwas created by new[]. </P>
+
+<P>When does the destructor run? </P>
+
+<P>.Destructors run automatically when an object is destroyed .Local variable: when it goes out of scope </P>
+
+<P>intfoo() { IntSetis; //ctorruns }//dtorruns .Global variable: when the program ends </P>
+
+<P>IntSetis; //ctorruns </P>
+
+<P>intmain() { } //dtorruns </P>
+
+<P>Exercise: deallocatingclasses </P>
+
+<P>void foo() { </P>
+
+<P>IntSetis(3); </P>
+
+<P>} </P>
+
+<P>.Draw the stack and heap .How much memory is leaked? .Assume 4B intand 8B int* </P>
+
+<P>stack heap </P>
+
+<P>When does the destructor run? </P>
+
+<P>.Destructors run automatically when an object is destroyed .Dynamic variable: when it is deleted </P>
+
+<P>intmain() { IntSet*ptr= new IntSet; //ctorruns delete ptr; ptr=0; //dtorruns } </P>
+
+<P>Exercise: allocating classes intmain() { new IntSet(3); } .Draw the stack and heap </P>
+
+<P>.How much memory is 
+leaked? 
+.Assume 4B intand 8B int* 
+</P>
+
+<P>.Fix the leak 
+</P>
+
+<P>stack heap </P>
+
+<P>Exercise: copying classes void foo(IntSetx) { //do something } </P>
+
+<P>intmain() { 
+IntSetis(3); 
+is.insert(5); 
+foo(is); 
+is.query(5); 
+} 
+.Draw the stack and heap 
+</P>
+
+<P>.Hint: classes are passed by value </P>
+
+<P>stack heap </P>
+
+<P>Dangling pointers </P>
+
+<P>.Code with dangling pointer problem (prev. slide) </P>
+
+<P>void foo(IntSetx){/*...*/} 
+intmain() { 
+IntSetis(3); 
+is.insert(5); 
+foo(is); 
+is.query(5); 
+} 
+.Another example with the 
+</P>
+
+<P>same problem 
+</P>
+
+<P>intmain() { 
+IntSetis(3); 
+is.insert(5); 
+{ 
+</P>
+
+<P>IntSetx = is; } is.query(5); } Member variables are copied from isto x, but both share the </P>
+
+<P>eltsarray on the heap. When xgoes out of scope and is destroyed, is.eltsdangles. </P>
+
+<P>Copy object w/ dynamic memory </P>
+
+<P>.So, what's the problem? .The semantics of by-value arguments and assignment specify that we should copy the contents of is to x, but unfortunately, that's not what happens since the two end up sharing the eltsarray .What we really want is to copy the array in addition to the elements themselves </P>
+
+<P>Dangling pointers </P>
+
+<P>.This code uses the copy constructor to copy isto x </P>
+
+<P>void foo(IntSetx){/*...*/} 
+intmain() { 
+IntSetis(3); 
+is.insert(5); 
+foo(is); 
+is.query(5); 
+} 
+.This code uses the assignment 
+</P>
+
+<P>operator to copy isto x 
+</P>
+
+<P>intmain() { 
+IntSetis(3); 
+is.insert(5); 
+</P>
+
+<P>{ IntSetx = is; } is.query(5); } Both the copy constructor and assignment operator make </P>
+
+<P>copies of a class instance. Let's start by fixing the copy constructor </P>
+
+<P>Copy constructor 
+.Declare a copy constructor for our IntSetclass 
+</P>
+
+<P>class IntSet{ 
+public: 
+//EFFECTS: create an IntSetthat is a copy of other 
+IntSet(const IntSet&amp;other); 
+//... 
+}; 
+.Why pass by reference? It's more efficient 
+</P>
+
+<P>.Why pass by constreference? The copy constructor should notchange the otherIntSet 
+</P>
+
+<P>Copy constructor 
+</P>
+
+<P>.Like other constructors, the copy constructor must create a new IntSet, starting from a formless blob of memory .Unlike other constructors, the copy constructor must copy everything from the otherIntSet .The default constructor had one task 1.Initialize the member variables </P>
+
+<P>.The copy constructor has two tasks 1.Initialize the member variables 2.Copy everything from the otherIntSet </P>
+
+<P>Copy constructor 
+IntSet::IntSet(constIntSet&amp;other) { 
+//1. Initialize member variables 
+elts= new int[other.elts_capacity]; 
+elts_size= other.elts_size; 
+elts_capacity= other.elts_capacity; 
+//2. Copy everything from the other IntSet 
+for (inti= 0; i&lt; other.elts_size; ++i) 
+elts[i] = other.elts[i]; 
+} 
+</P>
+
+<P>Copy constructor 
+IntSet::IntSet(constIntSet&amp;other) { 
+//1. Initialize member variables 
+elts= new int[other.elts_capacity]; 
+elts_size= other.elts_size; 
+elts_capacity= other.elts_capacity; 
+//2. Copy everything from the other IntSet 
+for (inti= 0; i&lt; other.elts_size; ++i) 
+elts[i] = other.elts[i]; 
+} 
+An IntSetmethod has access to the privatemembers 
+</P>
+
+<P>of both thisinstance and the otherinstance 
+</P>
+
+<P>Deep copies 
+</P>
+
+<P>.Contrast this copy constructor with the default method of copying, which does only copies member variables, including pointers </P>
+
+<P>.The copy constructor we've written follows pointers and copiesthe things they point to, rather than just copying the pointers .This is called a deep copy, as opposed to the default behavior which called a shallow copy </P>
+
+<P>Exercise: copy constructor 
+void foo(IntSetx) { 
+//do something 
+} 
+intmain() { 
+IntSetis(3); 
+is.insert(5); 
+foo(is); 
+is.query(5); 
+} 
+.Draw the stack and heap 
+</P>
+
+<P>.Identify where the copy constructor is used </P>
+
+<P>stack heap </P>
+
+<P>Destructors and polymorphism </P>
+
+<P>.We've talked about constructors and polymorphism .When you create a object, all the constructors run, starting with the base class .Now, let's see what happens when we mix destructors with polymorphism </P>
+
+<P>Destructors and polymorphism Animal Chicken Horse </P>
+
+<P>class Animal { 
+virtual void talk() {} 
+}; 
+class Chicken : public 
+</P>
+
+<P>Animal { 
+public: 
+virtual void talk() 
+{ cout&lt;&lt; &quot;cluck\n&quot;; } 
+}; 
+class Horse : public 
+</P>
+
+<P>Animal { 
+public: 
+virtual void talk() 
+{ cout&lt;&lt; “neigh\n&quot;; } 
+}; 
+</P>
+
+<P>Destructors and polymorphism 
+intmain() { 
+Animal *a = ask_user();//input: “Chicken” 
+//do something with a 
+delete a; a=0; 
+} 
+.Now the destructor runs. 
+</P>
+
+<P>.Group discussion: which destructor? 
+</P>
+
+<P>Destructors and polymorphism 
+class Animal { 
+public: 
+</P>
+
+<P>virtual void talk() {} </P>
+
+<P>virtual ~Animal() {} </P>
+
+<P>}; </P>
+
+<P>.Polymorphic objects need virtual destructors .Put another way: if you have a virtual function and a destructor, then the destructor probably needs to be virtual too. </P>
+
+<P>Destructors and polymorphism Animal *a = ask_user(); //input: “Chicken” // do something with a delete a; a=0; .For variable a, Actual type (Chicken) is different from </P>
+
+<P>apparent type (Animal) 
+.Since dtoris virtual, correct dtors(~Chicken(), then 
+~Animal() ) are selected at runtime. 
+</P>
+
+<P>class Animal { virtual void talk() {} virtual ~Animal {} }; </P>
+</TaggedPDF-doc>

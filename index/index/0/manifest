@@ -1,0 +1,26 @@
+<parameters>
+	<code-build-date>Jun  4 2014</code-build-date>
+	<corpus>
+		<document-base>1</document-base>
+		<frequent-terms>141</frequent-terms>
+		<maximum-document>2</maximum-document>
+		<total-documents>1</total-documents>
+		<total-terms>890791</total-terms>
+		<unique-terms>31470</unique-terms>
+	</corpus>
+	<fields>
+		<field>
+			<byte-offset>0</byte-offset>
+			<isNumeric>true</isNumeric>
+			<isOrdinal>false</isOrdinal>
+			<isParental>false</isParental>
+			<name>ephyra</name>
+			<parserName>NumericFieldAnnotator</parserName>
+			<total-documents>1</total-documents>
+			<total-terms>403269</total-terms>
+		</field>
+	</fields>
+	<indri-distribution>Indri development release 5.7</indri-distribution>
+	<type>DiskIndex</type>
+</parameters>
+

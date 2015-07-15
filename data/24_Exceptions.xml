@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:49:04-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:49:04-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:49:04-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">24_Exceptions.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:4f88db98-b3b3-4027-a48e-0c5643e12756</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:aa97db80-c073-40fa-9745-86ba44d10d6b</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="24_Exceptions.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280Programming and Introductory Data Structures </P>
+
+<P>blockM-dearborn Exceptions Slides by Andrew DeOrio, based on material by Jeff Ringeneberg and Brian Noble </P>
+
+<P>Detecting errors at runtime </P>
+
+<P>.We want a means of recognizing and handling unusual conditions in your program at runtime, not just at compile time. .If you have a function that does not produce meaningful results for all possible values of its inputs, then it is a partial function. .We have seen one particular way of preventing a partial function from receiving inputs for which it cannot deliver meaningful results: the REQUIRES specification. .However, a REQUIRES clause is just comments and cannot enforce the specification. Therefore, it is easy to pass parameters that violate the specification. </P>
+
+<P>Example </P>
+
+<P>.Recall our factorial function .It is only valid for positive integers </P>
+
+<P>//REQUIRES: n &gt;= 0 
+//EFFECTS: returns n! 
+intfactorial (intn) { 
+intresult = 1; 
+while (n &gt; 0) { 
+result *= n; 
+n -= 1; 
+} 
+return result; 
+} 
+</P>
+
+<P>Example </P>
+
+<P>.If we're asking the user for input, it would be easy to &quot;accidentally&quot; pass a negative value to factorial </P>
+
+<P>intmain() { string f; //function double n; //number while (cin&gt;&gt; f &gt;&gt; n) { if (f == &quot;factorial&quot;) { cout&lt;&lt; factorial(n) &lt;&lt; endl; } else { cout&lt;&lt; &quot;try again&quot; &lt;&lt; endl;; } } } ./a.out factorial 5 120 factorial -5 ???? </P>
+
+<P>Motivation </P>
+
+<P>.Instead of the REQUIRES clause, let’s look at another way of ensuring correct inputs: runtime checking. .So, if we can’t guarantee formally (via a specification) that the inputs are correct, maybe we can guarantee this by checking the inputs explicitly before using them in our program. </P>
+
+<P>Determining legitimate output for illegitimate input </P>
+
+<P>.There are three general strategies for determining legitimate 
+output for illegitimate input: 
+1.“It’s my problem!” 
+2.“I Give up!” 
+3.“It’s your problem!” 
+</P>
+
+<P>1. “It’s my problem!” 
+</P>
+
+<P>.Try to “fix” things and continue execution by “coercing” 
+legitimate inputs from illegitimate ones by either modifying 
+themor returning default outputs 
+.For example: 
+</P>
+
+<P>//REQUIRES: n &gt;= 0 //EFFECTS: returns n!for non-negative inputs and // 1 for negative inputs intfactorial (intn) { // ... } </P>
+
+<L>
+<L>
+<LI>
+<Lbl>1.</Lbl>
+
+<LBody> “It’s my problem!” //REQUIRES: n &gt;= 0 //EFFECTS: returns n!for non-negative inputs and // 1 for negative inputs intfactorial (intn) { // ... } .Problem: in this example, factorial is simply undefined for </LBody>
+</LI>
+
+<LI>negative numbers, and trying to define it changes the rules of math </LI>
+</L>
+
+<LI>
+<Lbl>2.</Lbl>
+
+<LBody> “I Give up!” .Use abort()or exit() </LBody>
+</LI>
+</L>
+
+<P>//REQUIRES: n &gt;= 0 //EFFECTS: returns n!for non-negative inputs and // crashes the program for negative inputs intfactorial (intn) { if (n &lt; 0) exit(EXIT_FAILURE); // ... } </P>
+
+<L>
+<L>
+<LI>
+<Lbl>2.</Lbl>
+
+<LBody> “I Give up!” //REQUIRES: n &gt;= 0 //EFFECTS: returns n!for non-negative inputs and // crashes the program for negative inputs intfactorial (intn) { if (n &lt; 0) exit(EXIT_FAILURE); // ... } .It is Not Nice to terminate a program this way </LBody>
+</LI>
+
+<LI>.What if there were open files? They could become corrupted. .Exiting from a function deep in the call stack is (usually) not the way to handle an error! </LI>
+</L>
+
+<LI>
+<Lbl>3.</Lbl>
+
+<LBody> “It's your problem!” </LBody>
+</LI>
+</L>
+
+<P>.Sometimes, the code that detects the error does not know how to correct the error .One way to solve this is to encode failure in the return value </P>
+
+<P>//EFFECTS: returns n!for non-negative inputs and 
+// returns a negative number for negative inputs 
+intfactorial (intn) { 
+if (n &lt; 0) return n; 
+</P>
+
+<P>// ... } </P>
+
+<P>3. “It's your problem!” .Encode failure in the return value </P>
+
+<P>//EFFECTS: returns n!for non-negative inputs and // returns a negative number for negative inputs intfactorial (intn) { if (n &lt; 0) return n; // ... } .Problem #1: we're still changing the rules of math </P>
+
+<P>3. “It's your problem!” 
+.Problem #2: code that uses factorial()forgets to check 
+</P>
+
+<P>intmain() { 
+string f; //function 
+double n; //number 
+while (cin&gt;&gt; f &gt;&gt; n) { 
+if (f == &quot;factorial&quot;) { 
+cout&lt;&lt; factorial(n) &lt;&lt; endl; 
+} else { 
+cout&lt;&lt; &quot;try again&quot; &lt;&lt; endl;; 
+} 
+} 
+} 
+</P>
+
+<P>3. “It's your problem!” 
+.Problem #3: code that uses factorial()gets messy 
+</P>
+
+<P>intmain() { 
+string f; //function 
+double n; //number 
+while (cin&gt;&gt; f &gt;&gt; n) { 
+if (f == &quot;factorial&quot;) { 
+intresult = factorial(n); 
+if (result &lt; 0) 
+cout&lt;&lt; &quot;try again&quot; &lt;&lt; endl; 
+else 
+cout&lt;&lt; result; 
+} else { 
+cout&lt;&lt; &quot;try again&quot; &lt;&lt; endl;; 
+} 
+} 
+} 
+</P>
+
+<P>3. “It's your problem!” </P>
+
+<P>.Encode “failure” in the return values .Problem #4: sometimes you can't encode “failure” elegantly in the return values .For example: </P>
+
+<P>//EFFECTS: returns n^3 
+intcube(intn) { 
+return n * n * n; 
+} 
+</P>
+
+<P>Exceptions </P>
+
+<P>.Exceptionslet us detect an error in one part of the program and correct it in a different part of the program .For example, we could detect an error in factorial()and correct it in main() </P>
+
+<P>Exception Handling </P>
+
+<P>.When an exception occurs, control transfers from normal-case code to the error handling code .This error handling code then tries to correct the problem .In pictures: </P>
+
+<P>Block </P>
+
+<P>Handler </P>
+
+<P>Exception </P>
+
+<P>Occurred </P>
+
+<P>Exception Propagation </P>
+
+<P>.When an exception occurs, it propagatesfrom a function to its caller until it reaches a handler .This is called exception propagation, and it happens automatically .In the worst case, an exception propagates up the call chain all the way to the caller of main(), at which point your program exits .You can imagine exceptions as a multi-level return </P>
+
+<P>Exception Handling in C++ </P>
+
+<P>.When code detects an error, it uses a throwstatement .Code that might cause an error goes in a try{}block .Code that corrects an error goes in a catch{}block .If the exception is successfully handled in the catch block, execution continues normally with the first statement following the catch block .Otherwise, the exception is propagated to the enclosing block or to the caller if there is no enclosing block .If an exception is propagated to the caller of main(), the program exits Exception Handling in C++ </P>
+
+<P>.When code detects an error, it uses a throwstatement .Exceptions have types and values (just like variables) .When we throw an exception, we specify a value for the exception type in a throw statement .You can think of this value as being a kind of parameter to the exception, allowing some information describing the exception to be passed the handler .Examples: .intn = 0; throw n; .char c = 'e'; throw c; </P>
+
+<P>Terminology </P>
+
+<P>.throw exception == raise exception .catch block == exception handler </P>
+
+<P>Exception Example 
+.When code detects an error, it uses a throwstatement 
+</P>
+
+<P>//EFFECTS: returns n!, throws n for negative inputs 
+intfactorial (intn) { 
+if (n&lt;0) throw n; 
+intresult = 1; 
+while (n &gt; 0) { 
+result *= n; 
+n -= 1; 
+} 
+return result; 
+} 
+</P>
+
+<P>Exception Example 
+.When code detects an error, it uses a throwstatement 
+</P>
+
+<P>//EFFECTS: returns n!, throws n for negative inputs 
+intfactorial (intn) { 
+if (n&lt;0) throw n; 
+intresult = 1; 
+while (n &gt; 0) { 
+result *= n; 
+n -= 1; 
+} 
+return result; 
+} 
+If nis non-negative, no 
+</P>
+
+<P>exception is thrown and 
+</P>
+
+<P>the function returns its 
+</P>
+
+<P>result </P>
+
+<P>Exception Example 
+.When code detects an error, it uses a throwstatement 
+</P>
+
+<P>//EFFECTS: returns n!, throws n for negative inputs 
+intfactorial (intn) { 
+if (n&lt;0) throw n; 
+intresult = 1; 
+while (n &gt; 0) { 
+result *= n; 
+n -= 1; 
+} 
+return result; 
+} 
+If nis negative: 
+</P>
+
+<P>1.No more code from this function executes 2.Control passes “up the chain” to the caller </P>
+
+<P>.Code that might cause an error goes in a try{}block </P>
+
+<P>intmain() { string f; //function double n; //number while (cin&gt;&gt; f &gt;&gt; n) { try { if (f == &quot;factorial&quot;) { cout&lt;&lt; factorial(n) &lt;&lt; endl; } } } } Exception Example </P>
+
+<P>Exception Example </P>
+
+<P>.Code that corrects an error goes in a catch{}block .A catch{}block goes directly after a try{}block .A catch{}block matches the type from a throwstatement </P>
+
+<P>Exception Example .Code that corrects an error goes in a catch{}block </P>
+
+<P>intmain() { string f; //function double n; //number </P>
+
+<P>while (cin&gt;&gt; f &gt;&gt; n) { 
+try { 
+if (f == &quot;factorial&quot;) { 
+cout&lt;&lt; factorial(n) &lt;&lt; endl; 
+} 
+} catch(inti) { 
+cout&lt;&lt; &quot;try again&quot; &lt;&lt;endl; 
+} 
+} 
+} 
+</P>
+
+<P>intmain() { 
+string f; //function 
+double n; //number 
+while (cin&gt;&gt; f &gt;&gt; n) { 
+try { 
+if (f == &quot;factorial&quot;) { 
+cout&lt;&lt; factorial(n) &lt;&lt; endl; 
+} 
+} catch(inti) { 
+cout&lt;&lt; &quot;try again&quot; &lt;&lt;endl; 
+} 
+} 
+} 
+Exception Example 
+./a.out 
+factorial 5 
+120 
+</P>
+
+<P>factorial -5 
+try again 
+intfactorial (intn) { 
+if (n&lt;0) throw n; 
+intresult = 1; 
+while (n &gt; 0) { 
+result *= n; 
+n -= 1; 
+} 
+return result; 
+} 
+</P>
+
+<P>Exercise 
+.Write this function 
+</P>
+
+<P>//EFFECTS: returns n choose k, 
+// throws an exception for negative input 
+intcombination(intn, intk); 
+.Question: do you need to add a throwstatement? Why or 
+</P>
+
+<P>why not? 
+.Add code to main()to call combination() 
+</P>
+
+<P>Unhandled exceptions 
+</P>
+
+<P>.When an exception is not caught by a catch block, it propagates 
+all the way to the caller of main(), and the program exits 
+</P>
+
+<P>intmain() { 
+// ... 
+while (cin&gt;&gt; f &gt;&gt; n) { 
+//no try{} block! ... 
+</P>
+
+<P>if (f == &quot;combination&quot;) { double k; cin&gt;&gt; k; cout&lt;&lt; combination(n, k) &lt;&lt; endl; } //no catch{} block! ... } } ./a.out combination -5 4 terminate called after </P>
+
+<P>throwing an instance of 
+'int' 
+Aborted (core dumped) 
+</P>
+
+<P>Type discrimination 
+</P>
+
+<P>.A try{}block can have multiple catch{}blocks to handle different exception types </P>
+
+<P>try { 
+if (foo) throw 4; 
+// some statements go here 
+if (bar) throw 2.0; 
+// more statements go here 
+if (baz) throw ‘a’; 
+} 
+catch (intn) { } 
+catch (double d) { } 
+catch (char c) { } 
+</P>
+
+<P>catch (...) { } 
+</P>
+
+<P>Type discrimination 
+try { 
+if (foo) throw 4; 
+// some statements go here 
+if (bar) throw 2.0; 
+// more statements go here 
+if (baz) throw ‘a’; 
+} 
+catch (intn) { } 
+catch (double d) { } 
+catch (char c) { } 
+catch (...) { } 
+The type of the thrown 
+</P>
+
+<P>exception is matched, in order, to the list of catch blocks. The first matching catch block is executed </P>
+
+<P>Type discrimination 
+try { 
+if (foo) throw 4; 
+// some statements go here 
+if (bar) throw 2.0; 
+// more statements go here 
+if (baz) throw ‘a’; 
+} 
+catch (intn) { } 
+catch (double d) { } 
+</P>
+
+<P>catch (char c) { } </P>
+
+<P>catch (...) { } </P>
+
+<P>The last handler is a default handler, which matches any exception type. It can be used as a “catch-all” in case no other catch block matches </P>
+
+<P>Exception types </P>
+
+<P>.Code often uses custom types to describe errors .For example: </P>
+
+<P>class NegativeError{}; 
+class InputError{}; 
+.We use the class mechanism to declare custom types 
+</P>
+
+<P>Exception types 
+</P>
+
+<P>.When an error is detected, create a NegativeErrorobject and throwit </P>
+
+<P>//EFFECTS: returns n!, throws NegativeErrorfor n&lt;0 
+intfactorial (intn) { 
+if (n&lt;0) throw NegativeError(); 
+intresult = 1; 
+while (n &gt; 0) { 
+result *= n; 
+n -= 1; 
+} 
+return result; 
+} 
+</P>
+
+<P>Exception types 
+</P>
+
+<P>.To correct an error, the catch{}block matches the type 
+</P>
+
+<P>intmain() { 
+//... 
+while (cin&gt;&gt; f &gt;&gt; n) { 
+try { 
+//... 
+} catch (NegativeError){ 
+cout&lt;&lt; &quot;try a positive number&quot; &lt;&lt; endl; 
+} catch (...) { 
+cout&lt;&lt; &quot;try again&quot; &lt;&lt;endl; 
+} 
+} 
+./a.out 
+combination -5 4 
+try a positive 
+</P>
+
+<P>number 
+</P>
+
+<P>Exercise: What is the output? 
+class GoodbyeError{}; 
+void goodbye() { 
+cout&lt;&lt; &quot;goodbye!\n&quot;; 
+GoodbyeErrore; throw e; 
+cout&lt;&lt; &quot;goodbye() returns\n&quot;; 
+} 
+class HelloError{}; 
+void hello() { 
+cout&lt;&lt; &quot;hello world!\n&quot;; 
+goodbye(); 
+</P>
+
+<P>cout&lt;&lt; &quot;hello() returns\n&quot;; 
+} 
+intmain() { 
+try { 
+hello(); 
+cout&lt;&lt; &quot;done\n&quot;; 
+} catch (HelloErrorhe) { 
+cout&lt;&lt; &quot;HelloError\n&quot;; 
+} catch (GoodbyeErrorge) { 
+cout&lt;&lt; &quot;GoodbyeError\n&quot;; 
+} 
+cout&lt;&lt; &quot;main() returns\n&quot;; 
+return 0; 
+} 
+</P>
+
+<P>Exercise: What is the output? 
+class GoodbyeError{}; 
+void goodbye() { 
+cout&lt;&lt; &quot;goodbye!\n&quot;; 
+GoodbyeErrore; throw e; 
+cout&lt;&lt; &quot;goodbye() returns\n&quot;; 
+} 
+class HelloError{}; 
+void hello() { 
+cout&lt;&lt; &quot;hello world!\n&quot;; 
+try { goodbye(); } 
+catch(GoodbyeErrorx) 
+</P>
+
+<P>{ throw HelloError(); } 
+cout&lt;&lt; &quot;hello() returns\n&quot;; 
+} 
+intmain() { 
+try { 
+hello(); 
+cout&lt;&lt; &quot;done\n&quot;; 
+} catch (HelloErrorhe) { 
+cout&lt;&lt; &quot;HelloError\n&quot;; 
+} catch (GoodbyeErrorge) { 
+cout&lt;&lt; &quot;GoodbyeError\n&quot;; 
+} 
+cout&lt;&lt; &quot;main() returns\n&quot;; 
+return 0; 
+} 
+</P>
+
+<P>void goodbye() { 
+cout&lt;&lt; &quot;goodbye!\n&quot;; 
+throw Error(&quot;goodbye error&quot;); 
+cout&lt;&lt; &quot;goodbye() returns\n&quot;; 
+} 
+void hello() { 
+cout&lt;&lt; &quot;hello world!\n&quot;; 
+try { goodbye(); } 
+catch (Error e) 
+{ throw Error(&quot;hello error&quot;);} 
+cout&lt;&lt; &quot;hello() returns\n&quot;; 
+} 
+</P>
+
+<P>intmain() { 
+try { 
+hello(); 
+cout&lt;&lt; &quot;done\n&quot;; 
+} catch (Error e) { 
+cout&lt;&lt; e.get_msg() 
+&lt;&lt; endl; 
+} catch (...) { 
+cout&lt;&lt; &quot;Unknown error" 
+&lt;&lt; endl; 
+} 
+cout&lt;&lt; &quot;main() returns\n&quot;; 
+return 0; 
+} 
+class Error { 
+string msg; 
+public: 
+Error(string s) : msg(s) {} 
+string get_msg() { return msg;} 
+}; 
+</P>
+</TaggedPDF-doc>

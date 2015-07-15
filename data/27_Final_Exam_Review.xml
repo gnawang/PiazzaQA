@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:49:04-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:49:04-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:49:04-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">27_Final_Exam_Review.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:bb8d9167-ed8e-4586-a22f-775867b1f41d</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:ab56677f-1344-4cbb-92e2-402a8f4aef2f</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="27_Final_Exam_Review.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280Programming and Introductory Data Structures </P>
+
+<P>blockM-dearborn Final Exam Review </P>
+
+<P>Slides by Andrew DeOrio </P>
+
+<P>Schedule </P>
+
+<P>.Normal office hours this week .No Lab this week </P>
+
+<P>Exam time and location </P>
+
+<P>.Time: Monday 28 April, 10:30am –12:30pm .Not Michigan time </P>
+
+<P>.Location –see email </P>
+
+<P>Policies </P>
+
+<P>.Closed book .Closed notes .One &quot;cheat sheet&quot; .8.5&quot;x11&quot;, double-sided, hand-written, with your name on it </P>
+
+<P>.No calculators or electronics .None needed </P>
+
+<P>.Given under the engineering honor code </P>
+
+<P>Study materials </P>
+
+<P>.Practice exams posted on Ctools .Labs .Including optional exercises </P>
+
+<P>.Lecture slides .Exercises from lecture </P>
+
+<P>.Text book Topics </P>
+
+<P>.Everything we have covered this semester .Focus on material beginning with Subtypes and Subclasses </P>
+
+<P>Topics since the midterm </P>
+
+<P>.Subtypes and Subclasses .Polymorphism .Container ADTs .Interfaces and Invariants .Memory Models .Copying Arrays .Deep Copies and Resizing .Linked Lists .TemplatedContainers .Iterators .Functors .Exceptions </P>
+
+<P>Biggest Topics </P>
+
+<P>.Subtypes, Subclasses and polymorphism .Memory Models and deep copies .Linked Lists .Including container ADTs and templates </P>
+
+<P>.Iterators .Functors .Exceptions </P>
+
+<P>Subtypes, Subclasses and Polymorphism </P>
+
+<P>http://technofriends.files.wordpress.com/2008/02/polymorphism.gif </P>
+
+<P>Dynamic type </P>
+
+<P>.Other times, the type is not known until run time .This is called the dynamic type </P>
+
+<P>//EFFECTS: asks user to select Triangle, </P>
+
+<P>// Isosceles or Equilateral 
+// returns a pointer to correct object 
+Triangle * ask_user(); 
+intmain() { 
+Triangle *t = ask_user(); //enters&quot;Isosceles" 
+t-&gt;print(); 
+} 
+.What is the static type of t? What is the dynamic type? 
+</P>
+
+<P>Triangle 
+Isosceles 
+Equilateral 
+</P>
+
+<P>Recall adding the Shape class ... 
+class Shape { 
+public: 
+Shape() 
+{cout&lt;< 
+&quot;Shape default ctor\n&quot;;} 
+//... 
+}; 
+class Triangle : Shape { 
+public: 
+Triangle() 
+{cout&lt;< 
+&quot;Triangle default ctor\n&quot;;} 
+//... 
+}; 
+</P>
+
+<P>... etc. 
+Triangle 
+Isosceles 
+Equilateral 
+Rectangle 
+Shape 
+</P>
+
+<P>Exercise: What is the output? 
+intmain() { 
+Isoscelesi; 
+Triangle *t_ptr= &amp;i; 
+} 
+intmain() { 
+Isoscelesi(1,12); 
+Shape *s_ptr= &amp;i; 
+} 
+</P>
+
+<P>Memory models and deep copies 
+http://www.life360.com/wp-content/uploads/2009/07/scuba_diving.jpg 
+Recall our IntSetclass 
+.We used a pointer to a dynamic array to store the set 
+</P>
+
+<P>class IntSet{ 
+int*elts; //pointer to dynamic array 
+intelts_size; //current occupancy 
+intelts_capacity; //capacity of array 
+static constintELTS_CAPACITY_DEFAULT = 100; 
+public: 
+~IntSet(); //dtor 
+</P>
+
+<P>IntSet(intcapacity = ELTS_CAPACITY_DEFAULT);//ctor 
+IntSet(constIntSet&amp;other); //copy ctor 
+IntSet&amp;operator=(constIntSet&amp;rhs);//assignment 
+//... 
+}; 
+</P>
+
+<P>Exercise: allocating classes 
+intmain() { 
+IntSetis1(1); 
+is1.insert(42); 
+IntSetis2(3); 
+is2 = is1; 
+is2.insert(43); 
+} 
+.Draw the stack and heap 
+</P>
+
+<P>.Assume copy ctor, assignment operator and dtorare correctly implemented to do a deep copy </P>
+
+<P>stack heap </P>
+
+<P>Linked Lists </P>
+
+<P>.You've gotten a lot of practice with these on Project 5, so we will focus on other topics today </P>
+
+<P>http://imgs.xkcd.com/comics/forgetting.png </P>
+
+<P>http://cs.brown.edu/~jak/proglang/cpp/stltut/figures/riter.2.gif Iterators </P>
+
+<P>.I have no idea what this is, but it's in an STL tutorial on Iterators from Brown University </P>
+
+<P>Iterators 
+intmain() { 
+List&lt;Gorilla*&gt; zoo; 
+zoo.insertFront(new Gorilla(&quot;Colo&quot;)); 
+zoo.insertFront(new Gorilla(&quot;Koko&quot;)); 
+//add code to print the name of each Gorilla 
+//add code to delete each dynamic variable 
+} 
+class Gorilla { 
+public: 
+Gorilla(conststring &amp;name_in); 
+~Gorilla(); 
+string get_name(); 
+}; 
+</P>
+
+<P>Functors 
+</P>
+
+<P>https://i.chzbgr.com/maxW500/926275328/hA4FBDADF/ 
+</P>
+
+<P>Functors 
+</P>
+
+<P>.Assume you have a functorcalled GreaterNthat returns true if an input integer is greater than an input limit .Assume you have a functorcalled LessNthat returns true if an input integer is less than an input limit .Write a functorcalled InRangethat returns true if an input integer is within an inclusive range: [min, max] .Overload the function call operator .Create a constructor to initialize minand max </P>
+
+<P>.Write a main()function that uses instances of LessN, GreaterNand InRangeto check if water is a solid, liquidor gasat a given temperature .Read an integer tempfrom standard input .Freezing point = 32, boiling point = 212 Exceptions </P>
+
+<P>http://treasure.diylol.com/uploads/post/image/287837/resized_philosoraptor-meme-generator-if-there-is-always-an</P>
+
+<P>exception-to-the-rule-is-there-an-exception-to-that-404239.jpg </P>
+
+<P>void goodbye() { </P>
+
+<P>cout&lt;&lt; &quot;goodbye!\n&quot;; </P>
+
+<P>throw Error(&quot;goodbye error&quot;); </P>
+
+<P>cout&lt;&lt; &quot;goodbye() returns\n&quot;; </P>
+
+<P>} </P>
+
+<P>void hello() { </P>
+
+<P>cout&lt;&lt; &quot;hello world!\n&quot;; </P>
+
+<P>try { goodbye(); } </P>
+
+<P>catch (Error e) </P>
+
+<P>{ throw Error(&quot;hello error&quot;);} </P>
+
+<P>cout&lt;&lt; &quot;hello() returns\n&quot;; </P>
+
+<P>} </P>
+
+<P>intmain() { </P>
+
+<P>try { </P>
+
+<P>hello(); </P>
+
+<P>cout&lt;&lt; &quot;done\n&quot;; </P>
+
+<P>} catch (Error e) { </P>
+
+<P>cout&lt;&lt; e.get_msg() </P>
+
+<P>&lt;&lt; endl; </P>
+
+<P>} catch (...) { </P>
+
+<P>cout&lt;&lt; &quot;Unknown error&quot; </P>
+
+<P>&lt;&lt; endl; </P>
+
+<P>} </P>
+
+<P>cout&lt;&lt; &quot;main() returns\n&quot;; </P>
+
+<P>return 0; 
+} 
+class Error { 
+string msg; 
+public: 
+Error(string s) : msg(s) {} 
+string get_msg() { return msg;} 
+}; 
+what is the 
+</P>
+
+<P>output? 
+</P>
+
+<P>What You’ve Learned 
+</P>
+
+<P>.At the beginning of the semester: 
+.Recursive function? Huh? 
+</P>
+
+<P>.At the end of the semester: 
+.Write your own templatedlibrary using classes and pointers 
+.This is how the STL is written! 
+</P>
+
+<P>What’s next 
+</P>
+
+<P>.EECS 281 
+.Creating and analyzing more complicated data structures 
+.Fast algorithms that pair with data structures 
+</P>
+
+<P>.EECS 381 
+.Advanced C++ 
+.Object-oriented programming 
+</P>
+
+<P>.Learning on your own 
+.You now have the background knowledge figure out just about anything 
+using cplusplus.com, stackoverflow.com, etc. 
+</P>
+</TaggedPDF-doc>

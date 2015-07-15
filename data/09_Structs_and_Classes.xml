@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:49-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:49-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:49-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">09_Structs_and_Classes.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:3e10b301-ac3a-4f1c-836c-7825281f6a52</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:65cf90f2-38af-444d-87b2-e258d32aefb8</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="09_Structs_and_Classes.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280Programming and Introductory Data Structures </P>
+
+<P>blockM-dearborn Structsand Classes Slides by Andrew DeOrio </P>
+
+<P>Representing a triangle </P>
+
+<P>.A triangle can be represented by a combinationof vertex angles and edge lengths .Heron's formula lets us calculate the area of a triangle using only its edge lengths .Let's write a function calculate the area of a triangle </P>
+
+<P>Representing a triangle 
+#include &lt;cmath&gt; //for sqrt() 
+double Triangle_area(double a, double b, double c) { 
+double s = (a + b + c) / 2; 
+double area = sqrt(s*(s-a)*(s-b)*(s-c)); 
+return area; 
+} 
+intmain() { 
+double a=3, b=4, c=5; // triangle edges 
+cout&lt;&lt; &quot;area = &quot; &lt;&lt; Triangle_area(a, b, c) &lt;&lt; endl; 
+} 
+$ ./a.out 
+area = 6 
+</P>
+
+<P>Multiple triangles 
+</P>
+
+<P>.What if we have more than one triangle? .For example, 3-4-5, 5-12-13, 8-15-17 .Let's use 3 arrays: one for all the a edges, another for the b edges and a third for the c edges </P>
+
+<P>Multiple triangles 
+.Three triangles: 3-4-5, 5-12-13, 8-15-17 
+</P>
+
+<P>constintSIZE = 3; 
+double a[SIZE] = {3, 5, 8}; 
+double b[SIZE] = {4, 12, 15}; 
+double c[SIZE] = {5, 13, 17}; 
+for (int i=0; i&lt;SIZE; ++i) 
+cout&lt;&lt; &quot;area = &quot; &lt;&lt; Triangle_area(a[i],b[i],c[i]) 
+&lt;&lt; endl; 
+$ ./a.out 
+area = 6 
+area = 30 
+area = 60 
+</P>
+
+<P>Product type 
+</P>
+
+<P>constintSIZE = 3; 
+</P>
+
+<P>double a[SIZE] = {3, 5, 8}; 
+</P>
+
+<P>double b[SIZE] = {4, 12, 15}; 
+</P>
+
+<P>double c[SIZE] = {5, 13, 17}; 
+</P>
+
+<P>.Problem: it is not clear that a[i]is related to b[i]and c[i] .Instead of three separate arrays, what we really want is a type that can “bind together” several other types into one “metatype”. .This is called a “product” type and it describes a “compound object” that comprises one or more elements, each of independent type. </P>
+
+<P>Introducing struct </P>
+
+<P>.C++ supports a product type: the struct .This structcontains a triangle’s edge lengths: structTriangle { </P>
+
+<P>double a,b,c; //edge lengths </P>
+
+<P>}; </P>
+
+<P>.This statement declares a new type Triangle, but does not 
+define any variables of that type 
+.By C++ convention, we name new types with a capital letter: 
+.structTriangle { /*...*/ }; 
+</P>
+
+<P>Introducing struct 
+structTriangle { 
+double a,b,c; //edge lengths 
+}; 
+intmain() { 
+Triangle t; 
+} 
+.This code define a new variable of the Triangletype 
+</P>
+
+<P>.In memory, we get storage for each member inside the struct .The values of a, band care undefined </P>
+
+<P>a b </P>
+
+<P>undefined undefined undefined Triangle t </P>
+
+<P>Initializing a struct structTriangle { </P>
+
+<P>double a,b,c; //edge lengths 
+}; 
+intmain() { 
+Triangle t; 
+t.a= 3; 
+t.b= 4; 
+t.c= 5; 
+} 
+.Initialize each member one at a time 
+</P>
+
+<P>a 
+b 
+c 
+4 
+5 
+3 
+Triangle 
+t 
+</P>
+
+<P>Initializing a struct 
+structTriangle { 
+double a,b,c; //edge lengths 
+}; 
+intmain() { 
+Triangle t = {3,4,5}; 
+} 
+.Initialize all members at once 
+</P>
+
+<P>a 
+b 
+c 
+4 
+5 
+3 
+Triangle 
+t 
+</P>
+
+<P>Assigning a struct 
+structTriangle { 
+double a,b,c; //edge lengths 
+}; 
+intmain() { 
+Triangle t1 = {3,4,5}; 
+Triangle t2 = t1; 
+} 
+.Assign one structto another 
+</P>
+
+<P>a 
+b 
+c 
+4 
+5 
+3 
+Triangle 
+a 
+b 
+</P>
+
+<P>c 4 5 3 Triangle t1 t2 </P>
+
+<P>Passing a structto a function </P>
+
+<P>.Like other types, structscan be passed as function arguments .Structsare passed by value, unlike arrays </P>
+
+<P>//EFFECTS: computes the area of Triangle t 
+double Triangle_area(Triangle t); 
+.Exercise: write this function using Heron's formula: 
+</P>
+
+<P>Passing a structto a function 
+structTriangle { 
+double a,b,c; //edge lengths 
+}; 
+double Triangle_area(Triangle t) { 
+//... 
+} 
+intmain() { 
+Triangle t = {3,4,5}; 
+cout&lt;&lt; &quot;area = &quot; &lt;&lt; Triangle_area(t) &lt;&lt; endl; 
+} 
+$ ./a.out 
+area = 6 
+</P>
+
+<P>Passing a structto a function </P>
+
+<P>.Problem: structscan become very large, and pass-by-value is inefficient! .Solution 1: pass by reference </P>
+
+<P>//EFFECTS: computes the area of Triangle t double Triangle_area(Triangle &amp;t); .Solution 2: pass by pointer </P>
+
+<P>//EFFECTS: computes the area of Triangle t double Triangle_area(Triangle *t); .Problem: the function could mistakenly change the contents of </P>
+
+<P>the caller’scopy of Triangle t </P>
+
+<P>Recall const </P>
+
+<P>.Problem: the function could mistakenly change the contents of the caller’scopy of Triangle t .Solution: const </P>
+
+<P>double Triangle_area(constTriangle &amp;t); </P>
+
+<P>double Triangle_area(constTriangle *t); </P>
+
+<P>.constis a type-qualifier, which adds a property .constmeans “the compiler won’t let you modify this variable” .Best of both worlds compared to pass-by-value .No expensive copy .Safety guarantee that the function can’t change caller's variable </P>
+
+<P>Exercise: pointer-to-struct .There are two ways to access the data inside a pointer-to-struct </P>
+
+<P>double Triangle_area(Triangle *t) { (*t).a + ... //the hard way with pointers t-&gt;a + ... //the easy way with pointers </P>
+
+<P>} </P>
+
+<P>.Exercise: write a new version of Triangle_area()that passes a Triangleby pointer, and promises not to modify the pointed-to object </P>
+
+<P>Composabledata types </P>
+
+<P>.So far, we have seen several mechanisms used to extend the basic data types (int, char, etc.) .Arrays </P>
+
+<P>inta[3] = {1,2,3}; 
+.Pointers 
+</P>
+
+<P>int*p = a; 
+.References 
+</P>
+
+<P>int&amp;a_ref= a[0]; 
+.Structs 
+</P>
+
+<P>structx { 
+inti; 
+char c; 
+}; 
+Types are composable. 
+Once you have declared a 
+</P>
+
+<P>type structx, that type can be used to define a pointer to structx, an array of structx, or even a structthat contains an element of structx. </P>
+
+<P>Arrays of structs 
+.Let’s compose structsand arrays 
+</P>
+
+<P>constintSIZE = 3; 
+Triangle triangles[SIZE]; 
+triangles[0].a=3; 
+triangles[0].b=4; 
+triangles[0].c=5; 
+triangles[1].a=5; 
+triangles[1].b=12; 
+triangles[1].c=13; 
+triangles[2].a=8; 
+triangles[2].b=15; 
+triangles[2].c=17; 
+a 
+b 
+c 
+15 
+17 
+8 
+Triangle 
+a 
+b 
+c 
+4 
+</P>
+
+<P>5 3 Triangle a b c 12 13 5 Triangle </P>
+
+<P>Exercise: arrays of structs </P>
+
+<P>.Call Triangle_area()on each Trianglein the array using traversal by pointer </P>
+
+<P>constintSIZE = 3; 
+Triangle triangles[SIZE]; 
+triangles[0].a=3; 
+triangles[0].b=4; 
+triangles[0].c=5; 
+triangles[1].a=5; 
+triangles[1].b=12; 
+triangles[1].c=13; 
+triangles[2].a=8; 
+triangles[2].b=15; 
+triangles[2].c=17; 
+a 
+b 
+c 
+</P>
+
+<P>15 
+17 
+8 
+Triangle 
+a 
+b 
+c 
+4 
+5 
+3 
+Triangle 
+a 
+b 
+c 
+12 
+13 
+5 
+Triangle 
+</P>
+
+<P>Exercise: arrays of structs 
+constintSIZE = 3; 
+Triangle triangles[SIZE]; 
+//initialize triangles... 
+for (Triangle *t=triangles; t&lt;triangles+SIZE; ++t) 
+cout&lt;&lt; &quot;area = &quot; &lt;&lt; Triangle_area(t) &lt;&lt; endl; 
+$ ./a.out 
+area = 6 
+</P>
+
+<P>area = 30 </P>
+
+<P>area = 60 </P>
+
+<P>++tmoves the pointer to the next struct </P>
+
+<P>structvs. array </P>
+
+<P>struct </P>
+
+<P>array </P>
+
+<P>.structTriangle{/*…*/}; .Stores group of data .Heterogeneous .Different types </P>
+
+<P>.Access by name .Default pass-by-value .Creates a custom type </P>
+
+<P>.double edges[3]; .Stores group of data .Homogeneous .All the same type </P>
+
+<P>.Access by index .Default pass-by-reference .Does not create a new type </P>
+
+<P>constvariables </P>
+
+<P>constintSIZE= 3; </P>
+
+<P>Triangle triangles[SIZE]; </P>
+
+<P>// initialize ... </P>
+
+<P>for (Triangle *t=triangles; t&lt;triangles+SIZE; ++t) </P>
+
+<P>cout&lt;&lt; &quot;area = &quot; &lt;&lt; Triangle_area(t) &lt;&lt; endl; </P>
+
+<P>This is a good use of const, because we reuse the value in multiple places. </P>
+
+<P>constvariables 
+#define SIZE 3 
+Triangle triangles[SIZE]; 
+// initialize ... 
+for (Triangle *t=triangles; t&lt;triangles+SIZE; ++t) 
+cout&lt;&lt; &quot;area = &quot; &lt;&lt; Triangle_area(t) &lt;&lt; endl; 
+This works, but 
+</P>
+
+<P>is bad style. It has no type! </P>
+
+<P>constvariables 
+constintSIZE = 4; 
+Triangle triangles[SIZE]; 
+// initialize ... 
+for (Triangle *t=triangles; t&lt;triangles+SIZE; ++t) 
+cout&lt;&lt; &quot;area = &quot; &lt;&lt; Triangle_area(t) &lt;&lt; endl; 
+Add another Triangle? 
+</P>
+
+<P>No problem. Just change one piece of code </P>
+
+<P>On to classes! </P>
+
+<P>struct </P>
+
+<P>class </P>
+
+<P>.Heterogeneous aggregate data type .C style .Contains only data .Undefined by default .All data is accessible </P>
+
+<P>.Heterogeneous aggregate data type .C++ style .Contains data and functions .Constructors can be used to initialize .Control of data access </P>
+
+<P>Introducing classes 
+class Triangle { 
+public: 
+double a,b,c;//edge lengths 
+double area(){ //compute area 
+double s = (a+b+c)/2; 
+double area = sqrt(s*(s-a)*(s-b)*(s-c)); 
+} 
+}; 
+.A classcontains both data andfunctions 
+</P>
+
+<P>.These are called member dataand member functions 
+</P>
+
+<P>Member data and functions 
+class Triangle { 
+public: 
+double a,b,c; //edge lengths 
+double area() { //compute area 
+double s = (a+b+c)/2; 
+double area = sqrt(s*(s-a)*(s-b)*(s-c)); 
+} 
+}; 
+.Because member functions are within the same scope as 
+</P>
+
+<P>member data, they have access to the member data directly 
+</P>
+
+<P>Using classes 
+</P>
+
+<P>class Triangle { 
+public: 
+double a,b,c; 
+double area() {/*compute area*/} 
+}; 
+intmain() { 
+Triangle t; 
+t.a=3; t.b=4; t.c=5; 
+cout&lt;&lt; &quot;area = &quot; &lt;&lt; t.area()&lt;&lt; endl; 
+} 
+.publicmeans members are accessible from outside the class 
+</P>
+
+<P>.From outside scope, access classmembers just like a struct 
+</P>
+
+<P>$ ./a.out 
+area = 6 
+</P>
+
+<P>Using classes 
+class Triangle { 
+public: 
+double a,b,c; 
+double area() {/*compute area*/} 
+}; 
+intmain() { 
+Triangle t; 
+t.a=3; t.b=4; t.c=5; 
+cout&lt;&lt; &quot;area = &quot; &lt;&lt; t.area() &lt;&lt; endl; 
+} 
+.In memory, we get storage for each member inside the class, but 
+</P>
+
+<P>notthe functions. This is like a struct. 
+</P>
+
+<P>.Why? Because functions are the same for all Triangleobjects </P>
+
+<P>a b c 4 5 3 Triangle </P>
+
+<P>Using classes </P>
+
+<P>intmain() { </P>
+
+<P>Triangle t; </P>
+
+<P>t.a=3; t.b=4; t.c=5; </P>
+
+<P>cout&lt;&lt; &quot;area = &quot; &lt;&lt; t.area() &lt;&lt; endl; </P>
+
+<P>} </P>
+
+<P>.Calling a member function is just like evaluating a function: 1.Evaluate the arguments 2.Create a stack frame 3.Pass the arguments 4.Execute the function 5.Replace the function call with the result 6.Destroy the frame </P>
+
+<P>Using classes 
+class Triangle { 
+public: 
+double a,b,c; 
+double area() {/*compute area*/} 
+}; 
+intmain() { 
+</P>
+
+<P>Triangle t1; 
+t.a=3; t.b=4; t.c=5; 
+Triangle t2 = t1; 
+} 
+.Just like a struct, we can copy a classobject 
+</P>
+
+<P>a 
+b 
+c 
+4 
+5 
+3 
+Triangle 
+a 
+b 
+c 
+4 
+5 
+3 
+Triangle 
+t1 
+t2 
+</P>
+
+<P>Exercise: array of classes 
+structTriangle{/*...*/}; 
+intmain() { 
+constintSIZE = 3; 
+Triangle triangles[SIZE]; 
+</P>
+
+<P>// initialize ... 
+for (Triangle *t=triangles; t&lt;triangles+SIZE; ++t) 
+cout&lt;&lt; &quot;area = &quot; &lt;&lt; Triangle_area(t) &lt;&lt; endl; 
+} 
+.Just like a struct, we can create arrays of classobjects 
+</P>
+
+<P>.Exercise: rewrite the boldcodeto use C++ classes instead of structs </P>
+
+<P>Initialization problem 
+class Triangle { 
+public: 
+double a,b,c; 
+double area() {/*compute area*/} 
+}; 
+intmain() { 
+Triangle t; 
+// forget to initialize 
+t.area(); //garbage! 
+} 
+.Just like a struct, values are undefined for a new class object 
+</P>
+
+<P>.Uninitialized values are common source of bugs 
+</P>
+
+<P>a 
+b 
+</P>
+
+<P>undefined 
+undefined 
+undefined 
+Triangle 
+</P>
+
+<P>Initialization solution: constructors 
+class Triangle { 
+public: 
+double a,b,c; 
+double area() {/*compute area*/} 
+Triangle() { a=0; b=0; c=0; } 
+}; 
+.A constructor is a member function that has the same name as 
+</P>
+
+<P>the class .A constructor runs automatically when a new object is defined .A constructor is typically used to initialize member variables </P>
+
+<P>Anatomy of a constructor 
+class Triangle { 
+public: 
+double a,b,c; 
+double area() {/*...*/} 
+Triangle() { a=0, b=0, c=0; } 
+}; 
+Same name 
+</P>
+
+<P>as class 
+</P>
+
+<P>No return 
+value 
+Initializes 
+</P>
+
+<P>member 
+variables 
+intmain() { 
+Triangle t; 
+t.area(); 
+} 
+</P>
+
+<P>a 
+b 
+c 
+0 
+0 
+0 
+Triangle 
+Constructor 
+</P>
+
+<P>executes 
+automatically 
+New object is initialized! 
+$ ./a.out 
+area = 0 
+No input: “default constructor” 
+</P>
+
+<P>Constructor exercise 
+.What does this code print? Why? 
+</P>
+
+<P>intmain() { 
+Triangle t1, t2; 
+cout&lt;&lt; t1.a &lt;&lt; t1.b &lt;&lt; t1.c &lt;&lt; endl; 
+cout&lt;&lt; t2.a &lt;&lt; t2.b &lt;&lt; t2.c &lt;&lt; endl; 
+} 
+</P>
+
+<P>Another initialization problem 
+class Triangle { 
+public: 
+double a,b,c; 
+double area() {/*...*/} 
+Triangle() { a=0, b=0, c=0; } 
+</P>
+
+<P>}; </P>
+
+<P>.Problem 1: a Triangle with 0 length edges doesn’t make much sense .Problem 2: Initializing lengths is still a pain </P>
+
+<P>Triangle t; 
+t.a=3, t.b=4, t.c=5; 
+</P>
+
+<P>Another initialization solution 
+class Triangle { 
+public: 
+double a,b,c; 
+double area() {/*...*/} 
+Triangle() { a=0, b=0, c=0; } 
+Triangle(double a_in, double b_in, double c_in) 
+{ a=a_in; b=b_in; c=c_in; } 
+}; 
+.Add a second constructor 
+</P>
+
+<P>.Constructors can take arguments, just like functions 
+</P>
+
+<P>Function overloading 
+class Triangle { 
+//... 
+Triangle() {/*...*/} 
+Triangle(double a_in, double b_in, double c_in) 
+{/*...*/} 
+}; 
+.This is called function overloading: two different functions 
+</P>
+
+<P>with the same name, but different prototypes 
+</P>
+
+<P>.Since the compiler knows the argument types, it can select the 
+</P>
+
+<P>correct constructor when a new object is created </P>
+
+<P>Another initialization solution 
+class Triangle { 
+public: 
+double a,b,c; 
+double area() {/*...*/} 
+Triangle() { a=0, b=0, c=0; } 
+Triangle(double a_in, double b_in, double c_in) 
+{ a=a_in; b=b_in; c=c_in; } 
+}; 
+intmain() { 
+Triangle t = Triangle(3,4,5); 
+t.area(); 
+} 
+a 
+b 
+c 
+4 
+5 
+3 
+Triangle 
+New constructor 
+</P>
+
+<P>runs 
+$ ./a.out 
+area = 6 
+</P>
+
+<P>Another initialization solution 
+class Triangle { 
+</P>
+
+<P>public: 
+double a,b,c; 
+double area() {/*...*/} 
+Triangle() { a=0, b=0, c=0; } 
+Triangle(double a_in, double b_in, double c_in) 
+{ a=a_in; b=b_in; c=c_in; } 
+}; 
+intmain() { 
+Triangle t = Triangle(3,4,5); 
+Triangle t(3,4,5); 
+t.area(); 
+} 
+a 
+b 
+c 
+4 
+5 
+3 
+Triangle 
+Alternate syntax 
+$ ./a.out 
+area = 6 
+</P>
+
+<P>The problem with public 
+class Triangle {/*...*/}; 
+intmain() { 
+Triangle t(3,4,5); 
+</P>
+
+<P>// later in the code ... 
+t.c= 9; 
+cout&lt;&lt; &quot;area = &quot; &lt;&lt; t.area() &lt;&lt; endl; 
+} 
+.What is wrong with this code? 
+</P>
+
+<P>3 
+4 
+5 
+</P>
+
+<P>Solution: private member variables 
+class Triangle { 
+private: 
+double a,b,c; 
+public: 
+double area() { 
+double s = (a + b + c) / 2; 
+double area = sqrt(s*(s-a)*(s-b)*(s-c)); 
+} 
+Triangle() { a=0, b=0, c=0; } 
+Triangle(double a_in, double b_in, double c_in) 
+{ a=a_in; b=b_in; c=c_in; } 
+}; 
+member variables are 
+</P>
+
+<P>privateto class 
+</P>
+
+<P>member functions are publicto outside Member functions </P>
+
+<P>canaccess privatemembers </P>
+
+<P>Solution: private member variables 
+class Triangle { 
+private: 
+double a,b,c; 
+public: 
+double area() {/*...*/} 
+Triangle() {/*...*/} 
+Triangle(double a_in, double b_in, double c_in) 
+{/*...*/} 
+}; 
+intmain() { 
+Triangle t(3,4,5); 
+t.c= 9; //compiler error 
+cout&lt;&lt; &quot;area = &quot; &lt;&lt; t.area() &lt;&lt; endl; 
+} 
+Compiler helps catch 
+</P>
+
+<P>programming error 
+Non-members cannotaccess privatemembers 
+Non-members can 
+</P>
+
+<P>access publicmembers 
+</P>
+
+<P>public vs. private 
+</P>
+
+<P>.By default, every member of a class is private .A private member is visible only to other members of this class. .The publickeyword is used to signify that everything after it is visible to anyone who sees the class declaration, not just members of this class. .Usually, we make member variables private .publicmember variables often indicate a bad design </P>
+
+<P>get and set functions .For convenience, some classes include functions to getand setmember functions .A getfunction is a publicfunction that returns a copy of a privatemember variable </P>
+
+<P>class Triangle { 
+//... 
+public: 
+//EFFECTS: returns edge a, b, c 
+double get_a() { return a; } 
+double get_b() { return b; } 
+double get_c() { return c; } 
+}; 
+</P>
+
+<P>get and set functions 
+.A setfunction is a publicfunction that modifies a privatemember variable 
+</P>
+
+<P>class Triangle { 
+//... 
+public: 
+//REQUIRES: a,b,care non-negative and form a 
+// triangle 
+//MODIFIES: a, b, c 
+//EFFECTS: sets length of edge a, b, c 
+void set_a(double a_in); 
+void set_b(double b_in); 
+void set_c(double c_in); 
+}; 
+</P>
+
+<P>get and set functions 
+.setfunctions allow you to run extra code when a member 
+</P>
+
+<P>variable changes, for example: </P>
+
+<P>class Triangle { //... public: void set_a(double a_in) { a = a_in; // add a check to make sure a,b,cstill// form a triangle } }; 3 4 5 3 4 9 </P>
+
+<P>structvs. class </P>
+
+<P>struct </P>
+
+<P>class </P>
+
+<P>.Heterogeneous aggregate data type .C style .Contains only data .Undefined by default .All data is accessible </P>
+
+<P>.Heterogeneous aggregate data type .C++ style .Contains data and functions .Constructors can be used to initialize .Control of data access structvs. class </P>
+
+<P>class </P>
+
+<P>.Contains data and functions .Member variables and member functions </P>
+
+<P>.Constructors can be used to initialize .Constructors run automatically </P>
+
+<P>.Control of data access .publicvs. private </P>
+
+<P>Exercise </P>
+
+<P>.Write a class called Rectangle .Include appropriate member variables .Include a default constructor .Include a second constructor to initialize member variables .Write one set()function that sets all member variables .Include an area()function .Write a print()function .Use publicand privateto expose member functions and hide member variables .Write a main function that defines a Rectanglevariable of size 2x4, calls the print()function, and then calls the area() function </P>
+</TaggedPDF-doc>
