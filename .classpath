@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" output="bin" path="src"/>
-	<classpathentry kind="var" path="JRE_LIB" rootpath="JRE_SRCROOT" sourcepath="JRE_SRC"/>
-	<classpathentry kind="con" path="C:\Users\Walex\School Work\Rada Research\SourceEphyra\bin"/>
-	<classpathentry kind="lib" path="C:\Program Files\Java\jdk1.7.0_79\jre\lib\rt.jar"/>
+	<classpathentry kind="var" path="JRE_LIB" sourcepath="JRE_SRC"/>
+	<classpathentry kind="con" path="C:/Users/Walex/School Work/Rada Research/SourceEphyra/bin"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_79/jre/lib/rt.jar"/>
 	<classpathentry kind="lib" path="lib/ml/maxent.jar"/>
 	<classpathentry kind="lib" path="lib/ml/minorthird.jar"/>
 	<classpathentry kind="lib" path="lib/nlp/jwnl.jar"/>
@@ -25,5 +25,6 @@
 	<classpathentry kind="lib" path="lib/util/log4j.jar"/>
 	<classpathentry kind="lib" path="lib/util/trove.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Walex/School Work/Rada Research/SourceEphyra/lib/search/commons-lang3-3.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -45,10 +45,10 @@ import info.ephyra.search.Search;
 import info.ephyra.search.searchers.BingKM;
 import info.ephyra.search.searchers.IndriKM;
 import info.ephyra.search.searchers.IndriDocumentKM;
+import questionsearch.*;
 
-
-
-
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 /**
@@ -62,6 +62,9 @@ public class OpenEphyra {
 	protected static final String FACTOID = "FACTOID";
 	/** List question type. */
 	protected static final String LIST = "LIST";
+	
+	/**Piazza and lecture searcher */
+	protected static PiazzaSearch relatedSearch;
 	
 	/** Maximum number of factoid answers. */
 	protected static final int FACTOID_MAX_ANSWERS = 5;
@@ -86,8 +89,10 @@ public class OpenEphyra {
 	 * interface.
 	 * 
 	 * @param args command line arguments are ignored
+	 * @throws UnsupportedEncodingException 
+	 * @throws FileNotFoundException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
 		// enable output of status and error messages
 		MsgPrinter.enableStatusMsgs(true);
 		MsgPrinter.enableErrorMsgs(true);
@@ -95,6 +100,9 @@ public class OpenEphyra {
 		// set log file and enable logging
 		Logger.setLogfile("log/OpenEphyra");
 		Logger.enableLogging(true);
+		
+		relatedSearch = new PiazzaSearch();
+//		relatedSearch.testPrint();
 		
 		// initialize Ephyra and start command line interface
 		(new OpenEphyra()).commandLine();
@@ -281,7 +289,7 @@ public class OpenEphyra {
 //			Search.addKnowledgeMiner(new IndriKM(indriIndices, false));
 		String[] INDRI_INDEX = {"C:/Users/Walex/School Work/Rada Research/SourceEphyra/index"};
 //		Search.addKnowledgeMiner(new IndriKM(INDRI_INDEX, false));
-		Search.addKnowledgeMiner(new IndriDocumentKM(INDRI_INDEX, false));
+//		Search.addKnowledgeMiner(new IndriDocumentKM(INDRI_INDEX, false));
 //		for (String[] indriServers : IndriKM.getIndriServers())
 //			Search.addKnowledgeMiner(new IndriKM(indriServers, true));
 		// - knowledge annotators for (semi-)structured knowledge sources
@@ -353,9 +361,12 @@ public class OpenEphyra {
 	public void commandLine() {
 		while (true) {
 			// query user for question, quit if user types in "exit"
-			MsgPrinter.printQuestionPrompt();
-			String question = readLine().trim();
-			if (question.equalsIgnoreCase("exit")) System.exit(0);
+			String question = "";
+			do {
+				MsgPrinter.printQuestionPrompt();
+				question = readLine().trim();
+				if (question.equalsIgnoreCase("exit")) System.exit(0);
+			} while(question.length() == 0);
 			
 			// determine question type and extract question string
 			String type;
@@ -388,7 +399,7 @@ public class OpenEphyra {
 			}
 			
 			// print answers
-			MsgPrinter.printAnswers(results);
+			MsgPrinter.printAnswers(results, relatedSearch.getRelatedLec(), relatedSearch.getRelatedPosts());
 		}
 	}
 	
@@ -409,6 +420,10 @@ public class OpenEphyra {
 		// analyze question
 		MsgPrinter.printAnalyzingQuestion();
 		AnalyzedQuestion aq = QuestionAnalysis.analyze(question);
+		
+		// get related posts and lectures
+		relatedSearch.SearchLectures(aq.getKeywords());
+		relatedSearch.SearchPiazza(aq.getKeywords());
 		
 		// get answers
 		Result[] results = runPipeline(aq, maxAnswers, absThresh);
