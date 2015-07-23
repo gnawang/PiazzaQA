@@ -48,6 +48,15 @@ public class MsgPrinter {
 	}
 	
 	/**
+	 * Prints out the lecture
+	 */
+	public static void printRelLecture(String lecture) {
+		if(statusMsgs) {
+			printMessage(lecture);
+		}
+	}
+	
+	/**
 	 * Prints out an arbitrary status message.
 	 * 
 	 * @param status a status message
@@ -392,14 +401,30 @@ public class MsgPrinter {
 	 * 
 	 * @param results <code>Result</code> objects
 	 */
-	public static synchronized void printAnswers(Result[] results) {
-		printMessage("\n" + results.length + " Answers:");
-		for (int i = 0; i < results.length; i++) {
+	public static synchronized void printAnswers(Result[] results, String lecture, String[] posts) {
+		//Answers
+		if(results.length == 0){
+			printAnswerUnknown();
+		} else {
+			printMessage("\n" + results.length + " Answers:");
+			for (int i = 0; i < results.length; i++) {
+				printMessage("[" + (i + 1) + "]\t" +
+								   results[i].getAnswer());
+				printMessage("\tScore: " + results[i].getScore());
+				if (results[i].getDocID() != null)
+					printMessage("\tDocument: " + results[i].getDocID());
+			}
+		}
+		
+		//Lecture
+		printMessage("\nLecture:");
+		printMessage("    " + lecture + "\n");
+		
+		//posts
+		printMessage("Related Posts:");
+		for(int i = 0; i < posts.length; ++i){
 			printMessage("[" + (i + 1) + "]\t" +
-							   results[i].getAnswer());
-			printMessage("\tScore: " + results[i].getScore());
-			if (results[i].getDocID() != null)
-				printMessage("\tDocument: " + results[i].getDocID());
+					   posts[i]);
 		}
 	}
 	
