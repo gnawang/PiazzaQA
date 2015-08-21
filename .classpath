@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" output="bin" path="src"/>
-	<classpathentry kind="var" path="JRE_LIB" sourcepath="JRE_SRC"/>
-	<classpathentry kind="con" path="C:/Users/Walex/School Work/Rada Research/SourceEphyra/bin"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_79/jre/lib/rt.jar"/>
-	<classpathentry kind="lib" path="lib/ml/maxent.jar"/>
-	<classpathentry kind="lib" path="lib/ml/minorthird.jar"/>
-	<classpathentry kind="lib" path="lib/nlp/jwnl.jar"/>
-	<classpathentry kind="lib" path="lib/nlp/lingpipe.jar"/>
-	<classpathentry kind="lib" path="lib/nlp/opennlp-tools.jar"/>
-	<classpathentry kind="lib" path="lib/nlp/plingstemmer.jar"/>
-	<classpathentry kind="lib" path="lib/nlp/snowball.jar"/>
-	<classpathentry kind="lib" path="lib/nlp/stanford-ner.jar"/>
-	<classpathentry kind="lib" path="lib/nlp/stanford-parser.jar"/>
-	<classpathentry kind="lib" path="lib/nlp/stanford-postagger.jar"/>
-	<classpathentry kind="lib" path="lib/qa/javelin.jar"/>
+	<classpathentry exported="true" kind="con" path="C:/Users/Walex/School Work/Rada Research/SourceEphyra/bin"/>
+	<classpathentry exported="true" kind="lib" path="lib/ml/maxent.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/ml/minorthird.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/nlp/jwnl.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/nlp/lingpipe.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/nlp/plingstemmer.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/nlp/snowball.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/nlp/stanford-ner.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/nlp/stanford-parser.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/nlp/stanford-postagger.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/qa/javelin.jar"/>
 	<classpathentry kind="lib" path="lib/search/bing-search-java-sdk.jar"/>
 	<classpathentry kind="lib" path="lib/search/googleapi.jar"/>
-	<classpathentry kind="lib" path="lib/search/indri.jar"/>
-	<classpathentry kind="lib" path="lib/search/yahoosearch.jar"/>
-	<classpathentry kind="lib" path="lib/util/commons-logging.jar"/>
-	<classpathentry kind="lib" path="lib/util/gson.jar"/>
-	<classpathentry kind="lib" path="lib/util/htmlparser.jar"/>
-	<classpathentry kind="lib" path="lib/util/log4j.jar"/>
-	<classpathentry kind="lib" path="lib/util/trove.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Walex/School Work/Rada Research/SourceEphyra/lib/search/commons-lang3-3.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/search/indri.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/search/yahoosearch.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/util/commons-logging.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/util/gson.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/util/htmlparser.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/util/log4j.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/util/trove.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/search/commons-lang3-3.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="lib/nlp/opennlp-tools.jar"/>
+	<classpathentry kind="lib" path="lib/nlp/opennlp-tools-1.5.jar"/>
+	<classpathentry kind="lib" path="forms-1.3.0.jar" sourcepath="forms-1.3.0-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
