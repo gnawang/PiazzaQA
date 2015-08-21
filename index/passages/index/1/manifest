@@ -1,0 +1,25 @@
+<parameters>
+	<code-build-date>Jun 19 2015</code-build-date>
+	<corpus>
+		<document-base>1</document-base>
+		<frequent-terms>54</frequent-terms>
+		<maximum-document>33</maximum-document>
+		<total-documents>32</total-documents>
+		<total-terms>352054</total-terms>
+		<unique-terms>8271</unique-terms>
+	</corpus>
+	<fields>
+		<field>
+			<byte-offset>0</byte-offset>
+			<isNumeric>false</isNumeric>
+			<isOrdinal>false</isOrdinal>
+			<isParental>false</isParental>
+			<name>p</name>
+			<total-documents>32</total-documents>
+			<total-terms>608299</total-terms>
+		</field>
+	</fields>
+	<indri-distribution>Indri development release 5.8</indri-distribution>
+	<type>DiskIndex</type>
+</parameters>
+
