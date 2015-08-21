@@ -61,4 +61,12 @@ public class NumberOfKeywordsFilter extends Filter {
 		
 		return null;  // drop result
 	}
+	
+	/**
+	 * Filters an array of results
+	 */
+	public Result[] apply(Result[] results) {
+		for (Result r : results) this.apply(r);
+		return results;
+	}
 }
