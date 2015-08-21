@@ -25,11 +25,11 @@ import lemurproject.indri.ScoredExtentResult;
  */
 public class IndriKM extends KnowledgeMiner {
 	/** Maximum total number of search results. */
-	private static final int MAX_RESULTS_TOTAL = 500;
+	private static final int MAX_RESULTS_TOTAL = 15;
 	/** Maximum number of search results per query. */
-	private static final int MAX_RESULTS_PERQUERY = 500;
+	private static final int MAX_RESULTS_PERQUERY = 15;
 	/** Maximum number of documents fetched at a time. */
-	private static final int MAX_DOCS = 500;
+	private static final int MAX_DOCS = 50;
 	/**
 	 * <p>Regular expression that matches characters that cause problems in
 	 * Indri queries and thus should be removed from query strings.</p>
@@ -193,7 +193,7 @@ public class IndriKM extends KnowledgeMiner {
 		try {
 			// create query environment
 			QueryEnvironment env = new QueryEnvironment();
-			System.out.println("a");
+			
 		    // add Indri indices or servers
 			if (indriDirs != null && indriDirs.length > 0) {
 				for (String indriDir : indriDirs) env.addIndex(indriDir);
@@ -204,12 +204,13 @@ public class IndriKM extends KnowledgeMiner {
 						"URLs of Indri servers required.");
 				System.exit(1);
 			}
-			System.out.println("b");
+			
 		    // run an Indri query, returning up to MAX_RESULTS_PERQUERY results
 		    ScoredExtentResult[] results =
 		    	env.runQuery(transformQueryString(query.getQueryString()),
 		    				 MAX_RESULTS_PERQUERY);
-		    System.out.println("c");
+		    
+//		    System.out.println("# Indri KM Results = " + results.length);
 			// get passages and document numbers
 			String[] passages = new String[results.length];
 			for (int i = 0; i < results.length; i += MAX_DOCS) {
@@ -222,7 +223,6 @@ public class IndriKM extends KnowledgeMiner {
 				ParsedDocument[] documents = env.documents(partResults);
 				
 				for (int j = 0; j < partResults.length; j++) {
-					System.out.println("warning...");
 					int passageBegin = partResults[j].begin;
 					int passageEnd = partResults[j].end;
 					int byteBegin = documents[j].positions[passageBegin].begin;
@@ -245,12 +245,10 @@ public class IndriKM extends KnowledgeMiner {
 //						docText.substring(byteBegin).split("</P>", 2)[0].trim();
 				}
 			}
-			System.out.println("done");
 			String[] docNos = env.documentMetadata(results, "docno");
 		    
 		    // close query environment
 		    env.close();
-		    System.out.println("really done");
 			// return results
 			return getResults(passages, docNos, false);
 		} catch (Exception e) {

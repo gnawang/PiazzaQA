@@ -140,8 +140,6 @@ public class Search {
 		pending = 0;
 		
 		// send only the first query to the KnowledgeAnnotators
-		System.out.println("# of KA's = " + kas.size());
-		System.out.println("# of KM's = " + kms.size());
 		if (queries.length > 0) queryKAs(queries[0]);
 		
 		// send all queries to the KnowledgeMiners

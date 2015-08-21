@@ -25,9 +25,9 @@ import lemurproject.indri.ScoredExtentResult;
  */
 public class IndriDocumentKM extends KnowledgeMiner {
 	/** Maximum total number of search results. */
-	private static final int MAX_RESULTS_TOTAL = 500;
+	private static final int MAX_RESULTS_TOTAL = 100;
 	/** Maximum number of search results per query. */
-	private static final int MAX_RESULTS_PERQUERY = 500;
+	private static final int MAX_RESULTS_PERQUERY = 100;
 	/** Maximum number of documents fetched at a time. */
 	private static final int MAX_DOCS = 500;
 	/**
@@ -158,7 +158,8 @@ public class IndriDocumentKM extends KnowledgeMiner {
 		    ScoredExtentResult[] results =
 		    	env.runQuery(transformQueryString(query.getQueryString()),
 		    				 MAX_RESULTS_PERQUERY);
-			
+		    
+		    System.out.println("# Indri KA Results = " + results.length);
 			// get documents and document numbers
 			String[] docs = new String[results.length];
 			for (int i = 0; i < results.length; i += MAX_DOCS) {
