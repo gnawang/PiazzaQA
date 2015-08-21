@@ -412,19 +412,18 @@ public class MsgPrinter {
 								   results[i].getAnswer());
 				printMessage("\tScore: " + results[i].getScore());
 				if (results[i].getDocID() != null)
-					printMessage("\tDocument: " + results[i].getDocID());
+					printMessage("\tDocument: " + results[i].getDocID() + "\n");
 			}
 		}
 		
 		//Lecture
-		printMessage("\nLecture:");
-		printMessage("    " + lecture + "\n");
+		printMessage("Related Document:");
+		printMessage("\t" + lecture + "\n");
 		
 		//posts
 		printMessage("Related Posts:");
 		for(int i = 0; i < posts.length; ++i){
-			printMessage("[" + (i + 1) + "]\t" +
-					   posts[i]);
+			printMessage("\t" + posts[i]);
 		}
 	}
 	
@@ -432,7 +431,7 @@ public class MsgPrinter {
 	 * Prints out an "answer unknown" message.
 	 */
 	public static synchronized void printAnswerUnknown() {
-		printMessage("\nSorry, I don't know the answer.");
+		printMessage("\nSorry, I don't know the answer... ¯\\_(?)_/¯");
 	}
 	
 	/**	the DateFormat object used in getTimespamt
