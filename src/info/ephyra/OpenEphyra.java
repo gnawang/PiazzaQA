@@ -1,19 +1,7 @@
 package info.ephyra;
 
 import info.ephyra.answerselection.AnswerSelection;
-import info.ephyra.answerselection.filters.AnswerPatternFilter;
-import info.ephyra.answerselection.filters.AnswerTypeFilter;
-import info.ephyra.answerselection.filters.DuplicateFilter;
-import info.ephyra.answerselection.filters.FactoidSubsetFilter;
-import info.ephyra.answerselection.filters.FactoidsFromPredicatesFilter;
-import info.ephyra.answerselection.filters.PredicateExtractionFilter;
-import info.ephyra.answerselection.filters.QuestionKeywordsFilter;
-import info.ephyra.answerselection.filters.ScoreCombinationFilter;
-import info.ephyra.answerselection.filters.ScoreNormalizationFilter;
-import info.ephyra.answerselection.filters.ScoreSorterFilter;
-import info.ephyra.answerselection.filters.StopwordFilter;
-import info.ephyra.answerselection.filters.TruncationFilter;
-import info.ephyra.answerselection.filters.WebDocumentFetcherFilter;
+import info.ephyra.answerselection.filters.*;
 import info.ephyra.io.Logger;
 import info.ephyra.io.MsgPrinter;
 import info.ephyra.nlp.LingPipe;
@@ -45,11 +33,15 @@ import info.ephyra.search.Search;
 import info.ephyra.search.searchers.BingKM;
 import info.ephyra.search.searchers.IndriKM;
 import info.ephyra.search.searchers.IndriDocumentKM;
-import questionsearch.*;
+import info.ephyra.questionsearch.*;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+
 
 /**
  * <code>OpenEphyra</code> is an open framework for question answering (QA).
@@ -60,8 +52,8 @@ import java.util.ArrayList;
 public class OpenEphyra {
 	/** Factoid question type. */
 	protected static final String FACTOID = "FACTOID";
-	/** List question type. */
-	protected static final String LIST = "LIST";
+	/** Info retrieval type */
+	protected static final String INFO = "INFO";
 	
 	/**Piazza and lecture searcher */
 	protected static PiazzaSearch relatedSearch;
@@ -70,8 +62,10 @@ public class OpenEphyra {
 	protected static final int FACTOID_MAX_ANSWERS = 5;
 	/** Absolute threshold for factoid answer scores. */
 	protected static final float FACTOID_ABS_THRESH = 0;
-	/** Relative threshold for list answer scores (fraction of top score). */
-	protected static final float LIST_REL_THRESH = 0.1f;
+	/** Maximum number of info answers. */
+	protected static final int INFO_MAX_ANSWERS = 5;
+	/** Relative threshold for info answer scores. */
+	protected static final float INFO_ABS_THRESH = 0;
 	
 	/** Serialized classifier for score normalization. */
 	public static final String NORMALIZER =
@@ -94,12 +88,12 @@ public class OpenEphyra {
 	 */
 	public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
 		// enable output of status and error messages
-		MsgPrinter.enableStatusMsgs(true);
+		MsgPrinter.enableStatusMsgs(false);
 		MsgPrinter.enableErrorMsgs(true);
 		
 		// set log file and enable logging
 		Logger.setLogfile("log/OpenEphyra");
-		Logger.enableLogging(true);
+		Logger.enableLogging(false);
 		
 		relatedSearch = new PiazzaSearch();
 //		relatedSearch.testPrint();
@@ -126,7 +120,7 @@ public class OpenEphyra {
 	 */
 	public OpenEphyra(String dir) {
 		this.dir = dir;
-		
+		System.out.println("Initializing PiazzaQA...");
 		MsgPrinter.printInitializing();
 		
 		// create tokenizer
@@ -281,38 +275,86 @@ public class OpenEphyra {
 		
 		// search
 		// - knowledge miners for unstructured knowledge sources
-		Search.clearKnowledgeMiners();
-//		Search.addKnowledgeMiner(new BingKM());
-//		Search.addKnowledgeMiner(new GoogleKM());
-//		Search.addKnowledgeMiner(new YahooKM());
-//		for (String[] indriIndices : IndriKM.getIndriIndices())
-//			Search.addKnowledgeMiner(new IndriKM(indriIndices, false));
-		String[] INDRI_INDEX = {"C:/Users/Walex/School Work/Rada Research/SourceEphyra/index"};
-//		Search.addKnowledgeMiner(new IndriKM(INDRI_INDEX, false));
-//		Search.addKnowledgeMiner(new IndriDocumentKM(INDRI_INDEX, false));
-//		for (String[] indriServers : IndriKM.getIndriServers())
-//			Search.addKnowledgeMiner(new IndriKM(indriServers, true));
-		// - knowledge annotators for (semi-)structured knowledge sources
+		Search.clearKnowledgeMiners();	
+		String[] INDRI_PASS = {"index/passages"};
+		String[] INDRI_DOC = {"index/documents"};
+		Search.addKnowledgeMiner(new IndriKM(INDRI_PASS, false));
+		Search.addKnowledgeMiner(new IndriDocumentKM(INDRI_DOC, false));
 		Search.clearKnowledgeAnnotators();
 		
 		// answer extraction and selection
 		// (the filters are applied in this order)
 		AnswerSelection.clearFilters();
 		// - answer extraction filters
+		AnswerSelection.addFilter(new SentenceExtractionFilter());
+		AnswerSelection.addFilter(new CutStatementProviderFilter());
+		AnswerSelection.addFilter(new NumberOfKeywordsFilter());
 		AnswerSelection.addFilter(new AnswerTypeFilter());
 		AnswerSelection.addFilter(new AnswerPatternFilter());
-//		AnswerSelection.addFilter(new WebDocumentFetcherFilter());
-		AnswerSelection.addFilter(new PredicateExtractionFilter());
-		AnswerSelection.addFilter(new FactoidsFromPredicatesFilter());
-		AnswerSelection.addFilter(new TruncationFilter());
+//		AnswerSelection.addFilter(new PredicateExtractionFilter());
+//		AnswerSelection.addFilter(new FactoidsFromPredicatesFilter());
+//		AnswerSelection.addFilter(new TruncationFilter());
 		// - answer selection filters
 		AnswerSelection.addFilter(new StopwordFilter());
-		AnswerSelection.addFilter(new QuestionKeywordsFilter());
+		AnswerSelection.addFilter(new PreferNamedEntitiesFilter());
 		AnswerSelection.addFilter(new ScoreNormalizationFilter(NORMALIZER));
 		AnswerSelection.addFilter(new ScoreCombinationFilter());
 		AnswerSelection.addFilter(new FactoidSubsetFilter());
 		AnswerSelection.addFilter(new DuplicateFilter());
 		AnswerSelection.addFilter(new ScoreSorterFilter());
+//		AnswerSelection.addFilter(new SerializationFilter());
+	}
+	
+	/**
+	 * Initializes the pipeline for info questions.
+	 */
+	protected void initInfo() {
+		// question analysis
+		Ontology wordNet = new WordNet();
+		// - dictionaries for term extraction
+		QuestionAnalysis.clearDictionaries();
+		QuestionAnalysis.addDictionary(wordNet);
+		// - ontologies for term expansion
+		QuestionAnalysis.clearOntologies();
+		QuestionAnalysis.addOntology(wordNet);
+		
+		// query generation
+		QueryGeneration.clearQueryGenerators();
+		QueryGeneration.addQueryGenerator(new BagOfWordsG());
+		QueryGeneration.addQueryGenerator(new BagOfTermsG());
+		QueryGeneration.addQueryGenerator(new PredicateG());
+		QueryGeneration.addQueryGenerator(new QuestionInterpretationG());
+		QueryGeneration.addQueryGenerator(new QuestionReformulationG());
+		QueryGeneration.addQueryGenerator(new EasyG());
+		
+		// search
+		// - knowledge miners for unstructured knowledge sources
+		Search.clearKnowledgeMiners();	
+		String[] INDRI_PASS = {"index/passages"};
+//		String[] INDRI_DOC = {"index/documents"};
+		Search.addKnowledgeMiner(new IndriKM(INDRI_PASS, false));
+//		Search.addKnowledgeMiner(new IndriDocumentKM(INDRI_DOC, false));
+		Search.clearKnowledgeAnnotators();
+		
+		// answer extraction and selection
+		// (the filters are applied in this order)
+		AnswerSelection.clearFilters();
+		// - answer extraction filters
+		AnswerSelection.addFilter(new ScoreResetterFilter());
+		AnswerSelection.addFilter(new SentenceExtractionFilter());
+		AnswerSelection.addFilter(new NumberOfKeywordsFilter());
+//		AnswerSelection.addFilter(new AdaptiveNumberOfKeywordsFilter());
+//		AnswerSelection.addFilter(new TermImportanceFilter());
+		// - answer selection filters
+		AnswerSelection.addFilter(new CutStatementProviderFilter());
+		AnswerSelection.addFilter(new StopwordFilter());
+		AnswerSelection.addFilter(new UnnecessaryCharactersFilter());
+		AnswerSelection.addFilter(new FunctionWordsFilter());
+		AnswerSelection.addFilter(new ScoreNormalizationFilter(NORMALIZER));
+		AnswerSelection.addFilter(new ScoreCombinationFilter());
+		AnswerSelection.addFilter(new DuplicateFilter());
+		AnswerSelection.addFilter(new ScoreSorterFilter());
+//		AnswerSelection.addFilter(new SerializationFilter());
 	}
 	
 	/**
@@ -333,6 +375,10 @@ public class OpenEphyra {
 		// search
 		MsgPrinter.printSearching();
 		Result[] results = Search.doSearch(queries);
+		
+//		for(Result r : results){
+//			System.out.println(r.getAnswer());
+//		}
 		
 		// answer selection
 		MsgPrinter.printSelectingAnswers();
@@ -374,14 +420,11 @@ public class OpenEphyra {
 				// factoid question
 				type = FACTOID;
 				question = question.split(":", 2)[1].trim();
-			} else if (question.matches("(?i)" + LIST + ":.*+")) {
-				// list question
-				type = LIST;
-				question = question.split(":", 2)[1].trim();
 			} else {
 				// question type unspecified
-				type = FACTOID;  // default type
+				type = INFO;  // default type
 			}
+			MsgPrinter.printStatusMsg("Question Type = " + type);
 			
 			// ask question
 			Result[] results = new Result[0];
@@ -391,9 +434,10 @@ public class OpenEphyra {
 						FACTOID_ABS_THRESH);
 				Logger.logResults(results);
 				Logger.logFactoidEnd();
-			} else if (type.equals(LIST)) {
+			} else if (type.equals(INFO)) {
 				Logger.logListStart(question);
-				results = askList(question, LIST_REL_THRESH);
+				results = askInfo(question, INFO_MAX_ANSWERS,
+						INFO_ABS_THRESH);
 				Logger.logResults(results);
 				Logger.logListEnd();
 			}
@@ -416,6 +460,34 @@ public class OpenEphyra {
 							   float absThresh) {
 		// initialize pipeline
 		initFactoid();
+		
+		// analyze question
+		MsgPrinter.printAnalyzingQuestion();
+		AnalyzedQuestion aq = QuestionAnalysis.analyze(question);
+		
+		// get related posts and lectures
+		relatedSearch.SearchLectures(aq.getKeywords());
+		relatedSearch.SearchPiazza(aq.getKeywords());
+		
+		// get answers
+		Result[] results = runPipeline(aq, maxAnswers, absThresh);
+		
+		return results;
+	}
+	
+	/**
+	 * Asks Ephyra an info question and returns up to <code>maxAnswers</code>
+	 * results that have a score of at least <code>absThresh</code>.
+	 * 
+	 * @param question info question
+	 * @param maxAnswers maximum number of answers
+	 * @param absThresh absolute threshold for scores
+	 * @return array of results
+	 */
+	public Result[] askInfo(String question, int maxAnswers,
+							   float absThresh) {
+		// initialize pipeline
+		initInfo();
 		
 		// analyze question
 		MsgPrinter.printAnalyzingQuestion();
@@ -469,4 +541,30 @@ public class OpenEphyra {
 		
 		return confident.toArray(new Result[confident.size()]);
 	}
+	
+	/**
+	* Parses query strings in individual strings for each sentence
+	* 
+	* @param question list question
+	* @param relThresh relative threshold for scores
+	* @return array of results
+//	*/
+//	public String[] questionParser(String question){
+//		InputStream modelIn = null;
+//		SentenceModel model = null;
+//		try {
+//			modelIn = new FileInputStream("en-sen.bin");
+//			model = new SentenceModel(modelIn);
+//		} catch (InvalidFormatException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		SentenceDetectorME sentenceDetector = new SentenceDetectorME(model);
+//		String sent[] = sentenceDetector.sentDetect(question);
+//		
+//		return sent;
+//	}
 }
