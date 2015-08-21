@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <dc:format>xml</dc:format>
+         <dc:creator>
+            <rdf:Seq>
+               <rdf:li>CAEN</rdf:li>
+            </rdf:Seq>
+         </dc:creator>
+         <xmp:CreateDate>2014-01-07T14:16-05:00</xmp:CreateDate>
+         <xmp:CreatorTool>Microsoft® Word 2010</xmp:CreatorTool>
+         <xmp:ModifyDate>2014-01-07T14:16-05:00</xmp:ModifyDate>
+         <pdf:Producer>Microsoft® Word 2010</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+
+<Part>
+<P>Project 1:  How much car can you afford? </P>
+
+<P>EECS 280 – Winter 2014 </P>
+
+<P>Due:  Wednesday, 22 January 2014, 11:55 PM </P>
+
+<P> </P>
+
+<P> </P>
+
+<P>Introduction </P>
+
+<P> </P>
+
+<P>This project will give you experience writing, compiling, and debugging a simple C++ program.  You will gain experience with header files and multiple compilations.  We expect the program itself to be straightforward for any student who has successfully completed the prerequisites for this course. </P>
+
+<P> </P>
+
+<P>Buying a car </P>
+
+<P> </P>
+
+<P>Upon graduation and obtainment of a &quot;real job(tm)&quot;, many college students celebrate by buying themselves a new car.  The key question, of course, is what car to buy?  Unfortunately, while many students have their hearts set on that new Ferrari, their wallets argue for a more modest selection.  For instance, Prof. DeOrio drove an economical, well-aged minivan upon graduating.  It only had 200,000 miles on it, and who needs power steering anyways? </P>
+
+<P> </P>
+
+<P>As any good salesperson will &quot;helpfully&quot; ask you, one way to answer this problem is to figure out how much you can pay each month.  While you may not wish to reveal your answer to this question to the salesperson, it is a useful metric to keep in mind when purchasing a car.  To assist you in making this calculation, you are going to write a simple program that tells you how much you can afford to pay based upon a monthly payment at a given interest rate for a fixed number of years.  For instance, if you were to specify that you are willing to pay $500 per month for 5 years at an interest rate of 6%, you could afford to take out a loan of $25,862.78 to pay for a car.   </P>
+
+<P> </P>
+
+<P>Programming Assignment </P>
+
+<P> </P>
+
+<P>You will implement a program that calculates the loan amount given the monthly payment, interest rate, and loan duration. </P>
+
+<P> </P>
+
+<P>Calculating Interest </P>
+
+<P> </P>
+
+<P>In this assignment, you will assume that loan interest is compounded monthly.  Each month, the lender calculates the interest that must be paid by multiplying the outstanding balance on the loan by the interest rate.  The monthly payment is first used to pay off the interest; the remainder is applied to the principal (i.e., it is used to reduce the outstanding balance on the loan).  Therefore, given an outstanding balance at the beginning of the month (B), a monthly payment (P), and a yearly interest rate (r), one can calculate the outstanding balance at the beginning of the next month (B') as: </P>
+
+<P> </P>
+
+<P>B' = B - (P - (B * (r/12))) </P>
+
+<P>or </P>
+
+<P>B' = B * (1 + r/12) - P </P>
+
+<P>or (rearranged) </P>
+
+<P>B = (B'+P)/(1+r/12) </P>
+
+<P> </P>
+
+<P>Input/Output </P>
+
+<P> </P>
+
+<P>Rather than ask you to write the input and output routines for this assignment, we have provided a library that does this I/O for you.  The definitions are given in the header file io.h seen below:   </P>
+
+<P> </P>
+
+<P>************************************************************************** </P>
+
+<P>#ifndef __IO_H__ </P>
+
+<P>#define __IO_H__ </P>
+
+<P> </P>
+
+<P>double GetParam(string prompt, double min, double max); </P>
+
+<P>  // EFFECTS: Prints the prompt, and reads a double from cin. </P>
+
+<P>  //          If the value is between min and max, inclusive, returns </P>
+
+<P>  //          it.  Otherwise, repeats. </P>
+
+<P> </P>
+
+<P>void PrintHeader (void); </P>
+
+<P>  // EFFECTS: prints out a nice header for the payment info table. </P>
+
+<P>  // MODIFIES: standard output stream </P>
+
+<P> </P>
+
+<P>void PrintMonthlyData (int month, double principal,  </P>
+
+<P>       double interest, double balance); </P>
+
+<P>  // EFFECTS: prints out a row in the payment info table. </P>
+
+<P>  // MODIFIES: standard output stream </P>
+
+<P> </P>
+
+<P>#endif </P>
+
+<P>************************************************************************** </P>
+
+<P> </P>
+
+<P>Use the GetParam function to obtain the parameters.  There are three: the monthly payment (between 1 and 100,000, inclusive), interest rate (between 0 and 1 inclusive), and years of the loan (between 1 and 100, inclusive; must be an integer).  To obtain each parameter, your program must ask the user to type it in.  Use the prompt argument for this purpose.  The three prompts are: </P>
+
+<P> </P>
+
+<P>     &quot;Please enter the monthly payment: &quot; </P>
+
+<P>     &quot;Please enter the interest rate: &quot; </P>
+
+<P>     &quot;Please enter the duration of the loan, in years: &quot; </P>
+
+<P> </P>
+
+<P>You must use exactly these prompts.  Don't forget the trailing single spaces! </P>
+
+<P> </P>
+
+<P>Note that you must do a small amount of additional error checking on the &quot;years&quot; input.  If the user enters something other than an integer number of years, call GetParam again with the same prompt/limits. </P>
+
+<P>     </P>
+
+<P>Your program should display output in a nice table format.  Your program should first call the PrintHeader() function to print out the table header.  It should then call PrintMonthlyData() once for each month of the loan, starting with the last month of the loan and proceeding to the first month of the loan (month 1).  This is a little odd, but it will make your programming task easier.  Later in the class, we will discuss how to show this output in a more natural format (starting at month 1). </P>
+
+<P> </P>
+
+<P>The table will have four columns.  First is the month of the loan - the first month of the loan is defined to be month 1 (but note that this prints out last!).  Second is the amount of the loan principal that is paid as part of the monthly payment.  Third is the amount of interest that is paid as part of the monthly payment.  The last column is the outstanding balance on the loan.  Note that the bottom value in this column tells you the amount of the loan (i.e., how much car you can afford). </P>
+
+<P> </P>
+
+<P>For example, if one were to specify a loan with a rate of 0.05 (5%) with a monthly payment of $100 and a one year duration, your program should print out: </P>
+
+<P> </P>
+
+<P>Month   Principal        Interest         Balance </P>
+
+<P>-----   ---------       ---------       --------- </P>
+
+<P>12          99.59            0.41           99.59 </P>
+
+<P>11          99.17            0.83          198.76 </P>
+
+<P>10          98.76            1.24          297.52 </P>
+
+<P>9           98.35            1.65          395.87 </P>
+
+<P>8           97.94            2.06          493.81 </P>
+
+<P>7           97.54            2.46          591.35 </P>
+
+<P>6           97.13            2.87          688.48 </P>
+
+<P>5           96.73            3.27          785.21 </P>
+
+<P>4           96.33            3.67          881.53 </P>
+
+<P>3           95.93            4.07          977.46 </P>
+
+<P>2           95.53            4.47         1072.99 </P>
+
+<P>1           95.13            4.87         1168.12 </P>
+
+<P> </P>
+
+<P>Your program should not take any input or produce any output other than the I/O specified in this section.  In particular, ensure that your program does not print out any debugging messages or extra output before you hand it in. </P>
+
+<P> </P>
+
+<P>Files </P>
+
+<P> </P>
+
+<P>There are several files installed in the directory /afs/umich.edu/class/eecs280/proj1: </P>
+
+<P> </P>
+
+<P>io.h The header file for the I/O functions described above.  This should be included (via #include &quot;io.h&quot;) in your solution. </P>
+
+<P>io.cpp The implementation of the I/O functions.  Should not be #included by your program. </P>
+
+<P>test1  A sample input file for your program. </P>
+
+<P>output1 The output that should be generated by input test1.  </P>
+
+<P> </P>
+
+<P>You should copy the above files into your working directory.  DO NOT modify io.h or io.cpp! </P>
+
+<P> </P>
+
+<P>You should put all of the functions you write in a single file, called p1.cpp.  You may use only the C++ standard libraries, and no others. </P>
+
+<P> </P>
+
+<P>When you compile your program, you should use the following command line: </P>
+
+<P> </P>
+
+<P>g++ -pedantic -Wall -Werror –O1 p1.cpp io.cpp -o p1 </P>
+
+<P> </P>
+
+<P>Note the –O1 compiler flag in the compilation string (that’s a capital letter ‘O’, not the number zero, followed by the number one).  This flag turns on a small amount of compiler optimization.  Not only will it make your code a bit faster, but it will also give you warnings if you try to use a variable uninitialized.  However, this flag will make it difficult to debug certain parts of your program when using a debugger.  So, if you are fixing your program using a debugger (i.e. you are using the –g flag), you must omit the –O1 flag when compiling your code and only include it once you think that you have fixed all the errors in your program.  In other words, you should be using either the –O1 flag or the –g flag for debugging, but not both. </P>
+
+<P> </P>
+
+<P>For initial testing purposes, we have given you one test case to see if your program is working correctly.  You may run this test by copying test1 and output1 to your working directory and executing the following commands: </P>
+
+<P> </P>
+
+<P>./p1 &lt; test1 &gt; test.out </P>
+
+<P>diff test.out output1 </P>
+
+<P> </P>
+
+<P>This runs your program, taking input from the file &quot;test1&quot; instead of the keyboard, and placing output into the file &quot;test.out&quot; instead of the screen.  Then, the &quot;diff&quot; program compares your test output (test.out) with the correct output (output1).  If they are identical, your program passes that test case.  If diff reports any differences at all, you have a bug somewhere. </P>
+
+<P> </P>
+
+<P>We will test your code using this test case, as well as several others.  You should therefore definitely pass this test case. However, you should also create a family of test cases that exercises your program with different inputs, since the test case we have given you is not sufficient to catch all bugs. </P>
+
+<P> </P>
+
+<P>Handing in and grading </P>
+
+<P> </P>
+
+<P>You should hand in your program, p1.cpp, via the submit280 script before the deadline.  We will post more information about the submit280 script on the CTools website in the next few days.  Your program will be graded along two criteria: </P>
+
+<P> </P>
+
+<P>   1) Functional Correctness </P>
+
+<P>   2) General Style </P>
+
+<P> </P>
+
+<P>An example of Functional Correctness is whether or not you produce the correct output.  General Style speaks to the cleanliness and readability of your code.  We don't need you to follow any particular style, as long as your style is consistent and clear. </P>
+
+<P> </P>
+
+<P>Notes and Hints </P>
+
+<P> </P>
+
+<P>Remember, your program must be received by our submission machine at or before the exact time on the due date.  Programs received after the due date will receive a zero. </P>
+
+<P> </P>
+
+<P>You do not need to handle any erroneous input---for example, a user who types &quot;foo&quot; instead of &quot;0.05&quot;.  You may assume that we will always supply numbers when they are expected, but that the numbers might be outside the allowable range. </P>
+
+<P> </P>
+
+<P>Given the equation for calculating interest and a little algebra, it is quite easy to calculate B as a function of B', r, and P.  Also, remember that the outstanding balance after the final payment MUST be zero! </P>
+</Part>
+</TaggedPDF-doc>

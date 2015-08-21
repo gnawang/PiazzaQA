@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:27:18-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:27:18-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:27:18-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">project5.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:08b9edce-9c0a-4348-aa47-727ce9072a0a</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:ece7d9e0-f845-4583-b3ff-577b29a765be</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="project5.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>EECS 280 Project 5: Rational Number Calculator EECS 280 – Winter 2014 Due: Tuesday, 22 April 2014, 11:55pm (Note that this project is due on Tuesday, unlike other projects) This project will give you experience implementing a container class, List, that is similar to the linked list discussed in the lecture, but with a few differences: it is doubly-linked to allow efficient inserts and deletes anywhere in the list and it supports an iterator. You will then use your List to implement a Stack, which only allows push and pop operations from one end. This Stack class makes use of the List class, so you should implement List class first. Next, you will implement a Rational number class that allows you to represent fractions. The Rational class is independent of other classes. So, if you prefer, you can implement and test it first. Finally, you will use the Rational and Stack classes to implement a postfix (also known as RPN) calculator. In a postfix calculator, operators appear after their operands, rather than in between them. For example, to compute (2 + 3) * 5, you would type 2 3 + 5 * List class The methods you have to implement are given in List.h.starter. You should copy that file to List.h and then implement each member function. The main difference from the version in lecture is that it is doubly-linked and also allows you to create an iterator and then use the iterator to search, insert, or delete at any position in the list. Note that this class is templated, so that it can hold data of any type. For classes that use templates, it is necessary to give the code for member functions inside the header file (it turns out that the compiler requires that in order to instantiate the class, given a specific type). Therefore, there will not be a List.cpp. See the lecture slides on how to add member functions in the header file for a template class. You must not change the public interface of List class and you must use a doubly-linked list (i.e., nodes chained using pointers) implementation (no arrays or vectors, etc.). The basic methods that List provides are in List.h.starter. You must manage memory allocation so that there are no memory leaks, no dangling pointers, etc. For example, when adding an item, you will need to allocate the memory for a node to hold the item’s value and the pointer to the next node in the linked list. When removing items, you will need to delete that previously allocated memory. The destructor needs to ensure that all the nodes in the linked list are deleted. </P>
+
+<P>Write a unit test for your List in List_test00.cpp and compile and run it it using this command: % g++ Wall Werror pedantic O1 List_test00.cpp –o List_test00 % ./List_test00 Or, simply type: % make List_test00 % ./List_test00 Also, you can run all the tests at once like this: % make test Your unit test should return 0 if it passes and non-zero (using assert) if it fails. Testing this class thoroughly using unit tests is important since not all of its functionality is used in the calculator. A few examples of functionality that the calculator may fail to fully exercise include: . erase and insert via the iterator. . copy constructor and assignment operator. Make sure you test for all the functionality, even if it is not important for getting the calculator to work. We will test your List.h with unit tests. Stack class </P>
+
+<P>You should complete the implementation of List (and test it) before working on Stack. The skeleton 
+code for Stack is given in Stack.h.starter. Copy Stack.h.starter to Stack.h. You must only use the public 
+interface of the List class to implement the stack. The List class should not have any friends. 
+The core functions of the Stack class are push(item), pop(), and top(). See the RMEs for the 
+description of these operations. Given the List type, the basic operations on a stack, push() and 
+pop(), are straightforward to implement. To push, you can simply add an element at one end of the 
+list (either end will do). To pop, you simply remove the element from the same end of the list. 
+Another function is top() that simply returns the top element (as a constant reference to eliminate 
+an unnecessary copy) without modifying the stack. 
+The count_if member function (see Stack.h.starter) may require some explanation. We illustrate 
+the use of this with an example. Let’s say the Stack S holds integers and contains the following 
+elements: 
+Stack&lt;int&gt; S; 
+S.push(2); 
+S.push(3); 
+S.push(4); 
+S.push(6); 
+S.push(2); 
+// S now holds 2 6 4 3 2 
+</P>
+
+<P>The count_if method allows you to count the number of elements that meet a certain predicate. For 
+example, isEven is a predicate functor that tells you if a number is even: 
+class isEven { 
+public: 
+bool operator() (int i) { 
+return (i % 2) == 0; 
+} 
+}; 
+Now, we can call count_if to find the number of even items in the stack: 
+S.count_if(isEven); //returns 4 
+We can automatically check the answer like this: 
+assert(S.count_if(isEven) == 4); 
+To test your stack, write unit tests in Stack_test00.cpp and compile and run them like this: 
+% g++ Wall 
+Werror 
+pedantic 
+O1 
+Stack_test00.cpp –o Stack_test00 
+% ./Stack_test00 
+Alternatively, you can use the given Makefile as follows: 
+% make Stack_test00 
+% ./Stack_test00 
+Also, you can run all the tests at once like this: 
+% make test 
+Rational Class 
+The Rational Class’s interface is given in Rational.h. You should write the code in Rational.cpp. Recall 
+from arithmetic that a rational number is simply one that can be represented as a ratio of two 
+integers (positive or negative). The following are all rational numbers: 
+1, 2, 2/5, 4/3, 0, -1/2, etc. 
+2/4 is also a rational number, but is equivalent to 1/2. Note that -0 is equivalent to 0. 
+Note that rational division is different from integer division. 
+10/11 * 11 gives 10/1 or simply 10. 
+We will also allow consider numbers in which the denominator is 0 to be Rational numbers, e.g., 
+1/0 : infinity 
+</P>
+
+<P>-1/0 : -infinity 0/0 : undefined </P>
+
+<P>4/0: equivalent to 1/0 -4/0: equivalent to -1/0 -0/0: equivalent to 0/0 (One of the reasons for allowing these forms of rational numbers, besides making the Rational class more general, is so that you don't have to do error checking in the code for things like divide by 0, etc.) Computers do not store fractions as ratio of two values. Instead, they store them as decimals. This can cause some problems. For example, (1.0/3)*3.0 may not be exactly equal to 1 because of precision errors inside the computer. The Rational class that stores both the numerator and denominator as integers to represent a rational value will not have such a problem. In the given Rational.h, you see two private data members: p and q. You should set p and q so that they represent the rational number p/q. For example, if p is 1 and q is 2, then the given Rational object represents a rational number 1/2. Here is how to use the class to create some rational numbers: Rational r(1, 2); Creates a rational number 1/2 Rational r(2, 4); Another way to create a rational number 1/2 Rational r(2, 1); Creates a rational number 2/1 Rational r(2); Another way to create a rational number 2/1 Rational r(0); Creates a rational number 0/1 Rational r(0) ; Another way to create a rational number 0/1 Rational r(); Another way to create a rational number 0/1 For additional examples, use this website to test your rational number constructor. . Rational r(1, 2); // creates a rational number 1/2 . Rational r(2, 4); // Also creates a rational number 1/2, since 2/4 is same as 1/2 . Rational r(2, 1); // Creates a rational number 2/1 or simply 2. . Rational r(2); // Another way to create a rational number 2/1 or simply 2. . Rational r(0); // Create the rational number 0/1 or 0. . Rational r(-0); // Also creates the rational number 0/1 or 0. Note that -0 is equivalent to 0. . Rational r(); // Another way to create the rational number with value 0 Once you have rational numbers, we need to define operators, +, -, *, /, and == to manipulate or compare them. You should implement these in Rational.cpp as non-member functions. The signature of, say, + is given in Rational.h as follows: // EFFECTS: Returns te lhs + rhs. Note that (a/b + c/d) is algebraically </P>
+
+<P>// equivalent to (ad+bc)/bd. Rational operator+(const Rational &amp;lhs, const Rational &amp;rhs); When initializing the p and q values of a rational number and when updating them, you must reduce p and q by dividing them by any common factor so that they are as small integers as possible. That is important because if you don’t reduce them, you could run into integer overflows and incorrect results when none should occur. For example, consider: 3/4 * 1000/1000 * 1000/1000 * [keep multiplying by 1000/1000 many times] The above should result in3/4 for a correct implementation. But, if both numerator and the denominator overflow, it is possible that you could get a different result. We do not want that. We will never test your code with inputs where the results overflow (or even where the intermediate results in adding, multiplying, etc. overflow). But, we will test for the above type of situation where the overflow is an artifact of your implementation. We have given you the following representation invariants for the internal values of integers p and q to avoid unnecessary overflows and generate results that are consistent with our tests: . Invariant #1: Keep q as always greater than or equal to 0. p can only be negative, 0, or positive. </P>
+
+<P>. Invariant #2: For non-zero p and q, p and q should not have a common factor other than 1. 
+Eliminate any common factors. When p is 0, and q is non-zero, set q to 1. 
+. Invariant #3: We want you to allow q to become 0, rather than treat it as an error. This could 
+result in three types of values: +infinity, -infinity, and undefined. 
+</P>
+
+<L>
+<LI>
+<LBody>o Positive infinity is any positive number divided by 0. Internally, it must always be stored with p being 1 and q being 0. When printed out, it should be printed out as 1/0. </LBody>
+</LI>
+
+<LI>
+<LBody>o Negative infinity is any negative number divided by 0. Internally, it must always be stored with p being -1 and q being 0. When printed out, it should be printed out as -1/0. </LBody>
+</LI>
+
+<LI>
+<LBody>o An undefined value is 0/0. Internally, it is simply represented with with p being 0 and q being 0. When printed out, it should be printed out as 0/0. For example, Rational(4,0) should be stored as Rational(1, 0), Rational(-4, 0) should be stored as Rational(-1, 0). For example: all the following arithmetic operations are legal: . 4/(2-2): results in +infinity, i.e., 1/0 . 4/-(2-2): also results in +infinity, i.e., 1/0. Note that -0 is same as 0. . -4/(2-2) results in -negative, i.e., -1/0 . (2-2)/(3-3) results in an undefined value, i.e., 0/0 Remember that these invariants must hold after the Rational object is constructed and throughout its lifetime, but they do not apply to the two parameters passed in to the constructor. The parameters passed into the constructor can be arbitrary integers and the constructor should always succeed. Accordingly, your implementation of the constructor must manipulate p/q based on equivalences </LBody>
+</LI>
+</L>
+
+<P>(e.g. reducing the fraction, moving or canceling the negative signs) to satisfy the invariants. </P>
+
+<P>You will need to find a way to identify the largest common factor between the numerator and denominator. For example, in 12/18, the largest common factor is 6. You should divide both numerator and denominator by 6, resulting in 2/3. Thus, Rational(12, 18) should result in p as 2 and q as 3. You can use a brute-force algorithm to find the largest common factor or use a well-known Euclid’s algorithm to find that. Just make sure that you handle cases where the numerator and/or denominator is negative as well. This could be the hardest part of implementing and testing the Rational class. There may be several corner cases, such as negative values, 0 values, etc. You may have implemented the Euclid's algorithm before (e.g., in a lab). You also need to implement the method for printing the value of a rational number to a stream. When the rational number is an integer, you should simply print the integer value. Otherwise, you should print it as p/q, where any common factors have been eliminated. If the ratio is negative, the fraction will have – sign since p will be negative. The signature of this method is given in Rational.h. Finally, the arithmetic laws for rational numbers are as follows: (a/b) + (c/d) = (ad + bc)/bd (a/b) - (c/d) = (ad-bc)/bd (a/b) * (c/d) = ac/bd (a/b) / (c/d) = ad/bc Assume that the above formulas also work when infinities and undefined values are encountered. For example, . undefined + anything will result in undefined . infinity * 0 will result in undefined . infinity - infinity will result in undefined . 2*infinity will result in infinity (i.e., 1/0) . 2*infinity - infinity will result in undefined. Reasoning: . 2*1/0 will result in 1/0 (after multiplying and reducing to bring the result in compliance with the invariants). Then, 1/0 - 1/0 will give 0/0 by applying the algebraic laws. To test your rational class, you can use these commands: % g++ Wall Werror pedantic O1 Rational_test00.cpp Rational.cpp o Rational_test00 % ./Rational_test00 Or you can use the given Makefile: % make Rational_test00 % Rational_test00 </P>
+
+<P>Also, you can run all the tests at once like this: % make test Postfix (RPN) Rational Number Calculator You will now use your Stack and Rational classes to develop a Reverse-Polish Notation calculator for rational numbers in calc.cpp.. Since all your classes for List and Stack are templated, it will be trivial to create a calculator that works for rationals (it is also trivial to make it work for integers and doubles, but you don’t have to implement them). An RPN calculator is one in which the operators appear after their respective operands, rather than in between them. So, instead of computing the following: (( 2 - 3) * 4 )/ (-6) an RPN calculator would compute this equivalent expression: 2 3 4 </P>
+
+<P>* 6 
+/ 
+RPN notation is convenient for several reasons. First, no parentheses are necessary since the 
+computation is always unambiguous. Second, such a calculator is easy to implement given a stack. In 
+the above case, when you see a number, you simply push it on the stack. When you see an operator, 
+you pop the top two values, apply the operator on them, and then push the result back on the stack. 
+In the above case, the stack would change as follows (top value shown first): 
+. Stack after seeing 2: [2] 
+. Stack after seeing 3: [ 3, 2] 
+. Stack after seeing - operator: [-1] 
+. Stack after seeing 4: [4, -1] 
+. Stack after seeing * operator: [-4] 
+. Stack after seeing -6: [-6, -4] 
+. Stack after seeing / operator: [2/3] 
+Notice that the stack only contains numbers at all times. The operators never go on the stack. Also 
+note that the stack contains a rational number equivalent to 2/3 at the end, which is internally 
+represented as a (p, q) pair (2,3) in your Rational class. 
+The above stack contents are a simplified view of what really is stored on the stack. At all times, the 
+stack only contains rational numbers. For example, after the first 2, the stack contains the object 
+Rational(2). After 3 is pushed, it contains [Rational(3), Rational(2)], etc. After the entire expression is 
+processed, the stack contains Rational(2, 3). All the arithmetic operators do rational arithmetic. Here 
+is another example: 
+Expression entered: 8 0 / 
+The final result on the stack will be equivalent to [Rational(1, 0)], since 8/0 should be reduced to 1/0 
+by the invariant rules for rational numbers. This is same as infinity. 
+</P>
+
+<P>The calculator program is invoked with no arguments, and starts out with an empty stack. It takes its input from the standard input stream, and writes its output to the standard output stream. Here are the commands your calculator must respond to and what you must do for each. Each command is separated from the next one by one or more whitespace characters (including possibly newlines). &lt;some number&gt; a number has the form: an optional - sign followed by one or more digits [0 – 9]. Thus, -2, 0, 23, 41, -41, -0 are all numbers. Notice that all these are integer values. Push the value on the stack. Your calculator should convert these values to the appropriate type (in this case, Rational, since you are implementing a rational calculator) before pushing them on the stack. That ensure that your stack only has to store one type of value, Rationals, and all operations are done only on rational numbers. The following are examples of things that are not valid numbers for user input: 0.3, 10/13, -1.1, 1,234. Note that rational values are never entered directly by the user. Only integers are entered (to simplify your project). But, rational numbers will result from the calculations and when values are pushed on the stack. </P>
+
+<P>+ pop the top two numbers off the stack, add them together, and push the result onto the top of the stack. This requires a stack with at least two operands. pop the top two numbers off the stack, subtract the first number popped from the second, and push the result onto the top of the stack. This requires a stack with at least two operands. </P>
+
+<P>* pop the top two numbers off the stack, multiply them together, and push the result onto the top of the stack. This requires a stack with at least two operands. / pop the top two numbers off the stack, divide the second value popped number by the first, and push the result onto the top of the stack. This requires a stack with at least two operands. the Rational class will provide the definition of /. d duplicate: pop the top item off the stack and push two copies of the number onto the top of the stack. This requires a stack with at least one operand. r reverse: pop the top two items off the stack, push the first popped item onto the top of the stack and then the push the second item onto the top of the stack (this just reverses the order of the top two items on the stack). This requires a stack with at least two operands. p print: print the top item on the stack to the standard output, followed by a newline. This requires a stack with at least one operand and leaves the stack unchanged. c clear: pop all items from the stack. This input is always valid. a print-all: print all items on the stack in one line, from top-most to bottom-most, each value followed by a single space. The end of the output must be followed by exactly one </P>
+
+<P>newline. This input is always valid and leaves the stack unchanged. For an empty stack, 
+for example, only the newline will be printed. As another example, For a stack with two 
+elements, say with stack contents being [Rational(10, 17), Rational(4)] (here, 10/17 is on 
+top), the following will be printed: 
+10/17 4 &lt;NEWLINE> 
+(Where &lt;NEWLINE&gt; corresponds to the newline character produced by endl or &quot;\n&quot;). 
+m match: pop the last element off the stack. Then push back the number of times this 
+element occurs in the remaining stack. This requires at least one operand. Here is an 
+example of commands, starting with an empty stack: 
+2 2 3 2 4 2 m 
+The above should result in a stack with (top value shown first): 
+[3, 4, 2, 3, 2, 2] 
+The 2 that precedes m was popped off the stack. Then, we want to count how many values 
+are equal to this value in the remaining stack. There are three 2’s. Thus, we push 3 on the 
+stack. 
+Here is another example of commands, starting with an empty stack: 
+2 m 
+The above simply results in a stack with: 
+</P>
+
+<P>[0] The reason is that there are zero values on the stack that match 2, once 2 is popped off. So, 0 is pushed. This one is the trickiest to implement. You are not allowed to actually pop all the elements off the stack to implement this (you can only pop the top value). Instead, you must use </P>
+
+<P>the count_if function that Stack class provides and push the final result. Functors or 
+function pointers may be useful here. Think about which one will work and then use it 
+with count_if. 
+q quit: exit the calculator with a 0 exit value. This input is always valid. End-of-file (e.g., 
+typing control-D on Linux) also must exit the calculator with a 0 exit value. Simply call 
+exit(0). 
+Each command is separated by whitespace. 
+For simplicity, you can assume that you are given valid input in our tests. No error checking on inputs 
+</P>
+
+<P>to the calculator is required. 
+Implement your calculator in a file called calc.cpp. 
+To compile your calculator, you must use: 
+g++ Wall 
+Werror 
+pedantic 
+O1 
+calc.cpp Rational.cpp o 
+calc 
+(To debug, replace O1 
+with g) 
+To run your calculator interactively, you can use: 
+% calc 
+And then start typing the commands. 
+General Requirements 
+. Enforcing the REQUIRES clauses: Unlike your previous assignments, we would like you to 
+enforce the REQUIRES clauses by using assert statements in all your functions. This is a good 
+idea for defensive programming and to catch bugs more easily. Since Calculator class builds 
+on Stack, which builds on List, it is a good idea for each class to enforce its REQUIRES classes 
+so that any misuse of the class can be detected. 
+. Use string class instead of CStrings. We taught you CStrings earlier for Project 3 to teach you 
+details of pointers and pointer arithmetic. But, using CStrings is generally considered a bad 
+idea, when they can be avoided. C++ strings are a lot safer. Besides, they are simpler to use. 
+For example, instead of using strcmp(s1, s2) to compare strings, you can simply use (s1 == s2), 
+since the C++ string class overloads the == operator and defines its meaning. Also, C++ strings 
+can never overflow, unlike CStrings. 
+. We will use valgrind to make sure that your code does not leak memory or result in dangling 
+pointers. Test your code with valgrind to make sure that none of your classes leak memory. 
+. You must not use STL or other types containers in the submitted assignment (though you are 
+free to use them for private testing). Instead, use the List.h and Stack.h that you implement. 
+. Fully implement the List ADT. 
+. In your calc.cpp you may #include &lt;iostream&gt;, &lt;string&gt;, &lt;cstdlib&gt;, 
+&lt;cassert&gt;, &lt;cmath&gt;. No other system header files may be included, and you may not 
+make any call to any function in any other library. 
+. As usual you may not use goto, nor may you use any any global variables that are not 
+const. 
+</P>
+
+<P>Getting Started 
+The files for this project live in /afs/umich.edu/class/eecs280/proj5 
+List.h.starter skeleton List class header file without function 
+implementations. Copy this file to List.h and then add your 
+function implementations. 
+Stack.h.starter Skeleton Stack class. Copy it to Stack.h and then add your function 
+implementations. 
+Rational.h Rational header file. Do not modify it. You will write the code for 
+</P>
+
+<P>the functions in Rational.cpp. This is not a templated class, so the 
+code can go in a .cpp file. 
+We have also provided you with some test files to get you started. See the Makefile for how to 
+compile and run the tests. Note that these tests are not exhaustive. You should run your own tests, 
+making sure you test for situations that are not covered by the published test cases. For example, the 
+published test case for List does not test iterators, copy constructor, assignment, etc. The given tests 
+for Stack do not completely test if_count, printing of a stack, etc. The tests for Rational and for the 
+overall calculator also only do very basic tests. 
+Submission 
+Submit these files to the autograder: 
+. List.h 
+. Stack.h 
+. Rational.cpp 
+. calc.cpp (this will contain a main function) 
+For autograding portion of the grade, we will be compiling your code with the given unit tests as well 
+as our own unit tests for the three classes. In addition, we will be doing blackbox testing of calc with 
+additional inputs to the calculator. Make sure at the least that the given tests work. Then, do 
+additional testing where you find gaps in the given tests. 
+Information required at the top of each file: 
+At the top of all the files you submit, remember to include the following information (there is an 
+additional element - see carefully below): 
+. your name and uniquename 
+. Your partner's name and uniquename 
+. Substantially identical submissions with respect to style? Yes or no. (put this information 
+only in calc.cpp). f you select yes, we will grade only one of the submissions for style (either 
+you or your partner's) and assign the same style points to both. If you don't give this 
+information, we will assume that the answer is yes. If you select no, we will grade you and 
+your partner separately. You may receive different style scores, even for identical 
+submissions, since style points are not auto-graded and have some inherent subjectivity. We 
+</P>
+
+<P>will not accept requests to regrade because of differences of style points between the two 
+partners unless both partners submit the request jointly. A regrade could raise or lower your 
+style score. 
+Appendix A: what's in a typename? 
+You saw the use of typename for declaring templates. When compiling your project, you may get the 
+following kind of error: 
+./Stack.h:94:8: error: missing 'typename' prior to dependent type name 'List&lt;T&gt;::Iterator' 
+List&lt;T&gt;::Iterator i; 
+If you see an error message that talks about missing 'typename' prior to dependent type name, 
+simply stick in the keyword &quot;typename&quot; before the type declaration. In the above instance, it would 
+become: 
+typename List&lt;T&gt;::Iterator i; 
+Same thing would apply if you declare a loop variable. For example: 
+for (List&lt;T&gt;::Iterator i; ….) 
+may need to become (if you get an error from the compiler): 
+for (typename List&lt;T&gt;::Iterator i; …) 
+Discussion of dependent types and why we have to insert the keyword typename with the version of 
+C++ compiler that we are using is beyond the scope of this course (the reason is quite subtle and 
+deep). If you want to see some explanation, see this article: 
+http://pages.cs.wisc.edu/~driscoll/typename.html 
+</P>
+</TaggedPDF-doc>

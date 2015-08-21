@@ -1,0 +1,1197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <dc:format>xml</dc:format>
+         <dc:creator>
+            <rdf:Seq>
+               <rdf:li>CAEN</rdf:li>
+            </rdf:Seq>
+         </dc:creator>
+         <xmp:CreateDate>2014-01-22T14:02:30-05:00</xmp:CreateDate>
+         <xmp:CreatorTool>Microsoft® Word 2010</xmp:CreatorTool>
+         <xmp:ModifyDate>2014-01-22T14:02:30-05:00</xmp:ModifyDate>
+         <pdf:Producer>Microsoft® Word 2010</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+
+<Part>
+<P>Project 2:  Recursive Data Structures </P>
+
+<P>EECS 280 – Winter 2014 </P>
+
+<P>Due:  Wednesday 5 February 2014, 11:55 PM </P>
+
+<P> </P>
+
+<P> </P>
+
+<P>Introduction </P>
+
+<P> </P>
+
+<P>This project will give you experience writing recursive functions that operate on recursively-defined data structures and mathematical abstractions.   </P>
+
+<P> </P>
+
+<P>Lists </P>
+
+<P> </P>
+
+<P>A &quot;list&quot; is a sequence of zero or more numbers in no particular order.  A list is well formed if: </P>
+
+<P> </P>
+
+<L>
+<LI>
+<LBody>a) It is the empty list, or </LBody>
+</LI>
+
+<LI>
+<LBody>b) It is an integer followed by a well-formed list. </LBody>
+</LI>
+</L>
+
+<P> </P>
+
+<P>A list is an example of a linear-recursive structure: it is &quot;recursive&quot; because the definition refers to itself.  It is &quot;linear&quot; because there is only one such reference.  </P>
+
+<P> </P>
+
+<P>Here are some examples of well-formed lists: </P>
+
+<P> </P>
+
+<P>( 1 2 3 4 ) // a list of four elements </P>
+
+<P>( 1 2 4 )  // a list of three elements </P>
+
+<P>( )               // a list of zero elements--the empty list </P>
+
+<P> </P>
+
+<P>List Interface </P>
+
+<P> </P>
+
+<P>The file recursive.h defines the type &quot;list_t&quot; and the following operations on lists: </P>
+
+<P> </P>
+
+<P>  bool list_isEmpty(list_t list); </P>
+
+<P>    // EFFECTS: returns true if list is empty, false otherwise </P>
+
+<P> </P>
+
+<P>  list_t list_make(); </P>
+
+<P>    // EFFECTS: returns an empty list. </P>
+
+<P> </P>
+
+<P>  list_t list_make(int elt, list_t list); </P>
+
+<P>    // EFFECTS: given the list (list) make a new list consisting of </P>
+
+<P>    //          the new element followed by the elements of the </P>
+
+<P>    //          original list.  </P>
+
+<P> </P>
+
+<P>  int list_first(list_t list); </P>
+
+<P>    // REQUIRES: list is not empty </P>
+
+<P>    // EFFECTS: returns the first element of list </P>
+
+<P> </P>
+
+<P>  list_t list_rest(list_t list); </P>
+
+<P>    // REQUIRES: list is not empty </P>
+
+<P>    // EFFECTS: returns the list containing all but the first element  </P>
+
+<P>    //          of list </P>
+
+<P> </P>
+
+<P>  void list_print(list_t list); </P>
+
+<P>    // MODIFIES: cout </P>
+
+<P>    // EFFECTS: prints list to cout. </P>
+
+<P> </P>
+
+<P>Note: list_first and list_rest are both partial functions; their EFFECTS clauses are only valid for non-empty lists.  To help you in writing your code, these functions actually check to see if their lists are empty or not--if they are passed an empty list, they fail gracefully by warning you and exiting; if you are running your program under the debugger, it will stop at the exit point.  Note that such checking is not required!  It would be perfectly acceptable to write these in such a way that they fail quite ungracefully if passed empty lists.  Note also that list_make is an overloaded function - if called with no arguments, it produces an empty list.  If called with an element and a list, it combines them. </P>
+
+<P> </P>
+
+<P>List Processing Procedures </P>
+
+<P> </P>
+
+<P>Given this list_t interface, you will write the list processing procedures below, adhering to the following constraints and guidelines: </P>
+
+<P> </P>
+
+<L>
+<LI>
+<LBody> Each of these procedures must be tail recursive.  For full credit, your routines must provide the correct result and provide an implementation that is tail-recursive.   </LBody>
+</LI>
+</L>
+
+<P> </P>
+
+<L>
+<LI>
+<LBody> In writing these functions, you may use only recursion and selection. You are NOT allowed to use goto, for, while, or do-while </LBody>
+</LI>
+</L>
+
+<P> </P>
+
+<L>
+<LI>
+<LBody> No static or global variables  </LBody>
+</LI>
+</L>
+
+<P> </P>
+
+<L>
+<LI>
+<LBody> If you define any helper functions, be sure to declare them &quot;static&quot;, so that they are not visible outside your program file.  See the appendix for more information about tail recursion and helper functions. </LBody>
+</LI>
+</L>
+
+<P> </P>
+
+<P>Here are the functions you are to implement.  There are several of them, but many of them are similar to one another, and the longest is at most tens of lines of code, including support functions.  You may call any of these functions in the implementation of another. </P>
+
+<P> </P>
+
+<P>int sum(list_t list); </P>
+
+<P>    /*  </P>
+
+<P>    // EFFECTS: returns the sum of each element in list </P>
+
+<P>    //          zero if the list is empty. </P>
+
+<P>    */  </P>
+
+<P> </P>
+
+<P>int product(list_t list); </P>
+
+<P>    /*  </P>
+
+<P>    // EFFECTS: returns the product of each element in list </P>
+
+<P>    //          one if the list is empty. </P>
+
+<P>    */ </P>
+
+<P> </P>
+
+<P>int accumulate(list_t list, int (*fn)(int, int), int identity); </P>
+
+<P>    /* </P>
+
+<P>    // REQUIRES: fn must be associative. </P>
+
+<P>    // EFFECTS: return identity if list is empty </P>
+
+<P>    //          return fn(list_first(list),  </P>
+
+<P>    //          accumulate(list_rest(list), fn, identity)) </P>
+
+<P>    //          otherwise. Be sure to make above code tail-recursive! </P>
+
+<P>    // </P>
+
+<P>    // For example, if you have the following function: </P>
+
+<P>    // </P>
+
+<P>    //           int add(int x, int y); </P>
+
+<P>    // </P>
+
+<P>    // Then the following invocation returns the sum of all elements: </P>
+
+<P>    // </P>
+
+<P>    //           accumulate(list, add, 0); </P>
+
+<P>    // </P>
+
+<P>    //  The &quot;identity&quot; argument is typically the value for which </P>
+
+<P>    //  fn(X, identity) == X, for any X. </P>
+
+<P>    */  </P>
+
+<P> </P>
+
+<P>list_t reverse(list_t list); </P>
+
+<P>    /* </P>
+
+<P>    // EFFECTS: returns the reverse of list </P>
+
+<P>    // </P>
+
+<P>    // For example: the reverse of ( 3 2 1 ) is ( 1 2 3 ) </P>
+
+<P>    */ </P>
+
+<P> </P>
+
+<P>list_t append(list_t first, list_t second); </P>
+
+<P>    /* </P>
+
+<P>    // EFFECTS: returns the list (first second) </P>
+
+<P>    */  </P>
+
+<P> </P>
+
+<P>list_t filter_odd(list_t list); </P>
+
+<P>    /* </P>
+
+<P>    // EFFECTS: returns a new list containing only the elements of </P>
+
+<P>    //          the original list which are odd in value,  </P>
+
+<P>    //          in the order in which they appeared in list. </P>
+
+<P>    // </P>
+
+<P>    // For example, if you applied filter_odd to the list ( 4 1 3 0 ) </P>
+
+<P>    // you would get the list ( 1 3 ) </P>
+
+<P>    */  </P>
+
+<P> </P>
+
+<P>list_t filter_even(list_t list); </P>
+
+<P>   /* </P>
+
+<P>   // EFFECTS: returns a new list containing only the elements of </P>
+
+<P>   //          the original list which are even in value,  </P>
+
+<P>   //          in the order in which they appeared in list </P>
+
+<P>   // </P>
+
+<P>   // For example, if you applied filter_even to the list ( 4 1 3 0 ) </P>
+
+<P>   // you would get the list ( 4 0 ) </P>
+
+<P>   */ </P>
+
+<P> </P>
+
+<P>list_t filter(list_t list, bool (*fn)(int)); </P>
+
+<P>    /* </P>
+
+<P>    // EFFECTS: returns a list containing precisely the elements of </P>
+
+<P>    //          list for which the predicate fn() evaluates to true,  </P>
+
+<P>    //          in the order in which they appeared in list. </P>
+
+<P>    */ </P>
+
+<P> </P>
+
+<P>list_t rotate(list_t list, unsigned int n); </P>
+
+<P>    /* </P>
+
+<P>    // EFFECTS: returns a list equal to the original list with the  </P>
+
+<P>    //          first n elements moved to the end of the list. </P>
+
+<P>    // </P>
+
+<P>    // For example, rotate(( 1, 2, 3, 4), 2) yields ( 3, 4, 1, 2 ) </P>
+
+<P>    */ </P>
+
+<P> </P>
+
+<P>list_t insert_list(list_t first, list_t second, unsigned int n); </P>
+
+<P>    /* </P>
+
+<P>    // REQUIRES: n &lt;= the number of elements in first </P>
+
+<P>    // EFFECTS: returns a list comprising the first n elements of </P>
+
+<P>    //          &quot;first&quot;, followed by all elements of &quot;second&quot;, </P>
+
+<P>    //           followed by any remaining elements of &quot;first&quot;. </P>
+
+<P>    // </P>
+
+<P>    //     For example: insert (( 1 2 3 ), ( 4 5 6 ), 2) </P>
+
+<P>    //            is  ( 1 2 4 5 6 3 ). </P>
+
+<P>    */ </P>
+
+<P> </P>
+
+<P>list_t chop(list_t l, unsigned int n); </P>
+
+<P>    /* </P>
+
+<P>    // REQUIRES l has at least n elements </P>
+
+<P>    // EFFECTS: returns the list equal to l without its last n </P>
+
+<P>    //          elements </P>
+
+<P>    */ </P>
+
+<P>  </P>
+
+<P>Fibonacci numbers </P>
+
+<P> </P>
+
+<P>Not all recursive definitions are necessarily linear-recursive.  For example, consider the Fibonacci numbers: </P>
+
+<P> </P>
+
+<P>     fib(0) = 0; </P>
+
+<P>     fib(1) = 1; </P>
+
+<P>     fib(n) = fib(n-1) + fib(n-2);    (n &gt; 1) </P>
+
+<P> </P>
+
+<P>This is called a &quot;tree-recursive&quot; definition; the definition of fib(N) refers to fib() twice.  You can see why this is so by drawing a picture of evaluating fib(3): </P>
+
+<P> </P>
+
+<P>                    fib(3) </P>
+
+<P>                   /      \ </P>
+
+<P>              fib(2)   +   fib(1) </P>
+
+<P>             /     \          | </P>
+
+<P>          fib(0) + fib(1)     1 </P>
+
+<P>             |       | </P>
+
+<P>             0       1 </P>
+
+<P> </P>
+
+<P>The call pattern forms a tree. </P>
+
+<P> </P>
+
+<P> </P>
+
+<P> </P>
+
+<P>Implement Fibonacci Recursively and Tail-Recursively </P>
+
+<P> </P>
+
+<P>You are to write two versions of fib(), as follows.  The first version should be written recursively, in this tree pattern.  It should not be tail-recursive (and so it should not call the second version!).  The second version must be tail-recursive and is tricky, but we've supplied a hint. </P>
+
+<P> </P>
+
+<P>int fib(int n); </P>
+
+<P>    /* </P>
+
+<P>    // REQUIRES: n &gt;= 0 </P>
+
+<P>    // EFFECTS: computes the Nth Fibonacci number </P>
+
+<P>    //          fib(0) = 0 </P>
+
+<P>    //          fib(1) = 1 </P>
+
+<P>    //          fib(n) = fib(n-1) + fib(n-2) for (n&gt;1). </P>
+
+<P>    // This must not be tail recursive </P>
+
+<P>    */ </P>
+
+<P> </P>
+
+<P>int fib_tail(int n); </P>
+
+<P>    /* </P>
+
+<P>    // REQUIRES: n &gt;= 0 </P>
+
+<P>    // EFFECTS: computes the Nth Fibonacci number </P>
+
+<P>    //          fib(0) = 0 </P>
+
+<P>    //          fib(1) = 1 </P>
+
+<P>    //          fib(n) = fib(n-1) + fib(n-2) for (n&gt;1). </P>
+
+<P>    // MUST be tail recursive </P>
+
+<P>    // Hint: instead of starting at n and working down, start with </P>
+
+<P>    // 0 and 1 and work *upwards*. </P>
+
+<P>    */ </P>
+
+<P> </P>
+
+<P>Binary Trees </P>
+
+<P> </P>
+
+<P>The Fibonacci numbers appear to be tree-recursive, but can be computed in a way that is linear-recursive.  This is not true for all tree-recursive problems.  For example, consider the following definition of a binary tree: </P>
+
+<P> </P>
+
+<P>A binary tree is well formed if: </P>
+
+<P> </P>
+
+<L>
+<LI>
+<LBody>a) It is the empty tree, or </LBody>
+</LI>
+
+<LI>
+<LBody>b) It consists of an integer element, plus two children, called the left subtree and the right subtree, each of which is a well-formed binary tree. </LBody>
+</LI>
+</L>
+
+<P> </P>
+
+<P>Additionally, we say a binary tree is a &quot;leaf&quot; if and only if both of its children are the EMPTY_TREE. </P>
+
+<P> </P>
+
+<P>Tree Interface </P>
+
+<P> </P>
+
+<P>The file recursive.h defines the type &quot;tree_t&quot; and the following operations on trees: </P>
+
+<P> </P>
+
+<P>bool tree_isEmpty(tree_t tree); </P>
+
+<P>    // EFFECTS: returns true if tree is empty, false otherwise </P>
+
+<P> </P>
+
+<P>tree_t tree_make(); </P>
+
+<P>    // EFFECTS: creates an empty tree. </P>
+
+<P> </P>
+
+<P>tree_t tree_make(int elt, tree_t left, tree_t right); </P>
+
+<P>    // EFFECTS: creates a new tree, with elt as it's element, left as </P>
+
+<P>    //          its left subtree, and right as its right subtree </P>
+
+<P> </P>
+
+<P>int tree_elt(tree_t tree); </P>
+
+<P>    // REQUIRES: tree is not empty </P>
+
+<P>    // EFFECTS: returns the element at the top of tree. </P>
+
+<P> </P>
+
+<P>tree_t tree_left(tree_t tree); </P>
+
+<P>    // REQUIRES: tree is not empty </P>
+
+<P>    // EFFECTS: returns the left subtree of tree </P>
+
+<P> </P>
+
+<P>tree_t tree_right(tree_t tree); </P>
+
+<P>    // REQUIRES: tree is not empty </P>
+
+<P>    // EFFECTS: returns the right subtree of tree </P>
+
+<P> </P>
+
+<P>void tree_print(tree_t tree); </P>
+
+<P>    // MODIFIES: cout </P>
+
+<P>    // EFFECTS: prints tree to cout. </P>
+
+<P>    //          Note: this uses a non-intuitive, but easy-to-print </P>
+
+<P>    //  format. </P>
+
+<P> </P>
+
+<P>Tree Processing Procedures </P>
+
+<P> </P>
+
+<P>There are four functions you are to write for binary trees.  These must be recursive, but do not need to be tail-recursive.  You may not use any looping structures.  </P>
+
+<P> </P>
+
+<P>int tree_sum(tree_t tree); </P>
+
+<P>    // EFFECTS: returns the sum of all elements in the tree,  </P>
+
+<P>    //          zero if the tree is empty </P>
+
+<P> </P>
+
+<P> </P>
+
+<P> </P>
+
+<P>list_t traversal(tree_t tree); </P>
+
+<P>    /* MODIFIES:  </P>
+
+<P>    // EFFECTS: returns the elements of tree in a list using an </P>
+
+<P>    //          in-order traversal. An in-order traversal yields a  </P>
+
+<P>    //          list with the &quot;left most&quot; element first, then the      </P>
+
+<P>    //          second-left-most, and so on, with the right-most  </P>
+
+<P>    //          element last. </P>
+
+<P>    // </P>
+
+<P>    //          for example, the tree: </P>
+
+<P>    //  </P>
+
+<P>    //                           4 </P>
+
+<P>    //                         /   \ </P>
+
+<P>    //                        /      \ </P>
+
+<P>    //                       2        5 </P>
+
+<P>    //                      / \      / \ </P>
+
+<P>    //                         3  </P>
+
+<P>    //                        / \ </P>
+
+<P>    // would return the list </P>
+
+<P>    // </P>
+
+<P>    //       ( 2 3 4 5 ) </P>
+
+<P>    //  </P>
+
+<P>    // An empty tree would print as: </P>
+
+<P>    //  </P>
+
+<P>    //       ( ) </P>
+
+<P>    // </P>
+
+<P>    */ </P>
+
+<P> </P>
+
+<P>We can define a special relation between trees &quot;is covered by&quot; as follows: </P>
+
+<P> </P>
+
+<L>
+<LI>
+<LBody> An empty tree is covered by all trees </LBody>
+</LI>
+
+<LI>
+<LBody> The empty tree covers only other empty trees. </LBody>
+</LI>
+
+<LI>
+<LBody> For any two non-empty trees, A and B, A is covered by B if and only if the top-most elements of A and B are equal, the left subtree of A is covered by the left subtree of B, and the right subtree of A is covered by the right subtree of B. </LBody>
+</LI>
+</L>
+
+<P> </P>
+
+<P>For example, the tree: </P>
+
+<P>                              4 </P>
+
+<P>                            /   \ </P>
+
+<P>                           /     \ </P>
+
+<P>                          2       5 </P>
+
+<P>                         / \     / \ </P>
+
+<P>                            3  </P>
+
+<P>                           / \ </P>
+
+<P>Covers the tree: </P>
+
+<P>                    4 </P>
+
+<P>                   / \ </P>
+
+<P>                  / </P>
+
+<P>                 2 </P>
+
+<P>                / \ </P>
+
+<P> </P>
+
+<P>But not the trees: </P>
+
+<P> </P>
+
+<P>            4                  5 </P>
+
+<P>           /                  / \ </P>
+
+<P>          /         or  </P>
+
+<P>         3 </P>
+
+<P>        / \ </P>
+
+<P> </P>
+
+<P>In light of this definition, write the following function: </P>
+
+<P> </P>
+
+<P>bool contained_by(tree_t A, tree_t B); </P>
+
+<P>       /* EFFECTS: returns true if A is covered by B, or A is covered </P>
+
+<P>       // by any complete subtree of B. </P>
+
+<P>       */        </P>
+
+<P> </P>
+
+<P>You need not explicitly write covered_by, but we recommend it, as it is likely to make your solution simpler overall to separate it. </P>
+
+<P> </P>
+
+<P>In other words, the trees </P>
+
+<P> </P>
+
+<P>    4             2             3             5 </P>
+
+<P>   / \           / \           / \           / \ </P>
+
+<P>  /       and           and           and </P>
+
+<P> 2 </P>
+
+<P>/ \ </P>
+
+<P> </P>
+
+<P> </P>
+
+<P>Are contained by the tree </P>
+
+<P> </P>
+
+<P>                              4 </P>
+
+<P>                            /   \ </P>
+
+<P>                           /     \ </P>
+
+<P>                          2       5 </P>
+
+<P>                         / \     / \ </P>
+
+<P>                            3  </P>
+
+<P>                           / \ </P>
+
+<P> </P>
+
+<P> </P>
+
+<P>But this tree is not: </P>
+
+<P> </P>
+
+<P>            4   </P>
+
+<P>           /    </P>
+
+<P>          /     </P>
+
+<P>         3 </P>
+
+<P>        / \ </P>
+
+<P> </P>
+
+<P> </P>
+
+<P> </P>
+
+<P> </P>
+
+<P> </P>
+
+<P>There exists a special kind of binary tree, called the sorted binary tree.  A sorted binary tree is well-formed if: </P>
+
+<P> </P>
+
+<L>
+<LI>
+<LBody>1. It is a well-formed binary tree and  </LBody>
+</LI>
+
+<LI>
+<LBody>2. One of the following is true: </LBody>
+</LI>
+
+<L>
+<LI>
+<LBody>a. The tree is empty </LBody>
+</LI>
+
+<LI>
+<LBody>b. The left subtree is a sorted binary tree, and all elements in the left subtree are strictly less than the top element of the tree. </LBody>
+</LI>
+</L>
+</L>
+
+<P>-  AND  - The right subtree is a sorted binary tree, and all elements in the right subtree are greater than or equal to the top element of the tree. </P>
+
+<P> </P>
+
+<P> </P>
+
+<P> </P>
+
+<P> </P>
+
+<P> </P>
+
+<P>For example, the following are all well-formed sorted binary trees: </P>
+
+<P>  </P>
+
+<P>               4                   1             </P>
+
+<P>             /   \                / \ </P>
+
+<P>            /     \                  1 </P>
+
+<P>           2       6                / \ </P>
+
+<P>          / \     / \                  2 </P>
+
+<P>         1   3   5   7                / \ </P>
+
+<P>        / \ / \ / \ / \ </P>
+
+<P> </P>
+
+<P>While the following are not: </P>
+
+<P> </P>
+
+<P>       1                 1               4 </P>
+
+<P>      / \               / \            /   \ </P>
+
+<P>     1                 2   3          3     6 </P>
+
+<P>    / \                              / \     \ </P>
+
+<P>                                    2   1     7 </P>
+
+<P> </P>
+
+<P>You are to write the following function for creating sorted binary trees: </P>
+
+<P> </P>
+
+<P>tree_t insert_tree(int elt, tree_t tree); </P>
+
+<P>    /*  </P>
+
+<P>    // REQUIRES: tree is a sorted binary tree </P>
+
+<P>    // EFFECTS: returns a new tree with elt inserted at a leaf  </P>
+
+<P>    //          such that the resulting tree is also a sorted  </P>
+
+<P>    //          binary tree. </P>
+
+<P>    // </P>
+
+<P>    //          for example, inserting 1 into the tree: </P>
+
+<P>    // </P>
+
+<P>    //                           4 </P>
+
+<P>    //                         /   \ </P>
+
+<P>    //                        /      \ </P>
+
+<P>    //                       2        5 </P>
+
+<P>    //                      / \      / \ </P>
+
+<P>    //                         3  </P>
+
+<P>    //                        / \ </P>
+
+<P>    // </P>
+
+<P>     </P>
+
+<P>    // would yield the tree: </P>
+
+<P>    //                           4 </P>
+
+<P>    //                         /   \ </P>
+
+<P>    //                        /      \ </P>
+
+<P>    //                       2        5 </P>
+
+<P>    //                      / \      / \ </P>
+
+<P>    //                     1   3  </P>
+
+<P>    //                    / \ / \ </P>
+
+<P>    //  </P>
+
+<P>    // Hint: an in-order traversal of a sorted binary tree is always </P>
+
+<P>    //       a sorted list, and there is only one unique location for </P>
+
+<P>    //       any element to be inserted. </P>
+
+<P>    */ </P>
+
+<P> </P>
+
+<P>Files </P>
+
+<P> </P>
+
+<P>There are several files installed in the directory:  /afs/umich.edu/class/eecs280/proj2 </P>
+
+<P> </P>
+
+<L>
+<LI>
+<LBody> p2.h   the header file for the functions you must write </LBody>
+</LI>
+
+<LI>
+<LBody> recursive.h  the list_t and tree_t interfaces </LBody>
+</LI>
+
+<LI>
+<LBody> recursive.cpp the implementations of list_t and tree_t </LBody>
+</LI>
+</L>
+
+<P> </P>
+
+<P>Coding Specifics </P>
+
+<P> </P>
+
+<P>You should put all of the functions you write in a single file, called p2.cpp.  You may use only the C++ standard and iostream libraries, and no others.  You may use assert() if you wish, but you do not need to.  You may not use global variables, static variables, or reference arguments. DO NOT INCLUDE a main function in your p2.cpp file.   You can think of p2.cpp as providing a library of functions that other programs might use, just as recursive.cpp does. We will provide a main function when using your code as a library to test your functions. </P>
+
+<P> </P>
+
+<P>Testing </P>
+
+<P> </P>
+
+<P>To test your code, you should create a family of test case programs that exercise these functions.  We have placed a handful of test cases in /afs/umich.edu/class/eecs280/proj2.  Here is a simple one to get you started: </P>
+
+<P> </P>
+
+<P>simple_test.cpp </P>
+
+<P>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ </P>
+
+<P>    #include &lt;iostream&gt; </P>
+
+<P>    #include &quot;recursive.h&quot; </P>
+
+<P>    #include &quot;p2.h&quot; </P>
+
+<P>    using namespace std; </P>
+
+<P> </P>
+
+<P>    int main() { </P>
+
+<P> int i; </P>
+
+<P> list_t listA; </P>
+
+<P> list_t listB; </P>
+
+<P> </P>
+
+<P> listA = list_make(); </P>
+
+<P> listB = list_make(); </P>
+
+<P> </P>
+
+<P> for (i = 5; i&gt;0; i--) { </P>
+
+<P>     listA = list_make(i, listA); </P>
+
+<P>     listB = list_make(i+10, listB); </P>
+
+<P> } </P>
+
+<P> </P>
+
+<P> list_print(listA); </P>
+
+<P> cout &lt;&lt; endl; </P>
+
+<P> list_print(listB); </P>
+
+<P> cout &lt;&lt; endl; </P>
+
+<P> </P>
+
+<P> list_print(reverse(listA)); </P>
+
+<P> cout &lt;&lt; endl; </P>
+
+<P> list_print(append(listA, listB)); </P>
+
+<P> cout &lt;&lt; endl; </P>
+
+<P>    } </P>
+
+<P>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ </P>
+
+<P> </P>
+
+<P>Here is how to build this test case, called simple_test.cpp, into a program, given your own implementation of p2.cpp and our implementation of recursive.cpp: </P>
+
+<P> </P>
+
+<P>g++ -O2 -pedantic -Wall -Werror -o simple_test simple_test.cpp p2.cpp recursive.cpp </P>
+
+<P> </P>
+
+<P>Note that recursive.cpp is part of the compile line.  This is how the compiler gains access to the routines contained inside the file.  DO NOT #include recursive.cpp in your p2.cpp file!  If you do, your submission will not compile with our test cases and you will receive little to no points for the project. </P>
+
+<P> </P>
+
+<P>Also note the –O2 flag (capital O, not zero).  We need this option to turn on tail recursion optimization, but should not be used if you are compiling for debugging.  When you run it, this is the output you should see: </P>
+
+<P> </P>
+
+<P>./simple_test </P>
+
+<P>( 1 2 3 4 5 ) </P>
+
+<P>( 11 12 13 14 15 ) </P>
+
+<P>( 5 4 3 2 1 ) </P>
+
+<P>( 1 2 3 4 5 11 12 13 14 15 ) </P>
+
+<P> </P>
+
+<P>We have provided two more test cases for you to try out.  These two are self-verifying (they tell you if they succeeded or failed). </P>
+
+<P> </P>
+
+<P>Handing in and grading </P>
+
+<P> </P>
+
+<P>You should hand in your program, p2.cpp, via submit280 before the deadline.  See CTools for more information on submit280.  Your program will be graded along three criteria: </P>
+
+<P> </P>
+
+<P>   1) Functional Correctness </P>
+
+<P>   2) Implementation Constraints </P>
+
+<P>   3) General Style </P>
+
+<P> </P>
+
+<P>An example of Functional Correctness is whether or not your reverse function reverses a list properly in all cases.  An example of an Implementation Constraint is whether reverse() is tail-recursive.  General Style speaks to the cleanliness and readability of your code. </P>
+
+<P> </P>
+
+<P>  </P>
+
+<P>Appendix </P>
+
+<P> </P>
+
+<P>Tail Recursion </P>
+
+<P> </P>
+
+<P>Remember: a tail-recursive function is one in which the recursive call happens absent any pending computation in the caller.  For example, the following is a tail-recursive implementation of factorial: </P>
+
+<P> </P>
+
+<P>  static int factorial_helper(int n, int result) </P>
+
+<P>    // REQUIRES: n &gt;= 0 </P>
+
+<P>    // EFFECTS: computes result * n! </P>
+
+<P>  { </P>
+
+<P>    if (!n) </P>
+
+<P>      return result; </P>
+
+<P>    else </P>
+
+<P>      return factorial_helper(n-1, n*result); </P>
+
+<P>  } </P>
+
+<P> </P>
+
+<P>  int factorial_tail(int n) </P>
+
+<P>    // REQUIRES: n &gt;= 0 </P>
+
+<P>    // EFFECTS: computes n! </P>
+
+<P>  { </P>
+
+<P>    return factorial_helper(n, 1); </P>
+
+<P>  } </P>
+
+<P> </P>
+
+<P>Notice that the return value from the recursive call to factorial_helper() is only returned again---it is not used in any local computation, nor are there any steps left after the recursive call. </P>
+
+<P> </P>
+
+<P>As another example, the following is *not* tail-recursive: </P>
+
+<P> </P>
+
+<P>  int factorial(int n) </P>
+
+<P>    // REQUIRES: n &gt;= 0 </P>
+
+<P>    // EFFECTS: computes n! </P>
+
+<P>  { </P>
+
+<P>    if (!n) </P>
+
+<P>      return 1; </P>
+
+<P>    else </P>
+
+<P>      return (n * factorial(n-1)); </P>
+
+<P>  } </P>
+
+<P> </P>
+
+<P>Notice that the return value of the recursive call to factorial is used in a computation in the caller---namely, it is multiplied by n. </P>
+
+<P> </P>
+
+<P>Helper Functions </P>
+
+<P> </P>
+
+<P>The tail-recursive version of factorial requires a helper function.  This is common, but not always necessary.  If you define any helper functions, be sure to declare them &quot;static&quot;, so that they are not visible outside your program file.  This will prevent any name conflicts in case you give a function the same name as one in the test harness.  The function factorial_helper, above, is defined as a static function. </P>
+
+<P> </P>
+</Part>
+</TaggedPDF-doc>

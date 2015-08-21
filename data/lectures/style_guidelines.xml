@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created from PDF via Acrobat SaveAsXML -->
+<!-- Mapping Table version: 28-February-2003 -->
+<TaggedPDF-doc>
+<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>
+<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.4-c005 78.147326, 2012/08/23-13:03:03        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""
+            xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+            xmlns:pdf="http://ns.adobe.com/pdf/1.3/">
+         <xmp:ModifyDate>2015-07-01T11:28:25-04:00</xmp:ModifyDate>
+         <xmp:CreateDate>2015-07-01T11:28:25-04:00</xmp:CreateDate>
+         <xmp:MetadataDate>2015-07-01T11:28:25-04:00</xmp:MetadataDate>
+         <xmp:CreatorTool>Adobe Acrobat 11.0</xmp:CreatorTool>
+         <dc:format>xml</dc:format>
+         <dc:title>
+            <rdf:Alt>
+               <rdf:li xml:lang="x-default">style_guidelines.txt</rdf:li>
+            </rdf:Alt>
+         </dc:title>
+         <xmpMM:DocumentID>uuid:7b4d72ee-76a5-421d-8d2a-1892b3a8e5f1</xmpMM:DocumentID>
+         <xmpMM:InstanceID>uuid:a8a6e4fe-6392-43bf-88e4-3a2bb473775c</xmpMM:InstanceID>
+         <pdf:Producer>Acrobat Web Capture 11.0</pdf:Producer>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?>
+<?xpacket end='r'?>
+<bookmark-tree>
+<bookmark title="Local Disk">
+<destination structID="None"/>
+<bookmark title="style_guidelines.txt">
+<destination structID="LinkTarget_7"/>
+</bookmark>
+</bookmark>
+</bookmark-tree>
+
+<P>Style Guide for EECS 280 C++ Programs </P>
+
+<P>First and foremost, be consistent. We don't care if you begin curly braces on their own line or not:</P>
+
+<P> if (i &gt; 1){ if (i &gt; 1)
+ x++; vs. {
+ } x++;
+ } 
+</P>
+
+<P>If you choose to put the braces on their own lines, make sure they line up. 
+</P>
+
+<P>Formatting: 
+</P>
+
+<P>Indentation. 
+All statements inside curly braces should be indented, either with tabs or a 
+consistent number of spaces. Blocks of code inside two sets of curly braces 
+should be indented twice, etc. 
+</P>
+
+<P>Be consistent with your indentation. Don't mix tabs and spaces and don't mix 
+four-space tabs and five-space tabs. 
+</P>
+
+<P>Try to keep your lines short (~80 characters). If you have an exceptionally 
+long line of code, split it into multiple lines, and indent lines beyond the 
+first to make it clear it is not a new statement. If a line is long and looks 
+unnecessarily complicated, consider splitting it into multiple simpler 
+statements. 
+</P>
+
+<P>Whitespace: 
+Include spaces between operators (such as: &lt;&lt;, &gt;, &lt;=, +, -, *, %, ||, &amp;&amp;, etc.). 
+</P>
+
+<P>if (foo &gt;= (bar * 2) &amp;&amp; baz == true) { cout &lt;&lt; a + (b % c); } </P>
+
+<P>is easier to read than </P>
+
+<P>if(foo&gt;=(bar*2)&amp;&amp;baz==true){ cout&lt;&lt;a+(b%c); } </P>
+
+<P>Use blank lines to delimit blocks of code with related tasks, in much the same way that you would use paragraphs to delimit ideas within an essay. </P>
+
+<P>Functions: </P>
+
+<P>It's good practice to include function prototypes at the beginning of your program, and comment them with &quot;Requires, Modifies, Effects&quot; (RME) clauses. </P>
+
+<P>If you find yourself writing an overly long function (&gt;50 lines), split it at a logical point into multiple functions to make your code more readable. </P>
+
+<P>style_guidelines.txt[7/1/2015 11:28:27 AM] </P>
+
+<P>Use descriptive function names and parameter names. 
+</P>
+
+<P>*** All functions you write MUST have an RME clause (see lecture 2 slides). 
+Writing your RME clauses above the function prototype can improve readability. 
+Particularly complex sections of code also deserve their own comment. If you're 
+</P>
+
+<P>not sure whether it's complex, ask yourself if you would know what the code did 
+if you returned to it after a month. 
+</P>
+
+<P>Variables: 
+Use meaningful variable names. If a variable name is not descriptive, include 
+a comment explaining its purpose (with the exception of loop control variables). 
+Do not use global variables unless they are declared constant. Global constant 
+names should be in all caps. 
+</P>
+
+<P>Documentation: 
+Unless they are *extremely* short, put comments on their own line. 
+Misc: 
+Don't use &quot;1&quot; or &quot;0&quot; if you mean &quot;true&quot; or &quot;false.&quot; Use &quot;true&quot; and &quot;false." 
+Remember, code is written to be *read.* Compiling and running is just something 
+</P>
+
+<P>special that we happen to be able to do. 
+If you're interested in this sort of thing, you may enjoy reading (and perhaps even following!) the Linux Kernel Coding 
+Style. Chapters 1-8 are most relevant to this course. 
+https://www.kernel.org/doc/Documentation/CodingStyle 
+</P>
+
+<P>style_guidelines.txt[7/1/2015 11:28:27 AM] </P>
+</TaggedPDF-doc>
