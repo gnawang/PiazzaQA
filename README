@@ -1,13 +1,15 @@
 ================================================================================
                       Piazza Question Answering System
-
+              Designed for EECS 280 at the University of Michigan
 ================================================================================
 Developed from the open source OpenEphyra Question Answering System,
 PiazzaQA is designed for computer science courses that make use of Piazza
 as an open class forum. 
 
 PiazzaQA is designed to respond appropriately to student questions by using
-course documents and previous piazza posts as reference material. 
+course documents and previous piazza posts as reference material. This QA system
+is capable of referencing most related pizza questions and class documents while
+also citing the most related answer from said sources. 
 ================================================================================
 
 Acknowledgements:
@@ -40,34 +42,9 @@ README         This file
 
 Getting Started:
 ----------------
-
-If you just like to run OpenEphyra in command line mode, try the following:
-
-- Go to the folder 'scripts'.
-- Execute OpenEphyra.sh (Unix, Linux, and Mac OS) or OpenEphyra.bat (Windows).
-- Type in a factoid question, 'LIST:' followed by a list question, or 'exit'.
+Currently there is no easily executable file to run. This file is capable of being edited
+and tested in Eclipse IDE.
 
 The only system requirements are a Java runtime environment (version 1.5 or
 later) and about 1 GB of free RAM.
 
-Documentation and Support:
---------------------------
-
-The documentation and a collection of tutorials are hosted on the Ephyra site:
-<http://www.ephyra.info/>.
-
-Downloads of new releases and a discussion forum can be found at SourceForge:
-<http://sourceforge.net/projects/openephyra/>.
-
-If you would like to be notified of new releases and other important information
-regarding OpenEphyra, you can subscribe to our mailing list:
-<https://lists.sourceforge.net/lists/listinfo/openephyra-announce/>.
-
-We highly appreciate any feedback, comments, and suggestions for improvements.
-Please post to our forum or send an email to nico@cs.cmu.edu.
-
-Sponsors:
----------
-
-The OpenEphyra effort is supported in part by IBM Open Collaboration Agreement
-#W0652159.
