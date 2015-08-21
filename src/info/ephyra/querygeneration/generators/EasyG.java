@@ -21,9 +21,8 @@ public class EasyG extends QueryGenerator {
 		String[] kw = aq.getKeywords();
 		// create query, set answer types
 		Query[] queries = new Query[1];
-		String q = "\"" + aq.getNormalized() + "\"";
-//		String q = "";
-		for(String word : kw) q += " " + word;
+		String q = "\"" + aq.getNormalized().toLowerCase() + "\"";
+		for(String word : kw) q += " " + word.toLowerCase();
 		queries[0] = new Query(q, aq, SCORE);
 		queries[0].setExtractionTechniques(EXTRACTION_TECHNIQUES);
 		return queries;
