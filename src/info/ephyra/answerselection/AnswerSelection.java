@@ -57,7 +57,6 @@ public class AnswerSelection {
 			results = filter.apply(results);
 			MsgPrinter.printFilterFinished(filter, results.length);
 		}
-		
 		// get up to maxResults results with a score of at least minScore
 		ArrayList<Result> resultsList = new ArrayList<Result>();
 		for (Result result : results) {
@@ -68,9 +67,13 @@ public class AnswerSelection {
 				maxResults--;
 			}
 		}
-//		if (resultsList.isEmpty()){
-//			return results;
-//		}
+
+		if(resultsList.isEmpty()){
+			for(int i = 0; i < maxResults; ++i) {
+				if(i == results.length) break;
+				resultsList.add(results[i]);
+			}
+		}
 		return resultsList.toArray(new Result[resultsList.size()]);
 	}
 }
